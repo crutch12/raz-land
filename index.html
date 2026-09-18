@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script src="./support.js"></script>
+  </head>
+  <body>
+    <x-dc>
+      <helmet data-dc-atomics>
+        <link rel="stylesheet" href="./raznos-v3.css" />
+        <link rel="stylesheet" href="./raznos-work.css" />
+        <link rel="stylesheet" href="./raznos-route-map.css" />
+        <link rel="stylesheet" href="./raznos-live.css" />
+        <style>
+          .lp { background: var(--raznos-bg); color: var(--raznos-ink); }
+          .lp ::selection { background: var(--raznos-green-tint); color: var(--raznos-ink); }
+          .lp a:focus-visible, .lp button:focus-visible { outline: 2px solid var(--raznos-green-deep); outline-offset: 3px; }
+          .lp-section { max-width: 1120px; margin: 0 auto; padding: 72px 24px; box-sizing: border-box; }
+          .lp-narrow { max-width: 780px; }
+          .lp-band { background: var(--raznos-surface-2); }
+          .lp-dark { background: var(--raznos-dark); color: var(--raznos-on-dark); }
+          .lp-green { background: var(--raznos-green-tint); }
+          .lp-h2 { font: 700 32px/1.12 var(--raznos-font); letter-spacing: -0.02em; margin: 0 0 14px; text-wrap: balance; }
+          @media (max-width: 640px) { .lp-h2 { font-size: 26px; } }
+          .lp-dek { font: 400 18px/1.55 var(--raznos-font); color: var(--raznos-ink-2); max-width: 62ch; margin: 0; text-wrap: pretty; }
+          .lp-dark .lp-dek { color: var(--raznos-on-dark); opacity: 0.82; }
+          .lp-acc { color: var(--raznos-green-deep); }
+          .lp-acc-d { color: oklch(0.82 0.15 150); }
+          .lp-ul { margin: 20px 0 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 12px; }
+          .lp-ul li { position: relative; padding-left: 26px; font: 400 16px/1.45 var(--raznos-font); color: var(--raznos-ink); text-wrap: pretty; }
+          .lp-ul li::before { content: ""; position: absolute; left: 2px; top: 2px; width: 16px; height: 16px; border-radius: 50%; background: var(--raznos-green-tint); }
+          .lp-ul li::after { content: ""; position: absolute; left: 7px; top: 7px; width: 6px; height: 6px; border-radius: 50%; background: var(--raznos-green-deep); }
+          .lp-dark .lp-ul li { color: var(--raznos-on-dark); }
+          .lp-btn { min-height: 52px; padding: 0 26px; border-radius: 14px; display: inline-flex; align-items: center; justify-content: center; font: 600 16px var(--raznos-font); text-decoration: none; border: 1px solid transparent; cursor: pointer; box-sizing: border-box; transition: transform .12s ease, box-shadow .16s ease; }
+          .lp-btn:hover { transform: translateY(-1px); }
+          .lp-btn-accent { background: var(--raznos-green-deep); color: var(--raznos-on-dark); }
+          .lp-btn-accent:hover { color: var(--raznos-on-dark); box-shadow: 0 10px 26px oklch(0.42 0.11 150 / 0.35); }
+          .lp-btn-line { background: transparent; color: var(--raznos-ink); border-color: var(--raznos-line-strong); }
+          .lp-btn-line:hover { color: var(--raznos-ink); }
+          .lp-dark .lp-btn-line { color: var(--raznos-on-dark); border-color: rgba(255,255,255,0.3); }
+          .lp-dark .lp-btn-line:hover { color: var(--raznos-on-dark); }
+          .lp-header { position: sticky; top: 0; z-index: 30; background: var(--raznos-surface); border-bottom: 1px solid var(--raznos-line); }
+          .lp-header-in { max-width: 1120px; margin: 0 auto; padding: 12px 24px; display: flex; align-items: center; justify-content: space-between; gap: 16px; box-sizing: border-box; }
+          .lp-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--raznos-ink); }
+          .lp-logo img { width: 30px; height: 30px; display: block; }
+          .lp-logo-word { font: 700 19px var(--raznos-font); letter-spacing: -0.01em; }
+          .lp-nav { display: flex; align-items: center; gap: 22px; }
+          .lp-nav a { font: 600 15px var(--raznos-font); color: var(--raznos-ink-2); text-decoration: none; }
+          .lp-nav a:hover { color: var(--raznos-ink); }
+          @media (max-width: 620px) { .lp-nav { display: none; } }
+          .lp-hero-in { max-width: 1120px; margin: 0 auto; padding: 80px 24px; display: grid; grid-template-columns: 1.05fr 0.95fr; gap: 48px; align-items: center; box-sizing: border-box; }
+          @media (max-width: 900px) { .lp-hero-in { grid-template-columns: 1fr; gap: 36px; } }
+          .lp-h1 { font: 700 52px/1.04 var(--raznos-font); letter-spacing: -0.03em; margin: 0 0 20px; text-wrap: balance; }
+          @media (max-width: 640px) { .lp-h1 { font-size: 36px; } }
+          .lp-hero-lead { font: 400 20px/1.5 var(--raznos-font); opacity: 0.85; max-width: 46ch; margin: 0 0 30px; text-wrap: pretty; }
+          .lp-cta-row { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; }
+          .lp-hero-badge { display: inline-flex; align-items: center; gap: 8px; padding: 7px 14px; border-radius: 999px; background: rgba(255,255,255,0.1); font: 600 13px var(--raznos-font); margin: 0 0 22px; }
+          .lp-hero-badge span { width: 8px; height: 8px; border-radius: 50%; background: oklch(0.82 0.15 150); }
+          @media (prefers-reduced-motion: no-preference) { .lp-hero-copy { animation: lpUp .7s cubic-bezier(.2,.7,.2,1) both; } }
+          @keyframes lpUp { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: none; } }
+          .lp-hero-frame { background: var(--raznos-surface); border-radius: 24px; padding: 14px; box-shadow: 0 30px 70px rgba(0,0,0,0.34); }
+          .lp-card { transition: transform .18s ease, box-shadow .18s ease; }
+          .lp-card:hover { transform: translateY(-2px); box-shadow: 0 14px 34px rgba(20,25,40,0.1); }
+          .lp-feature { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; }
+          @media (max-width: 900px) { .lp-feature { grid-template-columns: 1fr; gap: 28px; } .lp-feature-media { order: 2; } }
+          .lp-two { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+          @media (max-width: 760px) { .lp-two { grid-template-columns: 1fr; } }
+          .lp-statement { max-width: 900px; margin: 0 auto; text-align: center; font: 700 30px/1.25 var(--raznos-font); letter-spacing: -0.01em; color: var(--raznos-ink); text-wrap: balance; }
+          @media (max-width: 640px) { .lp-statement { font-size: 23px; } }
+          .lp-statement b { color: var(--raznos-green-deep); font-weight: 700; }
+          .lp-queue { display: flex; flex-direction: column; gap: 8px; }
+          .lp-queue-row { display: flex; align-items: center; gap: 12px; padding: 12px 14px; border-radius: 12px; background: rgba(255,255,255,0.06); }
+          .lp-queue-row .g { flex: 1; min-width: 0; }
+          .lp-map { position: relative; height: 300px; border-radius: 20px; overflow: hidden; border: 1px solid var(--raznos-line); background: var(--raznos-surface-2); }
+          .lp-map svg { display: block; width: 100%; height: 100%; }
+          .lp-bars { display: flex; align-items: flex-end; gap: 8px; height: 168px; margin-top: 8px; }
+          .lp-bcol { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 5px; height: 100%; justify-content: flex-end; }
+          .lp-bval { font: 600 11px var(--raznos-mono); color: var(--raznos-ink-2); }
+          .lp-bfill { width: 100%; border-radius: 7px 7px 0 0; background: var(--raznos-green-tint); }
+          .lp-bfill.is-peak { background: var(--raznos-green-deep); }
+          .lp-blabel { font: 600 12px var(--raznos-mono); color: var(--raznos-ink-3); }
+          .lp-hlegend { display: flex; align-items: center; gap: 16px; margin-top: 10px; font: 500 13px var(--raznos-font); color: var(--raznos-ink-2); }
+          .lp-hleg-sw { width: 12px; height: 12px; border-radius: 4px; display: inline-block; margin-right: 6px; vertical-align: -1px; }
+          .lp-slot { display: flex; align-items: center; gap: 12px; padding: 12px 14px; border-radius: 12px; background: var(--raznos-surface-2); }
+          .lp-slot.is-peak { background: var(--raznos-green-tint); }
+          .lp-slot.is-break { background: transparent; border: 1px dashed var(--raznos-line-strong); color: var(--raznos-ink-3); }
+          .lp-slot-time { font: 700 13px var(--raznos-mono); color: var(--raznos-ink-3); width: 52px; flex: none; }
+          .lp-slot-name { flex: 1; font: 600 15px var(--raznos-font); }
+          .lp-steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 30px; }
+          @media (max-width: 720px) { .lp-steps { grid-template-columns: 1fr; } }
+          .lp-step { display: flex; flex-direction: column; gap: 10px; padding: 22px; }
+          .lp-step-num { width: 42px; height: 42px; border-radius: 12px; background: var(--raznos-green-tint); color: var(--raznos-green-deep); display: flex; align-items: center; justify-content: center; font: 700 19px var(--raznos-mono); }
+          .lp-step-t { font: 700 17px var(--raznos-font); margin: 0; }
+          .lp-svc-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(158px, 1fr)); gap: 12px; margin-top: 28px; }
+          .lp-svc { display: flex; align-items: center; gap: 10px; padding: 14px 16px; border: 1px solid var(--raznos-line); border-radius: 14px; background: var(--raznos-surface); font: 600 15px var(--raznos-font); }
+          .lp-faq-item { border-bottom: 1px solid var(--raznos-line); padding: 20px 0; }
+          .lp-faq-item:last-child { border-bottom: 0; }
+          .lp-faq-q { font: 600 17px var(--raznos-font); margin: 0 0 6px; }
+          .lp-faq-a { font: 400 16px/1.5 var(--raznos-font); color: var(--raznos-ink-2); margin: 0; text-wrap: pretty; }
+          .lp-final { text-align: center; display: flex; flex-direction: column; align-items: center; gap: 22px; padding: 84px 24px; }
+          .lp-final h2 { font: 700 40px/1.1 var(--raznos-font); letter-spacing: -0.02em; margin: 0; text-wrap: balance; }
+          @media (max-width: 640px) { .lp-final h2 { font-size: 30px; } }
+          .lp-demo-tag { font: 500 13px var(--raznos-font); color: var(--raznos-ink-3); margin: 10px 0 0; }
+          .lp-dark .lp-demo-tag { color: var(--raznos-on-dark); opacity: 0.6; }
+          .lp-conv-chips { display: flex; flex-wrap: wrap; gap: 8px; }
+          .lp-conv-chip { display: inline-flex; align-items: center; gap: 7px; padding: 7px 12px 7px 8px; border-radius: 999px; background: var(--raznos-surface); border: 1px solid var(--raznos-line); font: 600 14px var(--raznos-font); }
+          .lp-prof-head { display: flex; align-items: center; gap: 14px; }
+          .lp-prof-services { display: flex; flex-direction: column; margin-top: 4px; }
+          .lp-prof-row { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 10px 0; border-bottom: 1px solid var(--raznos-line); }
+          .lp-prof-row:last-child { border-bottom: 0; }
+
+          .lp-nav-group { display:flex; align-items:center; gap:18px; }
+          .lp-lang { min-height:40px; padding:0 32px 0 12px; border-radius:10px; border:1px solid var(--raznos-line-strong); background-color:var(--raznos-surface); color:var(--raznos-ink); font:600 14px var(--raznos-font); cursor:pointer; -webkit-appearance:none; appearance:none; background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'><path d='M1 1l5 5 5-5' fill='none' stroke='%236b7280' stroke-width='1.6' stroke-linecap='round'/></svg>"); background-repeat:no-repeat; background-position:right 12px center; }
+          .lp-lang:hover { border-color:var(--raznos-ink-3); }
+          .lp-hero-widget { box-shadow:0 30px 70px rgba(0,0,0,0.34); }
+          .lp-hero-total { font:800 34px/1 var(--raznos-font); letter-spacing:-0.02em; }
+          .lp-dark .raznos-card { color:var(--raznos-ink); }
+          .lp-hero-badge { white-space:nowrap; width:fit-content; }
+        </style>
+      </helmet>
+      <div class="lp">
+
+        <header class="lp-header" data-screen-label="Шапка">
+          <div class="lp-header-in">
+            <a class="lp-logo" href="#top"><img src="./app-icon.svg" alt="Разнос" /><span class="lp-logo-word">Разнос</span></a>
+            <div class="lp-nav-group" style="display:flex;align-items:center;gap:18px"><nav class="lp-nav">
+              <a href="#zakazy">{{ t.nav_orders }}</a>
+              <a href="#dohod">{{ t.nav_income }}</a>
+              <a href="#prognoz">{{ t.nav_forecast }}</a>
+            </nav><select class="lp-lang" value="{{ lang }}" onChange="{{ onLang }}" aria-label="Язык"><option value="ru">Русский</option><option value="uz">Oʻzbekcha</option><option value="tg">Тоҷикӣ</option><option value="ky">Кыргызча</option><option value="hy">Հայերեն</option></select></div>
+          </div>
+        </header>
+
+        <div class="lp-dark" id="top" data-screen-label="Hero">
+          <div class="lp-hero-in">
+            <div class="lp-hero-copy">
+              <p class="lp-hero-badge"><span></span>{{ t.hero_badge }}</p>
+              <h1 class="lp-h1">{{ t.hero_h1_pre }} <span class="lp-acc-d">{{ t.hero_h1_acc }}</span></h1>
+              <p class="lp-hero-lead">{{ t.hero_lead }}</p>
+              <div class="lp-cta-row">
+                <a class="lp-btn lp-btn-accent" href="#zakazy">{{ t.hero_cta }}</a>
+              </div>
+            </div>
+            <div class="lp-feature-media">
+              <div class="raznos-card raznos-card-pad lp-hero-widget raznos-fx raznos-col raznos-gap12"><div class="raznos-fx raznos-col raznos-gap8"><span class="raznos-text-small">{{ t.hero_w_caption }}</span><span class="raznos-fx raznos-ac raznos-gap8"><span class="lp-hero-total">4 200</span><span class="raznos-text-small">₽</span></span></div><div class="raznos-breakdown-row"><span class="raznos-fx raznos-ac raznos-gap8"><dc-import name="RaznosIcon" svc="vkusvill" size="sm"></dc-import>ВкусВилл</span><span class="raznos-num">2 350 ₽</span></div><div class="raznos-breakdown-row"><span class="raznos-fx raznos-ac raznos-gap8"><dc-import name="RaznosIcon" svc="samokat" size="sm"></dc-import>Самокат</span><span class="raznos-num">1 850 ₽</span></div><div class="raznos-fx raznos-ac" style="justify-content:space-between;margin-top:2px"><span class="raznos-text-tiny">{{ t.hero_w_orders }}</span><span class="raznos-text-tiny">{{ t.hero_w_rate }}</span></div></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="lp-dark" id="zakazy" data-screen-label="Входящие заказы">
+          <div class="lp-section">
+            <div class="lp-feature">
+              <div>
+                <h2 class="lp-h2">{{ t.z_h2_pre }} <span class="lp-acc-d">{{ t.z_h2_acc }}</span></h2>
+                <p class="lp-dek">{{ t.z_dek }}</p>
+                <ul class="lp-ul">
+                  <li>{{ t.z_li1 }}</li>
+                  <li>{{ t.z_li2 }}</li>
+                  <li>{{ t.z_li3 }}</li>
+                </ul>
+              </div>
+              <div class="lp-feature-media">
+                <div class="raznos-card">
+                  <div class="raznos-list-row"><dc-import name="RaznosIcon" svc="samokat" size="sm"></dc-import><div class="raznos-list-main"><span class="raznos-list-title">Самокат · 3,2 км</span><span class="raznos-text-small">18 мин · 4 кг</span></div><div class="raznos-list-end"><span class="raznos-num">480 ₽</span><span class="raznos-status-pill raznos-pill-ok">≈ 1 280 ₽/ч</span></div></div>
+                  <div class="raznos-list-row"><dc-import name="RaznosIcon" svc="vkusvill" size="sm"></dc-import><div class="raznos-list-main"><span class="raznos-list-title">ВкусВилл · 2,1 км</span><span class="raznos-text-small">14 мин · 2 кг</span></div><div class="raznos-list-end"><span class="raznos-num">320 ₽</span><span class="raznos-text-tiny">≈ 1 040 ₽/ч</span></div></div>
+                  <div class="raznos-list-row"><dc-import name="RaznosIcon" svc="magnit" size="sm"></dc-import><div class="raznos-list-main"><span class="raznos-list-title">Магнит · 1,8 км</span><span class="raznos-text-small">12 мин · 3 кг</span></div><div class="raznos-list-end"><span class="raznos-num">260 ₽</span><span class="raznos-text-tiny">≈ 720 ₽/ч</span></div></div>
+                </div>
+              </div>
+            </div>
+            
+          </div>
+        </div>
+
+        <div class="lp-band" data-screen-label="Предложение вблизи">
+          <div class="lp-section">
+              <h3 class="raznos-text-h3" style="margin:0 0 14px">{{ t.offer_title }}</h3>
+              <div class="lp-two">
+                <dc-import name="RaznosIncomingOffer" svc="{{ offer.svc }}" title="{{ offer.title }}" pay="{{ offer.pay }}" pickupAddr="{{ offer.pickupAddr }}" dropAddr="{{ offer.dropAddr }}" etaPoint="{{ offer.etaPoint }}" etaTotal="{{ offer.etaTotal }}" distance="{{ offer.distance }}" weight="{{ offer.weight }}" packages="{{ offer.packages }}" timerLabel="{{ offer.timerLabel }}" timerFillStyle="{{ offer.timerFillStyle }}" estimate="{{ offer.estimate }}"></dc-import>
+                <div class="raznos-fx raznos-col raznos-gap8" style="justify-content:center">
+                  <p class="lp-dek" style="margin:0 0 4px">{{ t.offer_dek }}</p>
+                  <p class="lp-demo-tag">{{ t.offer_demo }}</p>
+                </div>
+              </div>
+            </div>
+        </div>
+
+
+        <div class="lp-green" data-screen-label="Настоящие данные">
+          <div class="lp-section">
+            <p class="lp-statement">{{ t.statement_pre }}<b>{{ t.statement_b }}</b>{{ t.statement_post }}</p>
+          </div>
+        </div>
+
+        <div class="lp-section" data-screen-label="Для кого">
+          <div class="lp-feature">
+            <div>
+              <h2 class="lp-h2">{{ t.who_h2 }}</h2>
+              <p class="lp-dek">{{ t.who_dek }}</p>
+            </div>
+            <div class="lp-feature-media">
+              <div class="raznos-card lp-card raznos-card-pad">
+                <span class="raznos-text-small">{{ t.who_conn }}</span>
+                <div class="lp-conv-chips">
+                  <span class="lp-conv-chip"><dc-import name="RaznosIcon" svc="samokat" size="sm"></dc-import>Самокат</span>
+                  <span class="lp-conv-chip"><dc-import name="RaznosIcon" svc="vkusvill" size="sm"></dc-import>ВкусВилл</span>
+                  <span class="lp-conv-chip"><dc-import name="RaznosIcon" svc="yandex-eda" size="sm"></dc-import>Яндекс Про</span>
+                  <span class="lp-conv-chip"><dc-import name="RaznosIcon" svc="x5" size="sm"></dc-import>X5</span>
+                </div>
+                <div class="raznos-breakdown-row"><span>{{ t.who_week }}</span><span class="raznos-num">18 240 ₽</span></div>
+                <div class="raznos-breakdown-row"><span>{{ t.who_net }}</span><span class="raznos-num lp-acc">15 210 ₽</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="lp-band" id="dohod" data-screen-label="Единый доход">
+          <div class="lp-section">
+            <div class="lp-feature">
+              <div class="lp-feature-media">
+                <div class="raznos-card lp-card raznos-card-pad">
+                  <span class="raznos-text-h3">{{ t.income_card_title }}</span>
+                  <div class="raznos-breakdown-row"><span class="raznos-fx raznos-ac raznos-gap8"><dc-import name="RaznosIcon" svc="samokat" size="sm"></dc-import>Самокат · 3 ч</span><span class="raznos-num">2 640 ₽</span></div>
+                  <div class="raznos-breakdown-row"><span class="raznos-fx raznos-ac raznos-gap8"><dc-import name="RaznosIcon" svc="vkusvill" size="sm"></dc-import>ВкусВилл · 2 ч</span><span class="raznos-num">2 180 ₽</span></div>
+                  <div class="raznos-breakdown-row"><span>Расходы · топливо и связь</span><span class="raznos-num" style="color:var(--raznos-red)">− 320 ₽</span></div>
+                  <p class="raznos-text-tiny">3 ч + 2 ч − 0 ч пересечения = 5 ч на работе, без двойного счёта</p>
+                </div>
+              </div>
+              <div>
+                <h2 class="lp-h2">{{ t.income_h2 }}</h2>
+                <p class="lp-dek">{{ t.income_dek }}</p>
+                <ul class="lp-ul">
+                  <li>{{ t.income_li1 }}</li>
+                  <li>{{ t.income_li2 }}</li>
+                  <li>{{ t.income_li3 }}</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="lp-section" data-screen-label="История заказов">
+          <h2 class="lp-h2">{{ t.hist_h2 }}</h2>
+          <p class="lp-dek">{{ t.hist_dek }}</p>
+          <div class="lp-two" style="margin-top:24px">
+            <sc-for list="{{ orders }}" as="o" hint-placeholder-count="4">
+              <dc-import name="RaznosOrderCard" svc="{{ o.svc }}" svcTitle="{{ o.svcTitle }}" orderNo="{{ o.orderNo }}" dateLabel="{{ o.dateLabel }}" deliveryStatus="{{ o.deliveryStatus }}" moneyStatus="{{ o.moneyStatus }}" payout="{{ o.payout }}" tipLabel="{{ o.tipLabel }}" routeLabel="{{ o.routeLabel }}"></dc-import>
+            </sc-for>
+          </div>
+        </div>
+
+        <div class="lp-band" data-screen-label="Статистика">
+          <div class="lp-section">
+            <div class="lp-feature">
+              <div>
+                <h2 class="lp-h2">{{ t.stat_h2 }}</h2>
+                <p class="lp-dek">{{ t.stat_dek }}</p>
+                <ul class="lp-ul">
+                  <li>{{ t.stat_li1 }}</li>
+                  <li>{{ t.stat_li2 }}</li>
+                  <li>{{ t.stat_li3 }}</li>
+                </ul>
+              </div>
+              <div class="lp-feature-media">
+                <div class="raznos-fx raznos-col raznos-gap12">
+                  <div class="raznos-card lp-card raznos-card-pad">
+                    <span class="raznos-text-h3">{{ t.stat_card_months }}</span>
+                    <div class="lp-bars">
+                      <div class="lp-bcol"><span class="lp-bval">96</span><div class="lp-bfill" style="height:62%"></div><span class="lp-blabel">апр</span></div>
+                      <div class="lp-bcol"><span class="lp-bval">118</span><div class="lp-bfill" style="height:76%"></div><span class="lp-blabel">май</span></div>
+                      <div class="lp-bcol"><span class="lp-bval">110</span><div class="lp-bfill" style="height:71%"></div><span class="lp-blabel">июн</span></div>
+                      <div class="lp-bcol"><span class="lp-bval">132</span><div class="lp-bfill" style="height:85%"></div><span class="lp-blabel">июл</span></div>
+                      <div class="lp-bcol"><span class="lp-bval">156</span><div class="lp-bfill is-peak" style="height:100%"></div><span class="lp-blabel">авг</span></div>
+                      <div class="lp-bcol"><span class="lp-bval">148</span><div class="lp-bfill" style="height:95%"></div><span class="lp-blabel">сен</span></div>
+                    </div>
+                  </div>
+                  <div class="raznos-metric-grid">
+                    <div class="raznos-metric-card lp-card"><span class="raznos-text-small">{{ t.stat_card_rate }}</span><span class="raznos-metric-value">1 060</span></div>
+                    <div class="raznos-metric-card lp-card"><span class="raznos-text-small">{{ t.stat_card_active }}</span><span class="raznos-metric-value">68%</span></div>
+                  </div>
+                  <div class="raznos-card lp-card raznos-card-pad">
+                    <span class="raznos-text-small">{{ t.stat_card_cohort }}</span>
+                    <div class="raznos-breakdown-row"><span>{{ t.stat_card_my }}</span><span class="raznos-num">1 180 ₽</span></div>
+                    <div class="raznos-breakdown-row"><span>{{ t.stat_card_median }}</span><span class="raznos-num">1 020 ₽</span></div>
+                    <span class="raznos-status-pill raznos-pill-ok" style="align-self:flex-start">{{ t.stat_card_above }}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="lp-section" id="prognoz" data-screen-label="Прогноз">
+          <div class="lp-feature">
+            <div class="lp-feature-media">
+              <div class="raznos-fx raznos-col raznos-gap12">
+                <div class="lp-map">
+                  <svg viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Схема доходности по районам"><rect width="400" height="300" fill="var(--raznos-surface-2)"></rect><ellipse cx="200" cy="150" rx="182" ry="130" fill="none" stroke="var(--raznos-line-strong)" stroke-width="2.5"></ellipse><ellipse cx="200" cy="150" rx="118" ry="84" fill="none" stroke="var(--raznos-line)" stroke-width="2"></ellipse><ellipse cx="200" cy="150" rx="58" ry="42" fill="none" stroke="var(--raznos-line)" stroke-width="1.5"></ellipse><g stroke="var(--raznos-line)" stroke-width="1.5"><line x1="200" y1="20" x2="200" y2="280"></line><line x1="18" y1="150" x2="382" y2="150"></line><line x1="72" y1="50" x2="328" y2="250"></line><line x1="328" y1="50" x2="72" y2="250"></line></g><path d="M36 92 C 132 150, 176 86, 226 150 S 322 214, 374 166" fill="none" stroke="#7aa0c4" stroke-width="7" stroke-linecap="round" opacity="0.5"></path><g font-family="JetBrains Mono, monospace" text-anchor="middle"><rect x="150" y="116" width="100" height="62" rx="16" fill="var(--raznos-green-tint)" stroke="var(--raznos-green-deep)" stroke-width="2"></rect><text x="200" y="142" font-weight="700" font-size="12" fill="var(--raznos-green-deep)">Центр</text><text x="200" y="163" font-weight="700" font-size="15" fill="var(--raznos-green-deep)">1 320 ₽/ч</text><rect x="252" y="34" width="104" height="52" rx="14" fill="var(--raznos-green-tint)" stroke="var(--raznos-green)" stroke-width="2"></rect><text x="304" y="55" font-weight="700" font-size="12" fill="var(--raznos-green-deep)">Север</text><text x="304" y="74" font-weight="700" font-size="13" fill="var(--raznos-green-deep)">980 ₽/ч</text><rect x="44" y="212" width="122" height="52" rx="14" fill="var(--raznos-surface)" stroke="var(--raznos-line-strong)" stroke-width="2"></rect><text x="105" y="233" font-weight="700" font-size="12" fill="var(--raznos-ink-3)">Юго-Запад</text><text x="105" y="251" font-weight="700" font-size="13" fill="var(--raznos-ink-3)">610 ₽/ч</text></g><circle cx="236" cy="150" r="8" fill="var(--raznos-dark)" stroke="#fff" stroke-width="3"></circle></svg>
+                </div>
+                <div class="raznos-card lp-card raznos-card-pad">
+                  <span class="raznos-text-h3">{{ t.prog_map_title }}</span>
+                  <div class="lp-bars">
+                    <div class="lp-bcol"><span class="lp-bval">560</span><div class="lp-bfill" style="height:38%"></div><span class="lp-blabel">10</span></div>
+                    <div class="lp-bcol"><span class="lp-bval">820</span><div class="lp-bfill" style="height:58%"></div><span class="lp-blabel">12</span></div>
+                    <div class="lp-bcol"><span class="lp-bval">640</span><div class="lp-bfill" style="height:46%"></div><span class="lp-blabel">14</span></div>
+                    <div class="lp-bcol"><span class="lp-bval">900</span><div class="lp-bfill" style="height:64%"></div><span class="lp-blabel">16</span></div>
+                    <div class="lp-bcol"><span class="lp-bval">1,3к</span><div class="lp-bfill is-peak" style="height:100%"></div><span class="lp-blabel">18</span></div>
+                    <div class="lp-bcol"><span class="lp-bval">1,2к</span><div class="lp-bfill is-peak" style="height:92%"></div><span class="lp-blabel">20</span></div>
+                    <div class="lp-bcol"><span class="lp-bval">820</span><div class="lp-bfill" style="height:60%"></div><span class="lp-blabel">22</span></div>
+                  </div>
+                  <div class="lp-hlegend"><span><span class="lp-hleg-sw" style="background:var(--raznos-green-deep)"></span>{{ t.prog_leg_peak }}</span><span><span class="lp-hleg-sw" style="background:var(--raznos-green-tint)"></span>{{ t.prog_leg_calm }}</span></div>
+                </div>
+              </div>
+              <p class="lp-demo-tag">{{ t.prog_map_demo }}</p>
+            </div>
+            <div>
+              <h2 class="lp-h2">{{ t.prog_h2_pre }} <span class="lp-acc">{{ t.prog_h2_acc }}</span> {{ t.prog_h2_post }}</h2>
+              <p class="lp-dek">{{ t.prog_dek }}</p>
+              <ul class="lp-ul">
+                <li>{{ t.prog_li1 }}</li>
+                <li>{{ t.prog_li2 }}</li>
+                <li>{{ t.prog_li3 }}</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="lp-band" data-screen-label="Расписание">
+          <div class="lp-section">
+            <div class="lp-feature">
+              <div>
+                <h2 class="lp-h2">{{ t.sched_h2_pre }} <span class="lp-acc">{{ t.sched_h2_acc }}</span></h2>
+                <p class="lp-dek">{{ t.sched_dek }}</p>
+                <ul class="lp-ul">
+                  <li>{{ t.sched_li1 }}</li>
+                  <li>{{ t.sched_li2 }}</li>
+                  <li>{{ t.sched_li3 }}</li>
+                </ul>
+              </div>
+              <div class="lp-feature-media">
+                <div class="raznos-card lp-card raznos-card-pad">
+                  <div class="raznos-head-row"><span class="raznos-text-h3 raznos-head-title">{{ t.sched_card_title }}</span><span class="raznos-num">≈ 5 400 ₽</span></div>
+                  <div class="raznos-fx raznos-col raznos-gap8">
+                    <div class="lp-slot"><span class="lp-slot-time">10–12</span><dc-import name="RaznosIcon" svc="vkusvill" size="sm"></dc-import><span class="lp-slot-name">ВкусВилл</span><span class="raznos-num">1 040 ₽/ч</span></div>
+                    <div class="lp-slot is-break"><span class="lp-slot-time">12–13</span><span class="lp-slot-name">{{ t.sched_break }}</span></div>
+                    <div class="lp-slot"><span class="lp-slot-time">13–16</span><dc-import name="RaznosIcon" svc="samokat" size="sm"></dc-import><span class="lp-slot-name">Самокат</span><span class="raznos-num">980 ₽/ч</span></div>
+                    <div class="lp-slot is-peak"><span class="lp-slot-time">17–21</span><dc-import name="RaznosIcon" svc="samokat" size="sm"></dc-import><span class="lp-slot-name">Самокат · пик</span><span class="raznos-num">1 280 ₽/ч</span></div>
+                  </div>
+                  <p class="raznos-text-tiny">{{ t.sched_demo }}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="lp-section" data-screen-label="Лента сообщений">
+          <div class="lp-feature">
+            <div>
+              <h2 class="lp-h2">{{ t.live_h2 }}</h2>
+              <p class="lp-dek">{{ t.live_dek }}</p>
+                <ul class="lp-ul">
+                  <li>{{ t.live_li1 }}</li>
+                  <li>{{ t.live_li2 }}</li>
+                  <li>{{ t.live_li3 }}</li>
+                </ul>
+            </div>
+            <div class="lp-feature-media">
+              <div class="raznos-card lp-card raznos-card-pad">
+                <dc-import name="RaznosLiveToday" items="{{ liveItems }}" cityTitle="Москва"></dc-import>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="lp-band" data-screen-label="Рынок и отзывы">
+          <div class="lp-section">
+            <h2 class="lp-h2">{{ t.mkt_h2_pre }} <span class="lp-acc">{{ t.mkt_h2_acc }}</span></h2>
+            <p class="lp-dek">{{ t.mkt_dek }}</p>
+            <div class="lp-two" style="margin-top:24px">
+              <sc-for list="{{ reviews }}" as="r" hint-placeholder-count="2">
+                <dc-import name="RaznosReviewCard" category="{{ r.category }}" authorCity="{{ r.authorCity }}" rating="{{ r.rating }}" confirmed="{{ r.confirmed }}" text="{{ r.text }}" date="{{ r.date }}" ordersLabel="{{ r.ordersLabel }}" courierLikes="{{ r.courierLikes }}" courierDislikes="{{ r.courierDislikes }}" userLikes="{{ r.userLikes }}" userDislikes="{{ r.userDislikes }}" canVote="{{ false }}"></dc-import>
+              </sc-for>
+            </div>
+            <h3 class="raznos-text-h3" style="margin:28px 0 0">{{ t.mkt_q_title }}</h3>
+            <div class="lp-two" style="margin-top:12px">
+              <sc-for list="{{ questions }}" as="q" hint-placeholder-count="2">
+                <div class="raznos-card lp-card raznos-card-pad">
+                  <div class="raznos-head-row"><span class="raznos-text-h3 raznos-head-title">{{ q.q }}</span><span class="raznos-text-tiny raznos-head-side">{{ q.meta }}</span></div>
+                  <p class="raznos-text-body">{{ q.a }}</p>
+                  <span class="raznos-text-tiny">{{ q.replies }}</span>
+                </div>
+              </sc-for>
+            </div>
+          </div>
+        </div>
+
+        <div class="lp-section" data-screen-label="Профиль и чаевые">
+          <div class="lp-feature">
+            <div>
+              <h2 class="lp-h2">{{ t.prof_h2 }}</h2>
+              <p class="lp-dek">{{ t.prof_dek }}</p>
+              <ul class="lp-ul">
+                <li>{{ t.prof_li1 }}</li>
+                <li>{{ t.prof_li2 }}</li>
+                <li>{{ t.prof_li3 }}</li>
+              </ul>
+            </div>
+            <div class="lp-feature-media">
+              <div class="raznos-segmented" style="margin-bottom:12px">
+                <button type="button" class="{{ tabPublicCls }}" onClick="{{ setPublic }}">{{ t.prof_tab_public }}</button>
+                <button type="button" class="{{ tabAnonCls }}" onClick="{{ setAnon }}">{{ t.prof_tab_anon }}</button>
+              </div>
+              <sc-if value="{{ profPublic }}" hint-placeholder-val="{{ true }}">
+                <div class="raznos-card lp-card raznos-card-pad">
+                  <div class="lp-prof-head"><span class="raznos-anon-avatar" style="background:var(--raznos-svc-samokat-tint);color:var(--raznos-svc-samokat);width:56px;height:56px;font-size:24px">А</span><div class="raznos-fx raznos-col"><span class="raznos-text-h3">Алекс</span><span class="raznos-text-small">Москва · велокурьер · 2 года</span></div></div>
+                  <div class="raznos-badge-row"><span class="raznos-badge">3 480 заказов</span><span class="raznos-badge">оценка 4,8</span><span class="raznos-badge">чаевые по QR</span></div>
+                  <div class="lp-prof-services">
+                    <div class="lp-prof-row"><span class="raznos-fx raznos-ac raznos-gap8"><dc-import name="RaznosIcon" svc="samokat" size="sm"></dc-import>Самокат</span><span class="raznos-num">1 год · 4,8</span></div>
+                    <div class="lp-prof-row"><span class="raznos-fx raznos-ac raznos-gap8"><dc-import name="RaznosIcon" svc="vkusvill" size="sm"></dc-import>ВкусВилл</span><span class="raznos-num">8 мес · 4,7</span></div>
+                  </div>
+                </div>
+              </sc-if>
+              <sc-if value="{{ profAnon }}" hint-placeholder-val="{{ false }}">
+                <div class="raznos-card lp-card raznos-card-pad">
+                  <div class="lp-prof-head"><span class="raznos-anon-avatar" style="background:var(--raznos-surface-2);color:var(--raznos-ink-2);width:56px;height:56px;font-size:24px">?</span><div class="raznos-fx raznos-col"><span class="raznos-text-h3">Курьер сервиса</span><span class="raznos-text-small">Москва · велокурьер</span></div></div>
+                  <div class="raznos-badge-row"><span class="raznos-badge">3 000–4 000 заказов</span><span class="raznos-badge">оценка 4,5–5,0</span></div>
+                  <div class="lp-prof-services">
+                    <div class="lp-prof-row"><span class="raznos-fx raznos-ac raznos-gap8"><dc-import name="RaznosIcon" svc="samokat" size="sm"></dc-import>Самокат</span><span class="raznos-num">около года</span></div>
+                    <div class="lp-prof-row"><span class="raznos-fx raznos-ac raznos-gap8"><dc-import name="RaznosIcon" svc="vkusvill" size="sm"></dc-import>ВкусВилл</span><span class="raznos-num">меньше года</span></div>
+                  </div>
+                  <p class="raznos-text-tiny">Без имени и фото, показатели приблизительные</p>
+                </div>
+              </sc-if>
+            </div>
+          </div>
+        </div>
+
+        <div class="lp-band" data-screen-label="Расходы">
+          <div class="lp-section">
+            <div class="lp-feature">
+              <div class="lp-feature-media">
+                <div class="raznos-card lp-card raznos-card-pad">
+                  <span class="raznos-text-h3">{{ t.exp_card_title }}</span>
+                  <div class="raznos-breakdown-row"><span>Аренда велосипеда · постоянный</span><span class="raznos-num">1 200 ₽</span></div>
+                  <div class="raznos-breakdown-row"><span>Связь · постоянный</span><span class="raznos-num">200 ₽</span></div>
+                  <div class="raznos-breakdown-row"><span>Заправка · разовый</span><span class="raznos-num">900 ₽</span></div>
+                  <div class="raznos-breakdown-row"><span>После расходов</span><span class="raznos-num lp-acc">15 210 ₽</span></div>
+                </div>
+              </div>
+              <div>
+                <h2 class="lp-h2">{{ t.exp_h2 }}</h2>
+                <p class="lp-dek">{{ t.exp_dek }}</p>
+                <ul class="lp-ul">
+                  <li>{{ t.exp_li1 }}</li>
+                  <li>{{ t.exp_li2 }}</li>
+                  <li>{{ t.exp_li3 }}</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="lp-section" data-screen-label="Подключение сервиса">
+          <div class="lp-narrow" style="margin:0 auto">
+            <h2 class="lp-h2">{{ t.conn_h2 }}</h2>
+            <p class="lp-dek">{{ t.conn_dek }}</p>
+          </div>
+          <div class="lp-steps">
+            <div class="raznos-card lp-card lp-step">
+              <span class="lp-step-num">1</span>
+              <p class="lp-step-t">{{ t.conn_s1 }}</p>
+              <div class="lp-conv-chips">
+                <span class="lp-conv-chip"><dc-import name="RaznosIcon" svc="samokat" size="sm"></dc-import>Самокат</span>
+                <span class="lp-conv-chip"><dc-import name="RaznosIcon" svc="vkusvill" size="sm"></dc-import>ВкусВилл</span>
+              </div>
+            </div>
+            <div class="raznos-card lp-card lp-step">
+              <span class="lp-step-num">2</span>
+              <p class="lp-step-t">{{ t.conn_s2 }}</p>
+              <div class="raznos-field-box">{{ t.conn_s2_field }}</div>
+              <p class="raznos-text-tiny">{{ t.conn_s2_note }}</p>
+            </div>
+            <div class="raznos-card lp-card lp-step">
+              <span class="lp-step-num">3</span>
+              <p class="lp-step-t">{{ t.conn_s3 }}</p>
+              <span class="raznos-status-pill raznos-pill-ok" style="align-self:flex-start">{{ t.conn_s3_pill }}</span>
+              <p class="raznos-text-tiny">{{ t.conn_s3_note }}</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="lp-band" data-screen-label="Сервисы">
+          <div class="lp-section">
+            <h2 class="lp-h2">{{ t.svc_h2 }}</h2>
+            <p class="lp-dek">{{ t.svc_dek }}</p>
+            <div class="lp-svc-grid">
+              <div class="lp-svc lp-card"><dc-import name="RaznosIcon" svc="samokat" size="sm"></dc-import>Самокат</div>
+              <div class="lp-svc lp-card"><dc-import name="RaznosIcon" svc="vkusvill" size="sm"></dc-import>ВкусВилл</div>
+              <div class="lp-svc lp-card"><dc-import name="RaznosIcon" svc="yandex-eda" size="sm"></dc-import>Яндекс Про</div>
+              <div class="lp-svc lp-card"><dc-import name="RaznosIcon" svc="delivery" size="sm"></dc-import>Деливери</div>
+              <div class="lp-svc lp-card"><dc-import name="RaznosIcon" svc="x5" size="sm"></dc-import>X5</div>
+              <div class="lp-svc lp-card"><dc-import name="RaznosIcon" svc="lenta" size="sm"></dc-import>Лента</div>
+              <div class="lp-svc lp-card"><dc-import name="RaznosIcon" svc="magnit" size="sm"></dc-import>Магнит</div>
+              <div class="lp-svc lp-card"><dc-import name="RaznosIcon" svc="ozon-fresh" size="sm"></dc-import>Ozon Fresh</div>
+              <div class="lp-svc lp-card"><dc-import name="RaznosIcon" svc="kuper" size="sm"></dc-import>Купер</div>
+              <div class="lp-svc lp-card"><dc-import name="RaznosIcon" svc="dostaevsky" size="sm"></dc-import>Достаевский</div>
+              <div class="lp-svc lp-card"><dc-import name="RaznosIcon" svc="dostavista" size="sm"></dc-import>Достависта</div>
+            </div>
+            <p class="lp-demo-tag">{{ t.svc_note }}</p>
+          </div>
+        </div>
+
+        <div class="lp-section lp-narrow" data-screen-label="Данные">
+          <h2 class="lp-h2">{{ t.data_h2 }}</h2>
+          <p class="lp-dek">{{ t.data_dek }}</p>
+          <ul class="lp-ul">
+            <li>{{ t.data_li1 }}</li>
+            <li>{{ t.data_li2 }}</li>
+            <li>{{ t.data_li3 }}</li>
+          </ul>
+        </div>
+
+        <div class="lp-band" data-screen-label="Города">
+          <div class="lp-section lp-narrow">
+            <h2 class="lp-h2">{{ t.city_h2 }}</h2>
+            <p class="lp-dek">{{ t.city_dek }}</p>
+          </div>
+        </div>
+
+        <div class="lp-section" data-screen-label="FAQ">
+          <h2 class="lp-h2">{{ t.faq_h2 }}</h2>
+          <div style="margin-top:14px">
+            <div class="lp-faq-item"><p class="lp-faq-q">{{ t.faq_q1 }}</p><p class="lp-faq-a">{{ t.faq_a1 }}</p></div>
+            <div class="lp-faq-item"><p class="lp-faq-q">{{ t.faq_q2 }}</p><p class="lp-faq-a">{{ t.faq_a2 }}</p></div>
+            <div class="lp-faq-item"><p class="lp-faq-q">{{ t.faq_q3 }}</p><p class="lp-faq-a">{{ t.faq_a3 }}</p></div>
+            <div class="lp-faq-item"><p class="lp-faq-q">{{ t.faq_q4 }}</p><p class="lp-faq-a">{{ t.faq_a4 }}</p></div>
+            <div class="lp-faq-item"><p class="lp-faq-q">{{ t.faq_q5 }}</p><p class="lp-faq-a">{{ t.faq_a5 }}</p></div>
+          </div>
+        </div>
+
+        <div class="lp-dark" data-screen-label="Финальный CTA">
+          <div class="lp-final">
+            <h2>{{ t.final_h2 }}</h2>
+            <p class="lp-dek" style="text-align:center">{{ t.final_dek }}</p>
+            <a class="lp-btn lp-btn-accent" href="https://crutch12.github.io/raz-app/" target="_blank" rel="noopener">{{ t.final_cta }}</a>
+          </div>
+        </div>
+
+      </div>
+    </x-dc>
+    <script type="text/x-dc" data-dc-script data-props='{}'>
+      class Component extends DCLogic {
+        renderVals() {
+          const st = this.state || {};
+          const tab = st.profileTab || 'public';
+          const lang = st.lang || 'ru';
+          const L = {"ru": {"nav_orders": "Заказы", "nav_income": "Доход", "nav_forecast": "Прогноз", "hero_badge": "Кабинет курьера для нескольких сервисов", "hero_h1_pre": "Весь заработок от доставки", "hero_h1_acc": "в одном месте", "hero_lead": "Разнос собирает доход, заказы и смены всех сервисов, показывает где выгоднее работать и добавляет рынок сервисов с отзывами курьеров", "hero_cta": "Что умеет приложение", "hero_w_caption": "Начислено в двух сервисах", "hero_w_orders": "17 заказов", "hero_w_rate": "700 ₽ / час до расходов", "z_h2_pre": "Выбирай заказ", "z_h2_acc": "в одной ленте", "z_dek": "Предложения всех подключённых сервисов приходят в один экран, сразу с оценкой выгоды, чтобы не держать пять приложений открытыми", "z_li1": "Оплата, доход за час и после расходов видно до принятия", "z_li2": "Маршрут, расстояние, вес и время всего заказа рядом", "z_li3": "Авто-отклонение по порогу рубль за км отсеивает невыгодное", "offer_title": "Предложение вблизи", "offer_dek": "Открываешь любое предложение и видишь маршрут, метрики и оценку выгоды целиком", "offer_demo": "Приём предложений в режиме Работа только для проверенных возможностей сервиса. Демо-данные", "statement_pre": "Все данные тянутся ", "statement_b": "напрямую из интеграций", "statement_post": " сервисов. Поэтому у нас настоящая статистика зарплат, штрафов и бонусов, а не маркетинговые обещания", "who_h2": "Для курьера, который работает в нескольких сервисах", "who_dek": "Доход разбросан по приложениям, непонятно где реально выгоднее и сколько остаётся после расходов. Разнос сводит всё вместе и считает честно", "who_conn": "Подключено сейчас", "who_week": "Общий доход за неделю", "who_net": "После расходов", "income_h2": "Весь заработок и история заказов в одном кабинете", "income_dek": "Доход в час и за заказ, из чего сложилась сумма и история заказов всех сервисов рядом", "income_li1": "Начисления, выплаты, чаевые, бонусы и удержания отдельно, без двойного счёта", "income_li2": "У каждой цифры источник, время обновления и признак получено или рассчитано", "income_li3": "История с маршрутом, расстоянием и товарами, если они есть в источнике", "income_card_title": "Из чего сложилась сумма", "hist_h2": "История заказов всех сервисов", "hist_dek": "Каждый заказ с суммой, статусом выплаты, чаевыми и маршрутом. Можно открыть подробности", "stat_h2": "Видно, где ты зарабатываешь и куда уходит время", "stat_dek": "Обзор, деньги, время, заказы и лучшие часы, с честным сравнением с другими курьерами", "stat_li1": "Сравнение с медианой курьеров твоего города, транспорта и периода", "stat_li2": "Структура времени: активное, ожидание, переезды и простой", "stat_li3": "Лучшие часы сеткой по дням и времени", "stat_card_months": "Доход по месяцам, тыс ₽", "stat_card_rate": "₽/ч после расходов", "stat_card_active": "Активное время", "stat_card_cohort": "Я и другие курьеры города", "stat_card_my": "Мой доход в час", "stat_card_median": "Медиана группы", "stat_card_above": "выше медианы на 16%", "prog_h2_pre": "Подсказывает,", "prog_h2_acc": "где и когда выгоднее", "prog_h2_post": "выйти", "prog_dek": "Карта дохода по районам и график дохода в час по времени суток: видно, в какой район и в какой час выгоднее выйти", "prog_li1": "Самые доходные районы и часы с пометками выше и ниже среднего", "prog_li2": "Прогноз с диапазоном и причиной, при нехватке данных честно об этом пишем", "prog_li3": "Доступные слоты и время переезда до зоны", "prog_map_title": "Доход в час по времени суток", "prog_leg_peak": "пик спроса", "prog_leg_calm": "спокойно", "prog_map_demo": "Схема районов и часов, демо-данные, не точная география", "sched_h2_pre": "Собирает смену из разных сервисов, чтобы заработать", "sched_h2_acc": "максимум", "sched_dek": "Разнос планирует день по часам и подсказывает, где в какое время выгоднее, комбинируя сервисы в течение дня", "sched_li1": "Разные сервисы в разное время под пиковый спрос", "sched_li2": "Перерывы и переезды учтены, доход считается за смену", "sched_li3": "Прогноз дохода за день и по каждому слоту", "sched_card_title": "Смена на сегодня", "sched_break": "перерыв", "sched_demo": "Собрано из подключённых сервисов под спрос, демо-данные", "live_h2": "Лента оперативных сообщений", "live_dek": "Что происходит прямо сейчас по твоим сервисам и городу: сбои, точки с очередями, всплески спроса. От курьеров, для курьеров", "live_li1": "Только твои сервисы и город, без лишнего шума", "live_li2": "Реакции и ответы, полезное поднимается выше", "live_li3": "Можно написать своё и предупредить остальных", "mkt_h2_pre": "Рынок сервисов", "mkt_h2_acc": "глазами курьеров", "mkt_dek": "Публичный рынок сервисов по городам, подтверждённые отзывы, оценки по сервисам и вопросы с ответами", "mkt_q_title": "Вопросы по сервисам", "prof_h2": "Публичный профиль курьера и чаевые по QR", "prof_dek": "Псевдоним, стаж, достижения и добровольно открытые показатели. По умолчанию профиль приватный, посетители видят обезличенное представление", "prof_li1": "Два режима: публичный именной и обезличенный из отзывов", "prof_li2": "В обезличенном нет имени и фото, оценки показываются диапазоном", "prof_li3": "Чаевые через платёжного провайдера, комиссия видна до оплаты", "prof_tab_public": "Публичный", "prof_tab_anon": "Обезличенный", "exp_card_title": "Расходы за неделю", "exp_h2": "Честный доход после всех затрат", "exp_dek": "Постоянные правила и разовые траты вместе, доход после расходов считается честно", "exp_li1": "Постоянные: аренда, связь, подписки. Разовые: заправка, метро, каршеринг", "exp_li2": "Предупреждаем о возможном двойном учёте траты", "exp_li3": "Экспорт CSV и PDF с исходными цифрами", "conn_h2": "Подключение сервиса за минуту", "conn_dek": "Добавляешь аккаунты сервисов, в которых работаешь. Режим Статистика только читает данные и не управляет заказами", "conn_s1": "Выбери сервис", "conn_s2": "Войди в аккаунт сервиса", "conn_s2_field": "Телефон или логин", "conn_s2_note": "Данные для входа шифруются, токены не сохраняются на нашем сервере", "conn_s3": "Готово", "conn_s3_pill": "Синхронизировано", "conn_s3_note": "Доход и история подтянутся автоматически", "svc_h2": "11 сервисов доставки в одном кабинете", "svc_dek": "Подключай те, в которых работаешь, и смотри общий доход", "svc_note": "Яндекс Про это одно подключение, внутри бренды Еда, Лавка и Деливери", "data_h2": "Сырые данные клиентов мы не храним", "data_dek": "Работаем по 152-ФЗ. Персональные данные покупателей обезличиваются на сервере, точные адреса и контакты не попадают в историю и аналитику", "data_li1": "Свои данные курьера хранятся в закрытом контуре и видны только владельцу", "data_li2": "Публичная статистика только обезличенная и с достаточной выборкой", "data_li3": "Токены интеграций не сохраняются на сервере, удаление аккаунта реально уничтожает персональные данные", "city_h2": "1105 городов России", "city_dek": "Город выбирается в профиле, статистика рынка и прогноз подстраиваются под него. Для города без данных не подставляем чужие показатели", "faq_h2": "Частые вопросы", "faq_q1": "Это бесплатно", "faq_a1": "Базовый кабинет дохода и статистики бесплатный. Платные возможности и партнёрские выгоды появятся позже", "faq_q2": "Как подключаются сервисы", "faq_a2": "Добавляешь аккаунт сервиса, данные для входа шифруются. Режим Статистика только читает данные и не управляет заказами", "faq_q3": "Где хранятся токены доступа к сервисам", "faq_a3": "Токены авторизации интеграций используются транзитно для синхронизации и не сохраняются на нашем сервере", "faq_q4": "Мои данные в безопасности", "faq_a4": "Свои данные видишь только ты, данные клиентов обезличиваются, работаем по 152-ФЗ", "faq_q5": "Можно принимать заказы прямо в приложении", "faq_a5": "Приём предложений в режиме Работа включается только для проверенных возможностей сервиса, обычная работа это статистика и помощник", "final_h2": "Посмотри весь доход от доставки в одном месте", "final_dek": "Открой живой прототип и пройдись по сценариям курьера", "final_cta": "Открыть прототип"}, "uz": {"nav_orders": "Buyurtmalar", "nav_income": "Daromad", "nav_forecast": "Bashorat", "hero_badge": "Bir nechta xizmat uchun kuryer kabineti", "hero_h1_pre": "Yetkazishdan olingan barcha daromad", "hero_h1_acc": "bitta joyda", "hero_lead": "Разнос barcha xizmatlarning daromadi, buyurtmalari va smenalarini yigʻadi, qayerda ishlash foydaliroq ekanini koʻrsatadi va kuryerlar sharhlari bilan xizmatlar bozorini qoʻshadi", "hero_cta": "Ilova nima qila oladi", "hero_w_caption": "Ikki xizmatda hisoblangan", "hero_w_orders": "17 buyurtma", "hero_w_rate": "700 ₽ / soatiga xarajatlardan oldin", "z_h2_pre": "Buyurtmani tanla", "z_h2_acc": "bitta lentada", "z_dek": "Barcha ulangan xizmatlarning takliflari bitta ekranga keladi, darrov foyda bahosi bilan, beshta ilovani ochiq tutmaslik uchun", "z_li1": "Toʻlov, soatlik va xarajatlardan keyingi daromad qabul qilishdan oldin koʻrinadi", "z_li2": "Marshrut, masofa, ogʻirlik va butun buyurtma vaqti yonida", "z_li3": "Kilometriga rubl chegarasi boʻyicha avto-rad etish foydasizini saralaydi", "offer_title": "Yaqin atrofdagi taklif", "offer_dek": "Istalgan taklifni ochib, marshrut, koʻrsatkichlar va foyda bahosini toʻliq koʻrasan", "offer_demo": "Ish rejimida takliflarni qabul qilish faqat xizmatning tasdiqlangan imkoniyatlari uchun. Namuna maʼlumotlar", "statement_pre": "Barcha maʼlumotlar xizmatlarning ", "statement_b": "integratsiyalaridan bevosita", "statement_post": " tortiladi. Shuning uchun bizda ish haqi, jarima va bonuslarning haqiqiy statistikasi bor, marketing vaʼdalari emas", "who_h2": "Bir nechta xizmatda ishlaydigan kuryer uchun", "who_dek": "Daromad ilovalarga tarqalgan, qayerda haqiqatan foydaliroq va xarajatlardan keyin qancha qolishi noaniq. Разнос hammasini birga yigʻadi va halol hisoblaydi", "who_conn": "Hozir ulangan", "who_week": "Haftalik umumiy daromad", "who_net": "Xarajatlardan keyin", "income_h2": "Butun daromad va buyurtmalar tarixi bitta kabinetda", "income_dek": "Soatlik va buyurtma daromadi, summa nimadan tashkil topgani va barcha xizmatlar buyurtmalari tarixi yonma-yon", "income_li1": "Hisoblanmalar, toʻlovlar, choychaqa, bonus va ushlab qolishlar alohida, ikki marta sanamasdan", "income_li2": "Har bir raqamning manbasi, yangilanish vaqti va olingan yoki hisoblangan belgisi bor", "income_li3": "Marshrut, masofa va tovarlar bilan tarix, agar ular manbada boʻlsa", "income_card_title": "Summa nimadan tashkil topdi", "hist_h2": "Barcha xizmatlar buyurtmalari tarixi", "hist_dek": "Har bir buyurtma summasi, toʻlov holati, choychaqa va marshruti bilan. Tafsilotlarni ochish mumkin", "stat_h2": "Qayerda ishlab topayotganing va vaqting qayerga ketayotgani koʻrinadi", "stat_dek": "Umumiy koʻrinish, pul, vaqt, buyurtmalar va eng yaxshi soatlar, boshqa kuryerlar bilan halol taqqoslash bilan", "stat_li1": "Shahring, transporting va davring boʻyicha kuryerlar medianasi bilan taqqoslash", "stat_li2": "Vaqt tuzilishi: faol, kutish, koʻchishlar va boʻsh turish", "stat_li3": "Eng yaxshi soatlar kunlar va vaqt boʻyicha katakchada", "stat_card_months": "Oylar boʻyicha daromad, ming ₽", "stat_card_rate": "₽/soat xarajatlardan keyin", "stat_card_active": "Faol vaqt", "stat_card_cohort": "Men va shahardagi boshqa kuryerlar", "stat_card_my": "Mening soatlik daromadim", "stat_card_median": "Guruh medianasi", "stat_card_above": "medianadan 16% yuqori", "prog_h2_pre": "Maslahat beradi:", "prog_h2_acc": "qayerda va qachon foydaliroq", "prog_h2_post": "chiqish", "prog_dek": "Tumanlar boʻyicha daromad xaritasi va kun davomida soatlik daromad grafigi: qaysi tuman va qaysi soatda chiqish foydaliroq ekani koʻrinadi", "prog_li1": "Eng daromadli tumanlar va soatlar, oʻrtachadan yuqori va past belgilari bilan", "prog_li2": "Diapazon va sabab bilan bashorat, maʼlumot yetmasa buni halol yozamiz", "prog_li3": "Mavjud slotlar va zonaga koʻchish vaqti", "prog_map_title": "Kun davomida soatlik daromad", "prog_leg_peak": "talab choʻqqisi", "prog_leg_calm": "sokin", "prog_map_demo": "Tumanlar va soatlar sxemasi, namuna maʼlumotlar, aniq geografiya emas", "sched_h2_pre": "Turli xizmatlardan smena tuzadi, daromading", "sched_h2_acc": "maksimal boʻlsin", "sched_dek": "Разнос kunni soatlab rejalashtiradi va kun davomida xizmatlarni birlashtirib, qaysi vaqtda qayerda foydaliroq ekanini maslahat beradi", "sched_li1": "Talab choʻqqisiga qarab turli vaqtda turli xizmatlar", "sched_li2": "Tanaffus va koʻchishlar hisobga olingan, daromad smena boʻyicha sanaladi", "sched_li3": "Kunlik va har bir slot boʻyicha daromad bashorati", "sched_card_title": "Bugungi smena", "sched_break": "tanaffus", "sched_demo": "Ulangan xizmatlardan talabga qarab tuzilgan, namuna maʼlumotlar", "live_h2": "Operativ xabarlar lentasi", "live_dek": "Xizmatlaring va shahring boʻyicha hozir nima boʻlayotgani: uzilishlar, navbatli nuqtalar, talab koʻtarilishi. Kuryerlardan kuryerlar uchun", "live_li1": "Faqat sening xizmatlaring va shahring, ortiqcha shovqinsiz", "live_li2": "Reaksiya va javoblar, foydalisi yuqoriga koʻtariladi", "live_li3": "Oʻzingnikini yozib, boshqalarni ogohlantirishing mumkin", "mkt_h2_pre": "Xizmatlar bozori", "mkt_h2_acc": "kuryerlar nigohida", "mkt_dek": "Shaharlar boʻyicha ochiq xizmatlar bozori, tasdiqlangan sharhlar, xizmatlar boʻyicha baholar va javobli savollar", "mkt_q_title": "Xizmatlar boʻyicha savollar", "prof_h2": "Kuryerning ochiq profili va QR orqali choychaqa", "prof_dek": "Taxallus, tajriba, yutuqlar va ixtiyoriy ochilgan koʻrsatkichlar. Odatda profil shaxsiy, tashrif buyuruvchilar shaxssiz koʻrinishni koʻradi", "prof_li1": "Ikki rejim: ochiq nomli va sharhlardan shaxssiz", "prof_li2": "Shaxssizda ism va foto yoʻq, baholar diapazon bilan koʻrsatiladi", "prof_li3": "Choychaqa toʻlov provayderi orqali, komissiya toʻlovdan oldin koʻrinadi", "prof_tab_public": "Ochiq", "prof_tab_anon": "Shaxssiz", "exp_card_title": "Haftalik xarajatlar", "exp_h2": "Barcha xarajatlardan keyingi halol daromad", "exp_dek": "Doimiy qoidalar va bir martalik xarajatlar birga, xarajatlardan keyingi daromad halol sanaladi", "exp_li1": "Doimiy: ijara, aloqa, obunalar. Bir martalik: yoqilgʻi, metro, karsharing", "exp_li2": "Xarajatning ikki marta hisoblanishi ehtimoli haqida ogohlantiramiz", "exp_li3": "Dastlabki raqamlar bilan CSV va PDF eksport", "conn_h2": "Xizmatni bir daqiqada ulash", "conn_dek": "Oʻzing ishlaydigan xizmatlar akkauntlarini qoʻshasan. Statistika rejimi faqat maʼlumotni oʻqiydi va buyurtmalarni boshqarmaydi", "conn_s1": "Xizmatni tanla", "conn_s2": "Xizmat akkauntiga kir", "conn_s2_field": "Telefon yoki login", "conn_s2_note": "Kirish maʼlumotlari shifrlanadi, tokenlar bizning serverda saqlanmaydi", "conn_s3": "Tayyor", "conn_s3_pill": "Sinxronlashtirildi", "conn_s3_note": "Daromad va tarix avtomatik tortiladi", "svc_h2": "Bitta kabinetda 11 ta yetkazish xizmati", "svc_dek": "Oʻzing ishlaydiganlarini ula va umumiy daromadni koʻr", "svc_note": "Яндекс Про bitta ulanish, ichida Еда, Лавка va Деливери brendlari", "data_h2": "Mijozlarning xom maʼlumotlarini saqlamaymiz", "data_dek": "152-ФЗ boʻyicha ishlaymiz. Xaridorlarning shaxsiy maʼlumotlari serverda shaxssizlantiriladi, aniq manzil va kontaktlar tarix va tahlilga tushmaydi", "data_li1": "Kuryerning oʻz maʼlumotlari yopiq konturda saqlanadi va faqat egasiga koʻrinadi", "data_li2": "Ommaviy statistika faqat shaxssiz va yetarli tanlanma bilan", "data_li3": "Integratsiya tokenlari serverda saqlanmaydi, akkauntni oʻchirish shaxsiy maʼlumotlarni haqiqatan yoʻq qiladi", "city_h2": "Rossiyaning 1105 shahri", "city_dek": "Shahar profilda tanlanadi, bozor statistikasi va bashorat unga moslashadi. Maʼlumoti yoʻq shahar uchun begona koʻrsatkichlarni qoʻymaymiz", "faq_h2": "Tez-tez beriladigan savollar", "faq_q1": "Bu bepulmi", "faq_a1": "Daromad va statistikaning asosiy kabineti bepul. Pullik imkoniyatlar va hamkorlik foydalari keyinroq paydo boʻladi", "faq_q2": "Xizmatlar qanday ulanadi", "faq_a2": "Xizmat akkauntini qoʻshasan, kirish maʼlumotlari shifrlanadi. Statistika rejimi faqat maʼlumotni oʻqiydi va buyurtmalarni boshqarmaydi", "faq_q3": "Xizmatlarga kirish tokenlari qayerda saqlanadi", "faq_a3": "Integratsiyalarning avtorizatsiya tokenlari sinxronlash uchun tranzit tarzda ishlatiladi va bizning serverda saqlanmaydi", "faq_q4": "Maʼlumotlarim xavfsizmi", "faq_a4": "Oʻz maʼlumotlaringni faqat oʻzing koʻrasan, mijozlar maʼlumotlari shaxssizlantiriladi, 152-ФЗ boʻyicha ishlaymiz", "faq_q5": "Buyurtmalarni ilovada qabul qilsa boʻladimi", "faq_a5": "Ish rejimida takliflarni qabul qilish faqat xizmatning tasdiqlangan imkoniyatlari uchun yoqiladi, oddiy ish bu statistika va yordamchi", "final_h2": "Yetkazishdan olingan butun daromadni bitta joyda koʻr", "final_dek": "Jonli prototipni ochib, kuryer stsenariylari boʻylab yur", "final_cta": "Prototipni ochish"}, "tg": {"nav_orders": "Фармоишҳо", "nav_income": "Даромад", "nav_forecast": "Пешбинӣ", "hero_badge": "Кабинети курьер барои якчанд хидмат", "hero_h1_pre": "Тамоми даромад аз расонидан", "hero_h1_acc": "дар як ҷо", "hero_lead": "Разнос даромад, фармоишҳо ва навбатҳои ҳамаи хидматҳоро ҷамъ мекунад, нишон медиҳад, ки дар куҷо кор кардан фоидаовартар аст ва бозори хидматҳоро бо шарҳҳои курьерон илова мекунад", "hero_cta": "Барнома чиро метавонад", "hero_w_caption": "Дар ду хидмат ҳисоб шуд", "hero_w_orders": "17 фармоиш", "hero_w_rate": "700 ₽ / соат то хароҷот", "z_h2_pre": "Фармоишро интихоб кун", "z_h2_acc": "дар як лента", "z_dek": "Пешниҳодҳои ҳамаи хидматҳои пайваст ба як экран меоянд, дарҳол бо баҳои фоида, то панҷ барномаро кушода нигоҳ надорӣ", "z_li1": "Пардохт, даромади соатӣ ва пас аз хароҷот пеш аз қабул дида мешавад", "z_li2": "Масир, масофа, вазн ва вақти тамоми фармоиш дар паҳлӯ", "z_li3": "Радкунии худкор аз рӯи ҳадди рубл ба километр бефоидаро ҷудо мекунад", "offer_title": "Пешниҳоди наздик", "offer_dek": "Ҳар пешниҳодро мекушоӣ ва масир, нишондиҳандаҳо ва баҳои фоидаро пурра мебинӣ", "offer_demo": "Қабули пешниҳодҳо дар ҳолати Кор танҳо барои имкониятҳои тасдиқшудаи хидмат. Маълумоти намунавӣ", "statement_pre": "Ҳамаи маълумот ", "statement_b": "бевосита аз интегратсияҳои", "statement_post": " хидматҳо гирифта мешавад. Барои ҳамин мо омори воқеии музд, ҷарима ва бонусҳо дорем, на ваъдаҳои маркетингӣ", "who_h2": "Барои курьере, ки дар якчанд хидмат кор мекунад", "who_dek": "Даромад дар байни барномаҳо пароканда аст, маълум нест дар куҷо воқеан фоидаовартар аст ва пас аз хароҷот чӣ қадар мемонад. Разнос ҳамаро якҷоя мекунад ва одилона ҳисоб мекунад", "who_conn": "Ҳоло пайваст шуда", "who_week": "Даромади умумӣ дар як ҳафта", "who_net": "Пас аз хароҷот", "income_h2": "Тамоми даромад ва таърихи фармоишҳо дар як кабинет", "income_dek": "Даромади соатӣ ва барои фармоиш, аз чӣ сумма ташкил шуд ва таърихи фармоишҳои ҳамаи хидматҳо дар паҳлӯ", "income_li1": "Ҳисобкуниҳо, пардохтҳо, чойпулӣ, бонус ва нигоҳдориҳо ҷудогона, бе ҳисоби дучанд", "income_li2": "Ҳар рақам манбаъ, вақти навшавӣ ва аломати гирифташуда ё ҳисобшуда дорад", "income_li3": "Таърих бо масир, масофа ва молҳо, агар онҳо дар манбаъ бошанд", "income_card_title": "Сумма аз чӣ ташкил шуд", "hist_h2": "Таърихи фармоишҳои ҳамаи хидматҳо", "hist_dek": "Ҳар фармоиш бо сумма, ҳолати пардохт, чойпулӣ ва масир. Тафсилотро кушодан мумкин аст", "stat_h2": "Дида мешавад, ки дар куҷо даромад меёбӣ ва вақтат ба куҷо меравад", "stat_dek": "Шарҳи умумӣ, пул, вақт, фармоишҳо ва беҳтарин соатҳо, бо муқоисаи одилона бо дигар курьерон", "stat_li1": "Муқоиса бо медианаи курьерони шаҳр, нақлиёт ва давраи ту", "stat_li2": "Сохтори вақт: фаъол, интизорӣ, кӯчиданҳо ва бекористӣ", "stat_li3": "Беҳтарин соатҳо дар шабака аз рӯи рӯзҳо ва вақт", "stat_card_months": "Даромад аз рӯи моҳҳо, ҳазор ₽", "stat_card_rate": "₽/соат пас аз хароҷот", "stat_card_active": "Вақти фаъол", "stat_card_cohort": "Ман ва дигар курьерони шаҳр", "stat_card_my": "Даромади соатии ман", "stat_card_median": "Медианаи гурӯҳ", "stat_card_above": "аз медиана 16% болотар", "prog_h2_pre": "Маслиҳат медиҳад,", "prog_h2_acc": "дар куҷо ва кай фоидаовартар", "prog_h2_post": "баромадан", "prog_dek": "Харитаи даромад аз рӯи ноҳияҳо ва графики даромади соатӣ дар давоми рӯз: дида мешавад, ки ба кадом ноҳия ва дар кадом соат баромадан фоидаовартар аст", "prog_li1": "Сердаромадтарин ноҳияҳо ва соатҳо бо аломатҳои болотар ва поёнтар аз миёна", "prog_li2": "Пешбинӣ бо диапазон ва сабаб, ҳангоми камии маълумот инро одилона менависем", "prog_li3": "Слотҳои дастрас ва вақти кӯчидан то минтақа", "prog_map_title": "Даромади соатӣ дар давоми рӯз", "prog_leg_peak": "авҷи талабот", "prog_leg_calm": "ором", "prog_map_demo": "Нақшаи ноҳияҳо ва соатҳо, маълумоти намунавӣ, ҷуғрофияи дақиқ нест", "sched_h2_pre": "Аз хидматҳои гуногун навбат ташкил мекунад, то даромад", "sched_h2_acc": "бештар шавад", "sched_dek": "Разнос рӯзро аз рӯи соатҳо ба нақша мегирад ва хидматҳоро дар давоми рӯз якҷоя карда, маслиҳат медиҳад, ки дар кадом вақт дар куҷо фоидаовартар аст", "sched_li1": "Хидматҳои гуногун дар вақтҳои гуногун мувофиқи авҷи талабот", "sched_li2": "Танаффус ва кӯчиданҳо ба ҳисоб гирифта шудаанд, даромад барои навбат ҳисоб мешавад", "sched_li3": "Пешбинии даромад барои рӯз ва ҳар слот", "sched_card_title": "Навбати имрӯз", "sched_break": "танаффус", "sched_demo": "Аз хидматҳои пайваст мувофиқи талабот ҷамъ шуда, маълумоти намунавӣ", "live_h2": "Лентаи паёмҳои фаврӣ", "live_dek": "Ҳозир аз рӯи хидматҳо ва шаҳри ту чӣ рӯй медиҳад: халалҳо, нуқтаҳои навбатдор, авҷи талабот. Аз курьерон, барои курьерон", "live_li1": "Танҳо хидматҳо ва шаҳри ту, бе садои зиёдатӣ", "live_li2": "Аксуламалҳо ва ҷавобҳо, фоиданок болотар мебарояд", "live_li3": "Метавонӣ аз худ нависӣ ва дигаронро огоҳ кунӣ", "mkt_h2_pre": "Бозори хидматҳо", "mkt_h2_acc": "аз назари курьерон", "mkt_dek": "Бозори кушодаи хидматҳо аз рӯи шаҳрҳо, шарҳҳои тасдиқшуда, баҳоҳо аз рӯи хидматҳо ва саволҳо бо ҷавоб", "mkt_q_title": "Саволҳо аз рӯи хидматҳо", "prof_h2": "Профили ошкори курьер ва чойпулӣ тавассути QR", "prof_dek": "Тахаллус, собиқа, дастовардҳо ва нишондиҳандаҳои ихтиёран кушодашуда. Одатан профил хусусӣ аст, бинандагон намуди беномро мебинанд", "prof_li1": "Ду ҳолат: ошкори номӣ ва беноми аз шарҳҳо", "prof_li2": "Дар беном ном ва акс нест, баҳоҳо бо диапазон нишон дода мешаванд", "prof_li3": "Чойпулӣ тавассути провайдери пардохт, комиссия то пардохт дида мешавад", "prof_tab_public": "Ошкор", "prof_tab_anon": "Беном", "exp_card_title": "Хароҷот дар як ҳафта", "exp_h2": "Даромади одилона пас аз ҳамаи хароҷот", "exp_dek": "Қоидаҳои доимӣ ва хароҷоти якдафъаина якҷоя, даромад пас аз хароҷот одилона ҳисоб мешавад", "exp_li1": "Доимӣ: иҷора, алоқа, обунаҳо. Якдафъаина: сӯзишворӣ, метро, каршеринг", "exp_li2": "Дар бораи имкони ҳисоби дучандаи хароҷот огоҳ мекунем", "exp_li3": "Содироти CSV ва PDF бо рақамҳои аслӣ", "conn_h2": "Пайвасти хидмат дар як дақиқа", "conn_dek": "Аккаунтҳои хидматҳоеро, ки дар онҳо кор мекунӣ, илова мекунӣ. Ҳолати Омор танҳо маълумотро мехонад ва фармоишҳоро идора намекунад", "conn_s1": "Хидматро интихоб кун", "conn_s2": "Ба аккаунти хидмат ворид шав", "conn_s2_field": "Телефон ё логин", "conn_s2_note": "Маълумоти вуруд рамзгузорӣ мешавад, токенҳо дар сервери мо нигоҳ дошта намешаванд", "conn_s3": "Тайёр", "conn_s3_pill": "Ҳамоҳанг шуд", "conn_s3_note": "Даромад ва таърих худкор кашида мешаванд", "svc_h2": "11 хидмати расонидан дар як кабинет", "svc_dek": "Онҳоеро, ки дар онҳо кор мекунӣ, пайваст кун ва даромади умумиро бубин", "svc_note": "Яндекс Про як пайваст аст, дар дохил брендҳои Еда, Лавка ва Деливери", "data_h2": "Маълумоти хоми муштариёнро нигоҳ намедорем", "data_dek": "Аз рӯи 152-ФЗ кор мекунем. Маълумоти шахсии харидорон дар сервер беном карда мешавад, суроға ва тамосҳои дақиқ ба таърих ва таҳлил намеафтанд", "data_li1": "Маълумоти шахсии курьер дар контури пӯшида нигоҳ дошта мешавад ва танҳо ба соҳиб дида мешавад", "data_li2": "Омори оммавӣ танҳо беном ва бо интихоби кофӣ", "data_li3": "Токенҳои интегратсия дар сервер нигоҳ дошта намешаванд, нобуд кардани аккаунт маълумоти шахсиро воқеан нест мекунад", "city_h2": "1105 шаҳри Русия", "city_dek": "Шаҳр дар профил интихоб мешавад, омори бозор ва пешбинӣ ба он мутобиқ мешаванд. Барои шаҳри бемаълумот нишондиҳандаҳои бегонаро намегузорем", "faq_h2": "Саволҳои зуд-зуд", "faq_q1": "Ин ройгон аст", "faq_a1": "Кабинети асосии даромад ва омор ройгон аст. Имкониятҳои пулакӣ ва фоидаҳои шарикӣ дертар пайдо мешаванд", "faq_q2": "Хидматҳо чӣ тавр пайваст мешаванд", "faq_a2": "Аккаунти хидматро илова мекунӣ, маълумоти вуруд рамзгузорӣ мешавад. Ҳолати Омор танҳо маълумотро мехонад ва фармоишҳоро идора намекунад", "faq_q3": "Токенҳои дастрасӣ ба хидматҳо дар куҷо нигоҳ дошта мешаванд", "faq_a3": "Токенҳои авторизатсияи интегратсияҳо барои ҳамоҳангсозӣ ба таври транзит истифода мешаванд ва дар сервери мо нигоҳ дошта намешаванд", "faq_q4": "Маълумоти ман бехатар аст", "faq_a4": "Маълумоти худро танҳо худат мебинӣ, маълумоти муштариён беном карда мешавад, аз рӯи 152-ФЗ кор мекунем", "faq_q5": "Фармоишҳоро дар барнома қабул кардан мумкин аст", "faq_a5": "Қабули пешниҳодҳо дар ҳолати Кор танҳо барои имкониятҳои тасдиқшудаи хидмат фаъол мешавад, кори оддӣ ин омор ва ёрирасон аст", "final_h2": "Тамоми даромад аз расониданро дар як ҷо бубин", "final_dek": "Прототипи зиндаро кушо ва аз рӯи сенарияҳои курьер гузар", "final_cta": "Кушодани прототип"}, "ky": {"nav_orders": "Буйрутмалар", "nav_income": "Киреше", "nav_forecast": "Болжом", "hero_badge": "Бир нече кызмат үчүн курьер кабинети", "hero_h1_pre": "Жеткирүүдөн түшкөн бардык киреше", "hero_h1_acc": "бир жерде", "hero_lead": "Разнос бардык кызматтардын кирешесин, буйрутмаларын жана сменаларын чогултат, кайда иштөө пайдалуураак экенин көрсөтөт жана курьерлердин пикирлери менен кызматтар рыногун кошот", "hero_cta": "Колдонмо эмне кыла алат", "hero_w_caption": "Эки кызматта эсептелди", "hero_w_orders": "17 буйрутма", "hero_w_rate": "700 ₽ / саат чыгашага чейин", "z_h2_pre": "Буйрутманы танда", "z_h2_acc": "бир лентада", "z_dek": "Туташтырылган бардык кызматтардын сунуштары бир экранга келет, дароо пайда баасы менен, беш колдонмону ачык кармабоо үчүн", "z_li1": "Төлөм, сааттык жана чыгашадан кийинки киреше кабыл алганга чейин көрүнөт", "z_li2": "Маршрут, аралык, салмак жана бүт буйрутманын убактысы жанында", "z_li3": "Километрге рубль босогосу боюнча авто-четке кагуу пайдасызды иргейт", "offer_title": "Жакын жердеги сунуш", "offer_dek": "Каалаган сунушту ачып, маршрутту, көрсөткүчтөрдү жана пайда баасын толук көрөсүң", "offer_demo": "Иш режиминде сунуштарды кабыл алуу кызматтын текшерилген мүмкүнчүлүктөрү үчүн гана. Демо-маалымат", "statement_pre": "Бардык маалымат кызматтардын ", "statement_b": "интеграцияларынан түздөн-түз", "statement_post": " алынат. Ошондуктан бизде айлык, айып жана бонустардын чыныгы статистикасы бар, маркетинг убадалары эмес", "who_h2": "Бир нече кызматта иштеген курьер үчүн", "who_dek": "Киреше колдонмолорго чачыранды, кайда чындап пайдалуураак жана чыгашадан кийин канча калары белгисиз. Разнос баарын бириктирип, адилеттүү эсептейт", "who_conn": "Азыр туташтырылган", "who_week": "Бир жумалык жалпы киреше", "who_net": "Чыгашадан кийин", "income_h2": "Бүт киреше жана буйрутмалар тарыхы бир кабинетте", "income_dek": "Сааттык жана буйрутма кирешеси, сумма эмнеден түзүлгөнү жана бардык кызматтардын буйрутмалар тарыхы жанаша", "income_li1": "Эсептөөлөр, төлөмдөр, чайпул, бонус жана кармоолор өзүнчө, кош эсептөөсүз", "income_li2": "Ар бир сандын булагы, жаңылоо убактысы жана алынган же эсептелген белгиси бар", "income_li3": "Маршрут, аралык жана товарлар менен тарых, эгер алар булакта болсо", "income_card_title": "Сумма эмнеден түзүлдү", "hist_h2": "Бардык кызматтардын буйрутмалар тарыхы", "hist_dek": "Ар бир буйрутма суммасы, төлөм статусу, чайпул жана маршруту менен. Чоо-жайын ачса болот", "stat_h2": "Кайда киреше тапканың жана убактың кайда кетери көрүнөт", "stat_dek": "Жалпы көрүнүш, акча, убакыт, буйрутмалар жана эң мыкты сааттар, башка курьерлер менен адилет салыштыруу менен", "stat_li1": "Шаарыңдын, транспортуңдун жана мезгилиңдин курьерлеринин медианасы менен салыштыруу", "stat_li2": "Убакыттын түзүлүшү: активдүү, күтүү, көчүүлөр жана бош туруу", "stat_li3": "Эң мыкты сааттар күндөр жана убакыт боюнча тор түрүндө", "stat_card_months": "Айлар боюнча киреше, миң ₽", "stat_card_rate": "₽/саат чыгашадан кийин", "stat_card_active": "Активдүү убакыт", "stat_card_cohort": "Мен жана шаардын башка курьерлери", "stat_card_my": "Менин сааттык кирешем", "stat_card_median": "Топтун медианасы", "stat_card_above": "медианадан 16% жогору", "prog_h2_pre": "Кеңеш берет,", "prog_h2_acc": "кайда жана качан пайдалуураак", "prog_h2_post": "чыгууну", "prog_dek": "Райондор боюнча киреше картасы жана күн бою сааттык киреше графиги: кайсы районго жана кайсы саатта чыгуу пайдалуураак экени көрүнөт", "prog_li1": "Эң кирешелүү райондор жана сааттар, орточодон жогору жана төмөн белгилери менен", "prog_li2": "Диапазон жана себеп менен болжом, маалымат жетишпесе бул тууралуу адилет жазабыз", "prog_li3": "Жеткиликтүү слоттор жана зонага чейин көчүү убактысы", "prog_map_title": "Күн бою сааттык киреше", "prog_leg_peak": "суроо-талаптын туу чокусу", "prog_leg_calm": "тынч", "prog_map_demo": "Райондор жана сааттар схемасы, демо-маалымат, так география эмес", "sched_h2_pre": "Ар кайсы кызматтардан смена түзөт, киреше", "sched_h2_acc": "максималдуу болсун", "sched_dek": "Разнос күндү сааттап пландайт жана күн бою кызматтарды айкалыштырып, кайсы убакта кайда пайдалуураак экенин кеңеш берет", "sched_li1": "Суроо-талаптын туу чокусуна жараша ар кайсы убакта ар кайсы кызматтар", "sched_li2": "Тыныгуулар жана көчүүлөр эске алынган, киреше смена боюнча эсептелет", "sched_li3": "Күнгө жана ар бир слотко киреше болжому", "sched_card_title": "Бүгүнкү смена", "sched_break": "тыныгуу", "sched_demo": "Туташтырылган кызматтардан суроо-талапка жараша чогултулган, демо-маалымат", "live_h2": "Оперативдүү билдирүүлөр лентасы", "live_dek": "Азыр сенин кызматтарың жана шаарың боюнча эмне болуп жатканы: үзгүлтүктөр, кезеги бар чекиттер, суроо-талаптын күчөшү. Курьерлерден, курьерлер үчүн", "live_li1": "Сенин кызматтарың жана шаарың гана, ашыкча ызы-чуусуз", "live_li2": "Реакциялар жана жооптор, пайдалуусу жогору чыгат", "live_li3": "Өзүңдүкүн жазып, башкаларды эскертсең болот", "mkt_h2_pre": "Кызматтар рыногу", "mkt_h2_acc": "курьерлердин көзү менен", "mkt_dek": "Шаарлар боюнча ачык кызматтар рыногу, тастыкталган пикирлер, кызматтар боюнча баалар жана жооптуу суроолор", "mkt_q_title": "Кызматтар боюнча суроолор", "prof_h2": "Курьердин ачык профили жана QR аркылуу чайпул", "prof_dek": "Псевдоним, стаж, жетишкендиктер жана ыктыярдуу ачылган көрсөткүчтөр. Демейде профиль жеке, келүүчүлөр атсыз көрүнүштү көрөт", "prof_li1": "Эки режим: ачык аттуу жана пикирлерден атсыз", "prof_li2": "Атсызда ат жана сүрөт жок, баалар диапазон менен көрсөтүлөт", "prof_li3": "Чайпул төлөм провайдери аркылуу, комиссия төлөмгө чейин көрүнөт", "prof_tab_public": "Ачык", "prof_tab_anon": "Атсыз", "exp_card_title": "Бир жумалык чыгашалар", "exp_h2": "Бардык чыгашадан кийинки адилет киреше", "exp_dek": "Туруктуу эрежелер жана бир жолку чыгашалар чогуу, чыгашадан кийинки киреше адилет эсептелет", "exp_li1": "Туруктуу: ижара, байланыш, жазылуулар. Бир жолку: күйүүчү май, метро, каршеринг", "exp_li2": "Чыгашанын кош эсептелиши мүмкүн экени тууралуу эскертебиз", "exp_li3": "Баштапкы сандар менен CSV жана PDF экспорт", "conn_h2": "Кызматты бир мүнөттө туташтыруу", "conn_dek": "Иштеген кызматтарыңдын аккаунттарын кошосуң. Статистика режими маалыматты гана окуйт жана буйрутмаларды башкарбайт", "conn_s1": "Кызматты танда", "conn_s2": "Кызматтын аккаунтуна кир", "conn_s2_field": "Телефон же логин", "conn_s2_note": "Кирүү маалыматы шифрленет, токендер биздин серверде сакталбайт", "conn_s3": "Даяр", "conn_s3_pill": "Шайкештирилди", "conn_s3_note": "Киреше жана тарых автоматтык түрдө тартылат", "svc_h2": "Бир кабинетте 11 жеткирүү кызматы", "svc_dek": "Иштегендериңди туташтыр жана жалпы кирешени көр", "svc_note": "Яндекс Про бир туташуу, ичинде Еда, Лавка жана Деливери бренддери", "data_h2": "Кардарлардын чийки маалыматын сактабайбыз", "data_dek": "152-ФЗ боюнча иштейбиз. Сатып алуучулардын жеке маалыматы серверде атсыздандырылат, так дарек жана байланыштар тарыхка жана талдоого түшпөйт", "data_li1": "Курьердин өз маалыматы жабык контурда сакталат жана ээсине гана көрүнөт", "data_li2": "Ачык статистика атсыз жана жетиштүү тандоо менен гана", "data_li3": "Интеграция токендери серверде сакталбайт, аккаунтту өчүрүү жеке маалыматты чындап жок кылат", "city_h2": "Орусиянын 1105 шаары", "city_dek": "Шаар профилде тандалат, рыноктун статистикасы жана болжом ага ыңгайлашат. Маалыматы жок шаар үчүн бөтөн көрсөткүчтөрдү койбойбуз", "faq_h2": "Көп берилүүчү суроолор", "faq_q1": "Бул акысызбы", "faq_a1": "Киреше жана статистиканын негизги кабинети акысыз. Акылуу мүмкүнчүлүктөр жана өнөктөштүк пайдалары кийинчерээк пайда болот", "faq_q2": "Кызматтар кантип туташат", "faq_a2": "Кызматтын аккаунтун кошосуң, кирүү маалыматы шифрленет. Статистика режими маалыматты гана окуйт жана буйрутмаларды башкарбайт", "faq_q3": "Кызматтарга кирүү токендери кайда сакталат", "faq_a3": "Интеграциялардын авторизация токендери шайкештирүү үчүн транзит түрүндө колдонулат жана биздин серверде сакталбайт", "faq_q4": "Менин маалыматым коопсузбу", "faq_a4": "Өз маалыматыңды өзүң гана көрөсүң, кардарлардын маалыматы атсыздандырылат, 152-ФЗ боюнча иштейбиз", "faq_q5": "Буйрутмаларды колдонмодо кабыл алса болобу", "faq_a5": "Иш режиминде сунуштарды кабыл алуу кызматтын текшерилген мүмкүнчүлүктөрү үчүн гана иштейт, кадимки иш бул статистика жана жардамчы", "final_h2": "Жеткирүүдөн түшкөн бүт кирешени бир жерден көр", "final_dek": "Тирүү прототипти ачып, курьердин сценарийлери боюнча жүр", "final_cta": "Прототипти ачуу"}, "hy": {"nav_orders": "Պատվերներ", "nav_income": "Եկամուտ", "nav_forecast": "Կանխատեսում", "hero_badge": "Առաքիչի աշխատասենյակ մի քանի ծառայության համար", "hero_h1_pre": "Առաքումից ողջ եկամուտը", "hero_h1_acc": "մեկ տեղում", "hero_lead": "Разнос-ը հավաքում է բոլոր ծառայությունների եկամուտը, պատվերներն ու հերթափոխերը, ցույց է տալիս որտեղ է ավելի ձեռնտու աշխատել և ավելացնում է ծառայությունների շուկան առաքիչների կարծիքներով", "hero_cta": "Ինչ կարող է հավելվածը", "hero_w_caption": "Հաշվարկված է երկու ծառայությունում", "hero_w_orders": "17 պատվեր", "hero_w_rate": "700 ₽ / ժամ մինչև ծախսերը", "z_h2_pre": "Ընտրիր պատվերը", "z_h2_acc": "մեկ հոսքում", "z_dek": "Բոլոր միացված ծառայությունների առաջարկները գալիս են մեկ էկրան, անմիջապես շահույթի գնահատականով, որ հինգ հավելված բաց չպահես", "z_li1": "Վճարը, ժամային և ծախսերից հետո եկամուտը երևում է մինչև ընդունելը", "z_li2": "Երթուղին, հեռավորությունը, քաշը և ամբողջ պատվերի ժամանակը կողքին", "z_li3": "Կիլոմետրի դիմաց ռուբլու շեմով ավտո-մերժումը զտում է անշահը", "offer_title": "Մոտակա առաջարկ", "offer_dek": "Բացում ես ցանկացած առաջարկ և տեսնում ես երթուղին, ցուցանիշներն ու շահույթի գնահատականն ամբողջությամբ", "offer_demo": "Աշխատանք ռեժիմում առաջարկների ընդունումը միայն ծառայության հաստատված հնարավորությունների համար է։ Ցուցադրական տվյալներ", "statement_pre": "Բոլոր տվյալները քաշվում են ծառայությունների ", "statement_b": "ինտեգրացիաներից ուղղակիորեն", "statement_post": "։ Դրա համար մենք ունենք աշխատավարձի, տուգանքների և բոնուսների իրական վիճակագրություն, ոչ թե մարքեթինգային խոստումներ", "who_h2": "Առաքիչի համար, ով աշխատում է մի քանի ծառայությունում", "who_dek": "Եկամուտը ցրված է հավելվածների միջև, պարզ չէ որտեղ է իրականում ավելի ձեռնտու և ծախսերից հետո որքան է մնում։ Разнос-ը միավորում է ամեն ինչ և հաշվում է ազնիվ", "who_conn": "Այժմ միացված է", "who_week": "Ընդհանուր եկամուտը շաբաթում", "who_net": "Ծախսերից հետո", "income_h2": "Ողջ եկամուտն ու պատվերների պատմությունը մեկ աշխատասենյակում", "income_dek": "Ժամային և պատվերի եկամուտը, ինչից է գումարը գոյացել և բոլոր ծառայությունների պատվերների պատմությունը կողք կողքի", "income_li1": "Հաշվարկումներ, վճարումներ, թեյավճար, բոնուս և պահումներ առանձին, առանց կրկնակի հաշվի", "income_li2": "Ամեն թվի համար կա աղբյուր, թարմացման ժամանակ և ստացված կամ հաշվարկված նշան", "income_li3": "Պատմությունը երթուղով, հեռավորությամբ և ապրանքներով, եթե դրանք կան աղբյուրում", "income_card_title": "Ինչից է գումարը գոյացել", "hist_h2": "Բոլոր ծառայությունների պատվերների պատմությունը", "hist_dek": "Ամեն պատվեր՝ գումարով, վճարման կարգավիճակով, թեյավճարով և երթուղով։ Կարելի է բացել մանրամասները", "stat_h2": "Երևում է, թե որտեղ ես վաստակում և ուր է գնում ժամանակդ", "stat_dek": "Ընդհանուր պատկեր, փող, ժամանակ, պատվերներ և լավագույն ժամեր, այլ առաքիչների հետ ազնիվ համեմատությամբ", "stat_li1": "Համեմատություն քո քաղաքի, տրանսպորտի և ժամանակահատվածի առաքիչների մեդիանի հետ", "stat_li2": "Ժամանակի կառուցվածքը՝ ակտիվ, սպասում, տեղափոխություններ և պարապ", "stat_li3": "Լավագույն ժամերը ցանցով՝ ըստ օրերի և ժամի", "stat_card_months": "Եկամուտն ըստ ամիսների, հազ ₽", "stat_card_rate": "₽/ժամ ծախսերից հետո", "stat_card_active": "Ակտիվ ժամանակ", "stat_card_cohort": "Ես և քաղաքի այլ առաքիչներ", "stat_card_my": "Իմ ժամային եկամուտը", "stat_card_median": "Խմբի մեդիանը", "stat_card_above": "մեդիանից 16% բարձր", "prog_h2_pre": "Հուշում է,", "prog_h2_acc": "որտեղ և երբ է ավելի ձեռնտու", "prog_h2_post": "դուրս գալ", "prog_dek": "Եկամուտի քարտեզն ըստ թաղամասերի և ժամային եկամուտի գրաֆիկն ըստ օրվա ժամի. երևում է, թե որ թաղամաս և որ ժամին դուրս գալն է ավելի ձեռնտու", "prog_li1": "Ամենաեկամտաբեր թաղամասերն ու ժամերը՝ միջինից բարձր և ցածր նշումներով", "prog_li2": "Կանխատեսում՝ միջակայքով և պատճառով, տվյալների պակասի դեպքում այդ մասին ազնիվ գրում ենք", "prog_li3": "Հասանելի սլոտներ և գոտի տեղափոխվելու ժամանակ", "prog_map_title": "Ժամային եկամուտն ըստ օրվա ժամի", "prog_leg_peak": "պահանջարկի գագաթ", "prog_leg_calm": "հանգիստ", "prog_map_demo": "Թաղամասերի և ժամերի սխեմա, ցուցադրական տվյալներ, ոչ ճշգրիտ աշխարհագրություն", "sched_h2_pre": "Տարբեր ծառայություններից հերթափոխ է կազմում, որ վաստակես", "sched_h2_acc": "առավելագույնը", "sched_dek": "Разнос-ը օրը պլանավորում է ժամերով և օրվա ընթացքում համատեղելով ծառայությունները՝ հուշում է, թե որ ժամին որտեղ է ավելի ձեռնտու", "sched_li1": "Տարբեր ծառայություններ տարբեր ժամերին՝ ըստ պահանջարկի գագաթի", "sched_li2": "Ընդմիջումներն ու տեղափոխությունները հաշվի են առնված, եկամուտը հաշվվում է հերթափոխով", "sched_li3": "Օրվա և ամեն սլոտի եկամուտի կանխատեսում", "sched_card_title": "Այսօրվա հերթափոխը", "sched_break": "ընդմիջում", "sched_demo": "Հավաքված է միացված ծառայություններից ըստ պահանջարկի, ցուցադրական տվյալներ", "live_h2": "Օպերատիվ հաղորդագրությունների հոսք", "live_dek": "Ինչ է կատարվում հենց հիմա քո ծառայությունների և քաղաքի շուրջ. խափանումներ, հերթ ունեցող կետեր, պահանջարկի աճ։ Առաքիչներից՝ առաքիչների համար", "live_li1": "Միայն քո ծառայություններն ու քաղաքը, առանց ավելորդ աղմուկի", "live_li2": "Ռեակցիաներ և պատասխաններ, օգտակարը բարձրանում է վերև", "live_li3": "Կարող ես գրել քոնը և զգուշացնել մյուսներին", "mkt_h2_pre": "Ծառայությունների շուկան", "mkt_h2_acc": "առաքիչների աչքերով", "mkt_dek": "Ծառայությունների բաց շուկա ըստ քաղաքների, հաստատված կարծիքներ, ծառայությունների գնահատականներ և հարցեր պատասխաններով", "mkt_q_title": "Հարցեր ըստ ծառայությունների", "prof_h2": "Առաքիչի հրապարակային պրոֆիլ և թեյավճար QR-ով", "prof_dek": "Կեղծանուն, ստաժ, նվաճումներ և կամավոր բացված ցուցանիշներ։ Լռելյայն պրոֆիլը մասնավոր է, այցելուները տեսնում են անանձնավորված տեսքը", "prof_li1": "Երկու ռեժիմ՝ հրապարակային անվանական և կարծիքներից անանձնավորված", "prof_li2": "Անանձնավորվածում չկա անուն և լուսանկար, գնահատականները ցույց են տրվում միջակայքով", "prof_li3": "Թեյավճարը վճարային մատակարարի միջոցով, միջնորդավճարը երևում է մինչև վճարումը", "prof_tab_public": "Հրապարակային", "prof_tab_anon": "Անանձնավորված", "exp_card_title": "Ծախսերը շաբաթում", "exp_h2": "Ազնիվ եկամուտ բոլոր ծախսերից հետո", "exp_dek": "Մշտական կանոններն ու միանվագ ծախսերը միասին, ծախսերից հետո եկամուտը հաշվվում է ազնիվ", "exp_li1": "Մշտական՝ վարձ, կապ, բաժանորդագրություններ։ Միանվագ՝ վառելիք, մետրո, կարշերինգ", "exp_li2": "Զգուշացնում ենք ծախսի հնարավոր կրկնակի հաշվառման մասին", "exp_li3": "CSV և PDF արտահանում սկզբնական թվերով", "conn_h2": "Ծառայության միացում մեկ րոպեում", "conn_dek": "Ավելացնում ես այն ծառայությունների հաշիվները, որտեղ աշխատում ես։ Վիճակագրություն ռեժիմը միայն կարդում է տվյալները և չի կառավարում պատվերները", "conn_s1": "Ընտրիր ծառայությունը", "conn_s2": "Մուտք գործիր ծառայության հաշիվ", "conn_s2_field": "Հեռախոս կամ լոգին", "conn_s2_note": "Մուտքի տվյալները գաղտնագրվում են, թոքենները չեն պահվում մեր սերվերում", "conn_s3": "Պատրաստ է", "conn_s3_pill": "Համաժամեցված է", "conn_s3_note": "Եկամուտն ու պատմությունը կքաշվեն ավտոմատ", "svc_h2": "11 առաքման ծառայություն մեկ աշխատասենյակում", "svc_dek": "Միացրու նրանք, որտեղ աշխատում ես, և տես ընդհանուր եկամուտը", "svc_note": "Яндекс Про-ն մեկ միացում է, ներսում Еда, Лавка և Деливери բրենդներն են", "data_h2": "Հաճախորդների չմշակված տվյալները չենք պահում", "data_dek": "Աշխատում ենք 152-ФЗ-ով։ Գնորդների անձնական տվյալներն անանձնավորվում են սերվերում, ճշգրիտ հասցեներն ու կոնտակտները չեն ընկնում պատմություն և վերլուծություն", "data_li1": "Առաքիչի սեփական տվյալները պահվում են փակ պարագծում և տեսանելի են միայն սեփականատիրոջը", "data_li2": "Հրապարակային վիճակագրությունը միայն անանձնավորված է և բավարար ընտրանքով", "data_li3": "Ինտեգրացիաների թոքենները չեն պահվում սերվերում, հաշվի ջնջումն իրապես ոչնչացնում է անձնական տվյալները", "city_h2": "Ռուսաստանի 1105 քաղաք", "city_dek": "Քաղաքն ընտրվում է պրոֆիլում, շուկայի վիճակագրությունն ու կանխատեսումը հարմարվում են դրան։ Առանց տվյալների քաղաքի համար օտար ցուցանիշներ չենք դնում", "faq_h2": "Հաճախ տրվող հարցեր", "faq_q1": "Սա անվճա՞ր է", "faq_a1": "Եկամուտի և վիճակագրության հիմնական աշխատասենյակն անվճար է։ Վճարովի հնարավորություններն ու գործընկերային օգուտները կհայտնվեն ավելի ուշ", "faq_q2": "Ինչպես են միանում ծառայությունները", "faq_a2": "Ավելացնում ես ծառայության հաշիվ, մուտքի տվյալները գաղտնագրվում են։ Վիճակագրություն ռեժիմը միայն կարդում է տվյալները և չի կառավարում պատվերները", "faq_q3": "Որտեղ են պահվում ծառայությունների մուտքի թոքենները", "faq_a3": "Ինտեգրացիաների ավտորիզացիայի թոքենները համաժամեցման համար օգտագործվում են տարանցիկ կերպով և չեն պահվում մեր սերվերում", "faq_q4": "Իմ տվյալներն ապահո՞վ են", "faq_a4": "Քո տվյալները տեսնում ես միայն դու, հաճախորդների տվյալներն անանձնավորվում են, աշխատում ենք 152-ФЗ-ով", "faq_q5": "Կարելի՞ է պատվերներն ընդունել հենց հավելվածում", "faq_a5": "Աշխատանք ռեժիմում առաջարկների ընդունումը միանում է միայն ծառայության հաստատված հնարավորությունների համար, սովորական աշխատանքը վիճակագրություն և օգնական է", "final_h2": "Տես առաքումից ողջ եկամուտը մեկ տեղում", "final_dek": "Բացիր կենդանի նախատիպը և անցիր առաքիչի սցենարներով", "final_cta": "Բացել նախատիպը"}};
+          const t = L[lang] || L.ru;
+          return {
+            t: t, lang: lang, onLang: (e) => this.setState({ lang: (e && e.target && e.target.value) || 'ru' }),
+            offer: { svc: 'samokat', title: 'Самокат', pay: '480', pickupAddr: 'Самокат, ул. Ленина 12', dropAddr: 'ул. Мира 5', etaPoint: '6 мин', etaTotal: '22 мин', distance: '3,2 км', weight: '4 кг', packages: '2', timerLabel: '00:18', timerFillStyle: 'width:72%', estimate: { hourly: '1 280', net: '360' } },
+            orders: [
+              { svc: 'samokat', svcTitle: 'Самокат', orderNo: 'А-2481', dateLabel: '14 сен', deliveryStatus: 'доставлен', moneyStatus: 'выплачено', payout: '480', tipLabel: 'Чаевые 120 ₽', routeLabel: 'Ленина 12 → Мира 5' },
+              { svc: 'vkusvill', svcTitle: 'ВкусВилл', orderNo: 'V-9020', dateLabel: '14 сен', deliveryStatus: 'доставлен', moneyStatus: 'ожидает выплаты', payout: '360', tipLabel: '', routeLabel: 'Садовая 3 → Клин 8' },
+              { svc: 'yandex-eda', svcTitle: 'Яндекс Про', orderNo: 'Y-5512', dateLabel: '13 сен', deliveryStatus: 'отменён магазином', moneyStatus: 'без удержания', payout: '0', tipLabel: '', routeLabel: '' }
+            ],
+            reviews: [
+              { category: 'courier', authorCity: 'Москва', rating: 4, confirmed: true, text: 'Выплаты вовремя, но в час пик много ожидания на выдаче. Зимой бонусы норм', date: '12 сен', ordersLabel: 'снимок: 1 240 заказов', courierLikes: 24, courierDislikes: 2, userLikes: 3, userDislikes: 0 },
+              { category: 'user', authorCity: 'Москва', rating: 5, confirmed: false, text: 'Курьер приехал быстро, всё аккуратно и вежливо. Спасибо', date: '10 сен', ordersLabel: '', courierLikes: 0, courierDislikes: 0, userLikes: 8, userDislikes: 0 }
+            ],
+            questions: [
+              { q: 'Как часто задерживают выплаты', meta: 'Самокат · Москва', a: 'Обычно раз в неделю без задержек, пару раз было плюс два дня', replies: '3 ответа' },
+              { q: 'Дают ли термосумку новичкам', meta: 'ВкусВилл · Москва', a: 'Да, выдают на складе под депозит, потом возвращают', replies: '5 ответов' }
+            ],
+            liveItems: [
+              { multi: false, svcKey: 'samokat', svcTitle: 'Самокат', svcs: [{ key: 'samokat', title: 'Самокат' }], cityLabel: 'Москва', timeLabel: '8 мин', text: 'На складе на Ленина очередь на выдаче, минут 15', likes: 12, dislikes: 0, repliesCount: 2, onOpen: () => {} },
+              { multi: false, svcKey: 'vkusvill', svcTitle: 'ВкусВилл', svcs: [{ key: 'vkusvill', title: 'ВкусВилл' }], cityLabel: 'Москва', timeLabel: '21 мин', text: 'В центре подняли коэффициент, много заказов', likes: 20, dislikes: 1, repliesCount: 4, onOpen: () => {} },
+              { multi: false, svcKey: 'x5', svcTitle: 'X5', svcs: [{ key: 'x5', title: 'X5' }], cityLabel: 'Москва', timeLabel: '34 мин', text: 'Приложение сервиса тупит, у кого так же', likes: 7, dislikes: 0, repliesCount: 6, onOpen: () => {} }
+            ],
+            profPublic: tab === 'public',
+            profAnon: tab === 'anon',
+            tabPublicCls: 'raznos-segment' + (tab === 'public' ? ' raznos-is-active' : ''),
+            tabAnonCls: 'raznos-segment' + (tab === 'anon' ? ' raznos-is-active' : ''),
+            setPublic: () => this.setState({ profileTab: 'public' }),
+            setAnon: () => this.setState({ profileTab: 'anon' })
+          };
+        }
+      }
+    </script>
+  </body>
+</html>

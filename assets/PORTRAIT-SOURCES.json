@@ -1,0 +1,23 @@
+[
+  {
+    "file": "portrait-1.jpg",
+    "author": "Matheus Bertelli",
+    "source": "https://www.pexels.com/photo/smiling-man-wearing-a-jacket-18999575/",
+    "image": "https://images.pexels.com/photos/18999575/pexels-photo-18999575.jpeg?auto=compress&cs=tinysrgb&w=400",
+    "usage": "Stock portrait for fictional demo identity"
+  },
+  {
+    "file": "portrait-2.jpg",
+    "author": "logan hansen",
+    "source": "https://www.pexels.com/photo/man-in-black-jacket-smiling-5871968/",
+    "image": "https://images.pexels.com/photos/5871968/pexels-photo-5871968.jpeg?auto=compress&cs=tinysrgb&w=400",
+    "usage": "Stock portrait for fictional demo identity"
+  },
+  {
+    "file": "portrait-3.jpg",
+    "author": "Eduardo Lopez",
+    "source": "https://www.pexels.com/photo/smiling-man-in-jacket-18271566/",
+    "image": "https://images.pexels.com/photos/18271566/pexels-photo-18271566.jpeg?auto=compress&cs=tinysrgb&w=400",
+    "usage": "Stock portrait for fictional demo identity"
+  }
+]
