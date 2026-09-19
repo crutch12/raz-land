@@ -116,7 +116,9 @@
           .lp-hero-widget { box-shadow:0 30px 70px rgba(0,0,0,0.34); }
           .lp-hero-total { font:800 34px/1 var(--raznos-font); letter-spacing:-0.02em; }
           .lp-dark .raznos-card { color:var(--raznos-ink); }
-          .lp-hero-badge { white-space:nowrap; width:fit-content; }
+          .lp-hero-badge { display:inline-block; max-width:100%; white-space:normal; }
+          .lp-hero-badge::before { content:""; display:inline-block; width:8px; height:8px; border-radius:50%; background:oklch(0.82 0.15 150); margin-right:8px; vertical-align:middle; }
+          .lp-hero-badge span { display:inline; width:auto; height:auto; background:none; border-radius:0; margin:0; }
         </style>
       </helmet>
       <div class="lp">
@@ -135,7 +137,7 @@
         <div class="lp-dark" id="top" data-screen-label="Hero">
           <div class="lp-hero-in">
             <div class="lp-hero-copy">
-              <p class="lp-hero-badge"><span></span>{{ t.hero_badge }}</p>
+              <p class="lp-hero-badge">{{ t.hero_badge }}</p>
               <h1 class="lp-h1">{{ t.hero_h1_pre }} <span class="lp-acc-d">{{ t.hero_h1_acc }}</span></h1>
               <p class="lp-hero-lead">{{ t.hero_lead }}</p>
               <div class="lp-cta-row">
@@ -174,15 +176,16 @@
 
         <div class="lp-band" data-screen-label="Предложение вблизи">
           <div class="lp-section">
-              <h3 class="raznos-text-h3" style="margin:0 0 14px">{{ t.offer_title }}</h3>
-              <div class="lp-two">
+            <div class="lp-feature">
+              <div>
+                <h2 class="lp-h2">{{ t.offer_title }}</h2>
+                <p class="lp-dek">{{ t.offer_dek }}</p>
+              </div>
+              <div class="lp-feature-media">
                 <dc-import name="RaznosIncomingOffer" svc="{{ offer.svc }}" title="{{ offer.title }}" pay="{{ offer.pay }}" pickupAddr="{{ offer.pickupAddr }}" dropAddr="{{ offer.dropAddr }}" etaPoint="{{ offer.etaPoint }}" etaTotal="{{ offer.etaTotal }}" distance="{{ offer.distance }}" weight="{{ offer.weight }}" packages="{{ offer.packages }}" timerLabel="{{ offer.timerLabel }}" timerFillStyle="{{ offer.timerFillStyle }}" estimate="{{ offer.estimate }}"></dc-import>
-                <div class="raznos-fx raznos-col raznos-gap8" style="justify-content:center">
-                  <p class="lp-dek" style="margin:0 0 4px">{{ t.offer_dek }}</p>
-                  <p class="lp-demo-tag">{{ t.offer_demo }}</p>
-                </div>
               </div>
             </div>
+          </div>
         </div>
 
 
@@ -295,7 +298,7 @@
             <div class="lp-feature-media">
               <div class="raznos-fx raznos-col raznos-gap12">
                 <div class="lp-map">
-                  <svg viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Схема доходности по районам"><rect width="400" height="300" fill="var(--raznos-surface-2)"></rect><ellipse cx="200" cy="150" rx="182" ry="130" fill="none" stroke="var(--raznos-line-strong)" stroke-width="2.5"></ellipse><ellipse cx="200" cy="150" rx="118" ry="84" fill="none" stroke="var(--raznos-line)" stroke-width="2"></ellipse><ellipse cx="200" cy="150" rx="58" ry="42" fill="none" stroke="var(--raznos-line)" stroke-width="1.5"></ellipse><g stroke="var(--raznos-line)" stroke-width="1.5"><line x1="200" y1="20" x2="200" y2="280"></line><line x1="18" y1="150" x2="382" y2="150"></line><line x1="72" y1="50" x2="328" y2="250"></line><line x1="328" y1="50" x2="72" y2="250"></line></g><path d="M36 92 C 132 150, 176 86, 226 150 S 322 214, 374 166" fill="none" stroke="#7aa0c4" stroke-width="7" stroke-linecap="round" opacity="0.5"></path><g font-family="JetBrains Mono, monospace" text-anchor="middle"><rect x="150" y="116" width="100" height="62" rx="16" fill="var(--raznos-green-tint)" stroke="var(--raznos-green-deep)" stroke-width="2"></rect><text x="200" y="142" font-weight="700" font-size="12" fill="var(--raznos-green-deep)">Центр</text><text x="200" y="163" font-weight="700" font-size="15" fill="var(--raznos-green-deep)">1 320 ₽/ч</text><rect x="252" y="34" width="104" height="52" rx="14" fill="var(--raznos-green-tint)" stroke="var(--raznos-green)" stroke-width="2"></rect><text x="304" y="55" font-weight="700" font-size="12" fill="var(--raznos-green-deep)">Север</text><text x="304" y="74" font-weight="700" font-size="13" fill="var(--raznos-green-deep)">980 ₽/ч</text><rect x="44" y="212" width="122" height="52" rx="14" fill="var(--raznos-surface)" stroke="var(--raznos-line-strong)" stroke-width="2"></rect><text x="105" y="233" font-weight="700" font-size="12" fill="var(--raznos-ink-3)">Юго-Запад</text><text x="105" y="251" font-weight="700" font-size="13" fill="var(--raznos-ink-3)">610 ₽/ч</text></g><circle cx="236" cy="150" r="8" fill="var(--raznos-dark)" stroke="#fff" stroke-width="3"></circle></svg>
+                  <svg viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Тепловая карта доходности по районам"><rect width="400" height="300" fill="var(--raznos-surface-2)"></rect><g stroke="var(--raznos-line)" stroke-width="1" opacity="0.7"><line x1="40" y1="0" x2="40" y2="300"></line><line x1="80" y1="0" x2="80" y2="300"></line><line x1="120" y1="0" x2="120" y2="300"></line><line x1="160" y1="0" x2="160" y2="300"></line><line x1="200" y1="0" x2="200" y2="300"></line><line x1="240" y1="0" x2="240" y2="300"></line><line x1="280" y1="0" x2="280" y2="300"></line><line x1="320" y1="0" x2="320" y2="300"></line><line x1="360" y1="0" x2="360" y2="300"></line><line x1="0" y1="36" x2="400" y2="36"></line><line x1="0" y1="72" x2="400" y2="72"></line><line x1="0" y1="108" x2="400" y2="108"></line><line x1="0" y1="144" x2="400" y2="144"></line><line x1="0" y1="180" x2="400" y2="180"></line><line x1="0" y1="216" x2="400" y2="216"></line><line x1="0" y1="252" x2="400" y2="252"></line><line x1="0" y1="288" x2="400" y2="288"></line></g><path d="M-10 64 C 120 128, 176 54, 258 128 S 384 206, 412 150" fill="none" stroke="#8fb3d6" stroke-width="16" stroke-linecap="round" opacity="0.3"></path><ellipse cx="156" cy="150" rx="76" ry="58" fill="var(--raznos-green-deep)" opacity="0.9"></ellipse><ellipse cx="306" cy="74" rx="58" ry="42" fill="var(--raznos-green)" opacity="0.5"></ellipse><ellipse cx="86" cy="242" rx="54" ry="38" fill="var(--raznos-green)" opacity="0.26"></ellipse><g font-family="JetBrains Mono, monospace" text-anchor="middle"><text x="156" y="146" font-weight="700" font-size="13" fill="#ffffff">Центр</text><text x="156" y="167" font-weight="700" font-size="17" fill="#ffffff">1 320 ₽/ч</text><text x="306" y="70" font-weight="700" font-size="12" fill="var(--raznos-green-deep)">Север</text><text x="306" y="88" font-weight="700" font-size="14" fill="var(--raznos-green-deep)">980 ₽/ч</text><text x="86" y="238" font-weight="700" font-size="12" fill="var(--raznos-ink-2)">Юго-Запад</text><text x="86" y="256" font-weight="700" font-size="14" fill="var(--raznos-ink-2)">610 ₽/ч</text></g><circle cx="236" cy="198" r="10" fill="#ffffff"></circle><circle cx="236" cy="198" r="6" fill="var(--raznos-dark)"></circle></svg>
                 </div>
                 <div class="raznos-card lp-card raznos-card-pad">
                   <span class="raznos-text-h3">{{ t.prog_map_title }}</span>
