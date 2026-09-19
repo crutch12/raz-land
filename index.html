@@ -127,9 +127,15 @@
           .lp-faq-a a { color:var(--raznos-green-deep); text-decoration:underline; }
           .lp-faq-a a:hover { color:var(--raznos-green-deep); }
           @keyframes lpGrow { from { transform:scaleY(0.04); opacity:0.35; } to { transform:scaleY(1); opacity:1; } }
-          @media (prefers-reduced-motion: no-preference) { @supports (animation-timeline: view()) {
-            .lp-bars .lp-bfill { transform-origin:bottom; animation:lpGrow cubic-bezier(.2,.7,.2,1) both; animation-timeline:view(); animation-range:cover 10% cover 45%; }
-          } }
+          @media (prefers-reduced-motion: no-preference) {
+            .lp-bars.lp-anim .lp-bfill { transform-origin:bottom; animation:lpGrow .7s cubic-bezier(.2,.8,.2,1) both; }
+            .lp-bars.lp-anim .lp-bcol:nth-child(2) .lp-bfill { animation-delay:.07s; }
+            .lp-bars.lp-anim .lp-bcol:nth-child(3) .lp-bfill { animation-delay:.14s; }
+            .lp-bars.lp-anim .lp-bcol:nth-child(4) .lp-bfill { animation-delay:.21s; }
+            .lp-bars.lp-anim .lp-bcol:nth-child(5) .lp-bfill { animation-delay:.28s; }
+            .lp-bars.lp-anim .lp-bcol:nth-child(6) .lp-bfill { animation-delay:.35s; }
+            .lp-bars.lp-anim .lp-bcol:nth-child(7) .lp-bfill { animation-delay:.42s; }
+          }
           .lp-dark { background-color:var(--raznos-dark); background-image:radial-gradient(rgba(255,255,255,0.05) 1px, transparent 1.5px); background-size:24px 24px; }
         </style>
       </helmet>
@@ -595,6 +601,13 @@
     </x-dc>
     <script type="text/x-dc" data-dc-script data-props='{}'>
       class Component extends DCLogic {
+        componentDidMount() {
+          try {
+            if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+            var obs = new IntersectionObserver(function (es) { es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('lp-anim'); obs.unobserve(e.target); } }); }, { threshold: 0.35 });
+            document.querySelectorAll('.lp-bars').forEach(function (el) { obs.observe(el); });
+          } catch (e) {}
+        }
         loadLang(lang) {
           const st = this.state || {};
           if (lang === 'ru' || (st.dict && st.dict[lang])) { this.setState({ lang: lang }); return; }
