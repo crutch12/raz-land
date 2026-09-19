@@ -138,12 +138,14 @@
             .lp-bars.lp-armed.lp-anim .lp-bcol:nth-child(7) .lp-bfill { animation-delay:.42s; }
           }
           .lp-dark { background-color:var(--raznos-dark); background-image:radial-gradient(rgba(255,255,255,0.05) 1px, transparent 1.5px); background-size:24px 24px; }
-          .lp-ord-timer { display:flex; align-items:center; gap:8px; margin-top:8px; }
-          .lp-ord-track { flex:1; height:4px; border-radius:999px; background:var(--raznos-line); overflow:hidden; }
+          .lp-ord-timer { display:flex; align-items:center; gap:8px; margin:2px 0; }
+          .lp-ord-track { width:110px; flex:none; height:5px; border-radius:999px; background:var(--raznos-line); overflow:hidden; }
           .lp-ord-fill { height:100%; border-radius:999px; background:var(--raznos-green-deep); }
-          .lp-ord-time { font:600 11px var(--raznos-mono); color:var(--raznos-ink-3); min-width:30px; text-align:right; }
-          @keyframes lpPulse { 0%,100% { opacity:1; } 50% { opacity:0.45; } }
-          @media (prefers-reduced-motion: no-preference) { .lp-ord-fill.is-soon { animation:lpPulse 1.3s ease-in-out infinite; } }
+          .lp-ord-fill.is-soon { background:var(--raznos-red); }
+          .lp-ord-time { font:600 11px var(--raznos-mono); color:var(--raznos-ink-3); }
+          .lp-ord-time.is-soon { color:var(--raznos-red); }
+          @keyframes lpPulse { 0%,100% { opacity:1; } 50% { opacity:0.3; } }
+          @media (prefers-reduced-motion: no-preference) { .lp-ord-fill.is-soon { animation:lpPulse 1s ease-in-out infinite; } }
         </style>
       </helmet>
       <div class="lp">
@@ -190,7 +192,7 @@
               <div class="lp-feature-media">
                 <div class="raznos-card">
                   <div class="raznos-list-row"><dc-import name="RaznosIcon" svc="samokat" size="sm"></dc-import><div class="raznos-list-main"><span class="raznos-list-title">Самокат · 3,2 км</span><span class="raznos-text-small">18 мин · 4 кг</span></div><div class="raznos-list-end"><span class="raznos-num">480 ₽</span><span class="raznos-status-pill raznos-pill-ok">≈ 1 280 ₽/ч</span></div></div>
-                  <div class="lp-ord-timer"><div class="lp-ord-track"><div class="lp-ord-fill is-soon" style="width:25%"></div></div><span class="lp-ord-time">0:18</span></div>
+                  <div class="lp-ord-timer"><div class="lp-ord-track"><div class="lp-ord-fill is-soon" style="width:25%"></div></div><span class="lp-ord-time is-soon">0:18</span></div>
                   <div class="raznos-list-row"><dc-import name="RaznosIcon" svc="vkusvill" size="sm"></dc-import><div class="raznos-list-main"><span class="raznos-list-title">ВкусВилл · 2,1 км</span><span class="raznos-text-small">14 мин · 2 кг</span></div><div class="raznos-list-end"><span class="raznos-num">320 ₽</span><span class="raznos-text-tiny">≈ 1 040 ₽/ч</span></div></div>
                   <div class="lp-ord-timer"><div class="lp-ord-track"><div class="lp-ord-fill" style="width:55%"></div></div><span class="lp-ord-time">0:41</span></div>
                   <div class="raznos-list-row"><dc-import name="RaznosIcon" svc="magnit" size="sm"></dc-import><div class="raznos-list-main"><span class="raznos-list-title">Магнит · 1,8 км</span><span class="raznos-text-small">12 мин · 3 кг</span></div><div class="raznos-list-end"><span class="raznos-num">260 ₽</span><span class="raznos-text-tiny">≈ 720 ₽/ч</span></div></div>
@@ -210,7 +212,7 @@
                 <p class="lp-dek">{{ t.offer_dek }}</p>
               </div>
               <div class="lp-feature-media">
-                <dc-import name="RaznosIncomingOffer" svc="{{ offer.svc }}" title="{{ offer.title }}" pay="{{ offer.pay }}" pickupAddr="{{ offer.pickupAddr }}" dropAddr="{{ offer.dropAddr }}" etaPoint="{{ offer.etaPoint }}" etaTotal="{{ offer.etaTotal }}" distance="{{ offer.distance }}" weight="{{ offer.weight }}" packages="{{ offer.packages }}" timerLabel="{{ offer.timerLabel }}" timerFillStyle="{{ offer.timerFillStyle }}" estimate="{{ offer.estimate }}"></dc-import>
+                <dc-import name="RaznosIncomingOffer" svc="{{ offer.svc }}" title="{{ offer.title }}" pay="{{ offer.pay }}" pickupAddr="{{ offer.pickupAddr }}" dropAddr="{{ offer.dropAddr }}" etaPoint="{{ offer.etaPoint }}" etaTotal="{{ offer.etaTotal }}" distance="{{ offer.distance }}" weight="{{ offer.weight }}" packages="{{ offer.packages }}" timerLabel="{{ offer.timerLabel }}" timerFillStyle="{{ offer.timerFillStyle }}" timerWarn="{{ true }}" isIdle="{{ true }}" canDecline="{{ true }}" estimate="{{ offer.estimate }}"></dc-import>
               </div>
             </div>
           </div>
