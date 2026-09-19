@@ -11,6 +11,7 @@
         <link rel="stylesheet" href="./raznos-v3.css" />
         <link rel="stylesheet" href="./raznos-work.css" />
         <link rel="stylesheet" href="./raznos-route-map.css" />
+        <link rel="stylesheet" href="./raznos-opportunities.css" />
         <link rel="stylesheet" href="./raznos-live.css" />
         <title>Разнос</title>
         <link rel="icon" href="./app-icon.svg" type="image/svg+xml" />
@@ -74,8 +75,6 @@
           .lp-queue { display: flex; flex-direction: column; gap: 8px; }
           .lp-queue-row { display: flex; align-items: center; gap: 12px; padding: 12px 14px; border-radius: 12px; background: rgba(255,255,255,0.06); }
           .lp-queue-row .g { flex: 1; min-width: 0; }
-          .lp-map { position: relative; height: 300px; border-radius: 20px; overflow: hidden; border: 1px solid var(--raznos-line); background: var(--raznos-surface-2); }
-          .lp-map svg { display: block; width: 100%; height: 100%; }
           .lp-bars { display: flex; align-items: flex-end; gap: 8px; height: 168px; margin-top: 8px; }
           .lp-bcol { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 5px; height: 100%; justify-content: flex-end; }
           .lp-bval { font: 600 11px var(--raznos-mono); color: var(--raznos-ink-2); }
@@ -361,9 +360,7 @@
           <div class="lp-feature">
             <div class="lp-feature-media">
               <div class="raznos-fx raznos-col raznos-gap12">
-                <div class="lp-map">
-                  <svg viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Тепловая карта доходности по районам"><rect width="400" height="300" fill="var(--raznos-surface-2)"></rect><g stroke="var(--raznos-line)" stroke-width="1" opacity="0.7"><line x1="40" y1="0" x2="40" y2="300"></line><line x1="80" y1="0" x2="80" y2="300"></line><line x1="120" y1="0" x2="120" y2="300"></line><line x1="160" y1="0" x2="160" y2="300"></line><line x1="200" y1="0" x2="200" y2="300"></line><line x1="240" y1="0" x2="240" y2="300"></line><line x1="280" y1="0" x2="280" y2="300"></line><line x1="320" y1="0" x2="320" y2="300"></line><line x1="360" y1="0" x2="360" y2="300"></line><line x1="0" y1="36" x2="400" y2="36"></line><line x1="0" y1="72" x2="400" y2="72"></line><line x1="0" y1="108" x2="400" y2="108"></line><line x1="0" y1="144" x2="400" y2="144"></line><line x1="0" y1="180" x2="400" y2="180"></line><line x1="0" y1="216" x2="400" y2="216"></line><line x1="0" y1="252" x2="400" y2="252"></line><line x1="0" y1="288" x2="400" y2="288"></line></g><path d="M-10 64 C 120 128, 176 54, 258 128 S 384 206, 412 150" fill="none" stroke="#8fb3d6" stroke-width="16" stroke-linecap="round" opacity="0.3"></path><ellipse cx="156" cy="150" rx="76" ry="58" fill="var(--raznos-green-deep)" opacity="0.9"></ellipse><ellipse cx="306" cy="74" rx="58" ry="42" fill="var(--raznos-green)" opacity="0.5"></ellipse><ellipse cx="86" cy="242" rx="54" ry="38" fill="var(--raznos-green)" opacity="0.26"></ellipse><g font-family="JetBrains Mono, monospace" text-anchor="middle"><text x="156" y="146" font-weight="700" font-size="13" fill="#ffffff">Центр</text><text x="156" y="167" font-weight="700" font-size="17" fill="#ffffff">1 320 ₽/ч</text><text x="306" y="70" font-weight="700" font-size="12" fill="var(--raznos-green-deep)">Север</text><text x="306" y="88" font-weight="700" font-size="14" fill="var(--raznos-green-deep)">980 ₽/ч</text><text x="86" y="238" font-weight="700" font-size="12" fill="var(--raznos-ink-2)">Юго-Запад</text><text x="86" y="256" font-weight="700" font-size="14" fill="var(--raznos-ink-2)">610 ₽/ч</text></g><circle cx="236" cy="198" r="10" fill="#ffffff"></circle><circle cx="236" cy="198" r="6" fill="var(--raznos-dark)"></circle></svg>
-                </div>
+                <dc-import name="RaznosAreaMap" title="Районы сейчас" rows="{{ areaRows }}" source="Демо-данные по спросу"></dc-import>
                 <div class="raznos-card lp-card raznos-card-pad">
                   <span class="raznos-text-h3">{{ t.prog_map_title }}</span>
                   <div class="{{ barsCls }}">
@@ -655,6 +652,11 @@
           return {
             barsCls: motionOK ? 'lp-bars lp-armed' : 'lp-bars',
             feedCls: motionOK ? 'raznos-card lp-feed lp-armed' : 'raznos-card lp-feed',
+            areaRows: [
+              { district: 'Центр', income: '1 320 ₽/ч', incomeNote: 'пик спроса', activity: 'высокая', activityNote: 'много заказов' },
+              { district: 'Север', income: '980 ₽/ч', incomeNote: 'стабильно', activity: 'средняя', activityNote: 'ровный поток' },
+              { district: 'Юго-Запад', income: '610 ₽/ч', incomeNote: 'спокойно', activity: 'низкая', activityNote: 'редкие заказы' }
+            ],
             t: t, lang: lang, onLang: (e) => this.loadLang((e && e.target && e.target.value) || 'ru'),
             offer: { svc: 'samokat', title: 'Самокат', pay: '480', pickupAddr: 'Самокат, ул. Ленина 12', dropAddr: 'ул. Мира 5', etaPoint: '6 мин', etaTotal: '22 мин', distance: '3,2 км', weight: '4 кг', packages: '2', timerLabel: '00:18', timerFillStyle: 'width:72%', estimate: { hourly: '1 280', net: '360' } },
             orders: [
