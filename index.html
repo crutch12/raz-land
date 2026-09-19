@@ -140,12 +140,18 @@
             .lp-bars.lp-armed.lp-anim .lp-bcol:nth-child(7) .lp-bfill { animation-delay:.42s; }
           }
           .lp-dark { background-color:var(--raznos-dark); background-image:radial-gradient(rgba(255,255,255,0.05) 1px, transparent 1.5px); background-size:24px 24px; }
-          @keyframes lpDrop { from { opacity:0; transform:translateY(-10px); } to { opacity:1; transform:none; } }
+          .lp-ord-new { border-left:3px solid var(--raznos-red); }
+          .lp-new-badge { display:inline-flex; align-items:center; gap:5px; align-self:flex-start; margin-top:4px; padding:2px 8px; border-radius:999px; background:rgba(224,49,49,0.12); color:var(--raznos-red); font:600 11px var(--raznos-mono); }
+          .lp-new-dot { width:6px; height:6px; border-radius:50%; background:var(--raznos-red); }
+          @keyframes lpDrop { from { opacity:0; transform:translateY(-8px); } to { opacity:1; transform:none; } }
+          @keyframes lpArrive { 0% { opacity:0; transform:translateY(-30px); } 60% { opacity:1; transform:translateY(2px); } 100% { opacity:1; transform:translateY(0); } }
+          @keyframes lpUrge { 0%,100% { opacity:1; box-shadow:0 0 0 0 rgba(224,49,49,0.5); } 50% { opacity:0.45; box-shadow:0 0 0 5px rgba(224,49,49,0); } }
           @media (prefers-reduced-motion: no-preference) {
             .lp-feed.lp-armed .raznos-list-row { opacity:0; }
-            .lp-feed.lp-armed.lp-anim .raznos-list-row { animation:lpDrop .5s cubic-bezier(.2,.8,.2,1) forwards; }
-            .lp-feed.lp-armed.lp-anim .raznos-list-row:nth-child(2) { animation-delay:.12s; }
-            .lp-feed.lp-armed.lp-anim .raznos-list-row:nth-child(3) { animation-delay:.24s; }
+            .lp-feed.lp-armed.lp-anim .raznos-list-row:nth-child(2) { animation:lpDrop .4s cubic-bezier(.2,.8,.2,1) .05s forwards; }
+            .lp-feed.lp-armed.lp-anim .raznos-list-row:nth-child(3) { animation:lpDrop .4s cubic-bezier(.2,.8,.2,1) .12s forwards; }
+            .lp-feed.lp-armed.lp-anim .raznos-list-row.lp-ord-new { animation:lpArrive .55s cubic-bezier(.2,.9,.2,1) .5s forwards; }
+            .lp-new-dot { animation:lpUrge 1s ease-in-out infinite; }
           }
           .lp-live { display:inline-flex; align-items:center; gap:8px; margin-top:8px; font:600 13px var(--raznos-font); color:var(--raznos-green-deep); }
           .lp-live-dot { width:8px; height:8px; border-radius:50%; background:var(--raznos-green-deep); }
@@ -196,7 +202,7 @@
               </div>
               <div class="lp-feature-media">
                 <div class="{{ feedCls }}">
-                  <div class="raznos-list-row"><dc-import name="RaznosIcon" svc="samokat" size="sm"></dc-import><div class="raznos-list-main"><span class="raznos-list-title">Самокат · 3,2 км</span><span class="raznos-text-small">18 мин · 4 кг</span></div><div class="raznos-list-end"><span class="raznos-num">480 ₽</span><span class="raznos-status-pill raznos-pill-ok">≈ 1 280 ₽/ч</span></div></div>
+                  <div class="raznos-list-row lp-ord-new"><dc-import name="RaznosIcon" svc="samokat" size="sm"></dc-import><div class="raznos-list-main"><span class="raznos-list-title">Самокат · 3,2 км</span><span class="raznos-text-small">18 мин · 4 кг</span><span class="lp-new-badge"><span class="lp-new-dot"></span>новый · 0:15</span></div><div class="raznos-list-end"><span class="raznos-num">480 ₽</span><span class="raznos-status-pill raznos-pill-ok">≈ 1 280 ₽/ч</span></div></div>
                   <div class="raznos-list-row"><dc-import name="RaznosIcon" svc="vkusvill" size="sm"></dc-import><div class="raznos-list-main"><span class="raznos-list-title">ВкусВилл · 2,1 км</span><span class="raznos-text-small">14 мин · 2 кг</span></div><div class="raznos-list-end"><span class="raznos-num">320 ₽</span><span class="raznos-text-tiny">≈ 1 040 ₽/ч</span></div></div>
                   <div class="raznos-list-row"><dc-import name="RaznosIcon" svc="magnit" size="sm"></dc-import><div class="raznos-list-main"><span class="raznos-list-title">Магнит · 1,8 км</span><span class="raznos-text-small">12 мин · 3 кг</span></div><div class="raznos-list-end"><span class="raznos-num">260 ₽</span><span class="raznos-text-tiny">≈ 720 ₽/ч</span></div></div>
                 </div>
