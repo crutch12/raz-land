@@ -126,6 +126,15 @@
           .lp-cmp-card-name { display:flex; align-items:center; gap:10px; font:700 16px var(--raznos-font); }
           .lp-faq-a a { color:var(--raznos-green-deep); text-decoration:underline; }
           .lp-faq-a a:hover { color:var(--raznos-green-deep); }
+          @keyframes lpGrow { from { transform:scaleY(0.04); opacity:0.35; } to { transform:scaleY(1); opacity:1; } }
+          @media (prefers-reduced-motion: no-preference) { @supports (animation-timeline: view()) {
+            .lp-bars .lp-bfill { transform-origin:bottom; animation:lpGrow cubic-bezier(.2,.7,.2,1) both; animation-timeline:view(); animation-range:entry 6% cover 22%; }
+          } }
+          .lp-dark { background-color:var(--raznos-dark); background-image:radial-gradient(rgba(255,255,255,0.05) 1px, transparent 1.5px); background-size:24px 24px; }
+          html { scrollbar-color:var(--raznos-green-deep) var(--raznos-bg); scrollbar-width:thin; }
+          ::-webkit-scrollbar { width:11px; height:11px; }
+          ::-webkit-scrollbar-thumb { background:var(--raznos-green-deep); border-radius:999px; border:3px solid var(--raznos-bg); }
+          ::-webkit-scrollbar-track { background:var(--raznos-bg); }
         </style>
       </helmet>
       <div class="lp">
