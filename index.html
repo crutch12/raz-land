@@ -626,7 +626,31 @@
       class Component extends DCLogic {
         componentDidMount() {
           try {
-            try { var sv = new URLSearchParams(window.location.search).get('s'); if (sv) { document.cookie = 's=' + encodeURIComponent(sv) + '; path=/; max-age=31536000; SameSite=Lax'; } } catch (e) {}
+            try {
+              var qp = new URLSearchParams(window.location.search);
+              var readCookie = function (n) { var m = document.cookie.match('(?:^|; )' + n + '=([^;]*)'); return m ? decodeURIComponent(m[1]) : ''; };
+              var writeCookie = function (n, v) { document.cookie = n + '=' + encodeURIComponent(v) + '; path=/; max-age=31536000; SameSite=Lax'; };
+              var sv = qp.get('s');
+              if (sv) writeCookie('s', sv);
+              var prev = {}; try { prev = JSON.parse(readCookie('raz_visitor') || '{}'); } catch (e) { prev = {}; }
+              var now = new Date().toISOString();
+              var utm = {}; ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term'].forEach(function (k) { var v = qp.get(k); if (v) utm[k] = v; });
+              var tz = ''; try { tz = Intl.DateTimeFormat().resolvedOptions().timeZone || ''; } catch (e) {}
+              var prof = {
+                s: sv || prev.s || '',
+                firstSeen: prev.firstSeen || now,
+                lastSeen: now,
+                visits: (parseInt(prev.visits, 10) || 0) + 1,
+                referrer: prev.referrer || document.referrer || '',
+                utm: Object.keys(utm).length ? utm : (prev.utm || {}),
+                lang: navigator.language || '',
+                tz: tz,
+                ua: navigator.userAgent || '',
+                screen: screen.width + 'x' + screen.height,
+                platform: navigator.platform || ''
+              };
+              writeCookie('raz_visitor', JSON.stringify(prof));
+            } catch (e) {}
             var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
             var fmt = function (n) { return String(n).replace(/\B(?=(\d{3})+(?!\d))/g, '\u00a0'); };
             var setFinal = function (el) { el.textContent = fmt(parseInt(el.getAttribute('data-to'), 10) || 0) + (el.getAttribute('data-suffix') || ''); };
