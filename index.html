@@ -615,7 +615,7 @@
           <div class="lp-final">
             <h2>{{ t.final_h2 }}</h2>
             <p class="lp-dek" style="text-align:center">{{ t.final_dek }}</p>
-            <a class="lp-btn lp-btn-accent" href="https://crutch12.github.io/raz-app/" target="_blank" rel="noopener">{{ t.final_cta }}</a>
+            <sc-if value="{{ showProto }}"><a class="lp-btn lp-btn-accent" href="https://crutch12.github.io/raz-app/" target="_blank" rel="noopener">{{ t.final_cta }}</a></sc-if>
             <a class="lp-btn lp-btn-line" href="https://t.me/raznos_app_bot" target="_blank" rel="noopener">{{ t.final_bot }}</a>
           </div>
         </div>
@@ -657,6 +657,7 @@
           return {
             barsCls: motionOK ? 'lp-bars lp-armed' : 'lp-bars',
             feedCls: motionOK ? 'raznos-card lp-feed lp-armed' : 'raznos-card lp-feed',
+            showProto: (typeof window !== 'undefined' && !!window.location && new URLSearchParams(window.location.search).has('show')),
             areaRows: [
               { district: 'Центр', income: '1 320 ₽/ч', incomeNote: 'пик спроса', activity: 'высокая', activityNote: 'много заказов' },
               { district: 'Север', income: '980 ₽/ч', incomeNote: 'стабильно', activity: 'средняя', activityNote: 'ровный поток' },
