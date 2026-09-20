@@ -654,6 +654,24 @@
               };
               writeCookie('raz_visitor', JSON.stringify(prof));
             } catch (e) {}
+            try {
+              var supported = ['ru', 'uz', 'tg', 'ky', 'hy', 'en'];
+              var near = { kk: 'ky', az: 'uz', tr: 'uz', fa: 'tg', prs: 'tg', uk: 'ru', be: 'ru' };
+              var pick = '';
+              var ql = String(qp.get('lang') || '').toLowerCase().split('-')[0];
+              if (ql && supported.indexOf(ql) !== -1) {
+                pick = ql;
+              } else {
+                var cand = (navigator.languages && navigator.languages.length) ? navigator.languages : [navigator.language || ''];
+                for (var li = 0; li < cand.length && !pick; li++) {
+                  var base = String(cand[li] || '').toLowerCase().split('-')[0];
+                  if (!base) continue;
+                  if (supported.indexOf(base) !== -1) pick = base;
+                  else if (near[base]) pick = near[base];
+                }
+              }
+              if (pick && pick !== 'ru') this.loadLang(pick);
+            } catch (e) {}
             var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
             var fmt = function (n) { return String(n).replace(/\B(?=(\d{3})+(?!\d))/g, '\u00a0'); };
             var setFinal = function (el) { el.textContent = fmt(parseInt(el.getAttribute('data-to'), 10) || 0) + (el.getAttribute('data-suffix') || ''); };
