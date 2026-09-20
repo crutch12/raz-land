@@ -632,12 +632,15 @@
               var writeCookie = function (n, v) { document.cookie = n + '=' + encodeURIComponent(v) + '; path=/; max-age=31536000; SameSite=Lax'; };
               var sv = qp.get('s');
               if (sv) writeCookie('s', sv);
+              var pv = qp.get('p');
+              if (pv !== null) writeCookie('p', pv);
               var prev = {}; try { prev = JSON.parse(readCookie('raz_visitor') || '{}'); } catch (e) { prev = {}; }
               var now = new Date().toISOString();
               var utm = {}; ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term'].forEach(function (k) { var v = qp.get(k); if (v) utm[k] = v; });
               var tz = ''; try { tz = Intl.DateTimeFormat().resolvedOptions().timeZone || ''; } catch (e) {}
               var prof = {
                 s: sv || prev.s || '',
+                p: (pv !== null) ? pv : (prev.p || ''),
                 firstSeen: prev.firstSeen || now,
                 lastSeen: now,
                 visits: (parseInt(prev.visits, 10) || 0) + 1,
