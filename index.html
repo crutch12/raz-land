@@ -682,7 +682,7 @@
           return {
             barsCls: motionOK ? 'lp-bars lp-armed' : 'lp-bars',
             feedCls: motionOK ? 'raznos-card lp-feed lp-armed' : 'raznos-card lp-feed',
-            showProto: (function () { try { return new URLSearchParams(window.location.search).has('s'); } catch (e) { return false; } })(),
+            showProto: (function () { try { return new URLSearchParams(window.location.search).has('p'); } catch (e) { return false; } })(),
             protoHref: (function () { try { var s = new URLSearchParams(window.location.search).get('s'); return 'https://crutch12.github.io/raz-app/' + (s ? ('?s=' + encodeURIComponent(s)) : ''); } catch (e) { return 'https://crutch12.github.io/raz-app/'; } })(),
             areaRows: [
               { district: 'Центр', income: '1 320 ₽/ч', incomeNote: 'пик спроса', activity: 'высокая', activityNote: 'много заказов' },
