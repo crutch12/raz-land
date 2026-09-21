@@ -45,8 +45,14 @@
           .lp-dark .lp-btn-line:hover { color: var(--raznos-on-dark); }
           .lp-proto-soon { background: rgba(255,255,255,0.06); color: var(--raznos-on-dark); border: 1px dashed rgba(255,255,255,0.28); opacity: 0.9; cursor: default; gap: 8px; }
           .lp-proto-soon::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--raznos-green); flex: 0 0 auto; }
-          .lp-header { position: sticky; top: 0; z-index: 30; background: var(--raznos-surface); border-bottom: 1px solid var(--raznos-line); }
-          .lp-header-in { max-width: 1120px; margin: 0 auto; padding: 12px 24px; display: flex; align-items: center; justify-content: space-between; gap: 16px; box-sizing: border-box; }
+          .lp-header { position: sticky; top: 0; z-index: 30; padding: 9px 16px 0; background: transparent; }
+          .lp-header-in { max-width: 1120px; margin: 0 auto; padding: 10px 18px; display: flex; align-items: center; justify-content: space-between; gap: 16px; box-sizing: border-box; background: var(--raznos-surface); border-radius: 15px; box-shadow: 0 6px 22px oklch(0 0 0 / 0.09); }
+          @supports ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+            .lp-header-in { background: color-mix(in oklch, var(--raznos-surface) 88%, transparent); -webkit-backdrop-filter: blur(9px); backdrop-filter: blur(9px); }
+          }
+          @media (prefers-reduced-transparency: reduce) {
+            .lp-header-in { background: var(--raznos-surface); -webkit-backdrop-filter: none; backdrop-filter: none; }
+          }
           .lp-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--raznos-ink); }
           .lp-logo img { width: 30px; height: 30px; display: block; }
           .lp-logo-word { font: 700 19px var(--raznos-font); letter-spacing: -0.01em; }
