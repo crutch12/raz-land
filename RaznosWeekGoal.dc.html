@@ -1,0 +1,48 @@
+<!DOCTYPE html><html><head><meta charset="utf-8" /><script src="./support.js"></script></head><body><x-dc>
+<helmet data-dc-atomics>
+  <link rel="stylesheet" href="./raznos-v3.css" />
+  <style>
+    .rwg { display: flex; flex-direction: column; gap: 8px; padding: 12px; border-radius: 12px; background: var(--raznos-surface-2); }
+    .rwg-head { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+    .rwg-title { font: 700 14px var(--raznos-font); color: var(--raznos-ink); }
+    .rwg-edit { font: 600 12px var(--raznos-font); color: var(--raznos-green-deep); background: none; border: none; padding: 0; cursor: pointer; }
+    .rwg-nums { display: flex; align-items: baseline; justify-content: space-between; gap: 8px; }
+    .rwg-goal { font: 800 20px var(--raznos-font); letter-spacing: -0.02em; color: var(--raznos-ink); font-variant-numeric: tabular-nums; }
+    .rwg-plan { font: 600 12px var(--raznos-font); color: var(--raznos-ink-3); font-variant-numeric: tabular-nums; }
+    .rwg-bar { height: 8px; border-radius: 999px; background: var(--raznos-line); overflow: hidden; }
+    .rwg-fill { display: block; height: 100%; background: var(--raznos-green); border-radius: 999px; }
+    .rwg-nudge { font: 500 12px var(--raznos-font); color: var(--raznos-ink-2); background: var(--raznos-surface); border: 1px solid var(--raznos-line); border-radius: 10px; padding: 8px 10px; }
+  </style>
+</helmet>
+<div class="rwg">
+  <div class="rwg-head">
+    <span class="rwg-title">Цель недели</span>
+    <button type="button" class="rwg-edit" onClick="{{ onEdit }}">Изменить</button>
+  </div>
+  <div class="rwg-nums">
+    <span class="rwg-goal">{{ goal_label }}</span>
+    <span class="rwg-plan">план ≈ {{ planned_label }} · {{ pct }}%</span>
+  </div>
+  <div class="rwg-bar"><span class="rwg-fill" style="{{ fill_style }}"></span></div>
+  <sc-if value="{{ has_nudge }}" hint-placeholder-val="{{ true }}"><div class="rwg-nudge">{{ nudge }}</div></sc-if>
+</div>
+</x-dc><script type="text/x-dc" data-dc-script data-props='{"unit":{"editor":"string","value":"₽"},"nudge":{"editor":"string","value":"В Центре вечером платят больше, добавьте пару часов"},"onEdit":{"editor":null},"$preview":{"width":390,"height":200}}'>
+const rwgFmt = (n) => String(Math.round(Number(n) || 0)).replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
+class Component extends DCLogic {
+  renderVals() {
+    const p = this.props || {};
+    const goal = Number(p.goal != null ? p.goal : 40000);
+    const planned = Number(p.planned != null ? p.planned : 0);
+    const unit = p.unit || '₽';
+    const pct = goal > 0 ? Math.min(100, Math.round(planned / goal * 100)) : 0;
+    return {
+      goal_label: rwgFmt(goal) + ' ' + unit,
+      planned_label: rwgFmt(planned) + ' ' + unit,
+      pct,
+      fill_style: 'width:' + pct + '%',
+      has_nudge: !!p.nudge, nudge: p.nudge || '',
+      onEdit: p.onEdit || (() => {})
+    };
+  }
+}
+</script></body></html>

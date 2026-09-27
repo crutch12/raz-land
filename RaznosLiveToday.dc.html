@@ -45,7 +45,7 @@
           const p = this.props || {};
           const items = (Array.isArray(p.items) ? p.items : []).slice(0, 3);
           return {
-            scopeLabel: 'Мои сервисы · ' + (p.cityTitle || ''),
+            scopeLabel: (p.scope === 'all' ? 'Все сервисы · ' : 'Мои сервисы · ') + (p.cityTitle || ''),
             isEmpty: items.length === 0,
             rows: items.map((m) => ({
               multi: !!m.multi, single: !m.multi, svcKey: m.svcKey || 'vkusvill', svcTitle: m.svcTitle || '',
