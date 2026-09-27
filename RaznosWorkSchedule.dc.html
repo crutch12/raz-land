@@ -11,12 +11,17 @@
     .rws-step-btn { width: 34px; height: 34px; border-radius: 50%; border: 1px solid var(--raznos-line-strong); background: var(--raznos-surface); color: var(--raznos-ink); font: 600 18px var(--raznos-font); line-height: 1; display: flex; align-items: center; justify-content: center; cursor: pointer; }
     .rws-step-btn:disabled { opacity: 0.35; cursor: default; }
     .rws-step-val { font: 700 17px var(--raznos-mono); color: var(--raznos-ink); min-width: 52px; text-align: center; font-variant-numeric: tabular-nums; }
+    .rws-recap { display: flex; flex-direction: column; gap: 2px; padding: 12px 14px; border-radius: 14px; background: var(--raznos-green-tint); border: 1px solid var(--raznos-green); }
+    .rws-recap-label { font: 500 12px var(--raznos-font); color: var(--raznos-green-deep); }
+    .rws-recap-value { font: 700 16px var(--raznos-font); color: var(--raznos-ink); }
   </style>
 </helmet>
 <div class="raznos-phone-body" data-screen-label="Work schedule">
-  <div class="raznos-app-bar"><button type="button" class="raznos-icon-btn" onClick="{{ onBack }}">‹</button><span class="raznos-text-small">Режим Работа</span></div>
+  <div class="raznos-app-bar"><button type="button" class="raznos-icon-btn" onClick="{{ onBack }}">‹</button><span></span></div>
   <h1 class="raznos-text-h1">График работы</h1>
-  <p class="raznos-text-small">Дни и часы, когда вы обычно работаете. Умное расписание берёт эти рамки за основу, часы вне графика показываются, но не идут в потенциальный итог дня</p>
+  <p class="raznos-text-small">Когда вы обычно на линии. Умное расписание берёт это за основу плана дня</p>
+
+  <div class="rws-recap"><span class="rws-recap-label">Сейчас в графике</span><span class="rws-recap-value">{{ summary }}</span></div>
 
   <div class="raznos-field"><span class="raznos-field-label">Рабочие дни</span>
     <div class="rws-days">
@@ -36,15 +41,17 @@
     <div class="rws-zone-wrap">
       <sc-for list="{{ zones }}" as="z" hint-placeholder-count="5"><button type="button" class="{{ z.cls }}" onClick="{{ z.tap }}">{{ z.label }}</button></sc-for>
     </div>
-    <p class="raznos-text-tiny">Умное расписание планирует и считает по выбранным районам. По умолчанию весь город</p>
+    <p class="raznos-text-tiny">По умолчанию весь город</p>
     </sc-if>
-    <sc-if value="{{ no_districts }}" hint-placeholder-val="{{ false }}"><p class="raznos-text-tiny">В вашем городе нет деления на районы, расписание считает по всему городу</p></sc-if>
+    <sc-if value="{{ no_districts }}" hint-placeholder-val="{{ false }}"><p class="raznos-text-tiny">В вашем городе нет деления на районы, считаем по всему городу</p></sc-if>
   </div>
 
-  <div class="raznos-notice raznos-notice-info"><span class="raznos-notice-title">{{ summary }}</span><span class="raznos-text-small">Расписание пересчитывается раз в сутки утром, перед началом смены. Пересчитать вручную можно на экране умного расписания</span></div>
-  <p class="raznos-text-tiny">По умолчанию пн-пт с 09:00 до 18:00. Если рабочих часов нет, умное расписание считает день с 09:00</p>
-  <sc-if value="{{ saved }}" hint-placeholder-val="{{ false }}"><p class="raznos-text-small" style="color:var(--raznos-green-deep)">График сохранён, умное расписание учтёт его при следующем пересчёте</p></sc-if>
-  <button type="button" class="raznos-btn" onClick="{{ do_save }}">Сохранить график</button>
+  <p class="raznos-text-tiny">Пересчёт раз в сутки утром, вручную можно в умном расписании</p>
+
+  <div class="raznos-sticky-actions">
+    <sc-if value="{{ saved }}" hint-placeholder-val="{{ false }}"><p class="raznos-text-small" style="color:var(--raznos-green-deep);text-align:center;margin:0">График сохранён, учтём при следующем пересчёте</p></sc-if>
+    <button type="button" class="raznos-btn raznos-btn-primary" onClick="{{ do_save }}">Сохранить график</button>
+  </div>
 </div>
 </x-dc><script type="text/x-dc" data-dc-script data-props='{"onBack":{"editor":null},"hasDistricts":{"editor":"boolean"},"$preview":{"width":390,"height":720}}'>
 const RWS_DAYS = ['пн', 'вт', 'ср', 'чт', 'пт', 'сб', 'вс'];
