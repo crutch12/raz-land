@@ -155,19 +155,13 @@
               <div class="raznos-hero-dark">
                 <span class="raznos-hero-label">Заработано сегодня</span>
                 <div class="raznos-fx raznos-ac raznos-gap8"><span class="raznos-hero-value">{{ today_earn }}</span><span class="raznos-hero-unit">₽</span></div>
+                <span style="color:var(--raznos-on-dark);opacity:0.88;font:600 13px var(--raznos-mono);margin-top:2px">{{ today_hero_stats }}</span>
                 <span class="raznos-hero-formula">из них {{ today_tips_digital }} ₽ чаевых, уже в сумме · после {{ today_expenses }} ₽ расходов останется {{ today_remain }} ₽</span>
               </div>
               <div class="raznos-card raznos-card-pad">
-                <div class="raznos-fx raznos-ac raznos-jb raznos-gap8"><span class="raznos-text-small">Темп дня</span><span class="raznos-text-small"><b>{{ today_earn }} ₽</b> из ≈ 6 000 ₽</span></div>
-                <div style="height:8px;border-radius:999px;background:var(--raznos-surface-2);overflow:hidden;margin:2px 0"><span style="display:block;height:100%;width:70%;background:var(--raznos-green);border-radius:999px"></span></div>
-                <span class="raznos-text-tiny">Обычный день ≈ 6 000 ₽, осталось примерно 3 заказа</span>
-              </div>
-
-              <div class="raznos-metric-grid">
-                <div class="raznos-metric-card"><span class="raznos-text-small">Остаток после расходов</span><span class="raznos-metric-value">{{ today_remain }} ₽</span></div>
-                <div class="raznos-metric-card"><span class="raznos-text-small">В час</span><span class="raznos-metric-value">{{ today_hourly }} ₽/ч</span></div>
-                <div class="raznos-metric-card"><span class="raznos-text-small">Время на работе</span><span class="raznos-metric-value">{{ today_hours }} ч</span></div>
-                <div class="raznos-metric-card"><span class="raznos-text-small">Ожидание на точке</span><span class="raznos-metric-value">{{ today_avg_wait }}</span></div>
+                <div class="raznos-fx raznos-ac raznos-jb raznos-gap8"><span class="raznos-text-small">Темп дня</span><span class="raznos-text-small"><b>{{ today_earn }} ₽</b> из ≈ {{ today_target }} ₽</span></div>
+                <div style="height:8px;border-radius:999px;background:var(--raznos-surface-2);overflow:hidden;margin:2px 0"><span style="{{ today_pace_style }}"></span></div>
+                <span class="raznos-text-tiny">{{ today_pace_note }}</span>
               </div>
 
               <dc-import name="RaznosNowNext" onOpenPlan="{{ go_smart }}"></dc-import>
@@ -175,7 +169,7 @@
               <dc-import name="RaznosEarnBreakdown" services="{{ earn_services }}" expenses="{{ earn_expenses }}" onOpenService="{{ go_history }}" onOpenExpenses="{{ go_expenses_from_home }}"></dc-import>
 
               <dc-import name="RaznosRecentOrders" orders="{{ recent_orders }}" onAll="{{ go_history }}" onOpenOrder="{{ open_recent_order }}"></dc-import>
-              <button type="button" class="raznos-btn raznos-btn-secondary raznos-btn-small" style="align-self:flex-start" onClick="{{ go_expenses_from_home }}">Добавить расход</button>
+              <button type="button" class="raznos-btn raznos-btn-secondary" onClick="{{ go_expenses_from_home }}">Добавить расход</button>
 
               <dc-import name="RaznosLiveToday" items="{{ live_today_items }}" cityTitle="{{ city_title }}" onAll="{{ live_go_feed_home }}" onWrite="{{ live_go_compose_home }}"></dc-import>
 
@@ -669,7 +663,6 @@
           <sc-if value="{{ is_market }}">
             <div class="raznos-phone-body" data-screen-label="22 Market">
               <div class="raznos-app-bar"><button type="button" class="raznos-icon-btn" onClick="{{ go_home_any }}">‹</button><span></span></div>
-              <button type="button" class="raznos-btn raznos-btn-secondary" onClick="{{ go_market_map }}">Карта заработка по районам</button>
               <h1 class="raznos-text-h1">Рынок сервисов</h1>
               <dc-import name="RaznosCitySelect" value="{{ mkCity }}" onChange="{{ set_mk_city }}"></dc-import>
               <button type="button" class="raznos-card" style="padding:16px;display:flex;align-items:center;justify-content:space-between;gap:12px;text-align:left;cursor:pointer" onClick="{{ go_job_guide }}"><span class="raznos-fx raznos-col raznos-gap4"><span style="font:700 16px var(--raznos-font);color:var(--raznos-ink)">Как и где начать работать</span><span class="raznos-text-small">Гайды по сервисам: вложения на старте, оформление, требования</span></span><span style="flex:none;line-height:0"><svg width="58" height="48" viewBox="0 0 58 48" fill="none"><rect x="27" y="5" width="4" height="39" rx="2" fill="var(--raznos-ink-3)"/><path d="M6 11 H37 l7 6 -7 6 H6 z" fill="var(--raznos-green)"/><path d="M52 25 H21 l-7 5 7 5 H52 z" fill="var(--raznos-ink-2)"/></svg></span></button>
@@ -713,6 +706,7 @@
               <sc-if value="{{ mk_no_data }}">
                 <div class="raznos-notice raznos-notice-info"><span class="raznos-notice-title">{{ mk_city_label }}</span><span class="raznos-text-small">Пока нет данных по этому городу</span></div>
               </sc-if>
+              <button type="button" class="raznos-btn raznos-btn-secondary" onClick="{{ go_market_map }}">Карта заработка по районам</button>
             </div>
           </sc-if>
 
@@ -3211,6 +3205,11 @@
           const todayTipsDigital = todayHistory.reduce((sum, o) => sum + o.tipDigital, 0);
           const todayPaidOutSum = todayHistory.filter((o) => o.money === 'Выплачено').reduce((sum, o) => sum + o.pay, 0);
           const todayRemain = todayEarn - todayExpenses;
+          // темп дня: цель из среднего по неделе для подключённых сервисов, в демо оставляем привычные 6000
+          const todayTarget = demoOn ? 6000 : Math.max(todayEarn, Math.round((scopeStat(STATS.week).earn / 6) / 100) * 100);
+          const todayAvgPay = todayOrders ? Math.round(todayEarn / todayOrders) : 300;
+          const todayPacePct = Math.max(4, Math.min(100, Math.round((todayEarn / (todayTarget || 1)) * 100)));
+          const todayOrdersLeft = Math.max(0, Math.round((todayTarget - todayEarn) / (todayAvgPay || 1)));
           const svcHourlySrc = [
             { key: 'vkusvill', name: 'ВкусВилл', hourly: todayVvHourly, hours: today.vvHours, color: 'var(--raznos-svc-vkusvill)' },
             { key: 'samokat', name: 'Самокат', hourly: todaySamokatHourly, hours: today.samokatHours, color: 'var(--raznos-svc-samokat)' }
@@ -3894,6 +3893,12 @@
             today_hourly: todayHourly, vv_earn: vvEarn, samokat_earn: samokatEarn, today_tips_digital: todayTipsDigital,
             vv_hours: today.vvHours, samokat_hours: today.samokatHours, overlap_hours: today.overlapHours,
             today_remain: formatMoney(todayRemain), today_avg_wait: today.avgWait,
+            today_hero_stats: todayOrders + ' ' + ruPlural(todayOrders, 'заказ', 'заказа', 'заказов') + ' · ' + todayHourly + ' ₽/ч · ' + todayHours + ' ч на линии',
+            today_target: formatMoney(todayTarget),
+            today_pace_style: 'display:block;height:100%;width:' + todayPacePct + '%;background:var(--raznos-green);border-radius:999px',
+            today_pace_note: todayOrdersLeft > 0
+              ? ('Обычный день ≈ ' + formatMoney(todayTarget) + ' ₽, осталось примерно ' + todayOrdersLeft + ' ' + ruPlural(todayOrdersLeft, 'заказ', 'заказа', 'заказов'))
+              : ('Обычный день ≈ ' + formatMoney(todayTarget) + ' ₽, цель на день выполнена'),
             svc_hourly_rows: svcHourlyRows, svc_hourly_note: svcHourlyNote,
             services_note: connectedKeys.length ? connectedKeys.map((k) => SERVICES[k].title).join(', ') + ' подключены' : 'ни один сервис не подключён',
             empty_has_real_connections: !demoOn && connectedKeys.length > 0,
@@ -3902,9 +3907,11 @@
             empty_orders_pulled: !demoOn && histConnectedCount > 0,
             pulled_orders_note: 'Подтянули ' + histConnectedCount + ' ' + ruPlural(histConnectedCount, 'заказ', 'заказа', 'заказов') + ' из подключённых сервисов',
             ready_graph_pending: !demoOn && connectedKeys.length > 0 && !st.graphSaved,
-            ready_lead: (!demoOn && connectedKeys.length > 0 && !st.graphSaved)
-              ? 'Сервис подключён. Настройте график, и Сегодня начнёт показывать план и подсказки куда ехать'
-              : 'Пара шагов, и Сегодня сам покажет заработок, план и подсказки куда ехать',
+            ready_lead: (!demoOn && connectedKeys.length > 0 && !!st.graphSaved)
+              ? 'Всё готово. Открывайте Сегодня, там заработок, заказы и план на день'
+              : ((!demoOn && connectedKeys.length > 0 && !st.graphSaved)
+                ? 'Сервис подключён. Настройте график, и Сегодня начнёт показывать план и подсказки куда ехать'
+                : 'Пара шагов, и Сегодня сам покажет заработок, план и подсказки куда ехать'),
             ready_steps: [
               { done: connectedKeys.length > 0, num: '1', title: 'Подключить сервис доставки',
                 note: connectedKeys.length > 0 ? (connectedKeys.map((k) => SERVICES[k].title).join(', ') + ' на месте') : 'Из него подтянутся доход, история и расписание',
@@ -3917,9 +3924,12 @@
               glyph_style: 'flex:none;width:24px;height:24px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font:700 13px var(--raznos-font);'
                 + (r.done ? 'background:var(--raznos-green);color:var(--raznos-on-dark)' : 'border:1px solid var(--raznos-line-strong);color:var(--raznos-ink-3)')
             })),
-            ready_cta_label: (!demoOn && connectedKeys.length > 0 && !st.graphSaved) ? 'Настроить график' : 'Подключить сервис',
+            ready_cta_label: (!demoOn && connectedKeys.length > 0 && !!st.graphSaved) ? 'Открыть Сегодня' : ((!demoOn && connectedKeys.length > 0 && !st.graphSaved) ? 'Настроить график' : 'Подключить сервис'),
             ready_cta_action: () => {
-              if (!demoOn && connectedKeys.length > 0 && !this.state.graphSaved) set({ s: 'work-schedule', wsFrom: s });
+              const cur = this.state || {};
+              const conn = Object.keys(cur.integrationStatus || {}).filter((k) => (cur.integrationStatus || {})[k] === 'connected' || (cur.integrationStatus || {})[k] === 'limited');
+              if (conn.length > 0 && cur.graphSaved) set({ s: 'courier-home' });
+              else if (conn.length > 0 && !cur.graphSaved) set({ s: 'work-schedule', wsFrom: s });
               else if (role === 'courier') set({ s: 'integrations' });
             },
             go_market: () => set({ s: 'market' }),
