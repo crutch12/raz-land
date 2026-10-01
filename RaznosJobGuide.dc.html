@@ -1,14 +1,13 @@
 <!DOCTYPE html><html><head><meta charset="utf-8" /><script src="./support.js"></script></head><body><x-dc>
 <helmet data-dc-atomics><link rel="stylesheet" href="./raznos-v3.css" /><link rel="stylesheet" href="./raznos-final.css" /></helmet>
 <div class="raznos-phone-body" data-screen-label="Job guide">
-  <div class="raznos-app-bar"><button type="button" class="raznos-icon-btn" onClick="{{ onBack }}">‹</button><span class="raznos-text-small">{{ city_title }}</span></div>
-  <h1 class="raznos-text-h1">Подобрать работу</h1>
+  <div class="raznos-app-bar" style="justify-content:flex-start;gap:10px"><button type="button" class="raznos-icon-btn" onClick="{{ onBack }}">‹</button><h1 class="raznos-text-h1" style="margin:0">Подобрать работу</h1></div>
   <div class="raznos-segmented">
     <sc-for list="{{ tabs }}" as="t" hint-placeholder-count="4"><button type="button" class="{{ t.cls }}" onClick="{{ t.tap }}">{{ t.label }}</button></sc-for>
   </div>
 
   <sc-if value="{{ no_data }}" hint-placeholder-val="{{ false }}">
-    <div class="raznos-empty-state"><span class="raznos-empty-glyph">?</span><span class="raznos-text-h3">По этому городу данных пока нет</span><p class="raznos-text-small">Город меняется в профиле. Покажем цифры, когда в городе наберётся хотя бы 30 курьеров Разноса на сервис</p></div>
+    <div class="raznos-empty-state"><span class="raznos-empty-glyph">?</span><span class="raznos-text-h3">По этому городу данных пока нет</span><p class="raznos-text-small">Город меняется в профиле. Покажем цифры, когда в городе появятся курьеры Разноса</p></div>
   </sc-if>
 
   <sc-if value="{{ is_newbies }}" hint-placeholder-val="{{ true }}">
@@ -25,7 +24,7 @@
           </div>
           <span class="raznos-text-small">Чаще всего сложно: {{ n.hard }}</span>
         </sc-if>
-        <sc-if value="{{ n.not_enough }}"><p class="raznos-text-small">Недостаточно данных: меньше 30 новичков, цифры не показываем</p></sc-if>
+        <sc-if value="{{ n.not_enough }}"><p class="raznos-text-small">По новичкам данных пока нет</p></sc-if>
       </div>
     </sc-for>
   </sc-if>
@@ -126,7 +125,7 @@ class Component extends DCLogic {
       svc_chips: JG_SVC.map((k) => ({ label: JG_TITLE[k], cls: 'raznos-chip' + (svc === k ? ' raznos-is-active' : ''), tap: () => this.setState({ svc: k }) })),
       newbies: !hasData ? [] : JG_SVC.map((k) => {
         const r = JG_NEWBIES[city][k];
-        const enough = r[5] >= 30;
+        const enough = r[5] > 0;
         return { key: k, title: JG_TITLE[k], cls: 'raznos-card raznos-card-pad raznos-svc-border-' + k, sample: r[5] + ' ' + jgPlural(r[5], 'новичок', 'новичка', 'новичков'), enough, not_enough: !enough, newH: r[0] + ' ₽', oldH: r[1] + ' ₽', newWait: r[2] + ' мин', oldWait: r[3] + ' мин', stayed: r[4] || '—', hard: r[6] };
       }),
       start: {

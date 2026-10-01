@@ -17,8 +17,7 @@
   </style>
 </helmet>
 <div class="raznos-phone-body" data-screen-label="Work schedule">
-  <div class="raznos-app-bar"><button type="button" class="raznos-icon-btn" onClick="{{ onBack }}">‹</button><span></span></div>
-  <h1 class="raznos-text-h1">График работы</h1>
+  <div class="raznos-app-bar" style="justify-content:flex-start;gap:10px"><button type="button" class="raznos-icon-btn" onClick="{{ onBack }}">‹</button><h1 class="raznos-text-h1" style="margin:0">График работы</h1></div>
   <p class="raznos-text-small">Когда вы обычно на линии. Умное расписание берёт это за основу плана дня</p>
 
   <div class="rws-recap"><span class="rws-recap-label">Сейчас в графике</span><span class="rws-recap-value">{{ summary }}</span></div>
@@ -45,8 +44,6 @@
     </sc-if>
     <sc-if value="{{ no_districts }}" hint-placeholder-val="{{ false }}"><p class="raznos-text-tiny">В вашем городе нет деления на районы, считаем по всему городу</p></sc-if>
   </div>
-
-  <p class="raznos-text-tiny">Пересчёт раз в сутки утром, вручную можно в умном расписании</p>
 
   <div class="raznos-sticky-actions">
     <sc-if value="{{ saved }}" hint-placeholder-val="{{ false }}"><p class="raznos-text-small" style="color:var(--raznos-green-deep);text-align:center;margin:0">График сохранён, учтём при следующем пересчёте</p></sc-if>
@@ -84,7 +81,7 @@ class Component extends DCLogic {
       has_districts: hasDistricts, no_districts: !hasDistricts, zones: zoneChips,
       summary: daysPart + (hasDistricts && zonesNote ? (', ' + zonesNote) : ''),
       saved: !!st.saved,
-      do_save: () => { set({ saved: true }); if (typeof p.onSave === 'function') p.onSave(); }
+      do_save: () => { set({ saved: true }); if (typeof p.onSave === 'function') p.onSave({ start, end, days: active }); }
     };
   }
 }

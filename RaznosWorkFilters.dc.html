@@ -15,8 +15,7 @@
 
 <sc-if value="{{ is_list }}">
 <div class="raznos-phone-body" data-screen-label="Work filters">
-<div class="raznos-app-bar"><button type="button" class="raznos-icon-btn" onClick="{{ onBack }}">‹</button><span class="raznos-text-small">Выбор заказов</span></div>
-<h1 class="raznos-text-h1">Мои фильтры</h1>
+<div class="raznos-app-bar" style="justify-content:flex-start;gap:10px"><button type="button" class="raznos-icon-btn" onClick="{{ onBack }}">‹</button><h1 class="raznos-text-h1" style="margin:0">Мои фильтры</h1></div>
 <p class="raznos-text-small">Тонкий фильтр конкретных заказов для ракурса Сейчас, когда виден пул одного сервиса. Заказ всегда принимаете вы</p>
 <div class="raznos-notice raznos-notice-info"><span class="raznos-text-small">Плановые предпочтения (районы, сервисы, часы, цель дохода) теперь в графике и цели умного расписания. Здесь остаются только параметры конкретного заказа</span></div>
 <div class="raznos-fx raznos-col raznos-gap8"><sc-for list="{{ sets }}" as="s" hint-placeholder-count="4">
@@ -33,8 +32,7 @@
 
 <sc-if value="{{ is_editor }}">
 <div class="raznos-phone-body" data-screen-label="Filter editor">
-<div class="raznos-app-bar"><button type="button" class="raznos-icon-btn" onClick="{{ ed_back }}">‹</button><span class="raznos-text-small">Мои фильтры</span></div>
-<h1 class="raznos-text-h1">{{ ed_title }}</h1>
+<div class="raznos-app-bar" style="justify-content:flex-start;gap:10px"><button type="button" class="raznos-icon-btn" onClick="{{ ed_back }}">‹</button><h1 class="raznos-text-h1" style="margin:0">{{ ed_title }}</h1></div>
 <label class="raznos-field"><span class="raznos-field-label">Название набора</span><input class="raznos-input" value="{{ ed_name }}" onChange="{{ ed_change_name }}" /></label>
 <sc-if value="{{ ed_adv }}" hint-placeholder-val="{{ false }}"><p class="raznos-text-tiny">Значения для: {{ ed_scope_label }}</p></sc-if>
 <div class="raznos-opportunity-fields"><sc-for list="{{ ed_fields }}" as="f"><label class="raznos-field"><span class="raznos-field-label">{{ f.label }}</span><input class="raznos-input" type="number" min="0" step="{{ f.step }}" value="{{ f.value }}" onChange="{{ f.change }}" /></label></sc-for></div>
@@ -55,8 +53,7 @@
 
 <sc-if value="{{ is_eff }}">
 <div class="raznos-phone-body" data-screen-label="Filter effectiveness">
-<div class="raznos-app-bar"><button type="button" class="raznos-icon-btn" onClick="{{ eff_back }}">‹</button><span class="raznos-text-small">Мои фильтры</span></div>
-<h1 class="raznos-text-h1">Проверить фильтр</h1>
+<div class="raznos-app-bar" style="justify-content:flex-start;gap:10px"><button type="button" class="raznos-icon-btn" onClick="{{ eff_back }}">‹</button><h1 class="raznos-text-h1" style="margin:0">Проверить фильтр</h1></div>
 <p class="raznos-text-small">Активный набор: {{ active_label }}</p>
 <div class="raznos-chip-row"><sc-for list="{{ eff_periods }}" as="ep"><button type="button" class="{{ ep.cls }}" onClick="{{ ep.tap }}">{{ ep.label }}</button></sc-for></div>
 <span class="raznos-text-body">{{ eff_summary }}</span>
