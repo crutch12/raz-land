@@ -353,14 +353,14 @@
   "nbp_tab4_d": "Money, work and requirements",
   "nbp_tabs": "Guide sections",
   "nbp_terms_note": "Check the final terms in the service app",
-  "nbp_v_cancel": "Couriers say you need to cancel a day or two ahead, otherwise your rating drops",
-  "nbp_v_docs": "From 18, passport, SNILS and INN",
-  "nbp_v_fine": "Couriers say there are no money penalties, violations hit your rating",
-  "nbp_v_gear": "The partner gives out the thermal bag and jacket, deposit 2 000 ₽",
+  "nbp_v_cancel": "A day or two ahead, otherwise your rating drops",
+  "nbp_v_docs": "From 18, passport, SNILS, INN",
+  "nbp_v_fine": "No money fines, violations hit your rating",
+  "nbp_v_gear": "Thermal bag and jacket provided, 2 000 ₽ deposit",
   "nbp_v_med": "Needed before the first slot",
-  "nbp_v_mode": "Slots from 2 hours, orders are assigned automatically",
+  "nbp_v_mode": "Slots from 2 hours, the service assigns orders",
   "nbp_v_out": "Once a week to a card",
-  "nbp_v_pay": "Hourly slot rate plus a bonus per order",
+  "nbp_v_pay": "Hourly rate plus a bonus per order",
   "nbp_v_zone": "Dark store",
   "nbp_via_f1": "Self-employed",
   "nbp_via_f2": "Partner",
@@ -390,5 +390,6 @@
   "unit_h": "h",
   "unit_k": "k",
   "stat_unit_hour": "Hourly income by month, ₽",
-  "months_short": "Apr,May,Jun,Jul,Aug,Sep"
+  "months_short": "Apr,May,Jun,Jul,Aug,Sep",
+  "nbp_src": "from couriers"
 }

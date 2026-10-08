@@ -353,14 +353,14 @@
   "nbp_tab4_d": "Pul, ish va talablar",
   "nbp_tabs": "Qo'llanma bo'limlari",
   "nbp_terms_note": "Yakuniy shartlarni servis ilovasida ko'r",
-  "nbp_v_cancel": "Kuryerlar yozishicha, bir-ikki kun oldin bekor qilish kerak, aks holda reyting tushadi",
-  "nbp_v_docs": "18 yoshdan, pasport, СНИЛС va ИНН",
-  "nbp_v_fine": "Kuryerlar yozishicha, pul jarimalari yo'q, qoidabuzarliklar reytingga ta'sir qiladi",
-  "nbp_v_gear": "Termosumka va kurtkani hamkor beradi, garov 2 000 ₽",
+  "nbp_v_cancel": "Bir-ikki kun oldin, aks holda reyting tushadi",
+  "nbp_v_docs": "18 yoshdan, pasport, SNILS, INN",
+  "nbp_v_fine": "Pul jarimalari yo'q, qoidabuzarlik reytingga ta'sir qiladi",
+  "nbp_v_gear": "Termosumka va kurtka beriladi, garov 2 000 ₽",
   "nbp_v_med": "Birinchi slotgacha kerak",
-  "nbp_v_mode": "Slotlar 2 soatdan, buyurtmalar avtomatik tayinlanadi",
+  "nbp_v_mode": "2 soatdan slotlar, buyurtmalarni servis beradi",
   "nbp_v_out": "Haftada bir marta kartaga",
-  "nbp_v_pay": "Slot soati uchun stavka va buyurtma uchun qo'shimcha to'lov",
+  "nbp_v_pay": "Soatlik stavka va buyurtma uchun qo'shimcha to'lov",
   "nbp_v_zone": "Darkstor",
   "nbp_via_f1": "O'zini o'zi band qilgan",
   "nbp_via_f2": "Hamkor",
@@ -390,5 +390,6 @@
   "unit_h": "soat",
   "unit_k": "k",
   "stat_unit_hour": "Oylar bo'yicha soatlik daromad, ₽",
-  "months_short": "apr,may,iyun,iyul,avg,sen"
+  "months_short": "apr,may,iyun,iyul,avg,sen",
+  "nbp_src": "kuryerlar so'zidan"
 }
