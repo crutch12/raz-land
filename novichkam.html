@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <script src="./support.js"></script>
+  </head>
+  <body>
+    <x-dc>
+      <helmet data-dc-atomics>
+        <link rel="stylesheet" href="./raznos-v3.css" />
+        <link rel="stylesheet" href="./raznos-work.css" />
+        <link rel="stylesheet" href="./raznos-route-map.css" />
+        <link rel="stylesheet" href="./raznos-opportunities.css" />
+        <link rel="stylesheet" href="./raznos-live.css" />
+        <link rel="stylesheet" href="./raznos-links.css" />
+        <link rel="stylesheet" href="./raznos-final.css" />
+        <title>Разнос · Новичкам</title>
+        <link rel="icon" href="./app-icon.svg" type="image/svg+xml" />
+        <style>
+          .lp { background: var(--raznos-bg); color: var(--raznos-ink); }
+          .lp ::selection { background: var(--raznos-green-tint); color: var(--raznos-ink); }
+          .lp a:focus-visible, .lp button:focus-visible { outline: 2px solid var(--raznos-green-deep); outline-offset: 3px; }
+          .lp-section { max-width: 1120px; margin: 0 auto; padding: 72px 24px; box-sizing: border-box; }
+          .lp-narrow { max-width: 780px; }
+          .lp-band { background: var(--raznos-surface-2); }
+          .lp-dark { background: var(--raznos-dark); color: var(--raznos-on-dark); }
+          .lp-green { background: var(--raznos-green-tint); }
+          .lp-h2 { font: 700 32px/1.12 var(--raznos-font); letter-spacing: -0.02em; margin: 0 0 14px; text-wrap: balance; }
+          @media (max-width: 640px) { .lp-h2 { font-size: 26px; } }
+          .lp-dek { font: 400 18px/1.55 var(--raznos-font); color: var(--raznos-ink-2); max-width: 62ch; margin: 0; text-wrap: pretty; }
+          .lp-dark .lp-dek { color: var(--raznos-on-dark); opacity: 0.82; }
+          .lp-acc { color: var(--raznos-green-deep); }
+          .lp-acc-d { color: oklch(0.82 0.15 150); }
+          .lp-ul { margin: 20px 0 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 12px; }
+          .lp-ul li { position: relative; padding-left: 26px; font: 400 16px/1.45 var(--raznos-font); color: var(--raznos-ink); text-wrap: pretty; }
+          .lp-ul li::before { content: ""; position: absolute; left: 2px; top: 2px; width: 16px; height: 16px; border-radius: 50%; background: var(--raznos-green-tint); }
+          .lp-ul li::after { content: ""; position: absolute; left: 7px; top: 7px; width: 6px; height: 6px; border-radius: 50%; background: var(--raznos-green-deep); }
+          .lp-dark .lp-ul li { color: var(--raznos-on-dark); }
+          .lp-btn { min-height: 52px; padding: 0 26px; border-radius: 14px; display: inline-flex; align-items: center; justify-content: center; font: 600 16px var(--raznos-font); text-decoration: none; border: 1px solid transparent; cursor: pointer; box-sizing: border-box; transition: transform .12s ease, box-shadow .16s ease; }
+          .lp-btn:hover { transform: translateY(-1px); }
+          .lp-btn-accent { background: var(--raznos-green-deep); color: var(--raznos-on-dark); }
+          .lp-btn-accent:hover { color: var(--raznos-on-dark); box-shadow: 0 10px 26px oklch(0.42 0.11 150 / 0.35); }
+          .lp-btn-line { background: transparent; color: var(--raznos-ink); border-color: var(--raznos-line-strong); }
+          .lp-btn-line:hover { color: var(--raznos-ink); }
+          .lp-dark .lp-btn-line { color: var(--raznos-on-dark); border-color: rgba(255,255,255,0.3); }
+          .lp-dark .lp-btn-line:hover { color: var(--raznos-on-dark); }
+          .lp-proto-soon { background: rgba(255,255,255,0.06); color: var(--raznos-on-dark); border: 1px dashed rgba(255,255,255,0.28); opacity: 0.9; cursor: default; gap: 8px; }
+          .lp-proto-soon::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--raznos-green); flex: 0 0 auto; }
+          .lp-header { position: sticky; top: 0; z-index: 30; padding: calc(9px + env(safe-area-inset-top, 0px)) 16px 0; background: transparent; margin-bottom: -69px; }
+          .lp-header-in { max-width: 1120px; margin: 0 auto; padding: 10px 18px; display: flex; align-items: center; justify-content: space-between; gap: 16px; box-sizing: border-box; background: var(--raznos-surface); border-radius: 15px; box-shadow: 0 6px 22px oklch(0 0 0 / 0.09); }
+          @supports ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+            .lp-header-in { background: color-mix(in oklch, var(--raznos-surface) 88%, transparent); -webkit-backdrop-filter: blur(9px); backdrop-filter: blur(9px); }
+          }
+          @media (prefers-reduced-transparency: reduce) {
+            .lp-header-in { background: var(--raznos-surface); -webkit-backdrop-filter: none; backdrop-filter: none; }
+          }
+          .lp-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--raznos-ink); }
+          .lp-logo img { width: 30px; height: 30px; display: block; }
+          .lp-logo-word { font: 700 19px var(--raznos-font); letter-spacing: -0.01em; }
+          .lp-nav { display: flex; align-items: center; gap: 22px; }
+          .lp-nav a { font: 600 15px var(--raznos-font); color: var(--raznos-ink-2); text-decoration: none; }
+          .lp-nav a:hover { color: var(--raznos-ink); }
+          @media (max-width: 620px) { .lp-nav { display: none; } }
+          .lp-hero-in { max-width: 1120px; margin: 0 auto; padding: 100px 24px 80px; display: grid; grid-template-columns: 1.05fr 0.95fr; gap: 48px; align-items: center; box-sizing: border-box; }
+          @media (max-width: 900px) { .lp-hero-in { grid-template-columns: 1fr; gap: 36px; } }
+          .lp-h1 { font: 700 52px/1.04 var(--raznos-font); letter-spacing: -0.03em; margin: 0 0 20px; text-wrap: balance; }
+          @media (max-width: 640px) { .lp-h1 { font-size: 36px; } }
+          .lp-hero-lead { font: 400 20px/1.5 var(--raznos-font); opacity: 0.85; max-width: 46ch; margin: 0 0 30px; text-wrap: pretty; }
+          .lp-cta-row { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; }
+          .lp-hero-badge { display: inline-flex; align-items: center; gap: 8px; padding: 7px 14px; border-radius: 999px; background: rgba(255,255,255,0.1); font: 600 13px var(--raznos-font); margin: 0 0 22px; }
+          .lp-hero-badge span { width: 8px; height: 8px; border-radius: 50%; background: oklch(0.82 0.15 150); }
+          @media (prefers-reduced-motion: no-preference) { .lp-hero-copy { animation: lpUp .7s cubic-bezier(.2,.7,.2,1) both; } }
+          @keyframes lpUp { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: none; } }
+          .lp-hero-frame { background: var(--raznos-surface); border-radius: 24px; padding: 14px; box-shadow: 0 30px 70px rgba(0,0,0,0.34); }
+          .lp-card, .lp .raznos-card, .lp-ov-tile { transition: transform .18s ease, box-shadow .18s ease; }
+          .lp-card:hover, .lp .raznos-card:hover, .lp-ov-tile:hover { transform: translateY(-2px); box-shadow: 0 14px 34px rgba(20,25,40,0.1); }
+          .lp .lp-card .raznos-card:hover, .lp .lp-card .raznos-card, .lp .lp-card .raznos-order-link:hover, .lp .lp-card .raznos-order-link { transform: none !important; box-shadow: none !important; }
+          .lp-feature { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; }
+          @media (max-width: 900px) { .lp-feature { grid-template-columns: 1fr; gap: 28px; } .lp-feature-media { order: 2; } }
+          .lp-two { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+          @media (max-width: 760px) { .lp-two { grid-template-columns: 1fr; } }
+          .lp-statement { max-width: 900px; margin: 0 auto; text-align: center; font: 700 30px/1.4 var(--raznos-font); letter-spacing: -0.01em; color: var(--raznos-ink); text-wrap: balance; }
+          @media (max-width: 640px) { .lp-statement { font-size: 23px; } }
+          .lp-statement b { color: var(--raznos-green-deep); font-weight: 700; }
+          .lp-queue { display: flex; flex-direction: column; gap: 8px; }
+          .lp-queue-row { display: flex; align-items: center; gap: 12px; padding: 12px 14px; border-radius: 12px; background: rgba(255,255,255,0.06); }
+          .lp-queue-row .g { flex: 1; min-width: 0; }
+          .lp-bars { display: flex; align-items: flex-end; gap: 8px; height: 168px; margin-top: 8px; }
+          .lp-bcol { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 5px; height: 100%; justify-content: flex-end; }
+          .lp-bval { font: 600 11px var(--raznos-mono); color: var(--raznos-ink-2); }
+          .lp-btrack { width: 100%; flex: 1; min-height: 0; display: flex; align-items: flex-end; position: relative; }
+          .lp-bars-solid .lp-bfill, .lp-bars-solid .lp-bfill.is-peak { background: oklch(0.85 0.07 150); }
+          .lp-bavg { position: absolute; left: -4px; right: -4px; height: 3px; border-radius: 2px; background: var(--raznos-ink); box-shadow: 0 0 0 1.5px var(--raznos-surface); z-index: 3; }
+          .lp-bavg-key { width: 16px; height: 3px; border-radius: 2px; background: var(--raznos-ink); display: inline-block; flex: none; }
+          .lp-bfill { width: 100%; border-radius: 7px 7px 0 0; background: var(--raznos-green-tint); }
+          .lp-bfill.is-peak { background: var(--raznos-green-deep); }
+          .lp-blabel { font: 600 12px var(--raznos-mono); color: var(--raznos-ink-3); }
+          .lp-hlegend { display: flex; align-items: center; gap: 16px; margin-top: 10px; font: 500 13px var(--raznos-font); color: var(--raznos-ink-2); }
+          .lp-hleg-sw { width: 12px; height: 12px; border-radius: 4px; display: inline-block; margin-right: 6px; vertical-align: -1px; }
+          .lp-slot { display: flex; align-items: center; gap: 12px; padding: 12px 14px; border-radius: 12px; background: var(--raznos-surface-2); }
+          .lp-slot.is-peak { background: var(--raznos-green-tint); }
+          .lp-slot.is-break { background: transparent; border: 1px dashed var(--raznos-line-strong); color: var(--raznos-ink-3); }
+          .lp-slot-time { font: 700 13px var(--raznos-mono); color: var(--raznos-ink-3); width: 52px; flex: none; }
+          .lp-slot-name { flex: 1; font: 600 15px var(--raznos-font); }
+          .lp-slot-end { display: flex; flex-direction: column; align-items: flex-end; gap: 3px; flex: none; }
+          .lp-slot-mark { font-size: 10px; }
+          .lp-act-dot { flex: 0 0 auto; width: 22px; height: 22px; border-radius: 50%; background: var(--raznos-surface); color: var(--raznos-ink-2); font: 700 12px/22px var(--raznos-font); text-align: center; }
+          .lp-act-dot.is-done { background: var(--raznos-green-deep); color: var(--raznos-on-dark); }
+          .lp-ov-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; max-width: 1120px; margin: 28px auto 0; box-sizing: border-box; padding: 0 24px; }
+          @media (max-width: 900px) { .lp-ov-grid { grid-template-columns: 1fr 1fr; } }
+          @media (max-width: 560px) { .lp-ov-grid { grid-template-columns: 1fr; } }
+          .lp-ov-tile { display: flex; gap: 12px; padding: 18px; border-radius: 16px; background: var(--raznos-surface); border: 1px solid var(--raznos-line); }
+          .lp-ov-num { flex: 0 0 auto; width: 26px; height: 26px; border-radius: 8px; background: var(--raznos-green-tint); color: var(--raznos-green-deep); font: 700 14px/26px var(--raznos-font); text-align: center; }
+          .lp-ov-t { font: 700 17px var(--raznos-font); margin: 0 0 4px; color: var(--raznos-ink); }
+          .lp-ov-d { font: 400 14px/1.5 var(--raznos-font); margin: 0; color: var(--raznos-ink-2); }
+          .lp-fine { margin: 18px 0 0; font: 400 13px/1.5 var(--raznos-font); color: var(--raznos-on-dark); opacity: 0.6; text-align: center; }
+          .lp-final-proof { margin: 4px 0 8px; font: 600 15px var(--raznos-font); color: var(--raznos-on-dark); opacity: 0.85; text-align: center; }
+          .lp-sched-compare { max-width: 760px; margin: 24px auto 0; display: flex; flex-direction: column; gap: 12px; }
+          @keyframes lpFadeUp { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
+          .lp-motion .lp-reveal > * { opacity: 0; }
+          .lp-motion .lp-reveal.lp-anim > * { animation: lpFadeUp .5s ease both; }
+          .lp-motion .lp-reveal.lp-anim > *:nth-child(2) { animation-delay: .08s; }
+          .lp-motion .lp-reveal.lp-anim > *:nth-child(3) { animation-delay: .16s; }
+          .lp-motion .lp-reveal.lp-anim > *:nth-child(4) { animation-delay: .24s; }
+          .lp-motion .lp-reveal.lp-anim > *:nth-child(5) { animation-delay: .32s; }
+          .lp-motion .lp-reveal.lp-anim > *:nth-child(6) { animation-delay: .40s; }
+          .lp-motion .lp-chart-anim .rgb-fill { transform: scaleY(0); transform-origin: bottom center; }
+          .lp-motion .lp-chart-anim.lp-anim .rgb-fill { transform: scaleY(1); transition: transform .7s cubic-bezier(.2, .7, .2, 1); }
+          .lp-svc-bar { display: flex; flex-direction: column; gap: 6px; }
+          .lp-svc-bar-head { display: flex; align-items: center; justify-content: space-between; gap: 8px; font: 600 15px var(--raznos-font); }
+          .lp-svc-track { height: 8px; border-radius: 999px; background: var(--raznos-surface-2); overflow: hidden; }
+          .lp-svc-fill { height: 100%; border-radius: 999px; }
+          .lp-motion .lp-svc-anim .lp-svc-fill { transform: scaleX(0); transform-origin: left center; }
+          .lp-motion .lp-svc-anim.lp-anim .lp-svc-fill { transform: scaleX(1); transition: transform .8s cubic-bezier(.2, .7, .2, 1); }
+          .lp-week-card { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+          .lp-week-cell { display: flex; flex-direction: column; gap: 4px; }
+          .lp-week-val { font: 700 24px var(--raznos-font); letter-spacing: -0.02em; }
+          .lp-week-lab { font: 400 13px var(--raznos-font); color: var(--raznos-ink-2); }
+          .lp-week-delta { display: inline-flex; align-items: center; gap: 4px; font: 600 13px var(--raznos-font); }
+          .lp-week-delta.is-up { color: var(--raznos-green-deep); }
+          .lp-week-delta.is-down { color: var(--raznos-danger, #c8372d); }
+          .lp-week-delta.is-flat { color: var(--raznos-ink-3); }
+          .lp-dark, .lp-band, .lp-green, .lp-section { scroll-margin-top: 84px; }
+          html { scroll-behavior: smooth; }
+          @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+          .lp .lp-card { border-color: transparent; box-shadow: 0 6px 22px oklch(0 0 0 / 0.06); }
+          .lp-ov-tile { border-color: transparent; box-shadow: 0 6px 22px oklch(0 0 0 / 0.06); }
+          .lp .raznos-card:not(.lp-card):not(.lp-hero-widget) { box-shadow: 0 6px 22px oklch(0 0 0 / 0.06); }
+          .lp .raznos-breakdown-row { border-bottom: 1px solid var(--raznos-line); }
+          .lp .raznos-breakdown-row:last-child { border-bottom: 0; }
+          .lp .raznos-breakdown-row.lp-total-row { border-top: 2px solid var(--raznos-ink-3); border-bottom: 0; padding-top: 12px; margin-top: 4px; font-weight: 700; }
+          .lp .raznos-breakdown-row:has(+ .lp-total-row) { border-bottom: 0; }
+          .lp-statband-in { display: flex; justify-content: center; align-items: stretch; flex-wrap: wrap; margin-top: 26px; }
+          .lp-stat { display: flex; flex-direction: column; align-items: center; gap: 4px; padding: 4px 44px; }
+          .lp-stat + .lp-stat { border-left: 1px solid var(--raznos-line); }
+          .lp-stat-num { font: 800 44px var(--raznos-font); letter-spacing: -0.02em; color: var(--raznos-ink); }
+          .lp-stat-lab { font: 400 15px var(--raznos-font); color: var(--raznos-ink-2); }
+          @media (max-width: 640px) { .lp-stat { padding: 4px 24px; } }
+          .lp-stat-showcase { display: grid; grid-template-columns: 1.5fr 1fr; gap: 16px; margin-top: 28px; align-items: start; }
+          @media (max-width: 900px) { .lp-stat-showcase { grid-template-columns: 1fr; } }
+          .lp-stat-metrics { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 16px; }
+          .lp-timebar { display: flex; height: 14px; border-radius: 999px; overflow: hidden; gap: 2px; margin: 10px 0; }
+          .lp-timeseg { height: 100%; }
+          .lp-timelegend { display: flex; flex-wrap: wrap; gap: 8px 18px; }
+          .lp-timelegend > span { display: inline-flex; align-items: center; gap: 6px; font: 500 13px var(--raznos-font); color: var(--raznos-ink-2); }
+          .lp-timedot { width: 10px; height: 10px; border-radius: 3px; display: inline-block; flex: none; }
+          @media (max-width: 900px) { .lp-stat-metrics { grid-template-columns: 1fr 1fr; } }
+          .lp-stat-points { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 20px; }
+          @media (max-width: 900px) { .lp-stat-points { grid-template-columns: 1fr; } }
+          .lp-stat-point { position: relative; padding-left: 18px; font: 400 15px/1.5 var(--raznos-font); color: var(--raznos-ink-2); }
+          .lp-stat-point::before { content: ""; position: absolute; left: 0; top: 8px; width: 7px; height: 7px; border-radius: 50%; background: var(--raznos-green); }
+          .lp-hist-list { display: flex; flex-direction: column; gap: 12px; max-width: 720px; margin: 24px auto 0; }
+          .lp-week-recap { display: flex; align-items: center; gap: 10px; width: 100%; padding: 6px 0 2px; border: 0; background: transparent; cursor: pointer; font: 600 15px var(--raznos-font); color: var(--raznos-green-deep); text-decoration: none; }
+          .lp-week-recap .lp-week-recap-lab { flex: 1; text-align: left; }
+          .lp-week-recap .raznos-row-chevron { color: var(--raznos-ink-3); }
+          .lp-hero-sum { margin: 2px 0 0; font: 400 13px/1.45 var(--raznos-font); color: var(--raznos-ink-2); }
+          .lp-act-est { font: 700 14px var(--raznos-font); color: var(--raznos-green-deep); }
+          .lp-svc-pick { display: flex; flex-direction: column; gap: 8px; margin-top: 6px; }
+          .lp-svc-pick-row { display: flex; align-items: center; gap: 10px; padding: 10px 12px; border-radius: 12px; background: var(--raznos-surface-2); font: 600 15px var(--raznos-font); }
+          .lp-svc-pick-row .lp-svc-pick-pill { margin-left: auto; }
+          .lp-wr-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 28px; align-items: start; }
+          .lp-wr-col { display: flex; flex-direction: column; gap: 16px; }
+          @media (max-width: 900px) { .lp-wr-grid { grid-template-columns: 1fr; } }
+          .lp-wr-big { font: 800 34px var(--raznos-font); letter-spacing: -0.02em; color: var(--raznos-ink); }
+          .lp-wr-days { display: flex; justify-content: space-between; gap: 6px; margin-top: 6px; }
+          .lp-wr-day { display: flex; flex-direction: column; align-items: center; gap: 6px; }
+          .lp-wr-ring { width: 32px; height: 32px; border-radius: 50%; background: conic-gradient(var(--raznos-green-deep) var(--p, 0%), var(--raznos-line) 0); position: relative; }
+          .lp-wr-ring::after { content: ""; position: absolute; inset: 5px; border-radius: 50%; background: var(--raznos-surface); }
+          .lp-wr-daylab { font: 600 12px var(--raznos-font); color: var(--raznos-ink-2); }
+          @property --p { syntax: "<percentage>"; inherits: false; initial-value: 0%; }
+          .lp-wr-ring { --p: var(--pt, 0%); }
+          .lp-motion .lp-ring-anim .lp-wr-ring { --p: 0%; }
+          .lp-motion .lp-ring-anim.lp-anim .lp-wr-ring { --p: var(--pt, 0%); transition: --p .9s cubic-bezier(.2, .7, .2, 1); }
+          .lp-motion .lp-ring-anim.lp-anim .lp-wr-day:nth-child(2) .lp-wr-ring { transition-delay: .05s; }
+          .lp-motion .lp-ring-anim.lp-anim .lp-wr-day:nth-child(3) .lp-wr-ring { transition-delay: .1s; }
+          .lp-motion .lp-ring-anim.lp-anim .lp-wr-day:nth-child(4) .lp-wr-ring { transition-delay: .15s; }
+          .lp-motion .lp-ring-anim.lp-anim .lp-wr-day:nth-child(5) .lp-wr-ring { transition-delay: .2s; }
+          .lp-motion .lp-ring-anim.lp-anim .lp-wr-day:nth-child(6) .lp-wr-ring { transition-delay: .25s; }
+          .lp-motion .lp-ring-anim.lp-anim .lp-wr-day:nth-child(7) .lp-wr-ring { transition-delay: .3s; }
+          .lp-merge-icons { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+          .lp-merge-more { font: 600 14px var(--raznos-font); color: var(--raznos-ink-2); padding-left: 4px; }
+          .lp-cities-big { font: 800 56px/1 var(--raznos-font); color: var(--raznos-green-deep); letter-spacing: -1px; }
+          .lp-city-chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 4px; }
+          .lp-city-chip { padding: 6px 12px; border-radius: 999px; background: var(--raznos-surface-2); border: 1px solid var(--raznos-line); font: 500 14px var(--raznos-font); color: var(--raznos-ink-2); }
+          .lp-city-chip-more { background: transparent; border-style: dashed; color: var(--raznos-ink-3); }
+          .raznos-reaction-glabel { color: var(--raznos-ink-3); align-self: center; }
+          .lp-cmp-rate { display: flex; flex-direction: column; gap: 2px; margin: 8px 0 8px; }
+          .lp-lead-me { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 14px 16px; border-radius: 16px; background: var(--raznos-dark); color: var(--raznos-on-dark); }
+          .lp-lead-me-left { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+          .lp-lead-me-place { font: 800 20px var(--raznos-font); letter-spacing: -0.01em; }
+          .lp-lead-me-sub { font: 500 13px var(--raznos-font); color: color-mix(in oklab, var(--raznos-on-dark) 72%, transparent); }
+          .lp-lead-me-end { display: flex; flex-direction: column; align-items: flex-end; gap: 2px; }
+          .lp-lead-me-val { font: 800 20px var(--raznos-mono); font-variant-numeric: tabular-nums; white-space: nowrap; }
+          .lp-lead-me-metric { font: 500 12px var(--raznos-font); color: color-mix(in oklab, var(--raznos-on-dark) 70%, transparent); }
+          .lp-lead-list { display: flex; flex-direction: column; gap: 6px; }
+          .lp-lead-row { display: grid; grid-template-columns: 24px 36px 1fr auto; align-items: center; gap: 12px; padding: 10px 12px; border-radius: 12px; background: var(--raznos-surface); border: 1px solid var(--raznos-line); }
+          .lp-lead-rank { font: 700 14px var(--raznos-mono); color: var(--raznos-ink-2); text-align: center; }
+          .lp-lead-face { width: 36px; height: 36px; border-radius: 50%; background: var(--raznos-surface-2); border: 1px solid var(--raznos-line); display: flex; align-items: center; justify-content: center; font: 700 15px var(--raznos-font); color: var(--raznos-ink-3); }
+          .lp-lead-namecol { display: flex; flex-direction: column; gap: 1px; min-width: 0; }
+          .lp-lead-name { font: 600 15px var(--raznos-font); color: var(--raznos-ink); }
+          .lp-lead-sub { font: 500 12px var(--raznos-font); color: var(--raznos-ink-3); }
+          .lp-lead-row.is-me { background: var(--raznos-green-tint); border-color: transparent; }
+          .lp-lead-near { font-weight: 600; color: var(--raznos-ink-2); margin-bottom: -4px; }
+          .lp-lead-gap { font-weight: 600; color: var(--raznos-green-deep); }
+          .lp-goal { display: flex; flex-direction: column; gap: 6px; }
+          .lp-goal-track { position: relative; height: 8px; margin-right: 8px; border-radius: 999px; background: var(--raznos-surface-2); }
+          .lp-goal-fill { position: absolute; left: 0; top: 0; bottom: 0; border-radius: 999px; background: var(--raznos-green-deep); }
+          .lp-goal-plan { position: absolute; top: 0; bottom: 0; border-radius: 0 999px 999px 0; background: repeating-linear-gradient(135deg, var(--raznos-green-tint) 0 4px, transparent 4px 8px); box-shadow: inset 0 0 0 1px var(--raznos-green-tint); }
+          .lp-goal-hex { position: absolute; right: -8px; top: 50%; width: 16px; height: 18px; transform: translateY(-50%); }
+          .lp-plan-goal { padding-bottom: 14px; margin-bottom: 14px; border-bottom: 1px solid var(--raznos-line); }
+          .lp-plan-goal-t { font: 700 15px var(--raznos-font); }
+          .lp-slot-hint { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-top: -4px; padding: 8px 14px; border-radius: 12px; border: 1px dashed var(--raznos-line-strong); font: 600 13px var(--raznos-font); color: var(--raznos-green-deep); }
+          .lp-zone-map { position: relative; width: 100%; aspect-ratio: 360 / 240; border-radius: 14px; overflow: hidden; border: 1px solid var(--raznos-line); }
+          .lp-zone-map .rcm { margin-top: -16.7%; }
+          .lp-zone-list { display: flex; flex-direction: column; }
+          .lp-zone-row { display: grid; grid-template-columns: 20px 1fr auto; gap: 10px; align-items: center; padding: 9px 0; border-bottom: 1px solid var(--raznos-line); font: 600 15px var(--raznos-font); }
+          .lp-zone-row:last-child { border-bottom: 0; }
+          .lp-zone-rank { font: 700 13px var(--raznos-mono); color: var(--raznos-ink-3); }
+          .lp .raznos-breakdown-row .raznos-num { white-space: nowrap; }
+          .lp-tax { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-top: 14px; padding: 12px 14px; border-radius: 12px; background: var(--raznos-surface-2); }
+          .lp-tax-t { font: 600 15px var(--raznos-font); }
+          .lp-tax-v { font: 800 20px var(--raznos-mono); font-variant-numeric: tabular-nums; white-space: nowrap; }
+          .lp-svc.lp-svc-soon { color: var(--raznos-ink-3); background: var(--raznos-surface-2); }
+          .lp-svc-soon svg, .lp-svc-soon img { filter: grayscale(1); opacity: .55; }
+          .lp-svc-soon-t { margin: 20px 0 0; font: 600 14px var(--raznos-font); color: var(--raznos-ink-3); }
+          .lp-svc-grid.lp-svc-grid-soon { margin-top: 10px; }
+          .lp-svc { min-width: 0; }
+          @media (max-width: 480px) { .lp .lp-svc { padding: 12px; gap: 8px; font-size: 14px; } }
+          .lp-cmap { position: relative; height: 240px; border-radius: 14px; overflow: hidden; border: 1px solid var(--raznos-line); }
+          .lp-nb-start { display: flex; flex-direction: column; padding-top: 12px; border-top: 1px solid var(--raznos-line); }
+          .lp-wr-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 28px; align-items: start; }
+          @media (max-width: 900px) { .lp-wr-pair { grid-template-columns: 1fr; } }
+          .lp-nb-teaser { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-top: 24px; padding: 16px 18px; border-radius: 16px; background: var(--raznos-green-tint); color: var(--raznos-ink); text-decoration: none; }
+          .lp-lead-prof { margin: 14px 0 0; color: var(--raznos-ink-2); }
+          .lp-conn-cities { margin: 18px 0 0; color: var(--raznos-ink-2); }
+          .lp-nb-top { padding-bottom: 0; }
+          .lp-nb-h1 { margin-top: 18px; }
+          /* навигация по разделам: одна полоса на стыке шапки и первого блока, как вкладки гайда в прототипе */
+          .lp-nb-tabs { position: relative; z-index: 2; display: grid; grid-template-columns: repeat(4, 1fr); margin: 28px 0 -44px; padding: 6px; border-radius: 18px; background: var(--raznos-surface); box-shadow: 0 12px 32px oklch(0.2 0.02 250 / 0.12); }
+          .lp-nb-tab { position: relative; display: flex; align-items: center; gap: 12px; padding: 12px 14px 12px 16px; border-radius: 12px; color: var(--raznos-ink); text-decoration: none; cursor: pointer; transition: background .2s ease; }
+          .lp-nb-tab-txt { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 3px; }
+          .lp-nb-tab-ic { flex: none; width: 30px; height: 30px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; background: var(--raznos-green-tint); color: var(--raznos-green-deep); transition: background .2s ease, color .2s ease, transform .2s cubic-bezier(.16, 1, .3, 1); }
+          .lp-nb-tab:hover .lp-nb-tab-ic, .lp-nb-tab:focus-visible .lp-nb-tab-ic { background: var(--raznos-green-deep); color: var(--raznos-on-dark); transform: translateY(2px); }
+          .lp-nb-tab + .lp-nb-tab::before { content: ""; position: absolute; left: 0; top: 14px; bottom: 14px; width: 1px; background: var(--raznos-line); }
+          .lp-nb-tab:hover { background: var(--raznos-surface-2); }
+          .lp-nb-tab:hover::before, .lp-nb-tab:hover + .lp-nb-tab::before { opacity: 0; }
+          .lp-nb-tab-t { font: 700 16px var(--raznos-font); }
+          .lp-nb-tab-d { font: 400 13px/1.35 var(--raznos-font); color: var(--raznos-ink-2); }
+          .lp-nb-tab:focus-visible { outline: 2px solid var(--raznos-green); outline-offset: -2px; }
+          #nb-new > .lp-section { padding-top: 116px; }
+          @media (max-width: 760px) {
+            .lp-nb-tabs { grid-template-columns: 1fr 1fr; gap: 6px; }
+            .lp-nb-tab { padding: 10px 10px 10px 14px; background: var(--raznos-surface-2); }
+            .lp-nb-tab + .lp-nb-tab::before { display: none; }
+            .lp-nb-tab-d { display: none; }
+            .lp-nb-tab-t { font-size: 15px; }
+            .lp-nb-tab-ic { width: 28px; height: 28px; }
+          }
+          .lp-nb-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 28px; align-items: start; }
+          @media (max-width: 900px) { .lp-nb-cards { grid-template-columns: 1fr; } }
+          .lp-nb-chips { display: flex; flex-wrap: wrap; gap: 8px; }
+          .lp-nb-chip { padding: 6px 12px; border-radius: 999px; border: 1px solid var(--raznos-line); font: 600 13px var(--raznos-font); color: var(--raznos-ink-2); }
+          .lp-nb-chip.is-on { background: var(--raznos-dark); border-color: var(--raznos-dark); color: var(--raznos-on-dark); }
+          .lp-nb-fit { display: flex; flex-direction: column; gap: 6px; padding-top: 12px; border-top: 1px solid var(--raznos-line); }
+          .lp-nb-term { display: flex; flex-direction: column; gap: 2px; padding: 8px 0; border-top: 1px solid var(--raznos-line); }
+          .lp-nb-term-l { font: 600 14px var(--raznos-font); color: var(--raznos-ink); }
+          .lp-nb-group { display: flex; flex-direction: column; }
+          .lp-nb-group-t { font: 700 12px var(--raznos-font); letter-spacing: .04em; text-transform: uppercase; color: var(--raznos-ink-3); padding-bottom: 4px; }
+          .lp-nb-back { font: 600 15px var(--raznos-font); color: var(--raznos-ink-2); text-decoration: none; }
+          .lp-week-val { white-space: nowrap; }
+          .lp-lead-val { font: 700 14px var(--raznos-mono); color: var(--raznos-ink); font-variant-numeric: tabular-nums; white-space: nowrap; }
+          .lp-steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 30px; }
+          @media (max-width: 720px) { .lp-steps { grid-template-columns: 1fr; } }
+          .lp-step { display: flex; flex-direction: column; gap: 10px; padding: 22px; }
+          .lp-step-num { width: 42px; height: 42px; border-radius: 12px; background: var(--raznos-green-tint); color: var(--raznos-green-deep); display: flex; align-items: center; justify-content: center; font: 700 19px var(--raznos-mono); }
+          .lp-step-t { font: 700 17px var(--raznos-font); margin: 0; }
+          .lp-step-head { display: flex; align-items: center; gap: 12px; }
+          .lp-step-head .lp-step-num { flex: none; }
+          .lp-svc-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 12px; margin-top: 28px; }
+          .lp-svc { display: flex; align-items: center; gap: 10px; padding: 14px 16px; border: 1px solid var(--raznos-line); border-radius: 14px; background: var(--raznos-surface); font: 600 15px var(--raznos-font); }
+          .lp-faq-item { border-bottom: 1px solid var(--raznos-line); padding: 0; }
+          .lp-faq-item:last-child { border-bottom: 0; }
+          .lp-faq-q { font: 600 17px var(--raznos-font); margin: 0; padding: 18px 0; cursor: pointer; list-style: none; display: flex; justify-content: space-between; align-items: center; gap: 16px; }
+          .lp-faq-q::-webkit-details-marker { display: none; }
+          .lp-faq-q::after { content: ""; flex: none; width: 9px; height: 9px; border-right: 2px solid var(--raznos-ink-3); border-bottom: 2px solid var(--raznos-ink-3); transform: rotate(45deg); transition: transform .2s ease; margin-right: 4px; }
+          .lp-faq-item[open] .lp-faq-q::after { transform: rotate(-135deg); }
+          .lp-faq-a { font: 400 16px/1.5 var(--raznos-font); color: var(--raznos-ink-2); margin: 0 0 18px; text-wrap: pretty; }
+          .lp-final { text-align: center; display: flex; flex-direction: column; align-items: center; gap: 22px; padding: 84px 24px; }
+          .lp-final h2 { font: 700 40px/1.1 var(--raznos-font); letter-spacing: -0.02em; margin: 0; text-wrap: balance; }
+          @media (max-width: 640px) { .lp-final h2 { font-size: 30px; } }
+          .lp-demo-tag { font: 500 13px var(--raznos-font); color: var(--raznos-ink-3); margin: 10px 0 0; }
+          .lp-dark .lp-demo-tag { color: var(--raznos-on-dark); opacity: 0.6; }
+          .lp-conv-chips { display: flex; flex-wrap: wrap; gap: 8px; }
+          .lp-conv-chip { display: inline-flex; align-items: center; gap: 7px; padding: 7px 12px 7px 8px; border-radius: 999px; background: var(--raznos-surface); border: 1px solid var(--raznos-line); font: 600 14px var(--raznos-font); }
+          .lp-prof-head { display: flex; align-items: center; gap: 14px; }
+          .lp-prof-services { display: flex; flex-direction: column; margin-top: 4px; }
+          .lp-prof-row { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 10px 0; border-bottom: 1px solid var(--raznos-line); }
+          .lp-prof-row:last-child { border-bottom: 0; }
+
+          .lp-nav-group { display:flex; align-items:center; gap:18px; }
+          .lp-lang { min-height:40px; padding:0 32px 0 12px; border-radius:10px; border:1px solid var(--raznos-line-strong); background-color:var(--raznos-surface); color:var(--raznos-ink); font:600 14px var(--raznos-font); cursor:pointer; -webkit-appearance:none; appearance:none; background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'><path d='M1 1l5 5 5-5' fill='none' stroke='%236b7280' stroke-width='1.6' stroke-linecap='round'/></svg>"); background-repeat:no-repeat; background-position:right 12px center; }
+          .lp-lang:hover { border-color:var(--raznos-ink-3); }
+          .lp-hero-widget { box-shadow:0 30px 70px rgba(0,0,0,0.34); }
+          .lp-hero-total { font:800 34px/1 var(--raznos-font); letter-spacing:-0.02em; }
+          .lp-dark .raznos-card { color:var(--raznos-ink); }
+          .lp-hero-badge { display:inline-block; max-width:100%; white-space:normal; }
+          .lp-hero-badge::before { content:""; display:inline-block; width:8px; height:8px; border-radius:50%; background:oklch(0.82 0.15 150); margin-right:8px; vertical-align:middle; }
+          .lp-hero-badge span { display:inline; width:auto; height:auto; background:none; border-radius:0; margin:0; }
+          .lp-stmt-icons { display:flex; justify-content:center; align-items:center; gap:12px; margin:0 0 22px; flex-wrap:wrap; }
+          .lp-cmp-cards { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin-top:24px; }
+          @media (max-width:760px) { .lp-cmp-cards { grid-template-columns:1fr; } }
+          .lp-cmp-card-head { display:flex; align-items:center; justify-content:space-between; gap:10px; margin-bottom:4px; }
+          .lp-cmp-card-name { display:flex; align-items:center; gap:10px; font:700 16px var(--raznos-font); }
+          .lp-faq-a a { color:var(--raznos-green-deep); text-decoration:underline; }
+          .lp-faq-a a:hover { color:var(--raznos-green-deep); }
+          @keyframes lpGrow { from { transform:scaleY(0.04); opacity:0.35; } to { transform:scaleY(1); opacity:1; } }
+          @media (prefers-reduced-motion: no-preference) {
+            .lp-bars.lp-armed .lp-bfill { transform-origin:bottom; transform:scaleY(0.04); opacity:0.35; }
+            .lp-bars.lp-armed.lp-anim .lp-bfill { animation:lpGrow .7s cubic-bezier(.2,.8,.2,1) forwards; }
+            .lp-bars.lp-armed.lp-anim .lp-bcol:nth-child(2) .lp-bfill { animation-delay:.07s; }
+            .lp-bars.lp-armed.lp-anim .lp-bcol:nth-child(3) .lp-bfill { animation-delay:.14s; }
+            .lp-bars.lp-armed.lp-anim .lp-bcol:nth-child(4) .lp-bfill { animation-delay:.21s; }
+            .lp-bars.lp-armed.lp-anim .lp-bcol:nth-child(5) .lp-bfill { animation-delay:.28s; }
+            .lp-bars.lp-armed.lp-anim .lp-bcol:nth-child(6) .lp-bfill { animation-delay:.35s; }
+            .lp-bars.lp-armed.lp-anim .lp-bcol:nth-child(7) .lp-bfill { animation-delay:.42s; }
+          }
+          .lp-dark { background-color:var(--raznos-dark); background-image:radial-gradient(rgba(255,255,255,0.05) 1px, transparent 1.5px); background-size:24px 24px; }
+          .lp-feed { overflow:hidden; }
+          .lp-neworder { overflow:hidden; }
+          .lp-ord-new { border-left:3px solid var(--raznos-red); }
+          .lp-new-badge { display:inline-flex; align-items:center; gap:5px; align-self:flex-start; margin-top:4px; padding:2px 8px; border-radius:999px; background:rgba(224,49,49,0.12); color:var(--raznos-red); font:600 11px var(--raznos-mono); }
+          .lp-new-dot { width:6px; height:6px; border-radius:50%; background:var(--raznos-red); }
+          @keyframes lpDrop { from { opacity:0; transform:translateY(-8px); } to { opacity:1; transform:none; } }
+          @keyframes lpExpand { 0% { max-height:0; opacity:0; transform:translateY(14px); } 100% { max-height:120px; opacity:1; transform:translateY(0); } }
+          @keyframes lpUrge { 0%,100% { opacity:1; box-shadow:0 0 0 0 rgba(224,49,49,0.5); } 50% { opacity:0.45; box-shadow:0 0 0 5px rgba(224,49,49,0); } }
+          @media (prefers-reduced-motion: no-preference) {
+            .lp-feed.lp-armed > .raznos-list-row { opacity:0; }
+            .lp-feed.lp-armed > .lp-neworder { max-height:0; opacity:0; }
+            .lp-feed.lp-armed.lp-anim > .raznos-list-row:nth-child(1) { animation:lpDrop .4s cubic-bezier(.2,.8,.2,1) forwards; }
+            .lp-feed.lp-armed.lp-anim > .raznos-list-row:nth-child(2) { animation:lpDrop .4s cubic-bezier(.2,.8,.2,1) .08s forwards; }
+            .lp-feed.lp-armed.lp-anim > .lp-neworder { animation:lpExpand .55s cubic-bezier(.2,.85,.2,1) .45s forwards; }
+            .lp-new-dot { animation:lpUrge 1s ease-in-out infinite; }
+          }
+          .lp-live { display:inline-flex; align-items:center; gap:8px; margin-top:8px; font:600 13px var(--raznos-font); color:var(--raznos-green-deep); }
+          .lp-live-dot { width:8px; height:8px; border-radius:50%; background:var(--raznos-green-deep); }
+          @keyframes lpBlink { 0%,100% { opacity:1; box-shadow:0 0 0 0 rgba(41,140,74,0.45); } 50% { opacity:0.55; box-shadow:0 0 0 6px rgba(41,140,74,0); } }
+          @media (prefers-reduced-motion: no-preference) { .lp-live-dot { animation:lpBlink 1.5s ease-in-out infinite; } }
+        </style>
+      </helmet>
+      <div class="lp">
+
+        <header class="lp-header" data-screen-label="Шапка">
+          <div class="lp-header-in">
+            <a class="lp-logo" href="{{ mainHref }}"><img src="./app-icon.svg" alt="Разнос" /><span class="lp-logo-word">Разнос</span></a>
+            <div class="lp-nav-group" style="display:flex;align-items:center;gap:18px"><select class="lp-lang" value="{{ lang }}" onChange="{{ onLang }}" aria-label="Язык"><option value="ru">Русский</option><option value="uz">Oʻzbekcha</option><option value="tg">Тоҷикӣ</option><option value="ky">Кыргызча</option><option value="hy">Հայերեն</option><option value="en">English</option></select></div>
+          </div>
+        </header>
+
+        <div class="lp-plain" id="top" data-screen-label="Новичкам">
+          <div class="lp-section lp-nb-top">
+            <a class="lp-nb-back" href="{{ mainHref }}">‹ {{ t.nb_back }}</a>
+            <h1 class="lp-h2 lp-nb-h1">{{ t.nb_h2_pre }} <span class="lp-acc">{{ t.nb_h2_acc }}</span></h1>
+            <p class="lp-dek">{{ t.nbp_dek }}</p>
+            <nav class="lp-nb-tabs" aria-label="{{ t.nbp_tabs }}"><a class="lp-nb-tab" href="#nb-new"><span class="lp-nb-tab-txt"><span class="lp-nb-tab-t">{{ t.nbp_tab1 }}</span><span class="lp-nb-tab-d">{{ t.nbp_tab1_d }}</span></span><span class="lp-nb-tab-ic" aria-hidden="true"><svg viewBox="0 0 16 16" width="14" height="14"><path d="M4 6l4 4 4-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></a><a class="lp-nb-tab" href="#nb-start"><span class="lp-nb-tab-txt"><span class="lp-nb-tab-t">{{ t.nbp_tab2 }}</span><span class="lp-nb-tab-d">{{ t.nbp_tab2_d }}</span></span><span class="lp-nb-tab-ic" aria-hidden="true"><svg viewBox="0 0 16 16" width="14" height="14"><path d="M4 6l4 4 4-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></a><a class="lp-nb-tab" href="#nb-sched"><span class="lp-nb-tab-txt"><span class="lp-nb-tab-t">{{ t.nbp_tab3 }}</span><span class="lp-nb-tab-d">{{ t.nbp_tab3_d }}</span></span><span class="lp-nb-tab-ic" aria-hidden="true"><svg viewBox="0 0 16 16" width="14" height="14"><path d="M4 6l4 4 4-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></a><a class="lp-nb-tab" href="#nb-terms"><span class="lp-nb-tab-txt"><span class="lp-nb-tab-t">{{ t.nbp_tab4 }}</span><span class="lp-nb-tab-d">{{ t.nbp_tab4_d }}</span></span><span class="lp-nb-tab-ic" aria-hidden="true"><svg viewBox="0 0 16 16" width="14" height="14"><path d="M4 6l4 4 4-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></a></nav>
+          </div>
+        </div>
+
+        <div class="lp-band" id="nb-new" data-screen-label="Новичкам и опытным">
+          <div class="lp-section">
+            <h2 class="lp-h2">{{ t.nbp_s1_h2 }}</h2>
+            <p class="lp-dek">{{ t.nbp_s1_dek }}</p>
+            <div class="lp-nb-cards">
+              <div class="raznos-card lp-card raznos-card-pad raznos-fx raznos-col raznos-gap12">
+                <div class="raznos-head-row"><span class="raznos-fx raznos-ac raznos-gap8 raznos-text-h3 raznos-head-title"><dc-import name="RaznosIcon" svc="vkusvill" size="sm"></dc-import>ВкусВилл</span><span class="raznos-text-tiny">41 {{ t.nbp_sample }}</span></div>
+                <div class="raznos-cohort-grid">
+                  <span class="raznos-cohort-grid-head"></span><span class="raznos-cohort-grid-head">{{ t.nb_new }}</span><span class="raznos-cohort-grid-head">{{ t.nb_old }}</span>
+                  <span class="raznos-text-small">{{ t.nb_r_hour }}</span><span class="raznos-cohort-cell">1 010 ₽</span><span class="raznos-cohort-cell raznos-cohort-cell-muted">1 240 ₽</span>
+                  <span class="raznos-text-small">{{ t.nb_r_wait }}</span><span class="raznos-cohort-cell">11 {{ t.nbp_min }}</span><span class="raznos-cohort-cell raznos-cohort-cell-muted">6 {{ t.nbp_min }}</span>
+                  <span class="raznos-text-small">{{ t.nb_r_stay }}</span><span class="raznos-cohort-cell">64%</span><span class="raznos-cohort-cell raznos-cohort-cell-muted">82%</span>
+                </div>
+                <p class="raznos-text-tiny">{{ t.nbp_hard }} {{ t.nbp_hard_vv }}</p>
+              </div>
+              <div class="raznos-card lp-card raznos-card-pad raznos-fx raznos-col raznos-gap12">
+                <div class="raznos-head-row"><span class="raznos-fx raznos-ac raznos-gap8 raznos-text-h3 raznos-head-title"><dc-import name="RaznosIcon" svc="samokat" size="sm"></dc-import>Самокат</span><span class="raznos-text-tiny">37 {{ t.nbp_sample }}</span></div>
+                <div class="raznos-cohort-grid">
+                  <span class="raznos-cohort-grid-head"></span><span class="raznos-cohort-grid-head">{{ t.nb_new }}</span><span class="raznos-cohort-grid-head">{{ t.nb_old }}</span>
+                  <span class="raznos-text-small">{{ t.nb_r_hour }}</span><span class="raznos-cohort-cell">980 ₽</span><span class="raznos-cohort-cell raznos-cohort-cell-muted">1 180 ₽</span>
+                  <span class="raznos-text-small">{{ t.nb_r_wait }}</span><span class="raznos-cohort-cell">9 {{ t.nbp_min }}</span><span class="raznos-cohort-cell raznos-cohort-cell-muted">8 {{ t.nbp_min }}</span>
+                  <span class="raznos-text-small">{{ t.nb_r_stay }}</span><span class="raznos-cohort-cell">58%</span><span class="raznos-cohort-cell raznos-cohort-cell-muted">76%</span>
+                </div>
+                <p class="raznos-text-tiny">{{ t.nbp_hard }} {{ t.nbp_hard_sm }}</p>
+              </div>
+              <div class="raznos-card lp-card raznos-card-pad raznos-fx raznos-col raznos-gap12">
+                <div class="raznos-head-row"><span class="raznos-fx raznos-ac raznos-gap8 raznos-text-h3 raznos-head-title"><dc-import name="RaznosIcon" svc="x5" size="sm"></dc-import>X5</span><span class="raznos-text-tiny">28 {{ t.nbp_sample }}</span></div>
+                <div class="raznos-cohort-grid">
+                  <span class="raznos-cohort-grid-head"></span><span class="raznos-cohort-grid-head">{{ t.nb_new }}</span><span class="raznos-cohort-grid-head">{{ t.nb_old }}</span>
+                  <span class="raznos-text-small">{{ t.nb_r_hour }}</span><span class="raznos-cohort-cell">950 ₽</span><span class="raznos-cohort-cell raznos-cohort-cell-muted">1 130 ₽</span>
+                  <span class="raznos-text-small">{{ t.nb_r_wait }}</span><span class="raznos-cohort-cell">12 {{ t.nbp_min }}</span><span class="raznos-cohort-cell raznos-cohort-cell-muted">9 {{ t.nbp_min }}</span>
+                  <span class="raznos-text-small">{{ t.nb_r_stay }}</span><span class="raznos-cohort-cell">55%</span><span class="raznos-cohort-cell raznos-cohort-cell-muted">74%</span>
+                </div>
+                <p class="raznos-text-tiny">{{ t.nbp_hard }} {{ t.nbp_hard_x5 }}</p>
+              </div>
+            </div>
+            <p class="lp-demo-tag">{{ t.nbp_s1_note }}</p>
+          </div>
+        </div>
+
+        <div class="lp-section" id="nb-start" data-screen-label="Старт">
+          <div class="lp-feature">
+            <div>
+              <h2 class="lp-h2">{{ t.nbp_s2_h2 }}</h2>
+              <p class="lp-dek">{{ t.nbp_s2_dek }}</p>
+            </div>
+            <div class="lp-feature-media">
+              <div class="raznos-fx raznos-col raznos-gap12">
+                <div class="raznos-card lp-card raznos-card-pad">
+                  <div class="raznos-head-row"><span class="raznos-fx raznos-ac raznos-gap8 raznos-text-h3 raznos-head-title"><dc-import name="RaznosIcon" svc="samokat" size="sm"></dc-import>{{ t.nb_start }}</span><span class="lp-tax-v">7 050 ₽</span></div>
+                  <div class="raznos-breakdown-row"><span>{{ t.nb_s1 }}</span><span class="raznos-num">2 000 ₽</span></div>
+                  <div class="raznos-breakdown-row"><span>{{ t.nb_s2 }}</span><span class="raznos-num">2 800 ₽</span></div>
+                  <div class="raznos-breakdown-row"><span>{{ t.nb_s3 }}</span><span class="raznos-num">1 800 ₽</span></div>
+                  <div class="raznos-breakdown-row"><span>{{ t.nb_s4 }}</span><span class="raznos-num">450 ₽</span></div>
+                  <p class="raznos-text-tiny">{{ t.nb_pay }}</p>
+                </div>
+                <div class="raznos-card lp-card raznos-card-pad raznos-fx raznos-col raznos-gap8">
+                  <span class="raznos-text-h3">{{ t.nbp_via_title }}</span>
+                  <span class="raznos-text-small">{{ t.nbp_via_verdict }}</span>
+                  <div class="lp-nb-chips"><span class="lp-nb-chip">{{ t.nbp_via_f1 }}</span><span class="lp-nb-chip">{{ t.nbp_via_f2 }}</span></div>
+                  <div class="lp-nb-term"><span class="lp-nb-term-l">{{ t.nbp_via_l1 }}</span><span class="raznos-text-small">{{ t.nbp_via_v1 }}</span></div>
+                  <div class="lp-nb-term"><span class="lp-nb-term-l">{{ t.nbp_via_l2 }}</span><span class="raznos-text-small">{{ t.nbp_via_v2 }}</span></div>
+                  <div class="lp-nb-term"><span class="lp-nb-term-l">{{ t.nbp_via_l3 }}</span><span class="raznos-text-small">{{ t.nbp_via_v3 }}</span></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="lp-band" id="nb-sched" data-screen-label="График">
+          <div class="lp-section">
+            <div class="lp-feature">
+              <div class="lp-feature-media">
+                <div class="raznos-card lp-card raznos-card-pad raznos-fx raznos-col raznos-gap12">
+                  <span class="raznos-text-h3">{{ t.nbp_s3_card }}</span>
+                  <div class="lp-nb-chips"><span class="lp-nb-chip is-on">{{ t.nbp_d1 }}</span><span class="lp-nb-chip">{{ t.nbp_d2 }}</span></div>
+                  <div class="lp-nb-chips"><span class="lp-nb-chip">{{ t.nbp_w1 }}</span><span class="lp-nb-chip">{{ t.nbp_w2 }}</span><span class="lp-nb-chip is-on">{{ t.nbp_w3 }}</span></div>
+                  <p class="raznos-text-small">{{ t.nbp_s3_sum }}</p>
+                <div class="lp-nb-fit">
+                  <div class="raznos-head-row"><span class="raznos-fx raznos-ac raznos-gap8 raznos-text-h3 raznos-head-title"><dc-import name="RaznosIcon" svc="yandex-eda" size="sm"></dc-import>Яндекс Еда</span><span class="raznos-status-pill raznos-pill-ok lp-slot-mark">{{ t.nbp_fit_p1 }}</span></div>
+                  <span class="raznos-text-small">{{ t.nbp_fit_n1 }}</span>
+                  <div class="raznos-breakdown-row"><span>{{ t.nbp_fit_range }}</span><span class="raznos-num">1 000–1 300 ₽/ч</span></div>
+                </div>
+                <div class="lp-nb-fit">
+                  <div class="raznos-head-row"><span class="raznos-fx raznos-ac raznos-gap8 raznos-text-h3 raznos-head-title"><dc-import name="RaznosIcon" svc="vkusvill" size="sm"></dc-import>ВкусВилл</span><span class="raznos-status-pill raznos-pill-warn lp-slot-mark">{{ t.nbp_fit_p2 }}</span></div>
+                  <span class="raznos-text-small">{{ t.nbp_fit_n2 }}</span>
+                  <div class="raznos-breakdown-row"><span>{{ t.nbp_fit_range }}</span><span class="raznos-num">1 000–1 250 ₽/ч</span></div>
+                </div>
+                <div class="lp-nb-fit">
+                  <div class="raznos-head-row"><span class="raznos-fx raznos-ac raznos-gap8 raznos-text-h3 raznos-head-title"><dc-import name="RaznosIcon" svc="samokat" size="sm"></dc-import>Самокат</span><span class="raznos-status-pill raznos-pill-warn lp-slot-mark">{{ t.nbp_fit_p3 }}</span></div>
+                  <span class="raznos-text-small">{{ t.nbp_fit_n3 }}</span>
+                  <div class="raznos-breakdown-row"><span>{{ t.nbp_fit_range }}</span><span class="raznos-num">1 000–1 300 ₽/ч</span></div>
+                </div>
+                  <p class="raznos-text-tiny">{{ t.nbp_fit_note }}</p>
+                </div>
+              </div>
+              <div>
+                <h2 class="lp-h2">{{ t.nbp_s3_h2 }}</h2>
+                <p class="lp-dek">{{ t.nbp_s3_dek }}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="lp-section" id="nb-terms" data-screen-label="Условия">
+          <div class="lp-feature">
+            <div>
+              <h2 class="lp-h2">{{ t.nbp_s4_h2 }}</h2>
+              <p class="lp-dek">{{ t.nbp_s4_dek }}</p>
+            </div>
+            <div class="lp-feature-media">
+              <div class="raznos-card lp-card raznos-card-pad raznos-fx raznos-col raznos-gap12">
+                <span class="raznos-fx raznos-ac raznos-gap8 raznos-text-h3"><dc-import name="RaznosIcon" svc="samokat" size="sm"></dc-import>Самокат</span>
+                <div class="lp-nb-group"><span class="lp-nb-group-t">{{ t.nbp_g1 }}</span><div class="lp-nb-term"><span class="lp-nb-term-l">{{ t.nbp_t_pay }}</span><span class="raznos-text-small">{{ t.nbp_v_pay }}</span></div><div class="lp-nb-term"><span class="lp-nb-term-l">{{ t.nbp_t_out }}</span><span class="raznos-text-small">{{ t.nbp_v_out }}</span></div><div class="lp-nb-term"><span class="lp-nb-term-l">{{ t.nbp_t_fine }}</span><span class="raznos-text-small">{{ t.nbp_v_fine }}</span></div></div>
+                <div class="lp-nb-group"><span class="lp-nb-group-t">{{ t.nbp_g2 }}</span><div class="lp-nb-term"><span class="lp-nb-term-l">{{ t.nbp_t_mode }}</span><span class="raznos-text-small">{{ t.nbp_v_mode }}</span></div><div class="lp-nb-term"><span class="lp-nb-term-l">{{ t.nbp_t_zone }}</span><span class="raznos-text-small">{{ t.nbp_v_zone }}</span></div><div class="lp-nb-term"><span class="lp-nb-term-l">{{ t.nbp_t_cancel }}</span><span class="raznos-text-small">{{ t.nbp_v_cancel }}</span></div></div>
+                <div class="lp-nb-group"><span class="lp-nb-group-t">{{ t.nbp_g3 }}</span><div class="lp-nb-term"><span class="lp-nb-term-l">{{ t.nbp_t_docs }}</span><span class="raznos-text-small">{{ t.nbp_v_docs }}</span></div><div class="lp-nb-term"><span class="lp-nb-term-l">{{ t.nbp_t_med }}</span><span class="raznos-text-small">{{ t.nbp_v_med }}</span></div><div class="lp-nb-term"><span class="lp-nb-term-l">{{ t.nbp_t_gear }}</span><span class="raznos-text-small">{{ t.nbp_v_gear }}</span></div></div>
+                <p class="raznos-text-tiny">{{ t.nbp_terms_note }}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="lp-dark" data-screen-label="Финальный CTA">
+          <div class="lp-final">
+            <h2>{{ t.final_h2 }}</h2>
+            <p class="lp-dek" style="text-align:center">{{ t.final_dek }}</p>
+            <p class="lp-final-proof">{{ t.final_proof }}</p>
+            <sc-if value="{{ showProto }}"><a class="lp-btn lp-btn-accent" href="{{ protoHref }}" target="_blank" rel="noopener">{{ t.final_cta }}</a></sc-if>
+            <sc-if value="{{ notProto }}"><span class="lp-btn lp-proto-soon">{{ t.final_soon }}</span></sc-if>
+            <a class="lp-btn lp-btn-line" href="https://t.me/raznos_app_bot" target="_blank" rel="noopener">{{ t.final_bot }}</a>
+            <p class="lp-fine">{{ t.data_note }}</p>
+          </div>
+        </div>
+
+      </div>
+    </x-dc>
+    <script type="text/x-dc" data-dc-script data-props='{}'>
+      class Component extends DCLogic {
+        componentDidMount() {
+          try {
+            try {
+              var qp = new URLSearchParams(window.location.search);
+              var readCookie = function (n) { var m = document.cookie.match('(?:^|; )' + n + '=([^;]*)'); return m ? decodeURIComponent(m[1]) : ''; };
+              var writeCookie = function (n, v) { document.cookie = n + '=' + encodeURIComponent(v) + '; path=/; max-age=31536000; SameSite=Lax'; };
+              var sv = qp.get('s');
+              if (sv) writeCookie('s', sv);
+              var pv = qp.get('p');
+              if (pv !== null) writeCookie('p', pv);
+              var prev = {}; try { prev = JSON.parse(readCookie('raz_visitor') || '{}'); } catch (e) { prev = {}; }
+              var now = new Date().toISOString();
+              var utm = {}; ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term'].forEach(function (k) { var v = qp.get(k); if (v) utm[k] = v; });
+              var tz = ''; try { tz = Intl.DateTimeFormat().resolvedOptions().timeZone || ''; } catch (e) {}
+              var prof = {
+                s: sv || prev.s || '',
+                p: (pv !== null) ? pv : (prev.p || ''),
+                firstSeen: prev.firstSeen || now,
+                lastSeen: now,
+                visits: (parseInt(prev.visits, 10) || 0) + 1,
+                referrer: prev.referrer || document.referrer || '',
+                utm: Object.keys(utm).length ? utm : (prev.utm || {}),
+                lang: navigator.language || '',
+                tz: tz,
+                ua: navigator.userAgent || '',
+                screen: screen.width + 'x' + screen.height,
+                platform: navigator.platform || ''
+              };
+              writeCookie('raz_visitor', JSON.stringify(prof));
+            } catch (e) {}
+            try {
+              var supported = ['ru', 'uz', 'tg', 'ky', 'hy', 'en'];
+              var near = { kk: 'ky', az: 'uz', tr: 'uz', fa: 'tg', prs: 'tg', uk: 'ru', be: 'ru' };
+              var pick = '';
+              var ql = String(qp.get('lang') || '').toLowerCase().split('-')[0];
+              var saved = ''; try { saved = localStorage.getItem('raz_lang') || ''; } catch (e) {}
+              if (ql && supported.indexOf(ql) !== -1) {
+                pick = ql;
+              } else if (saved && supported.indexOf(saved) !== -1) {
+                pick = saved;
+              } else {
+                var cand = (navigator.languages && navigator.languages.length) ? navigator.languages : [navigator.language || ''];
+                for (var li = 0; li < cand.length && !pick; li++) {
+                  var base = String(cand[li] || '').toLowerCase().split('-')[0];
+                  if (!base) continue;
+                  if (supported.indexOf(base) !== -1) pick = base;
+                  else if (near[base]) pick = near[base];
+                }
+              }
+              if (pick && pick !== 'ru') this.loadLang(pick);
+            } catch (e) {}
+            var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            var fmt = function (n) { return String(n).replace(/\B(?=(\d{3})+(?!\d))/g, '\u00a0'); };
+            var setFinal = function (el) { el.textContent = fmt(parseInt(el.getAttribute('data-to'), 10) || 0) + (el.getAttribute('data-suffix') || ''); };
+            if (reduce || !('IntersectionObserver' in window)) { document.querySelectorAll('.lp-count').forEach(setFinal); return; }
+            document.documentElement.classList.add('lp-motion');
+            var rObs = new IntersectionObserver(function (es) { es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('lp-anim'); rObs.unobserve(e.target); } }); }, { threshold: 0.2 });
+            document.querySelectorAll('.lp-reveal, .lp-chart-anim, .lp-svc-anim, .lp-ring-anim').forEach(function (el) { rObs.observe(el); });
+            var obs = new IntersectionObserver(function (es) { es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('lp-anim'); obs.unobserve(e.target); } }); }, { threshold: 0.35 });
+            document.querySelectorAll('.lp-bars').forEach(function (el) { obs.observe(el); });
+            var fobs = new IntersectionObserver(function (es) { es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('lp-anim'); fobs.unobserve(e.target); } }); }, { threshold: 0.6 });
+            document.querySelectorAll('.lp-feed').forEach(function (el) { fobs.observe(el); });
+            var cobs = new IntersectionObserver(function (es) { es.forEach(function (e) { if (!e.isIntersecting) return; var el = e.target; cobs.unobserve(el); var to = parseInt(el.getAttribute('data-to'), 10) || 0; var suf = el.getAttribute('data-suffix') || ''; var dur = 900, t0 = null; var step = function (ts) { if (!t0) t0 = ts; var p = Math.min((ts - t0) / dur, 1); var v = Math.round(to * (1 - Math.pow(1 - p, 3))); el.textContent = fmt(v) + suf; if (p < 1) requestAnimationFrame(step); }; requestAnimationFrame(step); }); }, { threshold: 0.6 });
+            document.querySelectorAll('.lp-count').forEach(function (el) { cobs.observe(el); });
+          } catch (e) {}
+        }
+        pickLang(lang) {
+          try { localStorage.setItem('raz_lang', lang); } catch (e) {}
+          this.loadLang(lang);
+        }
+        loadLang(lang) {
+          const st = this.state || {};
+          if (lang === 'ru' || (st.dict && st.dict[lang])) { this.setState({ lang: lang }); return; }
+          fetch('./land-' + lang + '.json').then(function (r) { return r.json(); }).then((d) => {
+            const dict = Object.assign({}, st.dict || {}); dict[lang] = d;
+            this.setState({ lang: lang, dict: dict });
+          }).catch(() => { this.setState({ lang: lang }); });
+        }
+        renderVals() {
+          const st = this.state || {};
+          const tab = st.profileTab || 'public';
+          const lang = st.lang || 'ru';
+          const L_ru = {"nav_orders": "План", "nav_income": "Результаты", "nav_forecast": "Рынок", "nav_connect": "Сервисы", "hero_badge": "Все сервисы доставки в одном приложении", "hero_h1_pre": "Весь заработок от доставки", "hero_h1_acc": "в одном месте", "hero_lead": "Разнос собирает доход, заказы и смены из всех твоих сервисов в одном приложении и показывает, где платят больше", "hero_cta": "Что умеет приложение", "hero_w_caption": "Заработано сегодня", "hero_w_summary": "в том числе 380 ₽ чаевых · после расходов останется 3 900 ₽", "hero_w_orders": "17 заказов", "hero_w_rate": "1 050 ₽ / час до расходов", "z_h2_pre": "Выбирай заказ", "z_h2_acc": "в одной ленте", "z_dek": "Заказы твоих подключённых сервисов приходят в один экран, сразу с оценкой выгоды, и принять можно прямо здесь, без пяти открытых приложений", "z_li1": "Оплата, доход за час и после расходов видно до принятия", "z_li2": "Маршрут, расстояние, вес и время всего заказа рядом", "z_li3": "Фильтры подсвечивают выгодные заказы и помечают те, что ниже твоей цели по ₽/час", "offer_title": "Всё видно до того, как примешь", "offer_dek": "Открываешь заказ сервиса и видишь маршрут, цифры и оценку выгоды целиком, ещё до того как принять", "offer_demo": "Приём предложений в режиме Работа только для проверенных возможностей сервиса", "statement_pre": "Цифры берём ", "statement_b": "прямо из подключённых аккаунтов", "statement_post": ". Поэтому статистика настоящая: зарплаты, штрафы и бонусы, а не обещания из рекламы", "who_h2": "Хватит считать доход в разных приложениях", "who_dek": "Доход раскидан по разным приложениям, и непонятно, где выгоднее и сколько остаётся на руках. Разнос собирает всё в одном месте и считает за тебя", "who_conn": "Подключено сейчас", "who_week": "Общий доход за неделю", "who_net": "После расходов", "income_h2": "Из чего сложился каждый рубль", "income_dek": "Видно доход за час и за заказ, а также из чего он собрался по каждому сервису", "income_li1": "Начисления, чаевые, бонусы и удержания видно по отдельности", "income_li2": "У каждой цифры видно, откуда она и когда обновилась", "income_li3": "Сумму видно за день, неделю и месяц", "income_card_title": "Из чего сложилась сумма", "hist_h2": "История заказов и выплат в одном списке", "hist_dek": "Каждый заказ: сумма, статус выплаты, чаевые и маршрут. Можно открыть подробности", "stat_h2": "Твой доход рядом с другими курьерами", "stat_dek": "Видно, растёшь ли ты от месяца к месяцу и где стоишь среди курьеров своего города", "stat_li1": "Сравнение со средним по курьерам твоего города и транспорта", "stat_li2": "Куда уходит время: доставка, ожидание, переезды, простой", "stat_li3": "Лучшие часы по дням, сеткой", "stat_card_months": "Доход по месяцам, тыс ₽", "stat_card_rate": "₽/ч после расходов", "stat_card_active": "Активное время", "stat_m_besthour": "Лучший час", "stat_m_pershift": "Заказов за смену", "stat_card_cohort": "Я и другие курьеры города", "stat_card_my": "Мой доход в час", "stat_card_median": "В среднем у других", "stat_card_above": "выше среднего на 16%", "prog_h2_pre": "Подсказывает,", "prog_h2_acc": "где и когда выгоднее", "prog_h2_post": "выйти", "prog_dek": "Карта по районам и график по часам. Видно, куда и во сколько выехать выгоднее", "prog_li1": "Самые денежные районы и часы, с пометками выше и ниже среднего", "prog_li2": "Показывает, сколько примерно заработаешь и почему. Мало данных, так и пишем", "prog_li3": "Свободные слоты и сколько ехать до района", "prog_map_title": "Доход в час по времени суток", "prog_leg_peak": "пик спроса", "prog_leg_calm": "спокойно", "prog_map_demo": "Схема районов, не точная география", "sched_h2_pre": "План недели", "sched_h2_acc": "под твою цель", "sched_dek": "Ставишь цель на неделю, Разнос раскладывает её по дням и часам в твоих сервисах и показывает, хватит ли плана. Слоты ты берёшь сам в приложении сервиса", "sched_li1": "Сразу видно, хватит ли плана до цели или сколько не хватает", "sched_li2": "Подскажет, если в это время в другом сервисе платят больше", "sched_li3": "План перестраивается сам, если изменился спрос или сервис отменил смену", "sched_card_title": "План на сегодня", "sched_break": "перерыв", "sched_demo": "Собрано из подключённых сервисов под спрос", "live_h2": "Что происходит прямо сейчас", "live_dek": "Что происходит прямо сейчас в твоём городе: сбои, очереди на складах, всплески заказов и курьеры на смене на карте. От курьеров для курьеров", "live_li1": "На карте видно, сколько курьеров на смене рядом, точка примерная и без имени", "live_li2": "Полезное поднимается выше, можно ответить", "live_li3": "Напиши сам и предупреди остальных", "mkt_h2_pre": "Отзывы о сервисах", "mkt_h2_acc": "от курьеров", "mkt_dek": "Отзывы и оценки сервисов по городам. Подтверждённые, с вопросами и ответами", "mkt_q_title": "Задавайте вопросы другим курьерам", "prof_h2": "Публичный профиль курьера", "prof_dek": "Псевдоним, стаж, достижения и то, что ты сам решил показать. По умолчанию профиль скрыт, другие пользователи видят версию без имени и фото", "prof_li1": "Два режима: открытый с именем и скрытый без имени", "prof_li2": "В скрытом нет имени и фото, а оценки показаны примерно", "prof_li3": "Профилем можно поделиться ссылкой, например с работодателем", "prof_tab_public": "Публичный", "prof_tab_anon": "Без имени", "exp_card_title": "Расходы за неделю", "exp_h2": "Сколько остаётся после расходов", "exp_dek": "Постоянные и разовые траты вместе. Считаем доход после всех расходов", "exp_li1": "Постоянные: аренда, связь, подписки. Разовые: ТО, ремонт, метро", "exp_li2": "Ловим дубли, если одна трата попала два раза", "exp_li3": "Экспорт CSV и PDF с исходными цифрами", "conn_h2": "Подключение сервиса за минуту", "conn_dek": "Добавляешь сервисы, в которых уже работаешь. Разнос читает их данные и собирает доход, статистику и план", "conn_s1": "Выбери сервис", "conn_s2": "Войди в аккаунт сервиса", "conn_s2_field": "Телефон или логин", "conn_s2_note": "Данные для входа шифруются и у нас не остаются", "conn_s3": "Готово", "conn_s3_pill": "Синхронизировано", "conn_s3_note": "Доход и история подтянутся автоматически", "svc_h2": "11 сервисов доставки, подключай свои", "svc_dek": "Подключай те, в которых работаешь, и смотри общий доход. Ещё 5 сервисов скоро", "svc_note": "Яндекс Про это одно подключение, внутри бренды Еда, Лавка и Деливери", "data_h2": "Сырые данные клиентов мы не храним", "data_dek": "Работаем по закону 152-ФЗ. Имена и контакты покупателей скрываем на сервере, точные адреса и телефоны не попадают в историю и аналитику", "data_li1": "Твои данные лежат в закрытом контуре и видны только тебе", "data_li2": "В общую статистику всё идёт без имён и только когда данных достаточно", "data_li3": "Ключи доступа к сервисам хранятся только на твоём телефоне. Удалишь аккаунт, данные правда стираются", "city_h2": "1105 городов России", "city_dek": "Город выбираешь в профиле, статистика и прогноз подстраиваются под него", "faq_h2": "Частые вопросы", "faq_q1": "Это бесплатно?", "faq_a1": "Базовый кабинет дохода и статистики бесплатный. Платные возможности появятся позже", "faq_q2": "Как подключить сервисы, где я работаю?", "faq_a2": "Один раз вводишь телефон или логин и пароль от сервиса, при необходимости подтверждаешь вход кодом. Данные шифруются и уходят прямо в сервис, копию логина и пароля мы не получаем. Разнос забирает только историю и доход и не управляет аккаунтом. Отключишь сервис, связанные данные удаляются", "faq_q3": "Разнос хранит мои пароли от сервисов?", "faq_a3": "Нет. Пароли и ключи доступа хранятся только на твоём телефоне, на сервере мы их не сохраняем", "faq_q4": "Мои данные в безопасности?", "faq_a4": "Свои данные видишь только ты, данные клиентов обезличиваются, работаем по 152-ФЗ", "faq_q5": "Можно принимать заказы прямо в приложении?", "faq_a5": "Пока нет. Заказ принимаешь в приложении сервиса, а Разнос помогает открыть его в один тап и ведёт доход, историю и расписание. Приём заказов внутри Разноса планируем позже", "final_h2": "Все сервисы и весь доход на одном экране", "final_proof": "11 сервисов · 1105 городов · настоящие цифры из подключённых аккаунтов", "final_dek": "Открой живой прототип и пройдись по сценариям курьера", "final_cta": "Открыть прототип", "faq_q6": "Разнос это работодатель, кто платит?", "faq_a6": "Нет. Разнос не платит за заказы и не выдаёт их. Платит и нанимает сам сервис доставки. Мы подключаемся к твоим сервисам, показываем заказы и статистику и считаем доход. Деньги приходят от сервиса", "cmp_h2": "Зарплаты и оценки сервисов рядом", "cmp_dek": "Разнос публикует статистику по сервисам без имён: зарплаты, число курьеров и заказов, штрафы, оценки и отзывы. Сравнивай и выбирай, где выгоднее", "cmp_col_svc": "Сервис", "cmp_col_pay": "₽/ч", "cmp_col_couriers": "Курьеров", "cmp_col_rating": "Оценка", "cmp_demo": "Данные по городу без имён · место присваивается при 30+ курьерах и 100+ заказах", "faq_q7": "Есть ли аналоги в России?", "faq_a7": "Прямых аналогов в России нет. За рубежом есть неполные аналоги, это приложения-агрегаторы для", "cmp_pay_label": "Доход в час", "cmp_couriers_label": "Курьеров в городе", "cmp_rating_word": "оценка", "faq_q8": "Как происходит вход в сервисы, где я работаю?", "faq_a8": "Один раз вводишь телефон или логин и пароль от сервиса, при необходимости подтверждаешь вход кодом. Данные шифруются и уходят прямо в сервис, копию логина и пароля мы не получаем. Разнос забирает только историю и доход и не управляет аккаунтом. Отключишь сервис, связанные данные удаляются", "faq_q9": "Что вы делаете с моими данными?", "faq_a9": "Личный кабинет с доходом и историей видишь только ты. Работаем по закону 152-ФЗ: имена и контакты покупателей скрываем, точные адреса и телефоны в историю не попадают. В общую статистику идут данные без имён и только когда их достаточно. Отключишь сервис или удалишь аккаунт, связанные данные удаляются", "live_badge": "в реальном времени", "faq_q10": "Есть ли демо-режим, можно попробовать?", "faq_a10": "Да. Можно открыть живой прототип и пройтись по сценариям курьера, а можно подключить свой аккаунт и увидеть свои цифры", "final_bot": "Вопросы, отзывы, предложения", "final_soon": "Прототип скоро появится", "ov_h2": "Если коротко", "ov_dek": "Главное о Разносе в одном экране", "ov_t1_h": "Весь доход и сравнение", "ov_t1_d": "Доход за день, неделю и месяц и честное сравнение с другими курьерами", "ov_t2_h": "План под цель", "ov_t2_d": "Разнос раскладывает цель недели по дням и сервисам и показывает, хватит ли плана", "ov_t3_h": "Где сейчас выгоднее", "ov_t3_d": "Карта спроса и прогноз дохода по районам и часам", "ov_t4_h": "Сравнение сервисов", "ov_t4_d": "Зарплаты, оценки и отзывы сервисов рядом, по твоему городу", "ov_t5_h": "Сообщество курьеров", "ov_t5_d": "Живая лента города и отзывы, от курьеров для курьеров", "ov_t6_h": "Настоящие данные", "ov_t6_d": "Все цифры прямо из твоих сервисов, а не реклама", "ov_t7_h": "Расходы и налог", "ov_t7_d": "Сколько остаётся после расходов, удержаний и налога", "act_h2": "Заказ под рукой", "act_dek": "Пока везёшь заказ, под рукой этапы и статус. Открыть его в приложении сервиса можно в один тап", "act_status": "Везу заказ", "act_meta": "2,1 км · 16 мин", "act_step1": "Забрал · ВкусВилл, Садовая 3", "act_step2": "Доставить · Клин 8", "act_est": "≈ 1 280 ₽/ч · 360 ₽ после расходов", "data_note": "Все цифры на странице приведены для примера", "sched_cmp_title": "Сравни, где платят больше в этот час", "who_week_title": "Итог недели", "who_week_range": "прошлая неделя", "who_c_income": "Доход", "who_c_costs": "Расходы", "who_c_orders": "Заказы", "who_recap": "Недельный отчёт", "who_new": "Новое", "wr_h2": "Недельный отчёт", "wr_dek": "Итоги недели: сколько, когда и где ты заработал", "wr_earn_lab": "Заработал за неделю", "wr_bestday_lab": "Лучший день", "wr_top_lab": "Топ сервис", "sb_services": "сервисов", "sb_cities": "городов", "sb_langs": "языков", "sb_free": "базовый доступ", "sb_head": "Публичный рынок сервисов и отзывы курьеров", "act_btn_done": "Доставил", "act_btn_open": "Открыть заказ в приложении", "dw_title": "Доход за неделю", "dw_recap": "Посмотреть отчёт", "dw_new": "Новый", "wr_vs_prev": "к прошлой неделе", "wr_for_orders": "за 72 заказа", "wr_deliv1": "32 доставки", "wr_deliv2": "25 доставок", "wr_deliv3": "15 доставок", "prog_map_now": "Районы сейчас", "prog_map_src": "доход в час", "inc_accr": "Начисления", "inc_tips": "Чаевые", "inc_bonus": "Бонусы", "inc_deduct": "Удержания", "order_badge_active": "активный", "exp_r_rent": "Аренда велосипеда · постоянный", "exp_r_conn": "Связь · постоянный", "exp_r_to": "ТО велосипеда · разовый, пн", "exp_r_metro": "Метро · разовый, чт", "exp_total": "Итого", "stat_tab_total": "Всего", "stat_tab_hour": "₽/час", "stat_avg_note": "среднее у других курьеров города", "stat_time_title": "Куда уходит время", "stat_time_sub": "в среднем 128 часов в месяц", "time_deliv": "Доставка", "time_wait": "Ожидание", "time_move": "Переезды", "time_idle": "Простой", "stat_best_time": "Лучшее время", "stat_best_time_sub": "когда платят больше", "stat_per_order": "За заказ", "stat_avg_word": "в среднем", "stat_per_shift": "Заказов за смену", "conn_ok_note": "обновлено только что, ошибок нет", "conn_pill_done": "подключено", "mark_mid": "среднее", "mark_below": "ниже среднего", "mark_above": "выше среднего", "peak_word": "пик", "cmp_reviews_label": "Отзывов", "cmp_order_word": "заказ", "prof_role": "велокурьер", "prof_badge_orders": "6 500 заказов", "prof_badge_orders_range": "3 000–4 000 заказов", "prof_about_year": "около года", "prof_less_year": "меньше года", "prof_anon_note": "Без имени и фото, показатели приблизительные", "lb_h2_pre": "Лидерборд курьеров", "lb_h2_acc": "твоего города", "lb_dek": "Видно своё место в городе за неделю, насколько сдвинулся за сегодня и сколько не хватает до места выше. Имена других скрыты", "lb_li1": "Место по заработку, заказам, чаевым и доходу в час", "lb_li2": "Рядом с тобой: кто выше и ниже и сколько до следующего места", "lb_li3": "Срез по твоему городу и за неделю, суммы у других настоящие", "lb_card_title": "Топ по заработку", "lb_me_place": "28 место", "lb_you": "Ты", "lb_bike": "велосипед", "lb_week": "за неделю", "lb_anon": "без имени", "lb_foot": "Себя видишь как есть, остальные без имён, но суммы у них настоящие", "data_card_title": "Что видно и что скрыто", "data_row1_l": "Личный кабинет", "data_row1_r": "только тебе", "data_row2_l": "Адреса и контакты клиентов", "data_row2_r": "скрыты", "data_row3_l": "Токены сервисов", "data_row3_r": "только на телефоне", "data_row4_l": "Общая статистика", "data_row4_r": "без имён", "city_of_russia": "городов России", "city_more": "и ещё 1096", "faq_gig_link": "gig-водителей", "plan_goal": "Цель недели 30 000 ₽", "plan_goal_ok": "плана хватит", "plan_goal_sub": "Заработано 18 600 ₽, в плане ещё ≈ 12 100 ₽", "plan_better": "Есть выгоднее: ВкусВилл в 13–15, +120 ₽", "conn_s1_note": "Нужен уже активный аккаунт курьера в этом сервисе", "svc_soon": "Скоро подключим", "tax_h2_pre": "Налог и удержания", "tax_h2_acc": "посчитаны заранее", "tax_dek": "Если ты самозанятый, Разнос покажет, сколько платить налога и до какого числа. Рядом видно, что удержал сервис и сколько взял парк", "tax_li1": "Налог за месяц и срок уплаты до 28 числа", "tax_li2": "Комиссия парка или партнёра отдельной строкой", "tax_li3": "Удержания сервиса по заказам с причиной", "tax_card_title": "Деньги за месяц", "tax_card_period": "сентябрь", "tax_r_accr": "Начислено", "tax_r_ded": "Удержания сервиса · 3", "tax_r_park": "Комиссия парка · Яндекс Про", "tax_r_pay": "К выплате", "tax_tax": "Налог самозанятого", "tax_due": "6% · заплатить до 28 октября", "lb_near": "Рядом с тобой", "lb_gap": "До 27 места 380 ₽", "lb_me_shift": "↑ на 3 выше за сегодня", "cmap_title": "Курьеры на смене рядом", "cmap_note": "Точка примерная и без имени, капля это сообщение курьера", "nb_h2_pre": "Только начинаешь?", "nb_h2_acc": "Подскажем, где начать", "nb_dek": "Сравни сервисы глазами новичка: сколько платят в первые недели, сколько вложить на старте и как оформиться. Цифры по курьерам Разноса в твоём городе", "nb_li1": "Новички и опытные отдельно: доход в час, ожидание заказа и сколько остались через месяц", "nb_li2": "Сколько вложить на старте: залог, медкнижка, аренда транспорта, связь", "nb_li3": "Как оформиться: самозанятость, парк или партнёр и сколько они берут", "nb_scope": "первые 4 недели · Москва", "nb_new": "Новички", "nb_old": "Опытные", "nb_r_hour": "Доход в час", "nb_r_wait": "Ожидание заказа", "nb_r_stay": "Остались через месяц", "nb_wait_new": "9 мин", "nb_wait_old": "8 мин", "nb_hard": "Чаще всего сложно: поиск подъездов и опоздание к слоту", "nb_start": "Вложить на старте", "nb_s1": "Залог за термосумку и куртку, вернут", "nb_s2": "Медкнижка", "nb_s3": "Аренда самоката или велосипеда на неделю", "nb_s4": "Связь на месяц", "nb_pay": "Первая выплата через неделю после первого слота", "keep_h2": "Сколько остаётся на руках", "keep_dek": "Начисления, чаевые, удержания сервиса, расходы и налог в одном расчёте. У каждой суммы виден источник", "keep_li1": "Расходы добавляешь в пару тапов, постоянные считаются сами", "keep_li2": "Если ты самозанятый, видно налог за месяц и срок уплаты до 28 числа", "keep_accr_note": "в том числе чаевые 3 400 ₽ и бонусы 2 600 ₽", "keep_r_exp": "Расходы: аренда, связь, ТО, метро", "keep_r_tax": "Налог самозанятого", "keep_r_net": "Остаётся на руках", "nb_teaser": "Сколько платят новичкам, сколько вложить на старте и как оформиться", "lb_prof": "Свой профиль можно показать с именем или оставить без имени, по умолчанию он скрыт", "conn_cities": "Работает в 1105 городах России, город выбираешь в профиле", "faq_q11": "На каких телефонах работает?", "faq_a11": "На телефонах с Android и на iPhone", "faq_q12": "Нужно ли быть самозанятым?", "faq_a12": "Разносу не важно, как ты оформлен. Оформление требует сам сервис: чаще всего это самозанятость, иногда работа через парк или партнёра. Если ты самозанятый, Разнос посчитает налог", "nb_back": "Разнос для курьеров", "nbp_dek": "Сравни сервисы глазами новичка. Цифры по курьерам Разноса в твоём городе, условия со ссылкой на источник", "nbp_tabs": "Разделы гайда", "nbp_tab1": "Новичкам", "nbp_tab2": "Старт", "nbp_tab3": "График", "nbp_tab4": "Условия", "nbp_s1_h2": "Как платят новичкам", "nbp_s1_dek": "Первые 4 недели отдельно от опытных курьеров: доход в час, ожидание заказа и сколько остаются через месяц", "nbp_sample": "новичков", "nbp_min": "мин", "nbp_hard": "Чаще всего сложно:", "nbp_hard_vv": "длинное ожидание на кассе и тяжёлые заказы", "nbp_hard_sm": "поиск подъездов и опоздание к слоту", "nbp_hard_x5": "ожидание на полигоне и тяжёлые сумки", "nbp_s1_note": "Москва, велосипед, медиана за 4 недели. Все цифры на странице приведены для примера", "nbp_s2_h2": "Сколько вложить на старте и как оформиться", "nbp_s2_dek": "Залог, медкнижка, транспорт и связь до первой выплаты. И как сервис оформляет курьера: напрямую, через партнёра или парк", "nbp_via_title": "Как оформиться в Самокате", "nbp_via_verdict": "Фактически через компанию-партнёра", "nbp_via_f1": "Самозанятый", "nbp_via_f2": "Партнёр", "nbp_via_l1": "Договор", "nbp_via_v1": "С компанией-партнёром, не с самим Самокатом", "nbp_via_l2": "Комиссия", "nbp_via_v2": "Партнёры комиссию не публикуют", "nbp_via_l3": "Налог", "nbp_via_v3": "Самозанятый, с выплат от компаний 6%", "nbp_s3_h2": "Подберём сервис под твои часы", "nbp_s3_dek": "Отмечаешь, когда готов работать, и видишь, где в эти часы можно выйти сразу, а где нужна запись на слот", "nbp_s3_card": "Когда готов работать", "nbp_d1": "Будни", "nbp_d2": "Выходные", "nbp_w1": "Утро", "nbp_w2": "День", "nbp_w3": "Вечер", "nbp_s3_sum": "Будни вечером, с 18 до 22", "nbp_fit_p1": "можно выйти сразу", "nbp_fit_n1": "Свободный выход от 1 часа, без записи", "nbp_fit_p2": "слот от 2 часов", "nbp_fit_n2": "Курьеры пишут, что слот можно взять даже за час до начала", "nbp_fit_p3": "нужна запись", "nbp_fit_n3": "Слоты от 2 часов, записываться лучше заранее", "nbp_fit_range": "В эти часы обычно", "nbp_fit_note": "Диапазон между четвертью и тремя четвертями курьеров Разноса на велосипеде", "nbp_s4_h2": "Условия сервиса простыми словами", "nbp_s4_dek": "Деньги, работа и требования по каждому сервису. Где условия знаем только со слов курьеров, так и пишем", "nbp_g1": "Деньги", "nbp_g2": "Работа", "nbp_g3": "Требования", "nbp_t_pay": "Оплата", "nbp_v_pay": "Ставка за час слота плюс доплата за заказ", "nbp_t_out": "Выплаты", "nbp_v_out": "Раз в неделю на карту", "nbp_t_fine": "Штрафы", "nbp_v_fine": "Курьеры пишут, что денежных штрафов нет, нарушения бьют по рейтингу", "nbp_t_mode": "Как работать", "nbp_v_mode": "Слоты от 2 часов, заказы назначаются автоматически", "nbp_t_zone": "Откуда заказы", "nbp_v_zone": "Даркстор", "nbp_t_cancel": "Отмена слота", "nbp_v_cancel": "Курьеры пишут, что отменять нужно за сутки-двое, иначе падает рейтинг", "nbp_t_docs": "Возраст и документы", "nbp_v_docs": "С 18 лет, паспорт, СНИЛС и ИНН", "nbp_t_med": "Медкнижка", "nbp_v_med": "Нужна до первого слота", "nbp_t_gear": "Экипировка", "nbp_v_gear": "Термосумку и куртку выдаёт партнёр, залог 2 000 ₽", "nbp_terms_note": "Окончательные условия смотри в приложении сервиса", "nbp_tab1_d": "Сколько платят в первые недели", "nbp_tab2_d": "Сколько вложить и как оформиться", "nbp_tab3_d": "Где выйти в твои часы", "nbp_tab4_d": "Деньги, работа и требования"};
+          const motionOK = (typeof window !== 'undefined' && window.matchMedia && !window.matchMedia('(prefers-reduced-motion: reduce)').matches && 'IntersectionObserver' in window);
+          const dict = st.dict || {};
+          const t = (lang === 'ru') ? L_ru : Object.assign({}, L_ru, dict[lang] || {});
+          const histOrders = [
+            { svc: 'vkusvill', svcTitle: 'ВкусВилл', orderNo: 'V-9021', dateLabel: 'сейчас', deliveryStatus: 'в пути', moneyStatus: 'в работе', payout: '320', tipLabel: '', routeLabel: 'Садовая 3 · Клин 8', quality: 'выше среднего', qualityTone: 'up' },
+            { svc: 'samokat', svcTitle: 'Самокат', orderNo: 'А-2481', dateLabel: '14 сен', deliveryStatus: 'доставлен', moneyStatus: 'выплачено', payout: '480', tipLabel: 'Чаевые 120 ₽', routeLabel: 'Ленина 12 · Мира 5', quality: 'выше среднего', qualityTone: 'up' },
+            { svc: 'vkusvill', svcTitle: 'ВкусВилл', orderNo: 'V-9020', dateLabel: '14 сен', deliveryStatus: 'доставлен', moneyStatus: 'ожидает выплаты', payout: '360', tipLabel: '', routeLabel: 'Садовая 3 · Клин 8', quality: 'среднее', qualityTone: 'mid' },
+            { svc: 'samokat', svcTitle: 'Самокат', orderNo: 'А-2478', dateLabel: '13 сен', deliveryStatus: 'доставлен', moneyStatus: 'выплачено', payout: '300', tipLabel: '', routeLabel: 'Пушкина 4 · Гагарина 9', quality: 'среднее', qualityTone: 'mid' },
+            { svc: 'yandex-eda', svcTitle: 'Яндекс Про', orderNo: 'Y-5512', dateLabel: '13 сен', deliveryStatus: 'отменён магазином', moneyStatus: 'без удержания', payout: '0', tipLabel: '', routeLabel: '', quality: 'ниже среднего', qualityTone: 'down' },
+            { svc: 'yandex-eda', svcTitle: 'Яндекс Про', orderNo: 'Y-5498', dateLabel: '12 сен', deliveryStatus: 'доставлен', moneyStatus: 'выплачено', payout: '410', tipLabel: '', routeLabel: 'Лесная 2 · Речная 7', quality: 'среднее', qualityTone: 'mid' }
+          ];
+          const statMode = st.statMode || 'total';
+          const STAT_DATA = {
+            total: { unit: 'Доход по месяцам, тыс ₽', max: 98, rows: [
+              { l: 'апр', v: 52, a: 46 }, { l: 'май', v: 68, a: 60 }, { l: 'июн', v: 60, a: 52 },
+              { l: 'июл', v: 82, a: 72 }, { l: 'авг', v: 98, a: 84 }, { l: 'сен', v: 92, a: 80 }
+            ] },
+            hour: { unit: 'Доход в час по месяцам, ₽', max: 1210, rows: [
+              { l: 'апр', v: 980, a: 900 }, { l: 'май', v: 1050, a: 960 }, { l: 'июн', v: 1010, a: 940 },
+              { l: 'июл', v: 1120, a: 1010 }, { l: 'авг', v: 1210, a: 1060 }, { l: 'сен', v: 1180, a: 1040 }
+            ] }
+          };
+          const sd = STAT_DATA[statMode] || STAT_DATA.total;
+          const statMonths = sd.rows.map((r) => ({
+            label: r.l,
+            val: String(r.v).replace(/\B(?=(\d{3})+(?!\d))/g, ' '),
+            barStyle: 'height:' + Math.round(r.v / sd.max * 100) + '%',
+            avgStyle: 'bottom:' + Math.round(r.a / sd.max * 100) + '%',
+            fillCls: 'lp-bfill' + (r.v === sd.max ? ' is-peak' : '')
+          }));
+          return {
+            barsCls: motionOK ? 'lp-bars lp-armed' : 'lp-bars',
+            statUnit: sd.unit,
+            statMonths: statMonths,
+            statTotalCls: 'raznos-segment' + (statMode === 'total' ? ' raznos-is-active' : ''),
+            statHourCls: 'raznos-segment' + (statMode === 'hour' ? ' raznos-is-active' : ''),
+            setStatTotal: () => this.setState({ statMode: 'total' }),
+            setStatHour: () => this.setState({ statMode: 'hour' }),
+            feedCls: motionOK ? 'raznos-card lp-feed lp-armed' : 'raznos-card lp-feed',
+            showProto: (function () { try { return new URLSearchParams(window.location.search).has('p'); } catch (e) { return false; } })(),
+            notProto: (function () { try { return !new URLSearchParams(window.location.search).has('p'); } catch (e) { return true; } })(),
+            connItems: [{ key: 'samokat', title: 'Самокат', note: '', state: 'ok' }, { key: 'vkusvill', title: 'ВкусВилл', note: '', state: 'ok' }],
+            protoHref: 'https://t.me/raznos_app_bot',
+            mapZones: [
+              { k: 'tverskoy', name: 'Тверской', val: '1 320 ₽/ч', t: 1 },
+              { k: 'presnya', name: 'Пресненский', val: '1 180 ₽/ч', t: 0.82 },
+              { k: 'basmanny', name: 'Басманный', val: '1 050 ₽/ч', t: 0.6 },
+              { k: 'khamovniki', name: 'Хамовники', val: '900 ₽/ч', t: 0.4 },
+              { k: 'arbat', name: 'Арбат', val: '980 ₽/ч', t: 0.5 },
+              { k: 'zamoskvorechye', name: 'Замоскворечье', val: '860 ₽/ч', t: 0.33 },
+              { k: 'begovoy', name: 'Беговой', val: '820 ₽/ч', t: 0.28 },
+              { k: 'meshchansky', name: 'Мещанский', val: '760 ₽/ч', t: 0.2 },
+              { k: 'dorogomilovo', name: 'Дорогомилово', val: '700 ₽/ч', t: 0.1 },
+              { k: 'krasnoselsky', name: 'Красносельский', val: '610 ₽/ч', t: 0 }
+            ],
+            cmapPins: [{ id: 'p1', x: 150, y: 150, svc: 'samokat' }, { id: 'p2', x: 250, y: 232, svc: 'vkusvill' }],
+            mainHref: ((typeof location !== 'undefined' && /\.dc\.html$/.test(decodeURIComponent(location.pathname))) ? './Лендинг - Курьер.dc.html' : './') + ((typeof location !== 'undefined' && location.search) || ''),
+            nbHref: ((typeof location !== 'undefined' && /\.dc\.html$/.test(decodeURIComponent(location.pathname))) ? './Лендинг - Новичкам.dc.html' : './novichkam.html') + ((typeof location !== 'undefined' && location.search) || ''),
+            t: t, lang: lang, onLang: (e) => this.pickLang((e && e.target && e.target.value) || 'ru'),
+            offer: { svc: 'samokat', title: 'Самокат', pay: '480', pickupAddr: 'Самокат, ул. Ленина 12', dropAddr: 'ул. Мира 5', etaPoint: '6 мин', etaTotal: '22 мин', distance: '3,2 км', weight: '4 кг', packages: '2', timerLabel: '00:18', timerFillStyle: 'width:72%', estimate: { hourly: '1 280', net: '360' } },
+            orders: histOrders, firstOrder: histOrders[0], restOrders: histOrders.slice(1),
+            reviews: [
+              { category: 'courier', authorCity: 'Москва', rating: 4, confirmed: true, anonNick: 'Хорёк', anonHue: '25', text: 'Выплаты вовремя, но в час пик много ожидания на выдаче. Зимой бонусы норм', date: '12 сен', ordersLabel: '1 240 заказов на сервисе', courierLikes: 24, courierDislikes: 2, userLikes: 3, userDislikes: 0 },
+              { category: 'courier', authorCity: 'Москва', rating: 5, confirmed: true, anonNick: 'Цапля', anonHue: '300', text: 'На ВкусВилле термосумку выдают сразу, поддержка отвечает быстро. Днём заказов меньше, зато вечером стабильно', date: '10 сен', ordersLabel: '860 заказов на сервисе', courierLikes: 15, courierDislikes: 1, userLikes: 0, userDislikes: 0 }
+            ],
+            questions: [
+              { q: 'Как часто задерживают выплаты?', meta: 'Самокат · Москва', a: 'Обычно платят раз в неделю без задержек, пару раз было плюс два дня', replies: '3 ответа' },
+              { q: 'Дают ли термосумку новичкам?', meta: 'ВкусВилл · Москва', a: 'Да, выдают на складе под депозит, потом возвращают', replies: '5 ответов' }
+            ],
+            liveItems: [
+              { multi: false, svcKey: 'samokat', svcTitle: 'Самокат', svcs: [{ key: 'samokat', title: 'Самокат' }], cityLabel: 'Москва', timeLabel: '8 мин', text: 'На складе на Ленина очередь на выдаче, минут 15', likes: 12, dislikes: 0, repliesCount: 2, onOpen: () => {} },
+              { multi: false, svcKey: 'vkusvill', svcTitle: 'ВкусВилл', svcs: [{ key: 'vkusvill', title: 'ВкусВилл' }], cityLabel: 'Москва', timeLabel: '21 мин', text: 'В центре подняли коэффициент, много заказов', likes: 20, dislikes: 1, repliesCount: 4, onOpen: () => {} },
+              { multi: false, svcKey: 'x5', svcTitle: 'X5', svcs: [{ key: 'x5', title: 'X5' }], cityLabel: 'Москва', timeLabel: '34 мин', text: 'Приложение сервиса тупит, у кого так же', likes: 7, dislikes: 0, repliesCount: 6, onOpen: () => {} }
+            ],
+            profPublic: tab === 'public',
+            profAnon: tab === 'anon',
+            tabPublicCls: 'raznos-segment' + (tab === 'public' ? ' raznos-is-active' : ''),
+            tabAnonCls: 'raznos-segment' + (tab === 'anon' ? ' raznos-is-active' : ''),
+            setPublic: () => this.setState({ profileTab: 'public' }),
+            setAnon: () => this.setState({ profileTab: 'anon' })
+          };
+        }
+      }
+    </script>
+
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript">
+      window.YM_COUNTER_ID = 112846403;
+      if (window.YM_COUNTER_ID) {
+        (function (m, e, t, r, i, k, a) { m[i] = m[i] || function () { (m[i].a = m[i].a || []).push(arguments) }; m[i].l = 1 * new Date(); for (var j = 0; j < document.scripts.length; j++) { if (document.scripts[j].src === r) { return; } } k = e.createElement(t), a = e.getElementsByTagName(t)[0], k.async = 1, k.src = r, a.parentNode.insertBefore(k, a) })(window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+        ym(window.YM_COUNTER_ID, "init", { clickmap: true, trackLinks: true, accurateTrackBounce: true, webvisor: true, ecommerce: "dataLayer", trackHash: true });
+      }
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/112846403" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
+  </body>
+</html>

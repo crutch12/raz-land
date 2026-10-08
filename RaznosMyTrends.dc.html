@@ -16,6 +16,7 @@
     <sc-if value="{{ is_list }}" hint-placeholder-val="{{ true }}">
       <div class="raznos-stats-trend-list">
         <sc-for list="{{ list_cards }}" as="c" hint-placeholder-count="6">
+          <sc-if value="{{ c.group }}" hint-placeholder-val="{{ false }}"><h3 class="raznos-stats-trend-group">{{ c.group }}</h3></sc-if>
           <button type="button" class="{{ c.cls }}" onClick="{{ c.tap }}" aria-label="{{ c.aria }}">
             <span class="raznos-stats-trend-card-head"><span class="raznos-stats-trend-card-title">{{ c.label }}</span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 6 6 6-6 6"/></svg></span>
             <span class="raznos-stats-trend-card-body">
@@ -68,7 +69,7 @@
     </sc-if>
   </div>
 </sc-if>
-</x-dc><script type="text/x-dc" data-dc-script data-props='{"current":{"editor":null},"previous":{"editor":null},"detailMode":{"editor":"boolean","default":false},"focusKey":{"editor":null},"scaleLabel":{"editor":"text","default":"Столбики: 6 последних месяцев, текущий справа"},"onFocus":{"editor":null},"scopeLabel":{"editor":"text","default":"Все данные"},"onFilters":{"editor":null},"$preview":{"width":340,"height":520}}'>
+</x-dc><script type="text/x-dc" data-dc-script data-props='{"current":{"editor":null},"previous":{"editor":null},"detailMode":{"editor":"boolean","default":false},"keys":{"editor":null},"focusKey":{"editor":null},"scaleLabel":{"editor":"text","default":"Столбики: 6 последних месяцев, текущий справа"},"onFocus":{"editor":null},"scopeLabel":{"editor":"text","default":"Все данные"},"onFilters":{"editor":null},"$preview":{"width":340,"height":520}}'>
 class Component extends DCLogic {
   renderVals() {
     const p = this.props || {};
@@ -105,7 +106,8 @@ class Component extends DCLogic {
       };
     };
     // названия как в ТЗ, доход в час до расходов
-    const rows = [row('Начислено', 'earn', ' ₽'), row('Заказы', 'orders', ''), row('Доход в час', 'rate', ' ₽/ч'), row('Доход за заказ', 'perOrder', ' ₽'), row('Заказов в час', 'ordersPerHour', ''), row('Часы на линии', 'hours', ' ч')];
+    // сначала три ставки, как на карточке Сравнение в Результатах, ниже остальные показатели
+    const rows = [row('Доход в час', 'rate', ' ₽/ч'), row('Доход за заказ', 'perOrder', ' ₽'), row('Заказов в час', 'ordersPerHour', ''), row('Начислено', 'earn', ' ₽'), row('Заказы', 'orders', ''), row('Часы на линии', 'hours', ' ч')];
     // часы на линии не бывают хорошими или плохими сами по себе, поэтому стрелка у них серая
     const tile = (item, judged) => {
       const kind = /raznos-is-(up|down)/.test(item.cls) ? RegExp.$1 : 'neutral';
@@ -120,7 +122,7 @@ class Component extends DCLogic {
       tile(rows[0], true), tile(rows[1], true),
       tile(rows[2], true), tile(rows[3], true),
       tile(rows[4], true), tile(rows[5], false)
-    ];
+    ].filter((item) => !Array.isArray(p.keys) || p.keys.indexOf(item.key) !== -1);
     const detail = !!p.detailMode;
     // открытый показатель хранит приложение, чтобы стрелка назад в шапке вела сначала в список
     const focusKey = typeof p.onFocus === 'function' ? (p.focusKey || '') : (st.focus || '');
@@ -136,10 +138,13 @@ class Component extends DCLogic {
     }));
     // столбики по периодам с медианой города, как сравнение в Gridwise
     const demoPoint = (label, title, earn, median, running) => ({ label, title, running, values: { earn, rate: Math.round(earn / 100), perOrder: 280, ordersPerHour: 2.4 }, medians: { earn: median, rate: Math.round(median / 100), perOrder: 270, ordersPerHour: 2.3 } });
-    const series = Array.isArray(p.series) ? p.series : [
-      demoPoint('апр', 'Апрель 2026', 60950, 56700), demoPoint('май', 'Май 2026', 70000, 72800), demoPoint('июн', 'Июнь 2026', 75400, 67900),
-      demoPoint('июл', 'Июль 2026', 49500, 48500), demoPoint('авг', 'Август 2026', 79650, 84400), demoPoint('сен', 'Сентябрь 2026, период идёт', 58900, 54200, true)
-    ];
+    // демо без пропса: шесть месяцев до текущего включительно
+    const demoMonth = (i, earn, median) => {
+      const t = new Date(), d = new Date(t.getFullYear(), t.getMonth() - 5 + i, 1), cur = i === 5;
+      const names = ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'];
+      return demoPoint(names[d.getMonth()].slice(0, 3).toLowerCase(), names[d.getMonth()] + ' ' + d.getFullYear() + (cur ? ', период идёт' : ''), earn, median, cur);
+    };
+    const series = Array.isArray(p.series) ? p.series : [[60950, 56700], [70000, 72800], [75400, 67900], [49500, 48500], [79650, 84400], [58900, 54200]].map((v, i) => demoMonth(i, v[0], v[1]));
     const unit = ({ earn: ' ₽', orders: '', rate: ' ₽/ч', perOrder: ' ₽', ordersPerHour: '', hours: ' ч' })[selected.key] || '';
     const known = series.filter((point) => point.values && point.values[selected.key] != null);
     const maxValue = Math.max.apply(null, known.map((point) => Math.max(point.values[selected.key], point.medians[selected.key] || 0)).concat([1])) * 1.08;
@@ -167,13 +172,14 @@ class Component extends DCLogic {
       };
     });
     // карточки списка: столбики по тем же периодам, что и сравнение, текущий выделен
-    const listCards = rows.map((item) => {
+    const listCards = rows.map((item, gi) => {
+      const group = gi === 0 ? 'Ставки' : (gi === 3 ? 'Ещё показатели' : '');
       const vals = series.map((point) => (point.values ? point.values[item.key] : null));
       const top = Math.max.apply(null, vals.filter((v) => v != null).concat([1]));
       const kind = /raznos-is-(up|down)/.test(item.cls) ? RegExp.$1 : 'neutral';
       const judged = item.key !== 'hours';
       return {
-        label: item.label, value: item.value, delta: item.delta,
+        label: item.label, value: item.value, delta: item.delta, group,
         cls: 'raznos-stats-trend-card raznos-is-' + (judged ? kind : 'neutral'),
         aria: item.label + ' ' + item.value + (item.delta ? ', ' + item.delta + ' к прошлому периоду' : '') + ', открыть подробно',
         spark: vals.map((v, i) => ({ cls: 'raznos-stats-trend-spark-bar' + (i === vals.length - 1 ? ' raznos-is-current' : ''), style: 'height:' + (v == null ? 0 : Math.max(8, Math.round(v * 100 / top))) + '%' })),

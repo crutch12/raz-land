@@ -21,13 +21,15 @@
   <sc-if value="{{ has_flags }}" hint-placeholder-val="{{ true }}"><span class="rsw-flags"><sc-for list="{{ flags }}" as="flag" hint-placeholder-count="2"><span class="{{ flag.cls }}">{{ flag.label }}</span></sc-for></span></sc-if>
   <sc-if value="{{ deadline }}" hint-placeholder-val="{{ false }}"><span class="rsw-deadline">{{ deadline }}</span></sc-if>
 </button>
-</x-dc><script type="text/x-dc" data-dc-script data-props='{"shifts":{"editor":null},"rules":{"editor":null},"today":{"editor":"text","default":"2026-09-15"},"nowMinutes":{"editor":null},"open":{"editor":null},"$preview":{"width":390,"height":130}}'>
+</x-dc><script type="text/x-dc" data-dc-script data-props='{"caps":{"editor":null},"shifts":{"editor":null},"rules":{"editor":null},"today":{"editor":"text","default":""},"nowMinutes":{"editor":null},"open":{"editor":null},"$preview":{"width":390,"height":130}}'>
 // вход в Смены из Работы: сколько смен на неделе и что требует внимания, подробности на самом экране
+// демо-сегодня: реальная дата устройства
+const rswAt = (off) => { const d = new Date(); d.setDate(d.getDate() + off); return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0'); };
 const RSW_DEMO = [
-  { id: 'a', iso: '2026-09-15', svc: 'vkusvill', title: 'ВкусВилл', from: 840, to: 1020, status: 'active' },
-  { id: 'b', iso: '2026-09-15', svc: 'yandex-eda', title: 'Яндекс Еда', from: 1020, to: 1200, status: 'confirmed' },
-  { id: 'c', iso: '2026-09-16', svc: 'samokat', title: 'Самокат', from: 630, to: 810, status: 'confirmed' },
-  { id: 'd', iso: '2026-09-16', svc: 'vkusvill', title: 'ВкусВилл', from: 840, to: 1080, status: 'requested' }
+  { id: 'a', iso: rswAt(0), svc: 'vkusvill', title: 'ВкусВилл', from: 840, to: 1020, status: 'active' },
+  { id: 'b', iso: rswAt(0), svc: 'yandex-eda', title: 'Яндекс Еда', from: 1020, to: 1200, status: 'confirmed' },
+  { id: 'c', iso: rswAt(1), svc: 'samokat', title: 'Самокат', from: 630, to: 810, status: 'confirmed' },
+  { id: 'd', iso: rswAt(1), svc: 'vkusvill', title: 'ВкусВилл', from: 840, to: 1080, status: 'requested' }
 ];
 const RSW_TRAVEL = 20;
 const RSW_DOW = ['вс', 'пн', 'вт', 'ср', 'чт', 'пт', 'сб'];
@@ -37,7 +39,7 @@ class Component extends DCLogic {
   renderVals() {
     const p = this.props || {};
     const open = typeof p.open === 'function' ? p.open : (() => {});
-    const today = p.today || '2026-09-15';
+    const today = p.today || rswAt(0);
     const now = p.nowMinutes == null ? 940 : p.nowMinutes;
     const rules = p.rules || {};
     const live = (p.shifts || RSW_DEMO).filter((s) => s.status !== 'cancelled' && s.status !== 'missed');
@@ -48,10 +50,14 @@ class Component extends DCLogic {
       const list = live.filter((s) => s.iso === iso).sort((a, b) => a.from - b.from);
       list.forEach((a, i) => { const b = list[i + 1]; if (b && (b.from < a.to || (a.svc !== b.svc && b.from - a.to < RSW_TRAVEL))) clashes.add(a.id + b.id); });
     });
-    const requested = live.filter((s) => s.status === 'requested').length;
+    const requestedList = live.filter((s) => s.status === 'requested');
+    const requested = requestedList.length;
+    // слово статуса из профиля сервиса: заявка у Самоката и ВкусВилла, пожелание у Додо
+    const caps = p.caps || {};
+    const allZayavka = requestedList.every((s) => ((caps[s.svc] || {}).words || { requested: 'заявка' }).requested === 'заявка');
     const flags = [];
     if (clashes.size) flags.push({ label: clashes.size + ' ' + RSW_PLURAL(clashes.size, 'пересечение', 'пересечения', 'пересечений'), cls: 'rsw-flag rsw-flag-danger' });
-    if (requested) flags.push({ label: requested + ' ' + RSW_PLURAL(requested, 'заявка ждёт', 'заявки ждут', 'заявок ждут') + ' ответа', cls: 'rsw-flag rsw-flag-warn' });
+    if (requested) flags.push({ label: requested + ' ' + (allZayavka ? RSW_PLURAL(requested, 'заявка ждёт', 'заявки ждут', 'заявок ждут') : RSW_PLURAL(requested, 'смена ждёт', 'смены ждут', 'смен ждут')) + ' ответа', cls: 'rsw-flag rsw-flag-warn' });
     // ближайший дедлайн бесплатной отмены, только если до него меньше суток
     const nowDate = new Date(today + 'T00:00:00'); nowDate.setMinutes(now);
     const deadlines = live.filter((s) => s.status === 'confirmed' && rules[s.svc] && rules[s.svc].freeCancel !== 'none').map((s) => {
@@ -60,9 +66,10 @@ class Component extends DCLogic {
       const d = r.freeCancel === 'noonBefore' ? (() => { const x = new Date(s.iso + 'T00:00:00'); x.setDate(x.getDate() - 1); x.setHours(12); return x; })() : new Date(start.getTime() - (r.hoursBefore || 24) * 3600000);
       return { s, d };
     }).filter((x) => x.d > nowDate && x.d - nowDate <= 24 * 3600000).sort((a, b) => a.d - b.d);
+    const RSW_SRC = { 'отзывы': '', 'вторичный': 'из пересказов', 'не подтверждено': 'точно не известно', 'партнёрские материалы': 'по словам партнёров' };
     const soon = deadlines[0];
     const summary = live.length + ' ' + RSW_PLURAL(live.length, 'смена', 'смены', 'смен') + ' на неделе · ' + Math.round(minutes / 60) + ' ч';
-    const deadline = soon ? 'Отменить ' + soon.s.title + ' без штрафа можно до ' + RSW_DOW[soon.d.getDay()] + ' ' + RSW_TIME(soon.d.getHours() * 60 + soon.d.getMinutes()) : '';
+    const deadline = soon ? 'Отменить ' + soon.s.title + ' без последствий можно до ' + RSW_DOW[soon.d.getDay()] + ' ' + RSW_TIME(soon.d.getHours() * 60 + soon.d.getMinutes()) + (rules[soon.s.svc].src && rules[soon.s.svc].src !== 'отзывы' ? ' · ' + (RSW_SRC[rules[soon.s.svc].src] || rules[soon.s.svc].src) : '') : '';
     return {
       open, summary, flags, has_flags: flags.length > 0, deadline,
       aria: 'Смены, ' + summary + (flags.length ? ', ' + flags.map((f) => f.label).join(', ') : '') + (deadline ? ', ' + deadline : '')

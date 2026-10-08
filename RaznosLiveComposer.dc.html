@@ -30,18 +30,18 @@
             <button type="button" class="{{ scopeAllCls }}" onClick="{{ onScopeAll }}">Все города</button>
           </div>
           <p class="raznos-text-tiny">{{ scopeNote }}</p>
+          <div class="raznos-live-chips" role="group" aria-label="Быстрые заготовки"><sc-for list="{{ quickChips }}" as="c" hint-placeholder-count="4"><button type="button" class="raznos-live-chip" onClick="{{ c.tap }}">{{ c.label }}</button></sc-for></div>
           <label class="raznos-field"><span class="raznos-field-label">Что происходит</span><textarea class="raznos-textarea" placeholder="Например: очередь на выдаче, сбой приложения, перекрыта улица" value="{{ text }}" onChange="{{ onText }}"></textarea></label>
           <div class="raznos-btn-row">
             <button type="button" class="raznos-btn raznos-btn-secondary raznos-btn-small" onClick="{{ onAddPhoto }}">{{ photoBtnLabel }}</button>
-            <button type="button" class="raznos-btn raznos-btn-secondary raznos-btn-small" onClick="{{ onPickPlace }}">{{ placeBtnLabel }}</button>
           </div>
           <sc-if value="{{ hasPhoto }}" hint-placeholder-val="{{ false }}">
             <div class="raznos-live-preview"><img src="{{ photoSrc }}" alt="Выбранное фото" /><span class="raznos-list-main"><span class="raznos-list-title">Фото</span><span class="raznos-text-small">Метаданные и координаты удалим перед публикацией</span></span><button type="button" class="raznos-btn raznos-btn-ghost raznos-btn-small" onClick="{{ onRemovePhoto }}">Убрать</button></div>
           </sc-if>
-          <sc-if value="{{ hasPlace }}" hint-placeholder-val="{{ false }}">
-            <div class="raznos-live-preview"><span class="raznos-live-pin-glyph"></span><span class="raznos-list-main"><span class="raznos-list-title">{{ placeLabel }}</span><span class="raznos-text-small">Точка события, не ваше местоположение</span></span><button type="button" class="raznos-btn raznos-btn-ghost raznos-btn-small" onClick="{{ onRemovePlace }}">Убрать</button></div>
-          </sc-if>
-          <p class="raznos-text-tiny">Фото и место необязательны. Имя, фото профиля и заказы к сообщению не прикрепляются, автор виден обезличенно</p>
+          <div class="raznos-card">
+            <button type="button" class="raznos-list-row" style="border-bottom:0" role="checkbox" aria-checked="{{ hasPlace }}" onClick="{{ onTogglePlace }}"><span class="{{ placeCheckCls }}">{{ placeMark }}</span><span class="raznos-list-main"><span class="raznos-list-title">Показать вашу точку на карте</span><span class="raznos-text-small">{{ placeNote }}</span></span></button>
+          </div>
+          <p class="raznos-text-tiny">Фото и точка необязательны. Имя, фото профиля и заказы к сообщению не прикрепляются, автор виден обезличенно</p>
           <button type="button" class="{{ publishCls }}" disabled="{{ publishDisabled }}" onClick="{{ onPublish }}">Опубликовать</button>
         </sc-if>
       </div>
@@ -60,14 +60,14 @@
       "onText": { "editor": null },
       "onAddPhoto": { "editor": null },
       "onRemovePhoto": { "editor": null },
-      "onPickPlace": { "editor": null },
-      "onRemovePlace": { "editor": null },
+      "onTogglePlace": { "editor": null },
       "onPublish": { "editor": null },
       "$preview": { "width": 360, "height": 720 }
     }'>
       const LIMIT = 5;
       function plural(n, one, few, many) { const m10 = n % 10, m100 = n % 100; if (m10 === 1 && m100 !== 11) return one; if (m10 >= 2 && m10 <= 4 && (m100 < 12 || m100 > 14)) return few; return many; }
       const noop = () => {};
+      const QUICK_TEXTS = ['Перекрыта улица', 'Очередь на выдаче', 'Приложение сервиса не работает', 'Пробка'];
       const DEMO_SERVICES = [{ key: 'vkusvill', title: 'ВкусВилл', city: 'Москва' }, { key: 'samokat', title: 'Самокат', city: 'Москва' }];
       // форма только показывает выбор, лимит и публикацию проверяет RaznosApp
       class Component extends DCLogic {
@@ -97,11 +97,15 @@
             scopeCityLabel: multi ? (cities.length === 1 ? cities[0] : 'Города интеграций') : chosen.city,
             onScopeCity: () => (p.onScope || noop)('city'), onScopeAll: () => (p.onScope || noop)('all'),
             scopeNote,
+            // заготовки подставляют текст в поле, дальше публикация как обычно
+            quickChips: QUICK_TEXTS.map((t) => ({ label: t, tap: () => (p.onText || noop)({ target: { value: t } }) })),
             text, onText: p.onText || noop,
             hasPhoto: !!p.photoSrc, photoSrc: p.photoSrc || '', photoBtnLabel: p.photoSrc ? 'Заменить фото' : 'Добавить фото',
-            hasPlace: !!p.placeLabel, placeLabel: p.placeLabel || '', placeBtnLabel: p.placeLabel ? 'Изменить место' : 'Указать место',
+            hasPlace: !!p.placeLabel, placeLabel: p.placeLabel || '',
+            placeCheckCls: 'raznos-check-box' + (p.placeLabel ? ' raznos-is-on' : ''), placeMark: p.placeLabel ? '✓' : '',
+            placeNote: p.placeLabel ? 'Другие увидят место (' + p.placeLabel + ') в подписи сообщения и на Карте курьеров, точка примерная' : 'По умолчанию выключено. Геолокация сама не публикуется',
             onAddPhoto: p.onAddPhoto || noop, onRemovePhoto: p.onRemovePhoto || noop,
-            onPickPlace: p.onPickPlace || noop, onRemovePlace: p.onRemovePlace || noop,
+            onTogglePlace: p.onTogglePlace || noop,
             publishCls: text.trim() ? 'raznos-btn raznos-btn-primary' : 'raznos-btn-disabled',
             publishDisabled: !text.trim(),
             onPublish: p.onPublish || noop

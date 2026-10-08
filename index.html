@@ -220,6 +220,65 @@
           .lp-lead-namecol { display: flex; flex-direction: column; gap: 1px; min-width: 0; }
           .lp-lead-name { font: 600 15px var(--raznos-font); color: var(--raznos-ink); }
           .lp-lead-sub { font: 500 12px var(--raznos-font); color: var(--raznos-ink-3); }
+          .lp-lead-row.is-me { background: var(--raznos-green-tint); border-color: transparent; }
+          .lp-lead-near { font-weight: 600; color: var(--raznos-ink-2); margin-bottom: -4px; }
+          .lp-lead-gap { font-weight: 600; color: var(--raznos-green-deep); }
+          .lp-goal { display: flex; flex-direction: column; gap: 6px; }
+          .lp-goal-track { position: relative; height: 8px; margin-right: 8px; border-radius: 999px; background: var(--raznos-surface-2); }
+          .lp-goal-fill { position: absolute; left: 0; top: 0; bottom: 0; border-radius: 999px; background: var(--raznos-green-deep); }
+          .lp-goal-plan { position: absolute; top: 0; bottom: 0; border-radius: 0 999px 999px 0; background: repeating-linear-gradient(135deg, var(--raznos-green-tint) 0 4px, transparent 4px 8px); box-shadow: inset 0 0 0 1px var(--raznos-green-tint); }
+          .lp-goal-hex { position: absolute; right: -8px; top: 50%; width: 16px; height: 18px; transform: translateY(-50%); }
+          .lp-plan-goal { padding-bottom: 14px; margin-bottom: 14px; border-bottom: 1px solid var(--raznos-line); }
+          .lp-plan-goal-t { font: 700 15px var(--raznos-font); }
+          .lp-slot-hint { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-top: -4px; padding: 8px 14px; border-radius: 12px; border: 1px dashed var(--raznos-line-strong); font: 600 13px var(--raznos-font); color: var(--raznos-green-deep); }
+          .lp-zone-map { position: relative; width: 100%; aspect-ratio: 360 / 240; border-radius: 14px; overflow: hidden; border: 1px solid var(--raznos-line); }
+          .lp-zone-map .rcm { margin-top: -16.7%; }
+          .lp-zone-list { display: flex; flex-direction: column; }
+          .lp-zone-row { display: grid; grid-template-columns: 20px 1fr auto; gap: 10px; align-items: center; padding: 9px 0; border-bottom: 1px solid var(--raznos-line); font: 600 15px var(--raznos-font); }
+          .lp-zone-row:last-child { border-bottom: 0; }
+          .lp-zone-rank { font: 700 13px var(--raznos-mono); color: var(--raznos-ink-3); }
+          .lp .raznos-breakdown-row .raznos-num { white-space: nowrap; }
+          .lp-tax { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-top: 14px; padding: 12px 14px; border-radius: 12px; background: var(--raznos-surface-2); }
+          .lp-tax-t { font: 600 15px var(--raznos-font); }
+          .lp-tax-v { font: 800 20px var(--raznos-mono); font-variant-numeric: tabular-nums; white-space: nowrap; }
+          .lp-svc.lp-svc-soon { color: var(--raznos-ink-3); background: var(--raznos-surface-2); }
+          .lp-svc-soon svg, .lp-svc-soon img { filter: grayscale(1); opacity: .55; }
+          .lp-svc-soon-t { margin: 20px 0 0; font: 600 14px var(--raznos-font); color: var(--raznos-ink-3); }
+          .lp-svc-grid.lp-svc-grid-soon { margin-top: 10px; }
+          .lp-svc { min-width: 0; }
+          @media (max-width: 480px) { .lp .lp-svc-grid { grid-template-columns: 1fr 1fr; } .lp .lp-svc { padding: 12px; gap: 8px; font-size: 14px; } }
+          .lp-cmap-card { padding: 0; overflow: hidden; }
+          .lp-cmap { position: relative; height: 300px; }
+          .lp-cmap-chip { position: absolute; left: 14px; top: 14px; display: inline-flex; align-items: center; gap: 8px; padding: 8px 12px; border-radius: 999px; background: var(--raznos-surface); box-shadow: 0 4px 14px oklch(0.2 0.02 250 / 0.14); font: 700 14px var(--raznos-font); color: var(--raznos-ink); }
+          .lp-cmap-note { margin: 0; padding: 12px 16px 14px; font: 400 13px/1.4 var(--raznos-font); color: var(--raznos-ink-2); border-top: 1px solid var(--raznos-line); }
+          .lp-nb-start { display: flex; flex-direction: column; padding-top: 12px; border-top: 1px solid var(--raznos-line); }
+          .lp-week-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 28px; align-items: stretch; }
+          .lp-week-col { display: flex; flex-direction: column; gap: 16px; }
+          .lp-week-grid > .raznos-card .lp-week-top-bars { flex: 1; justify-content: space-evenly; }
+          @media (max-width: 900px) { .lp-week-grid { grid-template-columns: 1fr; } }
+          .lp-nb-teaser { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-top: 24px; padding: 16px 18px; border-radius: 16px; background: var(--raznos-green-tint); color: var(--raznos-ink); text-decoration: none; }
+          .lp-lead-prof { margin: 14px 0 0; color: var(--raznos-ink-2); }
+          .lp-conn-cities { margin: 18px 0 0; color: var(--raznos-ink-2); }
+          .lp-week-val { white-space: nowrap; }
+          /* место в топе: один перекат золотого блика по поверхности, как у Топа в профиле прототипа */
+          .lp-lead-me { position: relative; overflow: hidden; }
+          @media (prefers-reduced-motion: no-preference) {
+            .lp-shine-anim::before { content: ""; position: absolute; inset: 0; pointer-events: none; background: linear-gradient(105deg, transparent 32%, color-mix(in oklab, oklch(0.93 0.11 92) 55%, transparent) 50%, transparent 68%); transform: translateX(-100%); }
+            .lp-shine-anim.lp-anim::before { animation: lpShine 2s cubic-bezier(.45, 0, .25, 1) .3s 1 both; }
+            @keyframes lpShine { from { transform: translateX(-100%); } to { transform: translateX(100%); } }
+          }
+          /* график по месяцам: столбцы растут снизу при первом показе, при смене Всего и ₽/час растут заново */
+          @media (prefers-reduced-motion: no-preference) {
+            .lp-motion .lp-stat-anim .lp-bfill { transform-origin: bottom; transform: scaleY(0.04); opacity: 0.35; }
+            .lp-motion .lp-stat-anim.lp-anim .lp-bfill { animation: lpGrow .7s cubic-bezier(.2, .8, .2, 1) forwards; }
+            .lp-motion .lp-stat-anim.lp-anim .lp-bcol:nth-child(2) .lp-bfill { animation-delay: .07s; }
+            .lp-motion .lp-stat-anim.lp-anim .lp-bcol:nth-child(3) .lp-bfill { animation-delay: .14s; }
+            .lp-motion .lp-stat-anim.lp-anim .lp-bcol:nth-child(4) .lp-bfill { animation-delay: .21s; }
+            .lp-motion .lp-stat-anim.lp-anim .lp-bcol:nth-child(5) .lp-bfill { animation-delay: .28s; }
+            .lp-motion .lp-stat-anim.lp-anim .lp-bcol:nth-child(6) .lp-bfill { animation-delay: .35s; }
+            .lp-motion .lp-stat-anim .lp-bavg, .lp-motion .lp-stat-anim .lp-bval { opacity: 0; }
+            .lp-motion .lp-stat-anim.lp-anim .lp-bavg, .lp-motion .lp-stat-anim.lp-anim .lp-bval { opacity: 1; transition: opacity .3s ease .55s; }
+          }
           .lp-lead-val { font: 700 14px var(--raznos-mono); color: var(--raznos-ink); font-variant-numeric: tabular-nums; white-space: nowrap; }
           .lp-steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 30px; }
           @media (max-width: 720px) { .lp-steps { grid-template-columns: 1fr; } }
@@ -228,7 +287,7 @@
           .lp-step-t { font: 700 17px var(--raznos-font); margin: 0; }
           .lp-step-head { display: flex; align-items: center; gap: 12px; }
           .lp-step-head .lp-step-num { flex: none; }
-          .lp-svc-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(158px, 1fr)); gap: 12px; margin-top: 28px; }
+          .lp-svc-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(176px, 1fr)); gap: 12px; margin-top: 28px; }
           .lp-svc { display: flex; align-items: center; gap: 10px; padding: 14px 16px; border: 1px solid var(--raznos-line); border-radius: 14px; background: var(--raznos-surface); font: 600 15px var(--raznos-font); }
           .lp-faq-item { border-bottom: 1px solid var(--raznos-line); padding: 0; }
           .lp-faq-item:last-child { border-bottom: 0; }
@@ -330,6 +389,7 @@
         </div>
 
 
+
         <div class="lp-band" id="raspisanie" data-screen-label="Расписание">
           <div class="lp-section">
             <div class="lp-feature">
@@ -346,11 +406,13 @@
                 <div class="raznos-fx raznos-col raznos-gap12">
                 <dc-import name="RaznosConnHealth" items="{{ connItems }}" okNote="{{ t.conn_ok_note }}"></dc-import>
                 <div class="raznos-card lp-card raznos-card-pad">
+                  <div class="lp-goal lp-plan-goal"><div class="raznos-head-row"><span class="lp-plan-goal-t">{{ t.plan_goal }}</span><span class="raznos-status-pill raznos-pill-ok lp-slot-mark">{{ t.plan_goal_ok }}</span></div><div class="lp-goal-track"><div class="lp-goal-fill" style="width:62%"></div><div class="lp-goal-plan" style="left:62%;right:0"></div><svg class="lp-goal-hex" viewBox="0 0 16 18" aria-hidden="true"><path d="M8 1.2l6.6 3.8v7.9L8 16.8l-6.6-3.9V5z" style="fill:var(--raznos-surface);stroke:var(--raznos-green-deep);stroke-width:2"></path></svg></div><span class="raznos-text-tiny">{{ t.plan_goal_sub }}</span></div>
                   <div class="raznos-head-row"><span class="raznos-text-h3 raznos-head-title">{{ t.sched_card_title }}</span><span class="raznos-num">≈ 6 640 ₽</span></div>
                   <div class="raznos-fx raznos-col raznos-gap8 lp-reveal">
                     <div class="lp-slot"><span class="lp-slot-time">10–12</span><dc-import name="RaznosIcon" svc="vkusvill" size="sm"></dc-import><span class="lp-slot-name">ВкусВилл</span><span class="lp-slot-end"><span class="raznos-num">1 040 ₽/ч</span><span class="raznos-status-pill raznos-pill-warn lp-slot-mark">{{ t.mark_mid }}</span></span></div>
                     <div class="lp-slot is-break"><span class="lp-slot-time">12–13</span><span class="lp-slot-name">{{ t.sched_break }}</span></div>
                     <div class="lp-slot"><span class="lp-slot-time">13–15</span><dc-import name="RaznosIcon" svc="samokat" size="sm"></dc-import><span class="lp-slot-name">Самокат</span><span class="lp-slot-end"><span class="raznos-num">980 ₽/ч</span><span class="raznos-status-pill raznos-pill-error lp-slot-mark">{{ t.mark_below }}</span></span></div>
+                    <div class="lp-slot-hint"><span>{{ t.plan_better }}</span><span class="raznos-row-chevron">›</span></div>
                     <div class="lp-slot is-peak"><span class="lp-slot-time">18–20</span><dc-import name="RaznosIcon" svc="samokat" size="sm"></dc-import><span class="lp-slot-name">Самокат · {{ t.peak_word }}</span><span class="lp-slot-end"><span class="raznos-num">1 300 ₽/ч</span><span class="raznos-status-pill raznos-pill-ok lp-slot-mark">{{ t.mark_above }}</span></span></div>
                   </div>
                   <p class="raznos-text-tiny">{{ t.sched_demo }}</p>
@@ -367,6 +429,7 @@
           </div>
         </div>
 
+
         <div class="lp-green" data-screen-label="Настоящие данные">
           <div class="lp-section" style="text-align:center">
             <div class="lp-stmt-icons"><dc-import name="RaznosIcon" svc="samokat" size="md"></dc-import><dc-import name="RaznosIcon" svc="vkusvill" size="md"></dc-import><dc-import name="RaznosIcon" svc="yandex-eda" size="md"></dc-import><dc-import name="RaznosIcon" svc="x5" size="md"></dc-import><dc-import name="RaznosIcon" svc="magnit" size="md"></dc-import></div>
@@ -374,27 +437,404 @@
           </div>
         </div>
 
-        <div class="lp-section" id="dohod" data-screen-label="Для кого">
-          <div class="lp-feature">
-            <div>
-              <h2 class="lp-h2">{{ t.who_h2 }}</h2>
-              <p class="lp-dek">{{ t.who_dek }}</p>
-            </div>
-            <div class="lp-feature-media">
-              <div class="raznos-card lp-card raznos-card-pad raznos-fx raznos-col raznos-gap12">
-                <div class="raznos-head-row"><span class="raznos-text-h3 raznos-head-title">{{ t.dw_title }}</span><span class="raznos-text-tiny">{{ t.who_week_range }}</span></div>
-                <div class="lp-week-card">
-                  <div class="lp-week-cell"><span class="lp-week-val">21 600 ₽</span><span class="lp-week-lab">{{ t.who_c_income }}</span><span class="lp-week-delta is-up">↑ 12%</span></div>
-                  <div class="lp-week-cell"><span class="lp-week-val">2 300 ₽</span><span class="lp-week-lab">{{ t.who_c_costs }}</span><span class="lp-week-delta is-flat">0%</span></div>
-                  <div class="lp-week-cell"><span class="lp-week-val">72</span><span class="lp-week-lab">{{ t.who_c_orders }}</span><span class="lp-week-delta is-up">↑ 9%</span></div>
+
+        <div class="lp-section" id="dohod" data-screen-label="Доход за неделю">
+          <h2 class="lp-h2">{{ t.who_h2 }}</h2>
+          <p class="lp-dek">{{ t.who_dek }}</p>
+          <div class="lp-week-grid">
+            <div class="lp-week-col">
+                <div class="raznos-card lp-card raznos-card-pad raznos-fx raznos-col raznos-gap12">
+                  <div class="raznos-head-row"><span class="raznos-text-h3 raznos-head-title">{{ t.dw_title }}</span><span class="raznos-text-tiny">{{ t.who_week_range }}</span></div>
+                  <div class="lp-week-card">
+                    <div class="lp-week-cell"><span class="lp-week-val">21 600 ₽</span><span class="lp-week-lab">{{ t.who_c_income }}</span><span class="lp-week-delta is-up">↑ 12%</span></div>
+                    <div class="lp-week-cell"><span class="lp-week-val">2 300 ₽</span><span class="lp-week-lab">{{ t.who_c_costs }}</span><span class="lp-week-delta is-flat">0%</span></div>
+                    <div class="lp-week-cell"><span class="lp-week-val">72</span><span class="lp-week-lab">{{ t.who_c_orders }}</span><span class="lp-week-delta is-up">↑ 9%</span></div>
+                  </div>
+                                  <div class="raznos-breakdown-row"><span>{{ t.who_net }}</span><span class="raznos-num lp-acc">19 300 ₽</span></div>
+                  <a href="#rezultaty" class="lp-week-recap"><span class="lp-week-recap-lab">{{ t.dw_recap }}</span><span class="raznos-status-pill raznos-pill-ok">{{ t.dw_new }}</span><span class="raznos-row-chevron">›</span></a>
                 </div>
-                <div class="raznos-breakdown-row"><span>{{ t.who_net }}</span><span class="raznos-num lp-acc">19 300 ₽</span></div>
-                <a href="#otchet" class="lp-week-recap"><span class="lp-week-recap-lab">{{ t.dw_recap }}</span><span class="raznos-status-pill raznos-pill-ok">{{ t.dw_new }}</span><span class="raznos-row-chevron">›</span></a>
+                <div class="raznos-card lp-card raznos-card-pad raznos-fx raznos-col raznos-gap8">
+                  <span class="raznos-text-small">{{ t.wr_bestday_lab }} <b class="lp-acc">вторник</b></span>
+                  <div class="lp-wr-days lp-ring-anim">
+                    <div class="lp-wr-day"><span class="lp-wr-ring" style="--pt:55%"></span><span class="lp-wr-daylab">пн</span></div>
+                    <div class="lp-wr-day"><span class="lp-wr-ring" style="--pt:100%"></span><span class="lp-wr-daylab">вт</span></div>
+                    <div class="lp-wr-day"><span class="lp-wr-ring" style="--pt:30%"></span><span class="lp-wr-daylab">ср</span></div>
+                    <div class="lp-wr-day"><span class="lp-wr-ring" style="--pt:72%"></span><span class="lp-wr-daylab">чт</span></div>
+                    <div class="lp-wr-day"><span class="lp-wr-ring" style="--pt:45%"></span><span class="lp-wr-daylab">пт</span></div>
+                    <div class="lp-wr-day"><span class="lp-wr-ring" style="--pt:60%"></span><span class="lp-wr-daylab">сб</span></div>
+                    <div class="lp-wr-day"><span class="lp-wr-ring" style="--pt:12%"></span><span class="lp-wr-daylab">вс</span></div>
+                  </div>
+                </div>
+            </div>
+            <div class="raznos-card lp-card raznos-card-pad raznos-fx raznos-col raznos-gap12">
+              <span class="raznos-text-small">{{ t.wr_top_lab }} <b class="lp-acc">ВкусВилл</b></span>
+              <div class="lp-svc-anim raznos-fx raznos-col raznos-gap12 lp-week-top-bars">
+                <div class="lp-svc-bar"><div class="lp-svc-bar-head"><span class="raznos-fx raznos-ac raznos-gap8"><dc-import name="RaznosIcon" svc="vkusvill" size="sm"></dc-import>ВкусВилл</span><span class="raznos-num">9 600 ₽</span></div><div class="lp-svc-track"><div class="lp-svc-fill" style="width:100%;background:var(--raznos-svc-vkusvill)"></div></div><span class="raznos-text-tiny">{{ t.wr_deliv1 }}</span></div>
+                <div class="lp-svc-bar"><div class="lp-svc-bar-head"><span class="raznos-fx raznos-ac raznos-gap8"><dc-import name="RaznosIcon" svc="samokat" size="sm"></dc-import>Самокат</span><span class="raznos-num">7 500 ₽</span></div><div class="lp-svc-track"><div class="lp-svc-fill" style="width:78%;background:var(--raznos-svc-samokat)"></div></div><span class="raznos-text-tiny">{{ t.wr_deliv2 }}</span></div>
+                <div class="lp-svc-bar"><div class="lp-svc-bar-head"><span class="raznos-fx raznos-ac raznos-gap8"><dc-import name="RaznosIcon" svc="yandex-eda" size="sm"></dc-import>Яндекс Про</span><span class="raznos-num">4 500 ₽</span></div><div class="lp-svc-track"><div class="lp-svc-fill" style="width:47%;background:var(--raznos-svc-yandex-eda)"></div></div><span class="raznos-text-tiny">{{ t.wr_deliv3 }}</span></div>
               </div>
             </div>
           </div>
         </div>
 
+
+        <div class="lp-band" id="nalog" data-screen-label="Остаётся на руках">
+          <div class="lp-section">
+            <div class="lp-feature">
+              <div>
+                <h2 class="lp-h2">{{ t.keep_h2 }}</h2>
+                <p class="lp-dek">{{ t.keep_dek }}</p>
+                <ul class="lp-ul">
+                  <li>{{ t.keep_li1 }}</li>
+                  <li>{{ t.keep_li2 }}</li>
+                </ul>
+              </div>
+              <div class="lp-feature-media">
+                <div class="raznos-card lp-card raznos-card-pad">
+                  <div class="raznos-head-row"><span class="raznos-text-h3 raznos-head-title">{{ t.tax_card_title }}</span><span class="raznos-text-tiny">{{ t.tax_card_period }}</span></div>
+                  <div class="raznos-breakdown-row"><span class="raznos-fx raznos-col"><span>{{ t.tax_r_accr }}</span><span class="raznos-text-tiny">{{ t.keep_accr_note }}</span></span><span class="raznos-num">92 000 ₽</span></div>
+                  <div class="raznos-breakdown-row"><span>{{ t.tax_r_ded }}</span><span class="raznos-num" style="color:var(--raznos-red)">− 1 400 ₽</span></div>
+                  <div class="raznos-breakdown-row"><span>{{ t.tax_r_park }}</span><span class="raznos-num" style="color:var(--raznos-red)">− 600 ₽</span></div>
+                  <div class="raznos-breakdown-row"><span>{{ t.keep_r_exp }}</span><span class="raznos-num" style="color:var(--raznos-red)">− 9 200 ₽</span></div>
+                  <div class="raznos-breakdown-row"><span class="raznos-fx raznos-col"><span>{{ t.keep_r_tax }}</span><span class="raznos-text-tiny">{{ t.tax_due }}</span></span><span class="raznos-num" style="color:var(--raznos-red)">− 5 400 ₽</span></div>
+                  <div class="raznos-breakdown-row lp-total-row"><span>{{ t.keep_r_net }}</span><span class="raznos-num lp-acc">75 400 ₽</span></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="lp-plain" id="rezultaty" data-screen-label="Результаты">
+          <div class="lp-section">
+            <div class="lp-narrow" style="margin:0 auto;text-align:center">
+              <h2 class="lp-h2">{{ t.stat_h2 }}</h2>
+              <p class="lp-dek" style="margin:0 auto">{{ t.stat_dek }}</p>
+            </div>
+            <div class="lp-stat-showcase">
+              <div class="raznos-card lp-card raznos-card-pad">
+                <span class="raznos-text-h3">{{ statUnit }}</span>
+                <div class="raznos-segmented" style="margin-top:10px">
+                  <button type="button" class="{{ statTotalCls }}" onClick="{{ setStatTotal }}">{{ t.stat_tab_total }}</button>
+                  <button type="button" class="{{ statHourCls }}" onClick="{{ setStatHour }}">{{ t.stat_tab_hour }}</button>
+                </div>
+                <div class="lp-bars lp-bars-solid lp-stat-anim" style="margin-top:12px">
+                  <sc-for list="{{ statMonths }}" as="m" hint-placeholder-count="6">
+                    <div class="lp-bcol"><span class="lp-bval">{{ m.val }}</span><div class="lp-btrack"><div class="{{ m.fillCls }}" style="{{ m.barStyle }}"></div><span class="lp-bavg" style="{{ m.avgStyle }}"></span></div><span class="lp-blabel">{{ m.label }}</span></div>
+                  </sc-for>
+                </div>
+                <div class="raznos-fx raznos-ac raznos-gap8" style="margin-top:10px"><span class="lp-bavg-key"></span><span class="raznos-text-tiny">{{ t.stat_avg_note }}</span></div>
+              </div>
+              <div class="raznos-card lp-card raznos-card-pad">
+                <span class="raznos-text-small">{{ t.stat_card_cohort }}</span>
+                <div class="raznos-breakdown-row"><span>{{ t.stat_card_my }}</span><span class="raznos-num">1 180 ₽</span></div>
+                <div class="raznos-breakdown-row"><span>{{ t.stat_card_median }}</span><span class="raznos-num">1 020 ₽</span></div>
+                <span class="raznos-status-pill raznos-pill-ok" style="align-self:flex-start">{{ t.stat_card_above }}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+<!-- СКРЫТО обратимо: Заказ под рукой, отключено после отказа от режима Работа, вернуть при необходимости
+        <div class="lp-section" data-screen-label="Активный заказ">
+          <div class="lp-feature">
+            <div>
+              <h2 class="lp-h2">{{ t.act_h2 }}</h2>
+              <p class="lp-dek">{{ t.act_dek }}</p>
+            </div>
+            <div class="lp-feature-media">
+              <div class="raznos-card lp-card raznos-card-pad raznos-fx raznos-col raznos-gap12">
+                <div class="raznos-head-row">
+                  <span class="raznos-fx raznos-gap8" style="align-items:center"><dc-import name="RaznosIcon" svc="vkusvill" size="sm"></dc-import><span class="raznos-text-h3">ВкусВилл</span></span>
+                  <span class="raznos-status-pill raznos-pill-ok">{{ t.act_status }}</span>
+                </div>
+                <div class="raznos-head-row"><span class="raznos-text-small">{{ t.act_meta }}</span><span class="raznos-num">320 ₽</span></div>
+                <dc-import name="RaznosRouteMap" pickupLabel="Забрал" dropLabel="Доставить" pickupAddr="ВкусВилл, Садовая 3" dropAddr="Клин 8" distance="2,1 км"></dc-import>
+                <dc-import name="RaznosOrderLink" svc="vkusvill" svcTitle="ВкусВилл" orderNo="№48200" orderRef="48200" app="ready" launch="ok"></dc-import>
+              </div>
+            </div>
+          </div>
+        </div>
+        СКРЫТО обратимо конец -->
+
+
+        <div class="lp-band" id="prognoz" data-screen-label="Прогноз">
+          <div class="lp-section">
+          <div class="lp-feature">
+            <div class="lp-feature-media">
+              <div class="raznos-fx raznos-col raznos-gap12">
+                <div class="raznos-card lp-card raznos-card-pad raznos-fx raznos-col raznos-gap8"><div class="raznos-head-row"><span class="raznos-text-h3 raznos-head-title">{{ t.prog_map_now }}</span><span class="raznos-text-tiny">{{ t.prog_map_src }}</span></div><div class="lp-zone-map"><dc-import name="RaznosCourierMap" couriers="{{ false }}" hideCouriers="{{ true }}" hideMe="{{ true }}" zones="{{ mapZones }}"></dc-import></div><div class="lp-zone-list"><div class="lp-zone-row"><span class="lp-zone-rank">1</span><span>Тверской</span><span class="raznos-num">1 320 ₽/ч</span></div><div class="lp-zone-row"><span class="lp-zone-rank">2</span><span>Пресненский</span><span class="raznos-num">1 180 ₽/ч</span></div><div class="lp-zone-row"><span class="lp-zone-rank">3</span><span>Басманный</span><span class="raznos-num">1 050 ₽/ч</span></div></div><span class="raznos-text-tiny">{{ t.prog_map_demo }}</span></div>
+                <div class="raznos-card lp-card raznos-card-pad">
+                  <span class="raznos-text-h3">{{ t.prog_map_title }}</span>
+                  <div class="{{ barsCls }}">
+                    <div class="lp-bcol"><span class="lp-bval">560</span><div class="lp-btrack"><div class="lp-bfill" style="height:43%"></div></div><span class="lp-blabel">10</span></div>
+                    <div class="lp-bcol"><span class="lp-bval">820</span><div class="lp-btrack"><div class="lp-bfill" style="height:63%"></div></div><span class="lp-blabel">12</span></div>
+                    <div class="lp-bcol"><span class="lp-bval">640</span><div class="lp-btrack"><div class="lp-bfill" style="height:49%"></div></div><span class="lp-blabel">14</span></div>
+                    <div class="lp-bcol"><span class="lp-bval">900</span><div class="lp-btrack"><div class="lp-bfill" style="height:69%"></div></div><span class="lp-blabel">16</span></div>
+                    <div class="lp-bcol"><span class="lp-bval">1,3к</span><div class="lp-btrack"><div class="lp-bfill is-peak" style="height:100%"></div></div><span class="lp-blabel">18</span></div>
+                    <div class="lp-bcol"><span class="lp-bval">1,2к</span><div class="lp-btrack"><div class="lp-bfill is-peak" style="height:92%"></div></div><span class="lp-blabel">20</span></div>
+                    <div class="lp-bcol"><span class="lp-bval">820</span><div class="lp-btrack"><div class="lp-bfill" style="height:63%"></div></div><span class="lp-blabel">22</span></div>
+                  </div>
+                  <div class="lp-hlegend"><span><span class="lp-hleg-sw" style="background:var(--raznos-green-deep)"></span>{{ t.prog_leg_peak }}</span><span><span class="lp-hleg-sw" style="background:var(--raznos-green-tint)"></span>{{ t.prog_leg_calm }}</span></div>
+                </div>
+              </div>            </div>
+            <div>
+              <h2 class="lp-h2">{{ t.prog_h2_pre }} <span class="lp-acc">{{ t.prog_h2_acc }}</span></h2>
+              <span class="lp-live"><span class="lp-live-dot"></span>{{ t.prog_live }}</span>
+              <p class="lp-dek">{{ t.prog_dek }}</p>
+            </div>
+          </div>
+        </div>
+
+        </div>
+
+        <div class="lp-plain" data-screen-label="Сравнение сервисов">
+          <div class="lp-section">
+            <h2 class="lp-h2">{{ t.cmp_h2 }}</h2>
+            <p class="lp-dek">{{ t.cmp_dek }}</p>
+            <div class="lp-cmp-cards">
+              <div class="raznos-card lp-card raznos-card-pad">
+                <div class="lp-cmp-card-head"><span class="lp-cmp-card-name"><dc-import name="RaznosIcon" svc="samokat" size="sm"></dc-import>Самокат</span><span class="raznos-status-pill raznos-pill-ok">{{ t.cmp_rating_word }}&nbsp;4,6</span></div>
+                <div class="lp-cmp-rate"><span class="raznos-text-h2">1 180 ₽/ч</span><span class="raznos-text-tiny">980–1 320 ₽/ч · {{ t.cmp_order_word }} 300 ₽</span></div>
+                <div class="raznos-breakdown-row"><span>{{ t.cmp_couriers_label }}</span><span class="raznos-num">3 200</span></div>
+                <div class="raznos-breakdown-row"><span>{{ t.cmp_reviews_label }}</span><span class="raznos-num">940</span></div>
+              </div>
+              <div class="raznos-card lp-card raznos-card-pad">
+                <div class="lp-cmp-card-head"><span class="lp-cmp-card-name"><dc-import name="RaznosIcon" svc="vkusvill" size="sm"></dc-import>ВкусВилл</span><span class="raznos-status-pill raznos-pill-ok">{{ t.cmp_rating_word }}&nbsp;4,4</span></div>
+                <div class="lp-cmp-rate"><span class="raznos-text-h2">1 040 ₽/ч</span><span class="raznos-text-tiny">880–1 180 ₽/ч · {{ t.cmp_order_word }} 290 ₽</span></div>
+                <div class="raznos-breakdown-row"><span>{{ t.cmp_couriers_label }}</span><span class="raznos-num">2 100</span></div>
+                <div class="raznos-breakdown-row"><span>{{ t.cmp_reviews_label }}</span><span class="raznos-num">720</span></div>
+              </div>
+              <div class="raznos-card lp-card raznos-card-pad">
+                <div class="lp-cmp-card-head"><span class="lp-cmp-card-name"><dc-import name="RaznosIcon" svc="yandex-eda" size="sm"></dc-import>Яндекс Про</span><span class="raznos-status-pill raznos-pill-ok">{{ t.cmp_rating_word }}&nbsp;4,2</span></div>
+                <div class="lp-cmp-rate"><span class="raznos-text-h2">980 ₽/ч</span><span class="raznos-text-tiny">820–1 120 ₽/ч · {{ t.cmp_order_word }} 270 ₽</span></div>
+                <div class="raznos-breakdown-row"><span>{{ t.cmp_couriers_label }}</span><span class="raznos-num">5 400</span></div>
+                <div class="raznos-breakdown-row"><span>{{ t.cmp_reviews_label }}</span><span class="raznos-num">1 630</span></div>
+              </div>
+            </div>
+            <p class="lp-demo-tag">{{ t.cmp_demo }}</p>
+            <h3 class="raznos-text-h3" style="margin:32px 0 0">{{ t.mkt_h2_pre }} {{ t.mkt_h2_acc }}</h3>
+            <div class="lp-two" style="margin-top:14px">
+              <sc-for list="{{ reviews }}" as="r" hint-placeholder-count="2">
+                <dc-import name="RaznosReviewCard" category="{{ r.category }}" authorCity="{{ r.authorCity }}" rating="{{ r.rating }}" confirmed="{{ r.confirmed }}" text="{{ r.text }}" date="{{ r.date }}" ordersLabel="{{ r.ordersLabel }}" courierLikes="{{ r.courierLikes }}" courierDislikes="{{ r.courierDislikes }}" userLikes="{{ r.userLikes }}" userDislikes="{{ r.userDislikes }}" anonNick="{{ r.anonNick }}" anonHue="{{ r.anonHue }}" showLabels="{{ true }}" canVote="{{ false }}"></dc-import>
+              </sc-for>
+            </div>
+            <a class="lp-card lp-nb-teaser" href="{{ nbHref }}"><span class="raznos-fx raznos-col"><span class="lp-tax-t">{{ t.nb_h2_pre }} {{ t.nb_h2_acc }}</span><span class="raznos-text-small">{{ t.nb_teaser }}</span></span><span class="raznos-row-chevron">›</span></a>
+          </div>
+        </div>
+
+
+        <div class="lp-band" data-screen-label="Лента сообщений">
+          <div class="lp-section">
+          <div class="lp-feature">
+            <div>
+              <h2 class="lp-h2">{{ t.live_h2 }}</h2>
+              <span class="lp-live"><span class="lp-live-dot"></span>{{ t.live_badge }}</span>
+              <p class="lp-dek">{{ t.live_dek }}</p>
+            </div>
+            <div class="lp-feature-media">
+              <div class="raznos-fx raznos-col raznos-gap12">
+                <div class="raznos-card lp-card lp-cmap-card">
+                  <div class="lp-cmap"><dc-import name="RaznosCourierMap" fill="{{ true }}" hideMe="{{ true }}" pins="{{ cmapPins }}"></dc-import><span class="lp-cmap-chip"><span class="lp-live-dot"></span>{{ t.cmap_title }}</span></div>
+                  <p class="lp-cmap-note">{{ t.cmap_note }}</p>
+                </div>
+                <dc-import name="RaznosLiveToday" items="{{ liveItems }}" cityTitle="Москва"></dc-import>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        </div>
+
+        <div class="lp-section" data-screen-label="Лидерборд">
+          <div class="lp-feature">
+            <div>
+              <h2 class="lp-h2">{{ t.lb_h2_pre }} <span class="lp-acc">{{ t.lb_h2_acc }}</span></h2>
+              <p class="lp-dek">{{ t.lb_dek }}</p>
+              <p class="raznos-text-small lp-lead-prof">{{ t.lb_prof }}</p>
+            </div>
+            <div class="lp-feature-media">
+              <div class="raznos-card lp-card raznos-card-pad raznos-fx raznos-col raznos-gap12">
+                <div class="raznos-head-row"><span class="raznos-text-h3 raznos-head-title">{{ t.lb_card_title }}</span><span class="raznos-text-tiny">Москва · {{ t.lb_week }}</span></div>
+                <div class="lp-lead-me lp-shine-anim">
+                  <div class="lp-lead-me-left"><span class="lp-lead-me-place">{{ t.lb_me_place }}</span><span class="lp-lead-me-sub">{{ t.lb_me_shift }}</span></div>
+                  <div class="lp-lead-me-end"><span class="lp-lead-me-val">21 600 ₽</span><span class="lp-lead-me-metric">{{ t.lb_week }}</span></div>
+                </div>
+                <span class="raznos-text-small lp-lead-near">{{ t.lb_near }}</span>
+                <div class="lp-lead-list">
+                  <div class="lp-lead-row"><span class="lp-lead-rank">27</span><span class="lp-lead-face" style="background:oklch(0.93 0.05 255);color:oklch(0.38 0.11 255);border:0">В</span><span class="lp-lead-namecol"><span class="lp-lead-name">Выдра</span><span class="lp-lead-sub">{{ t.lb_anon }}</span></span><span class="lp-lead-val">21 980 ₽</span></div>
+                  <div class="lp-lead-row is-me"><span class="lp-lead-rank">28</span><span class="lp-lead-face" style="background:var(--raznos-dark);color:var(--raznos-on-dark);border:0">Я</span><span class="lp-lead-namecol"><span class="lp-lead-name">{{ t.lb_you }}</span><span class="lp-lead-sub">Москва · {{ t.lb_bike }}</span></span><span class="lp-lead-val">21 600 ₽</span></div>
+                  <div class="lp-lead-row"><span class="lp-lead-rank">29</span><span class="lp-lead-face" style="background:oklch(0.93 0.05 300);color:oklch(0.38 0.11 300);border:0">Л</span><span class="lp-lead-namecol"><span class="lp-lead-name">Лис</span><span class="lp-lead-sub">{{ t.lb_anon }}</span></span><span class="lp-lead-val">21 350 ₽</span></div>
+                </div>
+                <span class="raznos-text-small lp-lead-gap">{{ t.lb_gap }}</span>
+                <p class="raznos-text-tiny">{{ t.lb_foot }}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="lp-band" id="podkl" data-screen-label="Подключение сервиса">
+          <div class="lp-section">
+          <div class="lp-narrow" style="margin:0 auto">
+            <h2 class="lp-h2">{{ t.conn_h2 }}</h2>
+            <p class="lp-dek">{{ t.conn_dek }}</p>
+          </div>
+          <div class="lp-steps">
+            <div class="raznos-card lp-card lp-step">
+              <div class="lp-step-head"><span class="lp-step-num">1</span><p class="lp-step-t">{{ t.conn_s1 }}</p></div>
+              <div class="lp-svc-pick">
+                <div class="lp-svc-pick-row"><dc-import name="RaznosIcon" svc="samokat" size="sm"></dc-import>Самокат<span class="raznos-status-pill raznos-pill-ok lp-svc-pick-pill">{{ t.conn_pill_done }}</span></div>
+                <div class="lp-svc-pick-row"><dc-import name="RaznosIcon" svc="vkusvill" size="sm"></dc-import>ВкусВилл<span class="raznos-status-pill raznos-pill-ok lp-svc-pick-pill">{{ t.conn_pill_done }}</span></div>
+                <div class="lp-svc-pick-row"><dc-import name="RaznosIcon" svc="yandex-eda" size="sm"></dc-import>Яндекс Про</div>
+              </div>
+              <p class="raznos-text-tiny">{{ t.conn_s1_note }}</p>
+            </div>
+            <div class="raznos-card lp-card lp-step">
+              <div class="lp-step-head"><span class="lp-step-num">2</span><p class="lp-step-t">{{ t.conn_s2 }}</p></div>
+              <div class="raznos-field-box">{{ t.conn_s2_field }}</div>
+              <p class="raznos-text-tiny">{{ t.conn_s2_note }}</p>
+            </div>
+            <div class="raznos-card lp-card lp-step">
+              <div class="lp-step-head"><span class="lp-step-num">3</span><p class="lp-step-t">{{ t.conn_s3 }}</p></div>
+              <span class="raznos-status-pill raznos-pill-ok" style="align-self:flex-start">{{ t.conn_s3_pill }}</span>
+              <p class="raznos-text-tiny">{{ t.conn_s3_note }}</p>
+            </div>
+          </div>
+          <h3 class="raznos-text-h3" style="margin:40px 0 0">{{ t.svc_h2 }}</h3>
+          <p class="lp-dek">{{ t.svc_dek }}</p>
+            <div class="lp-svc-grid">
+              <div class="lp-svc lp-card"><dc-import name="RaznosIcon" svc="yandex-eda" size="sm"></dc-import>Яндекс Еда</div>
+              <div class="lp-svc lp-card"><dc-import name="RaznosIcon" svc="yandex-lavka" size="sm"></dc-import>Яндекс Лавка</div>
+              <div class="lp-svc lp-card"><dc-import name="RaznosIcon" svc="vkusvill" size="sm"></dc-import>ВкусВилл</div>
+              <div class="lp-svc lp-card"><dc-import name="RaznosIcon" svc="samokat" size="sm"></dc-import>Самокат</div>
+              <div class="lp-svc lp-card"><dc-import name="RaznosIcon" svc="ozon-fresh" size="sm"></dc-import>Ozon Fresh</div>
+              <div class="lp-svc lp-card"><dc-import name="RaznosIcon" svc="kuper" size="sm"></dc-import>Купер</div>
+              <div class="lp-svc lp-card"><dc-import name="RaznosIcon" svc="x5" size="sm"></dc-import>X5</div>
+              <div class="lp-svc lp-card"><dc-import name="RaznosIcon" svc="magnit" size="sm"></dc-import>Магнит</div>
+              <div class="lp-svc lp-card"><dc-import name="RaznosIcon" svc="dodo" size="sm"></dc-import>Додо</div>
+              <div class="lp-svc lp-card"><dc-import name="RaznosIcon" svc="dostaevsky" size="sm"></dc-import>Достаевский</div>
+              <div class="lp-svc lp-card"><dc-import name="RaznosIcon" svc="delivery" size="sm"></dc-import>Деливери</div>
+            </div>
+            <p class="lp-svc-soon-t">{{ t.svc_soon }}</p>
+            <div class="lp-svc-grid lp-svc-grid-soon">
+              <div class="lp-svc lp-card lp-svc-soon"><dc-import name="RaznosIcon" svc="wb-courier" size="sm"></dc-import>WB курьер</div>
+              <div class="lp-svc lp-card lp-svc-soon"><dc-import name="RaznosIcon" svc="ozon-courier" size="sm"></dc-import>Ozon курьер</div>
+              <div class="lp-svc lp-card lp-svc-soon"><dc-import name="RaznosIcon" svc="yandex-delivery" size="sm"></dc-import>Яндекс Доставка</div>
+              <div class="lp-svc lp-card lp-svc-soon"><dc-import name="RaznosIcon" svc="dostavista" size="sm"></dc-import>Достависта</div>
+              <div class="lp-svc lp-card lp-svc-soon"><dc-import name="RaznosIcon" svc="flowwow" size="sm"></dc-import>Flowwow</div>
+            </div>
+            <p class="lp-demo-tag">{{ t.svc_note }}</p>
+          <p class="raznos-text-small lp-conn-cities">{{ t.conn_cities }}</p>
+        </div>
+
+        </div>
+
+        <div class="lp-section" data-screen-label="Обзор">
+          <div>
+          <div class="lp-narrow" style="margin:0 auto;text-align:center">
+            <h2 class="lp-h2">{{ t.ov_h2 }}</h2>
+            <p class="lp-dek" style="margin:0 auto">{{ t.ov_dek }}</p>
+          </div>
+          <div class="lp-ov-grid">
+            <div class="lp-ov-tile"><span class="lp-ov-num">1</span><div><p class="lp-ov-t">{{ t.ov_t1_h }}</p><p class="lp-ov-d">{{ t.ov_t1_d }}</p></div></div>
+            <div class="lp-ov-tile"><span class="lp-ov-num">2</span><div><p class="lp-ov-t">{{ t.ov_t2_h }}</p><p class="lp-ov-d">{{ t.ov_t2_d }}</p></div></div>
+            <div class="lp-ov-tile"><span class="lp-ov-num">3</span><div><p class="lp-ov-t">{{ t.ov_t3_h }}</p><p class="lp-ov-d">{{ t.ov_t3_d }}</p></div></div>
+            <div class="lp-ov-tile"><span class="lp-ov-num">4</span><div><p class="lp-ov-t">{{ t.ov_t4_h }}</p><p class="lp-ov-d">{{ t.ov_t4_d }}</p></div></div>
+            <div class="lp-ov-tile"><span class="lp-ov-num">5</span><div><p class="lp-ov-t">{{ t.ov_t5_h }}</p><p class="lp-ov-d">{{ t.ov_t5_d }}</p></div></div>
+            <div class="lp-ov-tile"><span class="lp-ov-num">6</span><div><p class="lp-ov-t">{{ t.ov_t6_h }}</p><p class="lp-ov-d">{{ t.ov_t6_d }}</p></div></div>
+            <div class="lp-ov-tile"><span class="lp-ov-num">7</span><div><p class="lp-ov-t">{{ t.ov_t7_h }}</p><p class="lp-ov-d">{{ t.ov_t7_d }}</p></div></div>
+          </div>
+        </div>
+
+        </div>
+
+        <div class="lp-section" data-screen-label="FAQ">
+          <h2 class="lp-h2">{{ t.faq_h2 }}</h2>
+          <div style="margin-top:14px">
+            <details class="lp-faq-item" open><summary class="lp-faq-q">{{ t.faq_q1 }}</summary><p class="lp-faq-a">{{ t.faq_a1 }}</p></details>
+            <details class="lp-faq-item"><summary class="lp-faq-q">{{ t.faq_q10 }}</summary><p class="lp-faq-a">{{ t.faq_a10 }}</p></details>
+            <details class="lp-faq-item"><summary class="lp-faq-q">{{ t.faq_q2 }}</summary><p class="lp-faq-a">{{ t.faq_a2 }}</p></details>
+            <details class="lp-faq-item"><summary class="lp-faq-q">{{ t.faq_q3 }}</summary><p class="lp-faq-a">{{ t.faq_a3 }}</p></details>
+            <details class="lp-faq-item"><summary class="lp-faq-q">{{ t.faq_q9 }}</summary><p class="lp-faq-a">{{ t.faq_a9 }}</p></details>
+            <details class="lp-faq-item"><summary class="lp-faq-q">{{ t.faq_q12 }}</summary><p class="lp-faq-a">{{ t.faq_a12 }}</p></details>
+            <details class="lp-faq-item"><summary class="lp-faq-q">{{ t.faq_q11 }}</summary><p class="lp-faq-a">{{ t.faq_a11 }}</p></details>
+            <details class="lp-faq-item"><summary class="lp-faq-q">{{ t.faq_q5 }}</summary><p class="lp-faq-a">{{ t.faq_a5 }}</p></details>
+            <details class="lp-faq-item"><summary class="lp-faq-q">{{ t.faq_q6 }}</summary><p class="lp-faq-a">{{ t.faq_a6 }}</p></details>
+            <details class="lp-faq-item"><summary class="lp-faq-q">{{ t.faq_q7 }}</summary><p class="lp-faq-a">{{ t.faq_a7 }} <a href="https://ru.wikipedia.org/wiki/%D0%A0%D0%B0%D0%B1%D0%BE%D1%82%D0%BD%D0%B8%D0%BA_%D0%BF%D0%BB%D0%B0%D1%82%D1%84%D0%BE%D1%80%D0%BC%D1%8B" target="_blank" rel="noopener nofollow">{{ t.faq_gig_link }}</a>: <a href="https://gridwise.io" target="_blank" rel="noopener nofollow">Gridwise</a>, <a href="https://www.worksolo.com" target="_blank" rel="noopener nofollow">Solo</a></p></details>
+          </div>
+        </div>
+
+
+        <!-- СКРЫТО обратимо начало
+        <div class="lp-dark" id="zakazy" data-screen-label="Входящие заказы">
+          <div class="lp-section">
+            <div class="lp-feature">
+              <div>
+                <h2 class="lp-h2">{{ t.z_h2_pre }} <span class="lp-acc-d">{{ t.z_h2_acc }}</span></h2>
+                <p class="lp-dek">{{ t.z_dek }}</p>
+                <ul class="lp-ul">
+                  <li>{{ t.z_li1 }}</li>
+                  <li>{{ t.z_li2 }}</li>
+                  <li>{{ t.z_li3 }}</li>
+                </ul>
+              </div>
+              <div class="lp-feature-media">
+                <div class="{{ feedCls }}">
+                  <div class="raznos-list-row"><dc-import name="RaznosIcon" svc="samokat" size="sm"></dc-import><div class="raznos-list-main"><span class="raznos-list-title">Самокат · 3,2 км</span><span class="raznos-text-small">18 мин · 4 кг</span></div><div class="raznos-list-end"><span class="raznos-num">480 ₽</span><span class="raznos-status-pill raznos-pill-ok">≈ 1 280 ₽/ч</span></div></div>
+                  <div class="raznos-list-row"><dc-import name="RaznosIcon" svc="vkusvill" size="sm"></dc-import><div class="raznos-list-main"><span class="raznos-list-title">ВкусВилл · 2,1 км</span><span class="raznos-text-small">14 мин · 2 кг</span></div><div class="raznos-list-end"><span class="raznos-num">320 ₽</span><span class="raznos-text-tiny">≈ 1 040 ₽/ч</span></div></div>
+                  <div class="lp-neworder"><div class="raznos-list-row lp-ord-new"><dc-import name="RaznosIcon" svc="magnit" size="sm"></dc-import><div class="raznos-list-main"><span class="raznos-list-title">Магнит · 1,8 км</span><span class="raznos-text-small">12 мин · 3 кг</span><span class="lp-new-badge"><span class="lp-new-dot"></span>новый · 0:15</span></div><div class="raznos-list-end"><span class="raznos-num">260 ₽</span><span class="raznos-status-pill raznos-pill-error">≈ 720 ₽/ч</span></div></div></div>
+                </div>
+              </div>
+            </div>
+            
+          </div>
+        </div>
+        СКРЫТО обратимо конец -->
+
+
+        <!-- СКРЫТО обратимо начало
+        <div class="lp-band" data-screen-label="Предложение вблизи">
+          <div class="lp-section">
+            <div class="lp-feature">
+              <div>
+                <h2 class="lp-h2">{{ t.offer_title }}</h2>
+                <p class="lp-dek">{{ t.offer_dek }}</p>
+              </div>
+              <div class="lp-feature-media">
+                <dc-import name="RaznosIncomingOffer" svc="{{ offer.svc }}" title="{{ offer.title }}" pay="{{ offer.pay }}" pickupAddr="{{ offer.pickupAddr }}" dropAddr="{{ offer.dropAddr }}" etaPoint="{{ offer.etaPoint }}" etaTotal="{{ offer.etaTotal }}" distance="{{ offer.distance }}" weight="{{ offer.weight }}" packages="{{ offer.packages }}" timerLabel="{{ offer.timerLabel }}" timerFillStyle="{{ offer.timerFillStyle }}" timerWarn="{{ true }}" isIdle="{{ true }}" canDecline="{{ true }}" estimate="{{ offer.estimate }}"></dc-import>
+              </div>
+            </div>
+          </div>
+        </div>
+        СКРЫТО обратимо конец -->
+
+<!-- СКРЫТО обратимо: стат-полоса Публичный рынок сервисов и отзывы курьеров
+        <div class="lp-band lp-statband" data-screen-label="Цифры">
+          <div class="lp-section" style="text-align:center">
+            <h2 class="lp-h2" style="max-width:760px;margin:0 auto 6px">{{ t.sb_head }}</h2>
+            <div class="lp-statband-in">
+              <div class="lp-stat"><span class="lp-stat-num">11</span><span class="lp-stat-lab">{{ t.sb_services }}</span></div>
+              <div class="lp-stat"><span class="lp-stat-num">1 105</span><span class="lp-stat-lab">{{ t.sb_cities }}</span></div>
+              <div class="lp-stat"><span class="lp-stat-num">0 ₽</span><span class="lp-stat-lab">{{ t.sb_free }}</span></div>
+            </div>
+          </div>
+        </div>
+        СКРЫТО обратимо конец -->
+
+
+        <div class="lp-dark" data-screen-label="Финальный CTA">
+          <div class="lp-final">
+            <h2>{{ t.final_h2 }}</h2>
+            <p class="lp-dek" style="text-align:center">{{ t.final_dek }}</p>
+            <p class="lp-final-proof">{{ t.final_proof }}</p>
+            <sc-if value="{{ showProto }}"><a class="lp-btn lp-btn-accent" href="{{ protoHref }}" target="_blank" rel="noopener">{{ t.final_cta }}</a></sc-if>
+            <sc-if value="{{ notProto }}"><span class="lp-btn lp-proto-soon">{{ t.final_soon }}</span></sc-if>
+            <a class="lp-btn lp-btn-line" href="https://t.me/raznos_app_bot" target="_blank" rel="noopener">{{ t.final_bot }}</a>
+            <p class="lp-fine">{{ t.data_note }}</p>
+          </div>
+        </div>
+
+<!-- СКРЫТО обратимо: блоки убраны при сокращении лендинга 8 октября 2026
         <div class="lp-band" id="otchet" data-screen-label="Недельный отчёт">
           <div class="lp-section">
             <div class="lp-narrow" style="margin:0 auto;text-align:center">
@@ -430,37 +870,6 @@
                   <div class="lp-svc-bar"><div class="lp-svc-bar-head"><span class="raznos-fx raznos-ac raznos-gap8"><dc-import name="RaznosIcon" svc="yandex-eda" size="sm"></dc-import>Яндекс Про</span><span class="raznos-num">4 500 ₽</span></div><div class="lp-svc-track"><div class="lp-svc-fill" style="width:47%;background:var(--raznos-svc-yandex-eda)"></div></div><span class="raznos-text-tiny">{{ t.wr_deliv3 }}</span></div>
                 </div>
               </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="lp-section" id="prognoz" data-screen-label="Прогноз">
-          <div class="lp-feature">
-            <div class="lp-feature-media">
-              <div class="raznos-fx raznos-col raznos-gap12">
-                <dc-import name="RaznosAreaMap" title="{{ t.prog_map_now }}" rows="{{ areaRows }}" source="{{ t.prog_map_src }}"></dc-import>
-                <div class="raznos-card lp-card raznos-card-pad">
-                  <span class="raznos-text-h3">{{ t.prog_map_title }}</span>
-                  <div class="{{ barsCls }}">
-                    <div class="lp-bcol"><span class="lp-bval">560</span><div class="lp-btrack"><div class="lp-bfill" style="height:43%"></div></div><span class="lp-blabel">10</span></div>
-                    <div class="lp-bcol"><span class="lp-bval">820</span><div class="lp-btrack"><div class="lp-bfill" style="height:63%"></div></div><span class="lp-blabel">12</span></div>
-                    <div class="lp-bcol"><span class="lp-bval">640</span><div class="lp-btrack"><div class="lp-bfill" style="height:49%"></div></div><span class="lp-blabel">14</span></div>
-                    <div class="lp-bcol"><span class="lp-bval">900</span><div class="lp-btrack"><div class="lp-bfill" style="height:69%"></div></div><span class="lp-blabel">16</span></div>
-                    <div class="lp-bcol"><span class="lp-bval">1,3к</span><div class="lp-btrack"><div class="lp-bfill is-peak" style="height:100%"></div></div><span class="lp-blabel">18</span></div>
-                    <div class="lp-bcol"><span class="lp-bval">1,2к</span><div class="lp-btrack"><div class="lp-bfill is-peak" style="height:92%"></div></div><span class="lp-blabel">20</span></div>
-                    <div class="lp-bcol"><span class="lp-bval">820</span><div class="lp-btrack"><div class="lp-bfill" style="height:63%"></div></div><span class="lp-blabel">22</span></div>
-                  </div>
-                  <div class="lp-hlegend"><span><span class="lp-hleg-sw" style="background:var(--raznos-green-deep)"></span>{{ t.prog_leg_peak }}</span><span><span class="lp-hleg-sw" style="background:var(--raznos-green-tint)"></span>{{ t.prog_leg_calm }}</span></div>
-                </div>
-              </div>            </div>
-            <div>
-              <h2 class="lp-h2">{{ t.prog_h2_pre }} <span class="lp-acc">{{ t.prog_h2_acc }}</span> {{ t.prog_h2_post }}</h2>
-              <p class="lp-dek">{{ t.prog_dek }}</p>
-              <ul class="lp-ul">
-                <li>{{ t.prog_li1 }}</li>
-                <li>{{ t.prog_li2 }}</li>
-                <li>{{ t.prog_li3 }}</li>
-              </ul>
             </div>
           </div>
         </div>
@@ -528,101 +937,26 @@
           </div>
         </div>
 
-        <div class="lp-band" data-screen-label="Статистика">
-          <div class="lp-section">
-            <div class="lp-narrow" style="margin:0 auto;text-align:center">
-              <h2 class="lp-h2">{{ t.stat_h2 }}</h2>
-              <p class="lp-dek" style="margin:0 auto">{{ t.stat_dek }}</p>
-            </div>
-            <div class="lp-stat-showcase">
-              <div class="raznos-card lp-card raznos-card-pad">
-                <span class="raznos-text-h3">{{ statUnit }}</span>
-                <div class="raznos-segmented" style="margin-top:10px">
-                  <button type="button" class="{{ statTotalCls }}" onClick="{{ setStatTotal }}">{{ t.stat_tab_total }}</button>
-                  <button type="button" class="{{ statHourCls }}" onClick="{{ setStatHour }}">{{ t.stat_tab_hour }}</button>
-                </div>
-                <div class="lp-bars lp-bars-solid" style="margin-top:12px">
-                  <sc-for list="{{ statMonths }}" as="m" hint-placeholder-count="6">
-                    <div class="lp-bcol"><span class="lp-bval">{{ m.val }}</span><div class="lp-btrack"><div class="{{ m.fillCls }}" style="{{ m.barStyle }}"></div><span class="lp-bavg" style="{{ m.avgStyle }}"></span></div><span class="lp-blabel">{{ m.label }}</span></div>
-                  </sc-for>
-                </div>
-                <div class="raznos-fx raznos-ac raznos-gap8" style="margin-top:10px"><span class="lp-bavg-key"></span><span class="raznos-text-tiny">{{ t.stat_avg_note }}</span></div>
-              </div>
-              <div class="raznos-card lp-card raznos-card-pad">
-                <span class="raznos-text-small">{{ t.stat_card_cohort }}</span>
-                <div class="raznos-breakdown-row"><span>{{ t.stat_card_my }}</span><span class="raznos-num">1 180 ₽</span></div>
-                <div class="raznos-breakdown-row"><span>{{ t.stat_card_median }}</span><span class="raznos-num">1 020 ₽</span></div>
-                <span class="raznos-status-pill raznos-pill-ok" style="align-self:flex-start">{{ t.stat_card_above }}</span>
-              </div>
-            </div>
-            <div class="raznos-card lp-card raznos-card-pad" style="margin-top:16px">
-              <div class="raznos-head-row"><span class="raznos-text-h3">{{ t.stat_time_title }}</span><span class="raznos-text-tiny">{{ t.stat_time_sub }}</span></div>
-              <div class="lp-timebar">
-                <span class="lp-timeseg" style="width:68%;background:var(--raznos-green-deep)"></span>
-                <span class="lp-timeseg" style="width:15%;background:#5bb381"></span>
-                <span class="lp-timeseg" style="width:12%;background:var(--raznos-green-tint)"></span>
-                <span class="lp-timeseg" style="width:5%;background:#cfd6dd"></span>
-              </div>
-              <div class="lp-timelegend">
-                <span><span class="lp-timedot" style="background:var(--raznos-green-deep)"></span>{{ t.time_deliv }} 68%</span>
-                <span><span class="lp-timedot" style="background:#5bb381"></span>{{ t.time_wait }} 15%</span>
-                <span><span class="lp-timedot" style="background:var(--raznos-green-tint)"></span>{{ t.time_move }} 12%</span>
-                <span><span class="lp-timedot" style="background:#cfd6dd"></span>{{ t.time_idle }} 5%</span>
-              </div>
-            </div>
-            <div class="lp-stat-metrics">
-              <div class="raznos-metric-card lp-card"><span class="raznos-text-small">{{ t.stat_best_time }}</span><span class="raznos-metric-value">18–20</span><span class="raznos-text-tiny">{{ t.stat_best_time_sub }}</span></div>
-              <div class="raznos-metric-card lp-card"><span class="raznos-text-small">{{ t.stat_per_order }}</span><span class="raznos-metric-value">300 ₽</span><span class="raznos-text-tiny">{{ t.stat_avg_word }}</span></div>
-              <div class="raznos-metric-card lp-card"><span class="raznos-text-small">{{ t.stat_per_shift }}</span><span class="raznos-metric-value">14</span><span class="raznos-text-tiny">{{ t.stat_avg_word }}</span></div>
-            </div>
-          </div>
-        </div>
-
-<!-- СКРЫТО обратимо: Заказ под рукой, отключено после отказа от режима Работа, вернуть при необходимости
-        <div class="lp-section" data-screen-label="Активный заказ">
+        <div class="lp-section" id="nalog" data-screen-label="Удержания и налог">
           <div class="lp-feature">
             <div>
-              <h2 class="lp-h2">{{ t.act_h2 }}</h2>
-              <p class="lp-dek">{{ t.act_dek }}</p>
+              <h2 class="lp-h2">{{ t.tax_h2_pre }} <span class="lp-acc">{{ t.tax_h2_acc }}</span></h2>
+              <p class="lp-dek">{{ t.tax_dek }}</p>
+              <ul class="lp-ul">
+                <li>{{ t.tax_li1 }}</li>
+                <li>{{ t.tax_li2 }}</li>
+                <li>{{ t.tax_li3 }}</li>
+              </ul>
             </div>
             <div class="lp-feature-media">
-              <div class="raznos-card lp-card raznos-card-pad raznos-fx raznos-col raznos-gap12">
-                <div class="raznos-head-row">
-                  <span class="raznos-fx raznos-gap8" style="align-items:center"><dc-import name="RaznosIcon" svc="vkusvill" size="sm"></dc-import><span class="raznos-text-h3">ВкусВилл</span></span>
-                  <span class="raznos-status-pill raznos-pill-ok">{{ t.act_status }}</span>
-                </div>
-                <div class="raznos-head-row"><span class="raznos-text-small">{{ t.act_meta }}</span><span class="raznos-num">320 ₽</span></div>
-                <dc-import name="RaznosRouteMap" pickupLabel="Забрал" dropLabel="Доставить" pickupAddr="ВкусВилл, Садовая 3" dropAddr="Клин 8" distance="2,1 км"></dc-import>
-                <dc-import name="RaznosOrderLink" svc="vkusvill" svcTitle="ВкусВилл" orderNo="№48200" orderRef="48200" app="ready" launch="ok"></dc-import>
+              <div class="raznos-card lp-card raznos-card-pad">
+                <div class="raznos-head-row"><span class="raznos-text-h3 raznos-head-title">{{ t.tax_card_title }}</span><span class="raznos-text-tiny">{{ t.tax_card_period }}</span></div>
+                <div class="raznos-breakdown-row"><span>{{ t.tax_r_accr }}</span><span class="raznos-num">92 000 ₽</span></div>
+                <div class="raznos-breakdown-row"><span>{{ t.tax_r_ded }}</span><span class="raznos-num" style="color:var(--raznos-red)">− 1 400 ₽</span></div>
+                <div class="raznos-breakdown-row"><span>{{ t.tax_r_park }}</span><span class="raznos-num" style="color:var(--raznos-red)">− 600 ₽</span></div>
+                <div class="raznos-breakdown-row lp-total-row"><span>{{ t.tax_r_pay }}</span><span class="raznos-num">90 000 ₽</span></div>
+                <div class="lp-tax"><div class="raznos-fx raznos-col"><span class="lp-tax-t">{{ t.tax_tax }}</span><span class="raznos-text-tiny">{{ t.tax_due }}</span></div><span class="lp-tax-v">5 400 ₽</span></div>
               </div>
-            </div>
-          </div>
-        </div>
-        СКРЫТО обратимо конец -->
-
-        <div class="lp-section" id="podkl" data-screen-label="Подключение сервиса">
-          <div class="lp-narrow" style="margin:0 auto">
-            <h2 class="lp-h2">{{ t.conn_h2 }}</h2>
-            <p class="lp-dek">{{ t.conn_dek }}</p>
-          </div>
-          <div class="lp-steps">
-            <div class="raznos-card lp-card lp-step">
-              <div class="lp-step-head"><span class="lp-step-num">1</span><p class="lp-step-t">{{ t.conn_s1 }}</p></div>
-              <div class="lp-svc-pick">
-                <div class="lp-svc-pick-row"><dc-import name="RaznosIcon" svc="samokat" size="sm"></dc-import>Самокат<span class="raznos-status-pill raznos-pill-ok lp-svc-pick-pill">{{ t.conn_pill_done }}</span></div>
-                <div class="lp-svc-pick-row"><dc-import name="RaznosIcon" svc="vkusvill" size="sm"></dc-import>ВкусВилл<span class="raznos-status-pill raznos-pill-ok lp-svc-pick-pill">{{ t.conn_pill_done }}</span></div>
-                <div class="lp-svc-pick-row"><dc-import name="RaznosIcon" svc="yandex-eda" size="sm"></dc-import>Яндекс Про</div>
-              </div>
-            </div>
-            <div class="raznos-card lp-card lp-step">
-              <div class="lp-step-head"><span class="lp-step-num">2</span><p class="lp-step-t">{{ t.conn_s2 }}</p></div>
-              <div class="raznos-field-box">{{ t.conn_s2_field }}</div>
-              <p class="raznos-text-tiny">{{ t.conn_s2_note }}</p>
-            </div>
-            <div class="raznos-card lp-card lp-step">
-              <div class="lp-step-head"><span class="lp-step-num">3</span><p class="lp-step-t">{{ t.conn_s3 }}</p></div>
-              <span class="raznos-status-pill raznos-pill-ok" style="align-self:flex-start">{{ t.conn_s3_pill }}</span>
-              <p class="raznos-text-tiny">{{ t.conn_s3_note }}</p>
             </div>
           </div>
         </div>
@@ -632,47 +966,61 @@
             <h2 class="lp-h2">{{ t.svc_h2 }}</h2>
             <p class="lp-dek">{{ t.svc_dek }}</p>
             <div class="lp-svc-grid">
-              <div class="lp-svc lp-card"><dc-import name="RaznosIcon" svc="samokat" size="sm"></dc-import>Самокат</div>
+              <div class="lp-svc lp-card"><dc-import name="RaznosIcon" svc="yandex-eda" size="sm"></dc-import>Яндекс Еда</div>
+              <div class="lp-svc lp-card"><dc-import name="RaznosIcon" svc="yandex-lavka" size="sm"></dc-import>Яндекс Лавка</div>
               <div class="lp-svc lp-card"><dc-import name="RaznosIcon" svc="vkusvill" size="sm"></dc-import>ВкусВилл</div>
-              <div class="lp-svc lp-card"><dc-import name="RaznosIcon" svc="yandex-eda" size="sm"></dc-import>Яндекс Про</div>
-              <div class="lp-svc lp-card"><dc-import name="RaznosIcon" svc="delivery" size="sm"></dc-import>Деливери</div>
-              <div class="lp-svc lp-card"><dc-import name="RaznosIcon" svc="x5" size="sm"></dc-import>X5</div>
-              <div class="lp-svc lp-card"><dc-import name="RaznosIcon" svc="lenta" size="sm"></dc-import>Лента</div>
-              <div class="lp-svc lp-card"><dc-import name="RaznosIcon" svc="magnit" size="sm"></dc-import>Магнит</div>
+              <div class="lp-svc lp-card"><dc-import name="RaznosIcon" svc="samokat" size="sm"></dc-import>Самокат</div>
               <div class="lp-svc lp-card"><dc-import name="RaznosIcon" svc="ozon-fresh" size="sm"></dc-import>Ozon Fresh</div>
               <div class="lp-svc lp-card"><dc-import name="RaznosIcon" svc="kuper" size="sm"></dc-import>Купер</div>
+              <div class="lp-svc lp-card"><dc-import name="RaznosIcon" svc="x5" size="sm"></dc-import>X5</div>
+              <div class="lp-svc lp-card"><dc-import name="RaznosIcon" svc="magnit" size="sm"></dc-import>Магнит</div>
+              <div class="lp-svc lp-card"><dc-import name="RaznosIcon" svc="dodo" size="sm"></dc-import>Додо</div>
               <div class="lp-svc lp-card"><dc-import name="RaznosIcon" svc="dostaevsky" size="sm"></dc-import>Достаевский</div>
-              <div class="lp-svc lp-card"><dc-import name="RaznosIcon" svc="dostavista" size="sm"></dc-import>Достависта</div>
+              <div class="lp-svc lp-card"><dc-import name="RaznosIcon" svc="delivery" size="sm"></dc-import>Деливери</div>
+            </div>
+            <p class="lp-svc-soon-t">{{ t.svc_soon }}</p>
+            <div class="lp-svc-grid lp-svc-grid-soon">
+              <div class="lp-svc lp-card lp-svc-soon"><dc-import name="RaznosIcon" svc="wb-courier" size="sm"></dc-import>WB курьер</div>
+              <div class="lp-svc lp-card lp-svc-soon"><dc-import name="RaznosIcon" svc="ozon-courier" size="sm"></dc-import>Ozon курьер</div>
+              <div class="lp-svc lp-card lp-svc-soon"><dc-import name="RaznosIcon" svc="yandex-delivery" size="sm"></dc-import>Яндекс Доставка</div>
+              <div class="lp-svc lp-card lp-svc-soon"><dc-import name="RaznosIcon" svc="dostavista" size="sm"></dc-import>Достависта</div>
+              <div class="lp-svc lp-card lp-svc-soon"><dc-import name="RaznosIcon" svc="flowwow" size="sm"></dc-import>Flowwow</div>
             </div>
             <p class="lp-demo-tag">{{ t.svc_note }}</p>
           </div>
         </div>
 
-        <div class="lp-band" data-screen-label="Сравнение сервисов">
-          <div class="lp-section">
-            <h2 class="lp-h2">{{ t.cmp_h2 }}</h2>
-            <p class="lp-dek">{{ t.cmp_dek }}</p>
-            <div class="lp-cmp-cards">
-              <div class="raznos-card lp-card raznos-card-pad">
-                <div class="lp-cmp-card-head"><span class="lp-cmp-card-name"><dc-import name="RaznosIcon" svc="samokat" size="sm"></dc-import>Самокат</span><span class="raznos-status-pill raznos-pill-ok">{{ t.cmp_rating_word }}&nbsp;4,6</span></div>
-                <div class="lp-cmp-rate"><span class="raznos-text-h2">1 180 ₽/ч</span><span class="raznos-text-tiny">980–1 320 ₽/ч · {{ t.cmp_order_word }} 300 ₽</span></div>
-                <div class="raznos-breakdown-row"><span>{{ t.cmp_couriers_label }}</span><span class="raznos-num">3 200</span></div>
-                <div class="raznos-breakdown-row"><span>{{ t.cmp_reviews_label }}</span><span class="raznos-num">940</span></div>
-              </div>
-              <div class="raznos-card lp-card raznos-card-pad">
-                <div class="lp-cmp-card-head"><span class="lp-cmp-card-name"><dc-import name="RaznosIcon" svc="vkusvill" size="sm"></dc-import>ВкусВилл</span><span class="raznos-status-pill raznos-pill-ok">{{ t.cmp_rating_word }}&nbsp;4,4</span></div>
-                <div class="lp-cmp-rate"><span class="raznos-text-h2">1 040 ₽/ч</span><span class="raznos-text-tiny">880–1 180 ₽/ч · {{ t.cmp_order_word }} 290 ₽</span></div>
-                <div class="raznos-breakdown-row"><span>{{ t.cmp_couriers_label }}</span><span class="raznos-num">2 100</span></div>
-                <div class="raznos-breakdown-row"><span>{{ t.cmp_reviews_label }}</span><span class="raznos-num">720</span></div>
-              </div>
-              <div class="raznos-card lp-card raznos-card-pad">
-                <div class="lp-cmp-card-head"><span class="lp-cmp-card-name"><dc-import name="RaznosIcon" svc="yandex-eda" size="sm"></dc-import>Яндекс Про</span><span class="raznos-status-pill raznos-pill-ok">{{ t.cmp_rating_word }}&nbsp;4,2</span></div>
-                <div class="lp-cmp-rate"><span class="raznos-text-h2">980 ₽/ч</span><span class="raznos-text-tiny">820–1 120 ₽/ч · {{ t.cmp_order_word }} 270 ₽</span></div>
-                <div class="raznos-breakdown-row"><span>{{ t.cmp_couriers_label }}</span><span class="raznos-num">5 400</span></div>
-                <div class="raznos-breakdown-row"><span>{{ t.cmp_reviews_label }}</span><span class="raznos-num">1 630</span></div>
+        <div class="lp-section" id="novichkam" data-screen-label="Новичкам">
+          <div class="lp-feature">
+            <div class="lp-feature-media">
+              <div class="raznos-card lp-card raznos-card-pad raznos-fx raznos-col raznos-gap12">
+                <div class="raznos-head-row"><span class="raznos-fx raznos-ac raznos-gap8 raznos-text-h3 raznos-head-title"><dc-import name="RaznosIcon" svc="samokat" size="sm"></dc-import>Самокат</span><span class="raznos-text-tiny">{{ t.nb_scope }}</span></div>
+                <div class="raznos-cohort-grid">
+                  <span class="raznos-cohort-grid-head"></span><span class="raznos-cohort-grid-head">{{ t.nb_new }}</span><span class="raznos-cohort-grid-head">{{ t.nb_old }}</span>
+                  <span class="raznos-text-small">{{ t.nb_r_hour }}</span><span class="raznos-cohort-cell">980 ₽</span><span class="raznos-cohort-cell raznos-cohort-cell-muted">1 180 ₽</span>
+                  <span class="raznos-text-small">{{ t.nb_r_wait }}</span><span class="raznos-cohort-cell">{{ t.nb_wait_new }}</span><span class="raznos-cohort-cell raznos-cohort-cell-muted">{{ t.nb_wait_old }}</span>
+                  <span class="raznos-text-small">{{ t.nb_r_stay }}</span><span class="raznos-cohort-cell">58%</span><span class="raznos-cohort-cell raznos-cohort-cell-muted">76%</span>
+                </div>
+                <p class="raznos-text-tiny">{{ t.nb_hard }}</p>
+                <div class="lp-nb-start">
+                  <div class="raznos-head-row"><span class="lp-tax-t">{{ t.nb_start }}</span><span class="lp-tax-v">7 050 ₽</span></div>
+                  <div class="raznos-breakdown-row"><span>{{ t.nb_s1 }}</span><span class="raznos-num">2 000 ₽</span></div>
+                  <div class="raznos-breakdown-row"><span>{{ t.nb_s2 }}</span><span class="raznos-num">2 800 ₽</span></div>
+                  <div class="raznos-breakdown-row"><span>{{ t.nb_s3 }}</span><span class="raznos-num">1 800 ₽</span></div>
+                  <div class="raznos-breakdown-row"><span>{{ t.nb_s4 }}</span><span class="raznos-num">450 ₽</span></div>
+                </div>
+                <p class="raznos-text-tiny">{{ t.nb_pay }}</p>
               </div>
             </div>
-            <p class="lp-demo-tag">{{ t.cmp_demo }}</p>
+            <div>
+              <h2 class="lp-h2">{{ t.nb_h2_pre }} <span class="lp-acc">{{ t.nb_h2_acc }}</span></h2>
+              <p class="lp-dek">{{ t.nb_dek }}</p>
+              <ul class="lp-ul">
+                <li>{{ t.nb_li1 }}</li>
+                <li>{{ t.nb_li2 }}</li>
+                <li>{{ t.nb_li3 }}</li>
+              </ul>
+            </div>
           </div>
         </div>
 
@@ -698,26 +1046,6 @@
           </div>
         </div>
 
-        <div class="lp-section" data-screen-label="Лента сообщений">
-          <div class="lp-feature">
-            <div>
-              <h2 class="lp-h2">{{ t.live_h2 }}</h2>
-              <span class="lp-live"><span class="lp-live-dot"></span>{{ t.live_badge }}</span>
-              <p class="lp-dek">{{ t.live_dek }}</p>
-                <ul class="lp-ul">
-                  <li>{{ t.live_li1 }}</li>
-                  <li>{{ t.live_li2 }}</li>
-                  <li>{{ t.live_li3 }}</li>
-                </ul>
-            </div>
-            <div class="lp-feature-media">
-              <div class="raznos-card lp-card raznos-card-pad">
-                <dc-import name="RaznosLiveToday" items="{{ liveItems }}" cityTitle="Москва"></dc-import>
-              </div>
-            </div>
-          </div>
-        </div>
-
         <div class="lp-section" data-screen-label="Профиль и чаевые">
           <div class="lp-feature">
             <div>
@@ -737,7 +1065,7 @@
               <sc-if value="{{ profPublic }}" hint-placeholder-val="{{ true }}">
                 <div class="raznos-card lp-card raznos-card-pad">
                   <div class="lp-prof-head"><span class="raznos-anon-avatar" style="background:var(--raznos-svc-samokat-tint);color:var(--raznos-svc-samokat);width:56px;height:56px;font-size:24px">А</span><div class="raznos-fx raznos-col"><span class="raznos-text-h3">Алекс</span><span class="raznos-text-small">Москва · {{ t.prof_role }} · 2 года</span></div></div>
-                  <div class="raznos-badge-row"><span class="raznos-badge">{{ t.prof_badge_orders }}</span><span class="raznos-badge">{{ t.cmp_rating_word }} 4,8</span><span class="raznos-badge">{{ t.prof_badge_tips }}</span></div>
+                  <div class="raznos-badge-row"><span class="raznos-badge">{{ t.prof_badge_orders }}</span><span class="raznos-badge">{{ t.cmp_rating_word }} 4,8</span></div>
                   <div class="lp-prof-services">
                     <div class="lp-prof-row"><span class="raznos-fx raznos-ac raznos-gap8"><dc-import name="RaznosIcon" svc="samokat" size="sm"></dc-import>Самокат</span><span class="raznos-num">1 год · 4,8</span></div>
                     <div class="lp-prof-row"><span class="raznos-fx raznos-ac raznos-gap8"><dc-import name="RaznosIcon" svc="vkusvill" size="sm"></dc-import>ВкусВилл</span><span class="raznos-num">8 мес · 4,7</span></div>
@@ -755,37 +1083,6 @@
                   <p class="raznos-text-tiny">{{ t.prof_anon_note }}</p>
                 </div>
               </sc-if>
-            </div>
-          </div>
-        </div>
-
-        <div class="lp-section" data-screen-label="Лидерборд">
-          <div class="lp-feature">
-            <div>
-              <h2 class="lp-h2">{{ t.lb_h2_pre }} <span class="lp-acc">{{ t.lb_h2_acc }}</span></h2>
-              <p class="lp-dek">{{ t.lb_dek }}</p>
-              <ul class="lp-ul">
-                <li>{{ t.lb_li1 }}</li>
-                <li>{{ t.lb_li2 }}</li>
-                <li>{{ t.lb_li3 }}</li>
-              </ul>
-            </div>
-            <div class="lp-feature-media">
-              <div class="raznos-card lp-card raznos-card-pad raznos-fx raznos-col raznos-gap12">
-                <div class="raznos-head-row"><span class="raznos-text-h3 raznos-head-title">{{ t.lb_card_title }}</span><span class="raznos-text-tiny">Москва · {{ t.lb_week }}</span></div>
-                <div class="lp-lead-me">
-                  <div class="lp-lead-me-left"><span class="lp-lead-me-place">{{ t.lb_me_place }}</span><span class="lp-lead-me-sub">{{ t.lb_you }} · Москва · {{ t.lb_bike }}</span></div>
-                  <div class="lp-lead-me-end"><span class="lp-lead-me-val">21 600 ₽</span><span class="lp-lead-me-metric">{{ t.lb_week }}</span></div>
-                </div>
-                <div class="lp-lead-list">
-                  <div class="lp-lead-row"><span class="lp-lead-rank">1</span><span class="lp-lead-face" style="background:oklch(0.93 0.05 150);color:oklch(0.38 0.11 150);border:0">Б</span><span class="lp-lead-namecol"><span class="lp-lead-name">Барсук</span><span class="lp-lead-sub">{{ t.lb_anon }}</span></span><span class="lp-lead-val">41 900 ₽</span></div>
-                  <div class="lp-lead-row"><span class="lp-lead-rank">2</span><span class="lp-lead-face" style="background:oklch(0.93 0.05 255);color:oklch(0.38 0.11 255);border:0">В</span><span class="lp-lead-namecol"><span class="lp-lead-name">Выдра</span><span class="lp-lead-sub">{{ t.lb_anon }}</span></span><span class="lp-lead-val">39 400 ₽</span></div>
-                  <div class="lp-lead-row"><span class="lp-lead-rank">3</span><span class="lp-lead-face" style="background:oklch(0.93 0.05 55);color:oklch(0.38 0.11 55);border:0">Ё</span><span class="lp-lead-namecol"><span class="lp-lead-name">Ёжик</span><span class="lp-lead-sub">{{ t.lb_anon }}</span></span><span class="lp-lead-val">37 100 ₽</span></div>
-                  <div class="lp-lead-row"><span class="lp-lead-rank">4</span><span class="lp-lead-face" style="background:oklch(0.93 0.05 300);color:oklch(0.38 0.11 300);border:0">Л</span><span class="lp-lead-namecol"><span class="lp-lead-name">Лис</span><span class="lp-lead-sub">{{ t.lb_anon }}</span></span><span class="lp-lead-val">35 800 ₽</span></div>
-                  <div class="lp-lead-row"><span class="lp-lead-rank">5</span><span class="lp-lead-face" style="background:oklch(0.93 0.05 200);color:oklch(0.38 0.11 200);border:0">С</span><span class="lp-lead-namecol"><span class="lp-lead-name">Сурок</span><span class="lp-lead-sub">{{ t.lb_anon }}</span></span><span class="lp-lead-val">34 200 ₽</span></div>
-                </div>
-                <p class="raznos-text-tiny">{{ t.lb_foot }}</p>
-              </div>
             </div>
           </div>
         </div>
@@ -842,106 +1139,28 @@
           </div>
         </div>
 
-        <div class="lp-section" data-screen-label="Обзор">
-          <div class="lp-narrow" style="margin:0 auto;text-align:center">
-            <h2 class="lp-h2">{{ t.ov_h2 }}</h2>
-            <p class="lp-dek" style="margin:0 auto">{{ t.ov_dek }}</p>
-          </div>
-          <div class="lp-ov-grid">
-            <div class="lp-ov-tile"><span class="lp-ov-num">1</span><div><p class="lp-ov-t">{{ t.ov_t1_h }}</p><p class="lp-ov-d">{{ t.ov_t1_d }}</p></div></div>
-            <div class="lp-ov-tile"><span class="lp-ov-num">2</span><div><p class="lp-ov-t">{{ t.ov_t2_h }}</p><p class="lp-ov-d">{{ t.ov_t2_d }}</p></div></div>
-            <div class="lp-ov-tile"><span class="lp-ov-num">3</span><div><p class="lp-ov-t">{{ t.ov_t3_h }}</p><p class="lp-ov-d">{{ t.ov_t3_d }}</p></div></div>
-            <div class="lp-ov-tile"><span class="lp-ov-num">4</span><div><p class="lp-ov-t">{{ t.ov_t4_h }}</p><p class="lp-ov-d">{{ t.ov_t4_d }}</p></div></div>
-            <div class="lp-ov-tile"><span class="lp-ov-num">5</span><div><p class="lp-ov-t">{{ t.ov_t5_h }}</p><p class="lp-ov-d">{{ t.ov_t5_d }}</p></div></div>
-            <div class="lp-ov-tile"><span class="lp-ov-num">6</span><div><p class="lp-ov-t">{{ t.ov_t6_h }}</p><p class="lp-ov-d">{{ t.ov_t6_d }}</p></div></div>
-            <div class="lp-ov-tile"><span class="lp-ov-num">7</span><div><p class="lp-ov-t">{{ t.ov_t7_h }}</p><p class="lp-ov-d">{{ t.ov_t7_d }}</p></div></div>
-          </div>
-        </div>
 
-        <div class="lp-section" data-screen-label="FAQ">
-          <h2 class="lp-h2">{{ t.faq_h2 }}</h2>
-          <div style="margin-top:14px">
-            <details class="lp-faq-item" open><summary class="lp-faq-q">{{ t.faq_q1 }}</summary><p class="lp-faq-a">{{ t.faq_a1 }}</p></details>
-            <details class="lp-faq-item"><summary class="lp-faq-q">{{ t.faq_q10 }}</summary><p class="lp-faq-a">{{ t.faq_a10 }}</p></details>
-            <details class="lp-faq-item"><summary class="lp-faq-q">{{ t.faq_q2 }}</summary><p class="lp-faq-a">{{ t.faq_a2 }}</p></details>
-            <details class="lp-faq-item"><summary class="lp-faq-q">{{ t.faq_q8 }}</summary><p class="lp-faq-a">{{ t.faq_a8 }}</p></details>
-            <details class="lp-faq-item"><summary class="lp-faq-q">{{ t.faq_q3 }}</summary><p class="lp-faq-a">{{ t.faq_a3 }}</p></details>
-            <details class="lp-faq-item"><summary class="lp-faq-q">{{ t.faq_q4 }}</summary><p class="lp-faq-a">{{ t.faq_a4 }}</p></details>
-            <details class="lp-faq-item"><summary class="lp-faq-q">{{ t.faq_q9 }}</summary><p class="lp-faq-a">{{ t.faq_a9 }}</p></details>
-            <details class="lp-faq-item"><summary class="lp-faq-q">{{ t.faq_q5 }}</summary><p class="lp-faq-a">{{ t.faq_a5 }}</p></details>
-            <details class="lp-faq-item"><summary class="lp-faq-q">{{ t.faq_q6 }}</summary><p class="lp-faq-a">{{ t.faq_a6 }}</p></details>
-            <details class="lp-faq-item"><summary class="lp-faq-q">{{ t.faq_q7 }}</summary><p class="lp-faq-a">{{ t.faq_a7 }} <a href="https://ru.wikipedia.org/wiki/%D0%A0%D0%B0%D0%B1%D0%BE%D1%82%D0%BD%D0%B8%D0%BA_%D0%BF%D0%BB%D0%B0%D1%82%D1%84%D0%BE%D1%80%D0%BC%D1%8B" target="_blank" rel="noopener nofollow">{{ t.faq_gig_link }}</a>: <a href="https://gridwise.io" target="_blank" rel="noopener nofollow">Gridwise</a>, <a href="https://www.worksolo.com" target="_blank" rel="noopener nofollow">Solo</a>, <a href="https://www.everlance.com" target="_blank" rel="noopener nofollow">Everlance</a></p></details>
-          </div>
-        </div>
-
-
-        <!-- СКРЫТО обратимо начало
-        <div class="lp-dark" id="zakazy" data-screen-label="Входящие заказы">
-          <div class="lp-section">
-            <div class="lp-feature">
-              <div>
-                <h2 class="lp-h2">{{ t.z_h2_pre }} <span class="lp-acc-d">{{ t.z_h2_acc }}</span></h2>
-                <p class="lp-dek">{{ t.z_dek }}</p>
-                <ul class="lp-ul">
-                  <li>{{ t.z_li1 }}</li>
-                  <li>{{ t.z_li2 }}</li>
-                  <li>{{ t.z_li3 }}</li>
-                </ul>
+            <div class="raznos-card lp-card raznos-card-pad" style="margin-top:16px">
+              <div class="raznos-head-row"><span class="raznos-text-h3">{{ t.stat_time_title }}</span><span class="raznos-text-tiny">{{ t.stat_time_sub }}</span></div>
+              <div class="lp-timebar">
+                <span class="lp-timeseg" style="width:68%;background:var(--raznos-green-deep)"></span>
+                <span class="lp-timeseg" style="width:15%;background:#5bb381"></span>
+                <span class="lp-timeseg" style="width:12%;background:var(--raznos-green-tint)"></span>
+                <span class="lp-timeseg" style="width:5%;background:#cfd6dd"></span>
               </div>
-              <div class="lp-feature-media">
-                <div class="{{ feedCls }}">
-                  <div class="raznos-list-row"><dc-import name="RaznosIcon" svc="samokat" size="sm"></dc-import><div class="raznos-list-main"><span class="raznos-list-title">Самокат · 3,2 км</span><span class="raznos-text-small">18 мин · 4 кг</span></div><div class="raznos-list-end"><span class="raznos-num">480 ₽</span><span class="raznos-status-pill raznos-pill-ok">≈ 1 280 ₽/ч</span></div></div>
-                  <div class="raznos-list-row"><dc-import name="RaznosIcon" svc="vkusvill" size="sm"></dc-import><div class="raznos-list-main"><span class="raznos-list-title">ВкусВилл · 2,1 км</span><span class="raznos-text-small">14 мин · 2 кг</span></div><div class="raznos-list-end"><span class="raznos-num">320 ₽</span><span class="raznos-text-tiny">≈ 1 040 ₽/ч</span></div></div>
-                  <div class="lp-neworder"><div class="raznos-list-row lp-ord-new"><dc-import name="RaznosIcon" svc="magnit" size="sm"></dc-import><div class="raznos-list-main"><span class="raznos-list-title">Магнит · 1,8 км</span><span class="raznos-text-small">12 мин · 3 кг</span><span class="lp-new-badge"><span class="lp-new-dot"></span>новый · 0:15</span></div><div class="raznos-list-end"><span class="raznos-num">260 ₽</span><span class="raznos-status-pill raznos-pill-error">≈ 720 ₽/ч</span></div></div></div>
-                </div>
+              <div class="lp-timelegend">
+                <span><span class="lp-timedot" style="background:var(--raznos-green-deep)"></span>{{ t.time_deliv }} 68%</span>
+                <span><span class="lp-timedot" style="background:#5bb381"></span>{{ t.time_wait }} 15%</span>
+                <span><span class="lp-timedot" style="background:var(--raznos-green-tint)"></span>{{ t.time_move }} 12%</span>
+                <span><span class="lp-timedot" style="background:#cfd6dd"></span>{{ t.time_idle }} 5%</span>
               </div>
             </div>
-            
-          </div>
-        </div>
-        СКРЫТО обратимо конец -->
-
-
-        <!-- СКРЫТО обратимо начало
-        <div class="lp-band" data-screen-label="Предложение вблизи">
-          <div class="lp-section">
-            <div class="lp-feature">
-              <div>
-                <h2 class="lp-h2">{{ t.offer_title }}</h2>
-                <p class="lp-dek">{{ t.offer_dek }}</p>
-              </div>
-              <div class="lp-feature-media">
-                <dc-import name="RaznosIncomingOffer" svc="{{ offer.svc }}" title="{{ offer.title }}" pay="{{ offer.pay }}" pickupAddr="{{ offer.pickupAddr }}" dropAddr="{{ offer.dropAddr }}" etaPoint="{{ offer.etaPoint }}" etaTotal="{{ offer.etaTotal }}" distance="{{ offer.distance }}" weight="{{ offer.weight }}" packages="{{ offer.packages }}" timerLabel="{{ offer.timerLabel }}" timerFillStyle="{{ offer.timerFillStyle }}" timerWarn="{{ true }}" isIdle="{{ true }}" canDecline="{{ true }}" estimate="{{ offer.estimate }}"></dc-import>
-              </div>
+            <div class="lp-stat-metrics">
+              <div class="raznos-metric-card lp-card"><span class="raznos-text-small">{{ t.stat_best_time }}</span><span class="raznos-metric-value">18–20</span><span class="raznos-text-tiny">{{ t.stat_best_time_sub }}</span></div>
+              <div class="raznos-metric-card lp-card"><span class="raznos-text-small">{{ t.stat_per_order }}</span><span class="raznos-metric-value">300 ₽</span><span class="raznos-text-tiny">{{ t.stat_avg_word }}</span></div>
+              <div class="raznos-metric-card lp-card"><span class="raznos-text-small">{{ t.stat_per_shift }}</span><span class="raznos-metric-value">14</span><span class="raznos-text-tiny">{{ t.stat_avg_word }}</span></div>
             </div>
-          </div>
-        </div>
         СКРЫТО обратимо конец -->
-
-<!-- СКРЫТО обратимо: стат-полоса Публичный рынок сервисов и отзывы курьеров
-        <div class="lp-band lp-statband" data-screen-label="Цифры">
-          <div class="lp-section" style="text-align:center">
-            <h2 class="lp-h2" style="max-width:760px;margin:0 auto 6px">{{ t.sb_head }}</h2>
-            <div class="lp-statband-in">
-              <div class="lp-stat"><span class="lp-stat-num">11</span><span class="lp-stat-lab">{{ t.sb_services }}</span></div>
-              <div class="lp-stat"><span class="lp-stat-num">1 105</span><span class="lp-stat-lab">{{ t.sb_cities }}</span></div>
-              <div class="lp-stat"><span class="lp-stat-num">0 ₽</span><span class="lp-stat-lab">{{ t.sb_free }}</span></div>
-            </div>
-          </div>
-        </div>
-        СКРЫТО обратимо конец -->
-
-        <div class="lp-dark" data-screen-label="Финальный CTA">
-          <div class="lp-final">
-            <h2>{{ t.final_h2 }}</h2>
-            <p class="lp-dek" style="text-align:center">{{ t.final_dek }}</p>
-            <p class="lp-final-proof">{{ t.final_proof }}</p>
-            <sc-if value="{{ showProto }}"><a class="lp-btn lp-btn-accent" href="{{ protoHref }}" target="_blank" rel="noopener">{{ t.final_cta }}</a></sc-if>
-            <sc-if value="{{ notProto }}"><span class="lp-btn lp-proto-soon">{{ t.final_soon }}</span></sc-if>
-            <a class="lp-btn lp-btn-line" href="https://t.me/raznos_app_bot" target="_blank" rel="noopener">{{ t.final_bot }}</a>
-            <p class="lp-fine">{{ t.data_note }}</p>
-          </div>
-        </div>
 
       </div>
     </x-dc>
@@ -1004,7 +1223,7 @@
             if (reduce || !('IntersectionObserver' in window)) { document.querySelectorAll('.lp-count').forEach(setFinal); return; }
             document.documentElement.classList.add('lp-motion');
             var rObs = new IntersectionObserver(function (es) { es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('lp-anim'); rObs.unobserve(e.target); } }); }, { threshold: 0.2 });
-            document.querySelectorAll('.lp-reveal, .lp-chart-anim, .lp-svc-anim, .lp-ring-anim').forEach(function (el) { rObs.observe(el); });
+            document.querySelectorAll('.lp-reveal, .lp-chart-anim, .lp-svc-anim, .lp-ring-anim, .lp-shine-anim').forEach(function (el) { rObs.observe(el); });
             var obs = new IntersectionObserver(function (es) { es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('lp-anim'); obs.unobserve(e.target); } }); }, { threshold: 0.35 });
             document.querySelectorAll('.lp-bars').forEach(function (el) { obs.observe(el); });
             var fobs = new IntersectionObserver(function (es) { es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('lp-anim'); fobs.unobserve(e.target); } }); }, { threshold: 0.6 });
@@ -1029,7 +1248,7 @@
           const st = this.state || {};
           const tab = st.profileTab || 'public';
           const lang = st.lang || 'ru';
-          const L_ru = {"nav_orders": "Расписание", "nav_income": "Доход", "nav_forecast": "Прогноз", "nav_connect": "Сервисы", "hero_badge": "Все сервисы доставки в одном приложении", "hero_h1_pre": "Весь заработок от доставки", "hero_h1_acc": "в одном месте", "hero_lead": "Разнос собирает доход, заказы и смены из всех твоих сервисов в одном приложении и показывает, где платят больше", "hero_cta": "Что умеет приложение", "hero_w_caption": "Заработано сегодня", "hero_w_summary": "в том числе 380 ₽ чаевых · после расходов останется 3 900 ₽", "hero_w_orders": "17 заказов", "hero_w_rate": "1 050 ₽ / час до расходов", "z_h2_pre": "Выбирай заказ", "z_h2_acc": "в одной ленте", "z_dek": "Заказы твоих подключённых сервисов приходят в один экран, сразу с оценкой выгоды, и принять можно прямо здесь, без пяти открытых приложений", "z_li1": "Оплата, доход за час и после расходов видно до принятия", "z_li2": "Маршрут, расстояние, вес и время всего заказа рядом", "z_li3": "Фильтры подсвечивают выгодные заказы и помечают те, что ниже твоей цели по ₽/час", "offer_title": "Всё видно до того, как примешь", "offer_dek": "Открываешь заказ сервиса и видишь маршрут, цифры и оценку выгоды целиком, ещё до того как принять", "offer_demo": "Приём предложений в режиме Работа только для проверенных возможностей сервиса", "statement_pre": "Цифры берём ", "statement_b": "прямо из подключённых аккаунтов", "statement_post": ". Поэтому статистика настоящая: зарплаты, штрафы и бонусы, а не обещания из рекламы", "who_h2": "Хватит считать доход в разных приложениях", "who_dek": "Доход раскидан по разным приложениям, и непонятно, где выгоднее и сколько остаётся на руках. Разнос собирает всё в одном месте и считает за тебя", "who_conn": "Подключено сейчас", "who_week": "Общий доход за неделю", "who_net": "После расходов", "income_h2": "Из чего сложился каждый рубль", "income_dek": "Видно доход за час и за заказ, а также из чего он собрался по каждому сервису", "income_li1": "Начисления, чаевые, бонусы и удержания видно по отдельности", "income_li2": "У каждой цифры видно, откуда она и когда обновилась", "income_li3": "Сумму видно за день, неделю и месяц", "income_card_title": "Из чего сложилась сумма", "hist_h2": "История заказов и выплат в одном списке", "hist_dek": "Каждый заказ: сумма, статус выплаты, чаевые и маршрут. Можно открыть подробности", "stat_h2": "Сколько зарабатываешь и куда уходит время", "stat_dek": "Деньги, время, заказы и лучшие часы. И сравнение с другими курьерами", "stat_li1": "Сравнение со средним по курьерам твоего города и транспорта", "stat_li2": "Куда уходит время: доставка, ожидание, переезды, простой", "stat_li3": "Лучшие часы по дням, сеткой", "stat_card_months": "Доход по месяцам, тыс ₽", "stat_card_rate": "₽/ч после расходов", "stat_card_active": "Активное время", "stat_m_besthour": "Лучший час", "stat_m_pershift": "Заказов за смену", "stat_card_cohort": "Я и другие курьеры города", "stat_card_my": "Мой доход в час", "stat_card_median": "В среднем у других", "stat_card_above": "выше среднего на 16%", "prog_h2_pre": "Подсказывает,", "prog_h2_acc": "где и когда выгоднее", "prog_h2_post": "выйти", "prog_dek": "Карта по районам и график по часам. Видно, куда и во сколько выехать выгоднее", "prog_li1": "Самые денежные районы и часы, с пометками выше и ниже среднего", "prog_li2": "Показывает, сколько примерно заработаешь и почему. Мало данных, так и пишем", "prog_li3": "Свободные слоты и сколько ехать до района", "prog_map_title": "Доход в час по времени суток", "prog_leg_peak": "пик спроса", "prog_leg_calm": "спокойно", "prog_map_demo": "Схема районов и часов, не точная география", "sched_h2_pre": "Умное расписание само", "sched_h2_acc": "собирает смену", "sched_dek": "Разнос сам собирает смену по часам, сервисам и районам. Опирается на твой график и районы, которые ты выбрал", "sched_li1": "Пересчитывает план на ходу, когда меняется спрос", "sched_li2": "Любой час можно настроить самому", "sched_li3": "Посмотри по часам, где платят больше", "sched_card_title": "Смена на сегодня", "sched_break": "перерыв", "sched_demo": "Собрано из подключённых сервисов под спрос", "live_h2": "Что происходит прямо сейчас", "live_dek": "Что происходит прямо сейчас в твоём городе: сбои, очереди на складах, всплески заказов. От курьеров для курьеров", "live_li1": "Твой город и сервисы, остальные по желанию", "live_li2": "Полезное поднимается выше, можно ответить", "live_li3": "Напиши сам и предупреди остальных", "mkt_h2_pre": "Отзывы о сервисах", "mkt_h2_acc": "от курьеров", "mkt_dek": "Отзывы и оценки сервисов по городам. Подтверждённые, с вопросами и ответами", "mkt_q_title": "Задавайте вопросы другим курьерам", "prof_h2": "Публичный профиль курьера и чаевые по QR", "prof_dek": "Псевдоним, стаж, достижения и то, что ты сам решил показать. По умолчанию профиль скрыт, другие пользователи видят версию без имени и фото", "prof_li1": "Два режима: открытый с именем и скрытый без имени", "prof_li2": "В скрытом нет имени и фото, а оценки показаны примерно", "prof_li3": "Чаевые через платёжный сервис, комиссия видна заранее", "prof_tab_public": "Публичный", "prof_tab_anon": "Без имени", "exp_card_title": "Расходы за неделю", "exp_h2": "Сколько остаётся после расходов", "exp_dek": "Постоянные и разовые траты вместе. Считаем доход после всех расходов", "exp_li1": "Постоянные: аренда, связь, подписки. Разовые: ТО, ремонт, метро", "exp_li2": "Ловим дубли, если одна трата попала два раза", "exp_li3": "Экспорт CSV и PDF с исходными цифрами", "conn_h2": "Подключение сервиса за минуту", "conn_dek": "Добавляешь сервисы, в которых работаешь. Разнос читает их данные и собирает доход, статистику и расписание", "conn_s1": "Выбери сервис", "conn_s2": "Войди в аккаунт сервиса", "conn_s2_field": "Телефон или логин", "conn_s2_note": "Данные для входа шифруются и у нас не остаются", "conn_s3": "Готово", "conn_s3_pill": "Синхронизировано", "conn_s3_note": "Доход и история подтянутся автоматически", "svc_h2": "11 сервисов доставки, подключай свои", "svc_dek": "Подключай те, в которых работаешь, и смотри общий доход", "svc_note": "Яндекс Про это одно подключение, внутри бренды Еда, Лавка и Деливери", "data_h2": "Сырые данные клиентов мы не храним", "data_dek": "Работаем по закону 152-ФЗ. Имена и контакты покупателей скрываем на сервере, точные адреса и телефоны не попадают в историю и аналитику", "data_li1": "Твои данные лежат в закрытом контуре и видны только тебе", "data_li2": "В общую статистику всё идёт без имён и только когда данных достаточно", "data_li3": "Ключи доступа к сервисам не храним. Удалишь аккаунт, данные правда стираются", "city_h2": "1105 городов России", "city_dek": "Город выбираешь в профиле, статистика и прогноз подстраиваются под него", "faq_h2": "Частые вопросы", "faq_q1": "Это бесплатно?", "faq_a1": "Базовый кабинет дохода и статистики бесплатный. Платные возможности появятся позже", "faq_q2": "Как подключаются сервисы?", "faq_a2": "Добавляешь аккаунт сервиса, данные для входа шифруются. Разнос только читает данные и не управляет заказами", "faq_q3": "Разнос хранит мои пароли от сервисов?", "faq_a3": "Нет. Пароли и ключи доступа мы не храним. Они нужны только чтобы забрать твои данные из сервиса и у нас не остаются", "faq_q4": "Мои данные в безопасности?", "faq_a4": "Свои данные видишь только ты, данные клиентов обезличиваются, работаем по 152-ФЗ", "faq_q5": "Можно принимать заказы прямо в приложении?", "faq_a5": "Пока нет. Заказ принимаешь в приложении сервиса, а Разнос помогает открыть его в один тап и ведёт доход, историю и расписание. Приём заказов внутри Разноса планируем позже", "final_h2": "Все сервисы и весь доход на одном экране", "final_proof": "11 сервисов · 1105 городов · настоящие цифры из подключённых аккаунтов", "final_dek": "Открой живой прототип и пройдись по сценариям курьера", "final_cta": "Открыть прототип", "faq_q6": "Разнос это работодатель, кто платит?", "faq_a6": "Нет. Разнос не платит за заказы и не выдаёт их. Платит и нанимает сам сервис доставки. Мы подключаемся к твоим сервисам, показываем заказы и статистику и считаем доход. Деньги приходят от сервиса", "cmp_h2": "Зарплаты и оценки сервисов рядом", "cmp_dek": "Разнос публикует статистику по сервисам без имён: зарплаты, число курьеров и заказов, штрафы, оценки и отзывы. Сравнивай и выбирай, где выгоднее", "cmp_col_svc": "Сервис", "cmp_col_pay": "₽/ч", "cmp_col_couriers": "Курьеров", "cmp_col_rating": "Оценка", "cmp_demo": "Данные по городу без имён · место присваивается при 30+ курьерах и 100+ заказах", "faq_q7": "Есть ли аналоги в России?", "faq_a7": "Прямых аналогов в России нет. За рубежом есть неполные аналоги, это приложения-агрегаторы для", "cmp_pay_label": "Доход в час", "cmp_couriers_label": "Курьеров в городе", "cmp_rating_word": "оценка", "faq_q8": "Как происходит вход в сервисы, где я работаю?", "faq_a8": "Один раз вводишь телефон или логин и пароль от сервиса, при необходимости подтверждаешь вход кодом. Данные шифруются и уходят прямо в сервис, копию логина и пароля мы не получаем. Доступ только на чтение: Разнос забирает историю и доход, но аккаунтом не управляет. Отключишь сервис, связанные данные удаляются", "faq_q9": "Что вы делаете с моими данными?", "faq_a9": "Личный кабинет с доходом и историей видишь только ты. В общую статистику идут данные без имён, по ним нельзя вычислить конкретного человека. Отключишь сервис или удалишь аккаунт, связанные данные удаляются", "live_badge": "в реальном времени", "faq_q10": "Есть ли демо-режим, можно попробовать?", "faq_a10": "Да. Можно открыть живой прототип и пройтись по сценариям курьера, а можно подключить свой аккаунт и увидеть свои цифры", "final_bot": "Вопросы, отзывы, предложения", "final_soon": "Прототип скоро появится", "ov_h2": "Если коротко", "ov_dek": "Главное о Разносе в одном экране", "ov_t1_h": "Весь доход и сравнение", "ov_t1_d": "Доход за день, неделю и месяц и честное сравнение с другими курьерами", "ov_t2_h": "Умное расписание", "ov_t2_d": "Приложение само собирает смену по часам и сервисам под максимум дохода", "ov_t3_h": "Где сейчас выгоднее", "ov_t3_d": "Карта спроса и прогноз дохода по районам и часам", "ov_t4_h": "Сравнение сервисов", "ov_t4_d": "Зарплаты, оценки и отзывы сервисов рядом, по твоему городу", "ov_t5_h": "Сообщество курьеров", "ov_t5_d": "Живая лента города и отзывы, от курьеров для курьеров", "ov_t6_h": "Настоящие данные", "ov_t6_d": "Все цифры прямо из твоих сервисов, а не реклама", "ov_t7_h": "Расходы и чистый доход", "ov_t7_d": "Учёт расходов и честный доход после всех затрат", "act_h2": "Заказ под рукой", "act_dek": "Пока везёшь заказ, под рукой этапы и статус. Открыть его в приложении сервиса можно в один тап", "act_status": "Везу заказ", "act_meta": "2,1 км · 16 мин", "act_step1": "Забрал · ВкусВилл, Садовая 3", "act_step2": "Доставить · Клин 8", "act_est": "≈ 1 280 ₽/ч · 360 ₽ после расходов", "data_note": "Все цифры на странице приведены для примера", "sched_cmp_title": "Сравни, где платят больше в этот час", "who_week_title": "Итог недели", "who_week_range": "прошлая неделя", "who_c_income": "Доход", "who_c_costs": "Расходы", "who_c_orders": "Заказы", "who_recap": "Недельный отчёт", "who_new": "Новое", "wr_h2": "Недельный отчёт", "wr_dek": "Итоги недели: сколько, когда и где ты заработал", "wr_earn_lab": "Заработал за неделю", "wr_bestday_lab": "Лучший день", "wr_top_lab": "Топ сервис", "sb_services": "сервисов", "sb_cities": "городов", "sb_langs": "языков", "sb_free": "базовый доступ", "sb_head": "Публичный рынок сервисов и отзывы курьеров", "act_btn_done": "Доставил", "act_btn_open": "Открыть заказ в приложении", "dw_title": "Доход за неделю", "dw_recap": "Посмотреть отчёт", "dw_new": "Новый", "wr_vs_prev": "к прошлой неделе", "wr_for_orders": "за 72 заказа", "wr_deliv1": "32 доставки", "wr_deliv2": "25 доставок", "wr_deliv3": "15 доставок", "prog_map_now": "Районы сейчас", "prog_map_src": "Спрос по районам", "inc_accr": "Начисления", "inc_tips": "Чаевые", "inc_bonus": "Бонусы", "inc_deduct": "Удержания", "order_badge_active": "активный", "exp_r_rent": "Аренда велосипеда · постоянный", "exp_r_conn": "Связь · постоянный", "exp_r_to": "ТО велосипеда · разовый, пн", "exp_r_metro": "Метро · разовый, чт", "exp_total": "Итого", "stat_tab_total": "Всего", "stat_tab_hour": "₽/час", "stat_avg_note": "среднее у других курьеров города", "stat_time_title": "Куда уходит время", "stat_time_sub": "в среднем 128 часов в месяц", "time_deliv": "Доставка", "time_wait": "Ожидание", "time_move": "Переезды", "time_idle": "Простой", "stat_best_time": "Лучшее время", "stat_best_time_sub": "когда платят больше", "stat_per_order": "За заказ", "stat_avg_word": "в среднем", "stat_per_shift": "Заказов за смену", "conn_ok_note": "обновлено только что, ошибок нет", "conn_pill_done": "подключено", "mark_mid": "среднее", "mark_below": "ниже среднего", "mark_above": "выше среднего", "peak_word": "пик", "cmp_reviews_label": "Отзывов", "cmp_order_word": "заказ", "prof_role": "велокурьер", "prof_badge_orders": "6 500 заказов", "prof_badge_tips": "чаевые по QR", "prof_badge_orders_range": "3 000–4 000 заказов", "prof_about_year": "около года", "prof_less_year": "меньше года", "prof_anon_note": "Без имени и фото, показатели приблизительные", "lb_h2_pre": "Лидерборд курьеров", "lb_h2_acc": "твоего города", "lb_dek": "Сравни себя с другими по заработку, заказам и чаевым за неделю. Своё место видно точно, остальные без имён", "lb_li1": "Рейтинг по заработку, заказам, чаевым и доходу в час", "lb_li2": "Своё место точное, чужие суммы реальные, но без имён", "lb_li3": "Срез по твоему городу и за неделю", "lb_card_title": "Топ по заработку", "lb_me_place": "28 место", "lb_you": "Вы", "lb_bike": "велосипед", "lb_week": "за неделю", "lb_anon": "без имени", "lb_foot": "Себя видишь как есть, остальные без имён, но суммы у них настоящие", "data_card_title": "Что видно и что скрыто", "data_row1_l": "Личный кабинет", "data_row1_r": "только тебе", "data_row2_l": "Адреса и контакты клиентов", "data_row2_r": "скрыты", "data_row3_l": "Токены сервисов", "data_row3_r": "не храним", "data_row4_l": "Общая статистика", "data_row4_r": "без имён", "city_of_russia": "городов России", "city_more": "и ещё 1096", "faq_gig_link": "gig-водителей"};
+          const L_ru = {"nav_orders": "План", "nav_income": "Результаты", "nav_forecast": "Рынок", "nav_connect": "Сервисы", "hero_badge": "Все сервисы доставки в одном приложении", "hero_h1_pre": "Весь заработок от доставки", "hero_h1_acc": "в одном месте", "hero_lead": "Разнос собирает доход из всех твоих сервисов в одном приложении, следит за спросом и подсказывает, где и когда сейчас заработать больше", "hero_cta": "Что умеет приложение", "hero_w_caption": "Заработано сегодня", "hero_w_summary": "в том числе 380 ₽ чаевых · после расходов останется 3 900 ₽", "hero_w_orders": "17 заказов", "hero_w_rate": "1 050 ₽ / час до расходов", "z_h2_pre": "Выбирай заказ", "z_h2_acc": "в одной ленте", "z_dek": "Заказы твоих подключённых сервисов приходят в один экран, сразу с оценкой выгоды, и принять можно прямо здесь, без пяти открытых приложений", "z_li1": "Оплата, доход за час и после расходов видно до принятия", "z_li2": "Маршрут, расстояние, вес и время всего заказа рядом", "z_li3": "Фильтры подсвечивают выгодные заказы и помечают те, что ниже твоей цели по ₽/час", "offer_title": "Всё видно до того, как примешь", "offer_dek": "Открываешь заказ сервиса и видишь маршрут, цифры и оценку выгоды целиком, ещё до того как принять", "offer_demo": "Приём предложений в режиме Работа только для проверенных возможностей сервиса", "statement_pre": "Цифры берём ", "statement_b": "прямо из подключённых аккаунтов", "statement_post": ". Поэтому статистика настоящая: зарплаты, штрафы и бонусы, а не обещания из рекламы", "who_h2": "Хватит считать доход в разных приложениях", "who_dek": "Доход раскидан по разным приложениям, и непонятно, где выгоднее и сколько остаётся на руках. Разнос собирает всё в одном месте и считает за тебя", "who_conn": "Подключено сейчас", "who_week": "Общий доход за неделю", "who_net": "После расходов", "income_h2": "Из чего сложился каждый рубль", "income_dek": "Видно доход за час и за заказ, а также из чего он собрался по каждому сервису", "income_li1": "Начисления, чаевые, бонусы и удержания видно по отдельности", "income_li2": "У каждой цифры видно, откуда она и когда обновилась", "income_li3": "Сумму видно за день, неделю и месяц", "income_card_title": "Из чего сложилась сумма", "hist_h2": "История заказов и выплат в одном списке", "hist_dek": "Каждый заказ: сумма, статус выплаты, чаевые и маршрут. Можно открыть подробности", "stat_h2": "Твой доход рядом с другими курьерами", "stat_dek": "Видно, растёшь ли ты от месяца к месяцу и где стоишь среди курьеров своего города", "stat_li1": "Сравнение со средним по курьерам твоего города и транспорта", "stat_li2": "Куда уходит время: доставка, ожидание, переезды, простой", "stat_li3": "Лучшие часы по дням, сеткой", "stat_card_months": "Доход по месяцам, тыс ₽", "stat_card_rate": "₽/ч после расходов", "stat_card_active": "Активное время", "stat_m_besthour": "Лучший час", "stat_m_pershift": "Заказов за смену", "stat_card_cohort": "Я и другие курьеры города", "stat_card_my": "Мой доход в час", "stat_card_median": "В среднем у других", "stat_card_above": "выше среднего на 16%", "prog_h2_pre": "Следим за спросом", "prog_h2_acc": "и подсказываем, где заработать больше", "prog_h2_post": "выйти", "prog_dek": "Разнос весь день смотрит спрос по районам, часам и сервисам и предлагает лучшие варианты: куда поехать и во сколько выйти", "prog_li1": "Самые денежные районы и часы, с пометками выше и ниже среднего", "prog_li2": "Показывает, сколько примерно заработаешь и почему. Мало данных, так и пишем", "prog_li3": "Свободные слоты и сколько ехать до района", "prog_map_title": "Доход в час по времени суток", "prog_leg_peak": "пик спроса", "prog_leg_calm": "спокойно", "prog_map_demo": "Схема районов, не точная география", "sched_h2_pre": "План недели", "sched_h2_acc": "под твою цель", "sched_dek": "Ставишь цель на неделю, Разнос раскладывает её по дням и часам в твоих сервисах и показывает, хватит ли плана. Слоты ты берёшь сам в приложении сервиса", "sched_li1": "Сразу видно, хватит ли плана до цели или сколько не хватает", "sched_li2": "Подскажет, если в это время в другом сервисе платят больше", "sched_li3": "План перестраивается сам, если изменился спрос или сервис отменил смену", "sched_card_title": "План на сегодня", "sched_break": "перерыв", "sched_demo": "Собрано из подключённых сервисов под спрос", "live_h2": "Что происходит прямо сейчас", "live_dek": "Что происходит прямо сейчас в твоём городе: сбои, очереди на складах, всплески заказов и курьеры на смене на карте. От курьеров для курьеров", "live_li1": "На карте видно, сколько курьеров на смене рядом, точка примерная и без имени", "live_li2": "Полезное поднимается выше, можно ответить", "live_li3": "Напиши сам и предупреди остальных", "mkt_h2_pre": "Отзывы о сервисах", "mkt_h2_acc": "от курьеров", "mkt_dek": "Отзывы и оценки сервисов по городам. Подтверждённые, с вопросами и ответами", "mkt_q_title": "Задавайте вопросы другим курьерам", "prof_h2": "Публичный профиль курьера", "prof_dek": "Псевдоним, стаж, достижения и то, что ты сам решил показать. По умолчанию профиль скрыт, другие пользователи видят версию без имени и фото", "prof_li1": "Два режима: открытый с именем и скрытый без имени", "prof_li2": "В скрытом нет имени и фото, а оценки показаны примерно", "prof_li3": "Профилем можно поделиться ссылкой, например с работодателем", "prof_tab_public": "Публичный", "prof_tab_anon": "Без имени", "exp_card_title": "Расходы за неделю", "exp_h2": "Сколько остаётся после расходов", "exp_dek": "Постоянные и разовые траты вместе. Считаем доход после всех расходов", "exp_li1": "Постоянные: аренда, связь, подписки. Разовые: ТО, ремонт, метро", "exp_li2": "Ловим дубли, если одна трата попала два раза", "exp_li3": "Экспорт CSV и PDF с исходными цифрами", "conn_h2": "Подключение сервиса за минуту", "conn_dek": "Добавляешь сервисы, в которых уже работаешь. Разнос читает их данные и собирает доход, статистику и план", "conn_s1": "Выбери сервис", "conn_s2": "Войди в аккаунт сервиса", "conn_s2_field": "Телефон или логин", "conn_s2_note": "Данные для входа шифруются и у нас не остаются", "conn_s3": "Готово", "conn_s3_pill": "Синхронизировано", "conn_s3_note": "Доход и история подтянутся автоматически", "svc_h2": "11 сервисов доставки, подключай свои", "svc_dek": "Подключай те, в которых работаешь, и смотри общий доход. Ещё 5 сервисов скоро", "svc_note": "Яндекс Про это одно подключение, внутри бренды Еда, Лавка и Деливери", "data_h2": "Сырые данные клиентов мы не храним", "data_dek": "Работаем по закону 152-ФЗ. Имена и контакты покупателей скрываем на сервере, точные адреса и телефоны не попадают в историю и аналитику", "data_li1": "Твои данные лежат в закрытом контуре и видны только тебе", "data_li2": "В общую статистику всё идёт без имён и только когда данных достаточно", "data_li3": "Ключи доступа к сервисам хранятся только на твоём телефоне. Удалишь аккаунт, данные правда стираются", "city_h2": "1105 городов России", "city_dek": "Город выбираешь в профиле, статистика и прогноз подстраиваются под него", "faq_h2": "Частые вопросы", "faq_q1": "Это бесплатно?", "faq_a1": "Базовый кабинет дохода и статистики бесплатный. Платные возможности появятся позже", "faq_q2": "Как подключить сервисы, где я работаю?", "faq_a2": "Один раз вводишь телефон или логин и пароль от сервиса, при необходимости подтверждаешь вход кодом. Данные шифруются и уходят прямо в сервис, копию логина и пароля мы не получаем. Разнос забирает только историю и доход и не управляет аккаунтом. Отключишь сервис, связанные данные удаляются", "faq_q3": "Разнос хранит мои пароли от сервисов?", "faq_a3": "Нет. Пароли и ключи доступа хранятся только на твоём телефоне, на сервере мы их не сохраняем", "faq_q4": "Мои данные в безопасности?", "faq_a4": "Свои данные видишь только ты, данные клиентов обезличиваются, работаем по 152-ФЗ", "faq_q5": "Можно принимать заказы прямо в приложении?", "faq_a5": "Пока нет. Заказ принимаешь в приложении сервиса, а Разнос помогает открыть его в один тап и ведёт доход, историю и расписание. Приём заказов внутри Разноса планируем позже", "final_h2": "Все сервисы и весь доход на одном экране", "final_proof": "11 сервисов · 1105 городов · настоящие цифры из подключённых аккаунтов", "final_dek": "Открой живой прототип и пройдись по сценариям курьера", "final_cta": "Открыть прототип", "faq_q6": "Разнос это работодатель, кто платит?", "faq_a6": "Нет. Разнос не платит за заказы и не выдаёт их. Платит и нанимает сам сервис доставки. Мы подключаемся к твоим сервисам, показываем заказы и статистику и считаем доход. Деньги приходят от сервиса", "cmp_h2": "Зарплаты и оценки сервисов рядом", "cmp_dek": "Разнос публикует статистику по сервисам без имён: зарплаты, число курьеров и заказов, штрафы, оценки и отзывы. Сравнивай и выбирай, где выгоднее", "cmp_col_svc": "Сервис", "cmp_col_pay": "₽/ч", "cmp_col_couriers": "Курьеров", "cmp_col_rating": "Оценка", "cmp_demo": "Данные по городу без имён · место присваивается при 30+ курьерах и 100+ заказах", "faq_q7": "Есть ли аналоги в России?", "faq_a7": "Прямых аналогов в России нет. За рубежом есть неполные аналоги, это приложения-агрегаторы для", "cmp_pay_label": "Доход в час", "cmp_couriers_label": "Курьеров в городе", "cmp_rating_word": "оценка", "faq_q8": "Как происходит вход в сервисы, где я работаю?", "faq_a8": "Один раз вводишь телефон или логин и пароль от сервиса, при необходимости подтверждаешь вход кодом. Данные шифруются и уходят прямо в сервис, копию логина и пароля мы не получаем. Разнос забирает только историю и доход и не управляет аккаунтом. Отключишь сервис, связанные данные удаляются", "faq_q9": "Что вы делаете с моими данными?", "faq_a9": "Личный кабинет с доходом и историей видишь только ты. Работаем по закону 152-ФЗ: имена и контакты покупателей скрываем, точные адреса и телефоны в историю не попадают. В общую статистику идут данные без имён и только когда их достаточно. Отключишь сервис или удалишь аккаунт, связанные данные удаляются", "live_badge": "в реальном времени", "faq_q10": "Есть ли демо-режим, можно попробовать?", "faq_a10": "Да. Можно открыть живой прототип и пройтись по сценариям курьера, а можно подключить свой аккаунт и увидеть свои цифры", "final_bot": "Вопросы, отзывы, предложения", "final_soon": "Прототип скоро появится", "ov_h2": "Если коротко", "ov_dek": "Главное о Разносе в одном экране", "ov_t1_h": "Весь доход и сравнение", "ov_t1_d": "Доход за день, неделю и месяц и честное сравнение с другими курьерами", "ov_t2_h": "План под цель", "ov_t2_d": "Разнос раскладывает цель недели по дням и сервисам и показывает, хватит ли плана", "ov_t3_h": "Где сейчас выгоднее", "ov_t3_d": "Карта спроса и прогноз дохода по районам и часам", "ov_t4_h": "Сравнение сервисов", "ov_t4_d": "Зарплаты, оценки и отзывы сервисов рядом, по твоему городу", "ov_t5_h": "Сообщество курьеров", "ov_t5_d": "Живая лента города и отзывы, от курьеров для курьеров", "ov_t6_h": "Настоящие данные", "ov_t6_d": "Все цифры прямо из твоих сервисов, а не реклама", "ov_t7_h": "Расходы и налог", "ov_t7_d": "Сколько остаётся после расходов, удержаний и налога", "act_h2": "Заказ под рукой", "act_dek": "Пока везёшь заказ, под рукой этапы и статус. Открыть его в приложении сервиса можно в один тап", "act_status": "Везу заказ", "act_meta": "2,1 км · 16 мин", "act_step1": "Забрал · ВкусВилл, Садовая 3", "act_step2": "Доставить · Клин 8", "act_est": "≈ 1 280 ₽/ч · 360 ₽ после расходов", "data_note": "Все цифры на странице приведены для примера", "sched_cmp_title": "Сравни, где платят больше в этот час", "who_week_title": "Итог недели", "who_week_range": "прошлая неделя", "who_c_income": "Доход", "who_c_costs": "Расходы", "who_c_orders": "Заказы", "who_recap": "Недельный отчёт", "who_new": "Новое", "wr_h2": "Недельный отчёт", "wr_dek": "Итоги недели: сколько, когда и где ты заработал", "wr_earn_lab": "Заработал за неделю", "wr_bestday_lab": "Лучший день", "wr_top_lab": "Топ сервис", "sb_services": "сервисов", "sb_cities": "городов", "sb_langs": "языков", "sb_free": "базовый доступ", "sb_head": "Публичный рынок сервисов и отзывы курьеров", "act_btn_done": "Доставил", "act_btn_open": "Открыть заказ в приложении", "dw_title": "Доход за неделю", "dw_recap": "Посмотреть отчёт", "dw_new": "Новый", "wr_vs_prev": "к прошлой неделе", "wr_for_orders": "за 72 заказа", "wr_deliv1": "32 доставки", "wr_deliv2": "25 доставок", "wr_deliv3": "15 доставок", "prog_map_now": "Районы сейчас", "prog_map_src": "доход в час", "inc_accr": "Начисления", "inc_tips": "Чаевые", "inc_bonus": "Бонусы", "inc_deduct": "Удержания", "order_badge_active": "активный", "exp_r_rent": "Аренда велосипеда · постоянный", "exp_r_conn": "Связь · постоянный", "exp_r_to": "ТО велосипеда · разовый, пн", "exp_r_metro": "Метро · разовый, чт", "exp_total": "Итого", "stat_tab_total": "Всего", "stat_tab_hour": "₽/час", "stat_avg_note": "среднее у других курьеров города", "stat_time_title": "Куда уходит время", "stat_time_sub": "в среднем 128 часов в месяц", "time_deliv": "Доставка", "time_wait": "Ожидание", "time_move": "Переезды", "time_idle": "Простой", "stat_best_time": "Лучшее время", "stat_best_time_sub": "когда платят больше", "stat_per_order": "За заказ", "stat_avg_word": "в среднем", "stat_per_shift": "Заказов за смену", "conn_ok_note": "обновлено только что, ошибок нет", "conn_pill_done": "подключено", "mark_mid": "среднее", "mark_below": "ниже среднего", "mark_above": "выше среднего", "peak_word": "пик", "cmp_reviews_label": "Отзывов", "cmp_order_word": "заказ", "prof_role": "велокурьер", "prof_badge_orders": "6 500 заказов", "prof_badge_orders_range": "3 000–4 000 заказов", "prof_about_year": "около года", "prof_less_year": "меньше года", "prof_anon_note": "Без имени и фото, показатели приблизительные", "lb_h2_pre": "Лидерборд курьеров", "lb_h2_acc": "твоего города", "lb_dek": "Видно своё место в городе за неделю, насколько сдвинулся за сегодня и сколько не хватает до места выше. Имена других скрыты", "lb_li1": "Место по заработку, заказам, чаевым и доходу в час", "lb_li2": "Рядом с тобой: кто выше и ниже и сколько до следующего места", "lb_li3": "Срез по твоему городу и за неделю, суммы у других настоящие", "lb_card_title": "Топ по заработку", "lb_me_place": "28 место", "lb_you": "Ты", "lb_bike": "велосипед", "lb_week": "за неделю", "lb_anon": "без имени", "lb_foot": "Себя видишь как есть, остальные без имён, но суммы у них настоящие", "data_card_title": "Что видно и что скрыто", "data_row1_l": "Личный кабинет", "data_row1_r": "только тебе", "data_row2_l": "Адреса и контакты клиентов", "data_row2_r": "скрыты", "data_row3_l": "Токены сервисов", "data_row3_r": "только на телефоне", "data_row4_l": "Общая статистика", "data_row4_r": "без имён", "city_of_russia": "городов России", "city_more": "и ещё 1096", "faq_gig_link": "gig-водителей", "plan_goal": "Цель недели 30 000 ₽", "plan_goal_ok": "плана хватит", "plan_goal_sub": "Заработано 18 600 ₽, в плане ещё ≈ 12 100 ₽", "plan_better": "Есть выгоднее: ВкусВилл в 13–15, +120 ₽", "conn_s1_note": "Нужен уже активный аккаунт курьера в этом сервисе", "svc_soon": "Скоро подключим", "tax_h2_pre": "Налог и удержания", "tax_h2_acc": "посчитаны заранее", "tax_dek": "Если ты самозанятый, Разнос покажет, сколько платить налога и до какого числа. Рядом видно, что удержал сервис и сколько взял парк", "tax_li1": "Налог за месяц и срок уплаты до 28 числа", "tax_li2": "Комиссия парка или партнёра отдельной строкой", "tax_li3": "Удержания сервиса по заказам с причиной", "tax_card_title": "Деньги за месяц", "tax_card_period": "сентябрь", "tax_r_accr": "Начислено", "tax_r_ded": "Удержания сервиса · 3", "tax_r_park": "Комиссия парка · Яндекс Про", "tax_r_pay": "К выплате", "tax_tax": "Налог самозанятого", "tax_due": "6% · заплатить до 28 октября", "lb_near": "Рядом с тобой", "lb_gap": "До 27 места 380 ₽", "lb_me_shift": "↑ на 3 выше за сегодня", "cmap_title": "30 курьеров на смене рядом", "cmap_note": "Точка примерная и без имени. Капля это сообщение курьера с места", "nb_h2_pre": "Только начинаешь?", "nb_h2_acc": "Подскажем, где начать", "nb_dek": "Сравни сервисы глазами новичка: сколько платят в первые недели, сколько вложить на старте и как оформиться. Цифры по курьерам Разноса в твоём городе", "nb_li1": "Новички и опытные отдельно: доход в час, ожидание заказа и сколько остались через месяц", "nb_li2": "Сколько вложить на старте: залог, медкнижка, аренда транспорта, связь", "nb_li3": "Как оформиться: самозанятость, парк или партнёр и сколько они берут", "nb_scope": "первые 4 недели · Москва", "nb_new": "Новички", "nb_old": "Опытные", "nb_r_hour": "Доход в час", "nb_r_wait": "Ожидание заказа", "nb_r_stay": "Остались через месяц", "nb_wait_new": "9 мин", "nb_wait_old": "8 мин", "nb_hard": "Чаще всего сложно: поиск подъездов и опоздание к слоту", "nb_start": "Вложить на старте", "nb_s1": "Залог за термосумку и куртку, вернут", "nb_s2": "Медкнижка", "nb_s3": "Аренда самоката или велосипеда на неделю", "nb_s4": "Связь на месяц", "nb_pay": "Первая выплата через неделю после первого слота", "keep_h2": "Сколько остаётся на руках", "keep_dek": "Начисления, чаевые, удержания сервиса, расходы и налог в одном расчёте. У каждой суммы виден источник", "keep_li1": "Расходы добавляешь в пару тапов, постоянные считаются сами", "keep_li2": "Если ты самозанятый, видно налог за месяц и срок уплаты до 28 числа", "keep_accr_note": "в том числе чаевые 3 400 ₽ и бонусы 2 600 ₽", "keep_r_exp": "Расходы: аренда, связь, ТО, метро", "keep_r_tax": "Налог самозанятого", "keep_r_net": "Остаётся на руках", "nb_teaser": "Сколько платят новичкам, сколько вложить на старте и как оформиться", "lb_prof": "Свой профиль можно показать с именем или оставить без имени, по умолчанию он скрыт", "conn_cities": "Работает в 1105 городах России, город выбираешь в профиле", "faq_q11": "На каких телефонах работает?", "faq_a11": "На телефонах с Android и на iPhone", "faq_q12": "Нужно ли быть самозанятым?", "faq_a12": "Разносу не важно, как ты оформлен. Оформление требует сам сервис: чаще всего это самозанятость, иногда работа через парк или партнёра. Если ты самозанятый, Разнос посчитает налог", "nb_back": "Разнос для курьеров", "prog_live": "спрос по районам и часам сейчас"};
           const motionOK = (typeof window !== 'undefined' && window.matchMedia && !window.matchMedia('(prefers-reduced-motion: reduce)').matches && 'IntersectionObserver' in window);
           const dict = st.dict || {};
           const t = (lang === 'ru') ? L_ru : Object.assign({}, L_ru, dict[lang] || {});
@@ -1073,11 +1292,20 @@
             notProto: (function () { try { return !new URLSearchParams(window.location.search).has('p'); } catch (e) { return true; } })(),
             connItems: [{ key: 'samokat', title: 'Самокат', note: '', state: 'ok' }, { key: 'vkusvill', title: 'ВкусВилл', note: '', state: 'ok' }],
             protoHref: 'https://t.me/raznos_app_bot',
-            areaRows: [
-              { district: 'Центр', income: '1 320 ₽/ч', incomeNote: 'пик спроса', activity: 'высокая', activityNote: 'много заказов' },
-              { district: 'Север', income: '980 ₽/ч', incomeNote: 'стабильно', activity: 'средняя', activityNote: 'ровный поток' },
-              { district: 'Юго-Запад', income: '610 ₽/ч', incomeNote: 'спокойно', activity: 'низкая', activityNote: 'редкие заказы' }
+            mapZones: [
+              { k: 'tverskoy', name: 'Тверской', val: '1 320 ₽/ч', t: 1 },
+              { k: 'presnya', name: 'Пресненский', val: '1 180 ₽/ч', t: 0.82 },
+              { k: 'basmanny', name: 'Басманный', val: '1 050 ₽/ч', t: 0.6 },
+              { k: 'khamovniki', name: 'Хамовники', val: '900 ₽/ч', t: 0.4 },
+              { k: 'arbat', name: 'Арбат', val: '980 ₽/ч', t: 0.5 },
+              { k: 'zamoskvorechye', name: 'Замоскворечье', val: '860 ₽/ч', t: 0.33 },
+              { k: 'begovoy', name: 'Беговой', val: '820 ₽/ч', t: 0.28 },
+              { k: 'meshchansky', name: 'Мещанский', val: '760 ₽/ч', t: 0.2 },
+              { k: 'dorogomilovo', name: 'Дорогомилово', val: '700 ₽/ч', t: 0.1 },
+              { k: 'krasnoselsky', name: 'Красносельский', val: '610 ₽/ч', t: 0 }
             ],
+            cmapPins: [{ id: 'p1', x: 150, y: 196, svc: 'samokat' }, { id: 'p2', x: 252, y: 246, svc: 'vkusvill' }],
+            nbHref: ((typeof location !== 'undefined' && /\.dc\.html$/.test(decodeURIComponent(location.pathname))) ? './Лендинг - Новичкам.dc.html' : './novichkam.html') + ((typeof location !== 'undefined' && location.search) || ''),
             t: t, lang: lang, onLang: (e) => this.pickLang((e && e.target && e.target.value) || 'ru'),
             offer: { svc: 'samokat', title: 'Самокат', pay: '480', pickupAddr: 'Самокат, ул. Ленина 12', dropAddr: 'ул. Мира 5', etaPoint: '6 мин', etaTotal: '22 мин', distance: '3,2 км', weight: '4 кг', packages: '2', timerLabel: '00:18', timerFillStyle: 'width:72%', estimate: { hourly: '1 280', net: '360' } },
             orders: histOrders, firstOrder: histOrders[0], restOrders: histOrders.slice(1),

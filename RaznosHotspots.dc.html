@@ -11,20 +11,35 @@
     .rhs-foot { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
     .rhs-best { font: 500 13px var(--raznos-font); color: var(--raznos-ink-2); }
     .rhs-best b { color: var(--raznos-ink); font-weight: 700; }
-    .rhs-more { flex: none; display: inline-flex; align-items: center; gap: 2px; border: 0; background: none; padding: 0; font: 600 13px var(--raznos-font); color: var(--raznos-green-deep); cursor: pointer; }
+    .rhs-more { flex: none; display: inline-flex; align-items: center; gap: 2px; min-height: 44px; border: 0; background: none; padding: 0 0 0 8px; font: 600 13px var(--raznos-font); color: var(--raznos-green-deep); cursor: pointer; }
 
     .rhs-full { display: flex; flex-direction: column; gap: 12px; }
     .rhs-full .rhs-list { background: var(--raznos-surface); border: 1px solid var(--raznos-line); border-radius: 16px; padding: 4px 16px; }
+    .rhs-map { position: relative; overflow: hidden; border-radius: 16px; border: 1px solid var(--raznos-line); }
+    .rhs-legend { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 12px; font: 500 12px var(--raznos-font); color: var(--raznos-ink-2); }
+    .rhs-legend > span { display: inline-flex; align-items: center; gap: 5px; }
+    .rhs-legend i { width: 12px; height: 13px; clip-path: polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%); }
+    .rhs-legend .rhs-l1 { background: oklch(0.8 0.1 150 / 0.55); } .rhs-legend .rhs-l2 { background: oklch(0.7 0.14 150 / 0.7); } .rhs-legend .rhs-l3 { background: oklch(0.58 0.15 150 / 0.85); }
+    .rhs-legend-note { width: 100%; color: var(--raznos-ink-3); }
+    .rhs-pick { background: var(--raznos-surface); border: 1px solid var(--raznos-line); border-radius: 16px; padding: 4px 16px; }
     .rhs-empty { padding: 20px 0; font: 500 14px var(--raznos-font); color: var(--raznos-ink-2); text-align: center; }
   </style>
 </helmet>
+
+<sc-if value="{{ no_data }}" hint-placeholder-val="{{ false }}">
+  <div class="rhs">
+    <span class="rhs-title">Где выгоднее</span>
+    <span class="raznos-list-title">{{ no_data_title }}</span>
+    <span class="raznos-text-small">Рейтинга районов для этого города пока нет, районы других городов не показываем</span>
+  </div>
+</sc-if>
 
 <sc-if value="{{ is_card }}" hint-placeholder-val="{{ true }}">
   <div class="rhs">
     <span class="raznos-fx raznos-col"><span class="rhs-title"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12Z"/><circle cx="12" cy="9" r="2.5"/></svg>Где выгоднее</span><span class="rhs-sub">{{ card_sub }}</span></span>
     <div class="rhs-list">
       <sc-for list="{{ card_rows }}" as="z" hint-placeholder-count="4">
-        <dc-import name="RaznosRankRow" rank="{{ z.rank }}" title="{{ z.name }}" meta="{{ z.meta }}" fill="{{ z.fill }}" value="{{ z.val }}" action="{{ z.action }}" href="{{ z.routeHref }}" actionLabel="{{ z.routeAria }}" trend="{{ z.trend }}" trendTail="{{ z.trendTail }}" divider="{{ z.divider }}"></dc-import>
+        <dc-import name="RaznosRankRow" rank="{{ z.rank }}" title="{{ z.name }}" meta="{{ z.meta }}" fill="{{ z.fill }}" value="{{ z.val }}" action="{{ z.action }}" href="{{ z.routeHref }}" actionLabel="{{ z.routeAria }}" trend="{{ z.trend }}" trendUp="{{ z.trendUp }}" trendDown="{{ z.trendDown }}" trendTail="{{ z.trendTail }}" divider="{{ z.divider }}"></dc-import>
       </sc-for>
     </div>
     <div class="rhs-foot"><span class="rhs-best">{{ more_label }}</span><button type="button" class="rhs-more" onClick="{{ open_more }}">Подробнее<span class="raznos-row-chevron">›</span></button></div>
@@ -33,21 +48,32 @@
 
 <sc-if value="{{ is_full }}" hint-placeholder-val="{{ false }}">
   <div class="rhs-full">
+    <div class="raznos-segmented" role="tablist" aria-label="Вид">
+      <button type="button" role="tab" aria-selected="{{ is_list }}" class="{{ view_list_cls }}" onClick="{{ view_list }}">Список</button>
+      <button type="button" role="tab" aria-selected="{{ is_map }}" class="{{ view_map_cls }}" onClick="{{ view_map }}">Карта</button>
+    </div>
+    <dc-import name="RaznosFilterChips" filters="{{ filters }}" onChange="{{ on_filter }}"></dc-import>
+    <sc-if value="{{ is_map }}" hint-placeholder-val="{{ false }}">
+      <div class="rhs-map"><dc-import name="RaznosCourierMap" couriers="{{ false }}" hideCouriers="{{ true }}" hideMe="{{ true }}" zones="{{ map_zones }}"></dc-import></div>
+      <div class="rhs-legend"><span><i class="rhs-l3" aria-hidden="true"></i>Лучшие</span><span><i class="rhs-l2" aria-hidden="true"></i>Выше среднего</span><span><i class="rhs-l1" aria-hidden="true"></i>Средне</span><span class="rhs-legend-note">Без заливки ниже среднего · ↑ растёт за 4 недели · нажмите на район</span></div>
+      <sc-if value="{{ has_pick }}" hint-placeholder-val="{{ true }}"><div class="rhs-pick"><dc-import name="RaznosRankRow" rank="{{ pick.rank }}" title="{{ pick.name }}" meta="{{ pick.meta }}" fill="{{ pick.fill }}" value="{{ pick.val }}" action="{{ pick.action }}" href="{{ pick.routeHref }}" actionLabel="{{ pick.routeAria }}" trend="{{ pick.trend }}" trendUp="{{ pick.trendUp }}" trendDown="{{ pick.trendDown }}" trendTail="{{ pick.trendTail }}" divider="{{ false }}"></dc-import></div></sc-if>
+    </sc-if>
+    <sc-if value="{{ is_list }}" hint-placeholder-val="{{ true }}">
     <div class="raznos-segmented" role="tablist" aria-label="Порядок районов">
       <button type="button" role="tab" aria-selected="{{ by_rank }}" class="{{ seg_rank_cls }}" onClick="{{ sort_rank }}">Выгоднее</button>
       <button type="button" role="tab" aria-selected="{{ by_near }}" class="{{ seg_near_cls }}" onClick="{{ sort_near }}">Ближе ко мне</button>
     </div>
-    <dc-import name="RaznosFilterChips" filters="{{ filters }}" onChange="{{ on_filter }}"></dc-import>
     <div class="rhs-list">
       <sc-for list="{{ rows }}" as="z" hint-placeholder-count="8">
-        <dc-import name="RaznosRankRow" rank="{{ z.rank }}" title="{{ z.name }}" meta="{{ z.meta }}" fill="{{ z.fill }}" value="{{ z.val }}" action="{{ z.action }}" href="{{ z.routeHref }}" actionLabel="{{ z.routeAria }}" trend="{{ z.trend }}" trendTail="{{ z.trendTail }}" divider="{{ z.divider }}"></dc-import>
+        <dc-import name="RaznosRankRow" rank="{{ z.rank }}" title="{{ z.name }}" meta="{{ z.meta }}" fill="{{ z.fill }}" value="{{ z.val }}" action="{{ z.action }}" href="{{ z.routeHref }}" actionLabel="{{ z.routeAria }}" trend="{{ z.trend }}" trendUp="{{ z.trendUp }}" trendDown="{{ z.trendDown }}" trendTail="{{ z.trendTail }}" divider="{{ z.divider }}"></dc-import>
       </sc-for>
       <sc-if value="{{ is_empty }}" hint-placeholder-val="{{ false }}"><p class="rhs-empty">В этих районах нет заказов выбранного сервиса</p></sc-if>
     </div>
+    </sc-if>
     <p class="raznos-text-tiny">{{ source_note }}</p>
   </div>
 </sc-if>
-</x-dc><script type="text/x-dc" data-dc-script data-props='{"mode":{"editor":"text","default":"card"},"open":{"editor":null},"cityTitle":{"editor":"text","default":"Москва"},"transportTitle":{"editor":"text","default":"велосипед"},"$preview":{"width":390,"height":330}}'>
+</x-dc><script type="text/x-dc" data-dc-script data-props='{"mode":{"editor":"text","default":"card"},"open":{"editor":null},"cityTitle":{"editor":"text","default":"Москва"},"cityKey":{"editor":"text","default":"moscow"},"hasData":{"editor":"boolean","default":true},"$preview":{"width":390,"height":330}}'>
 // где выгоднее по мотивам Gridwise Where to Work: районы по доходу, полоса от лучшего, тренд за 4 недели
 // один компонент на карточку хаба Работа и экран, чтобы цифры совпадали
 // районы те же, что в фильтре Когда выгоднее, демо
@@ -77,19 +103,6 @@ const RHS_TODS = [
   { k: 'evening', label: 'Вечер', note: '17–22', i: 2 },
   { k: 'night', label: 'Ночь', note: '22–24', i: 3 }
 ];
-const RHS_TRANSPORTS = [
-  { k: 'foot', label: 'Пешком', mul: 0.78, reach: 2.5 },
-  { k: 'bike', label: 'Велосипед', mul: 1, reach: 6 },
-  { k: 'ebike', label: 'Электровелосипед', mul: 1.12, reach: 8 },
-  { k: 'car', label: 'Авто', mul: 1.22, reach: 99 }
-];
-const rhsTransportKey = (t) => {
-  const s = String(t || '').toLowerCase();
-  if (s.includes('пеш')) return 'foot';
-  if (s.includes('электро')) return 'ebike';
-  if (s.includes('авто') || s.includes('машин')) return 'car';
-  return 'bike';
-};
 const RHS_FMT = (n) => String(n).replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
 const byKey = (list, k) => list.find((x) => x.k === k) || list[0];
 const rhsKm = (km) => String(km).replace('.', ',') + ' км';
@@ -103,9 +116,9 @@ class Component extends DCLogic {
     const cat = byKey(RHS_CATS, st.cat);
     const when = byKey(RHS_WHEN, st.when);
     const tod = byKey(RHS_TODS, st.tod);
-    const trDefault = byKey(RHS_TRANSPORTS, rhsTransportKey(p.transportTitle));
-    const tr = byKey(RHS_TRANSPORTS, st.transport || trDefault.k);
     const city = p.cityTitle || 'Москва';
+    // районы посчитаны только для Москвы
+    const hasData = p.hasData !== false && (p.cityKey || 'moscow') === 'moscow';
 
     // доход в час по району с учётом фильтров, 0 если сервиса в районе нет
     const valueOf = (z) => {
@@ -113,7 +126,7 @@ class Component extends DCLogic {
       if (!svc) return 0;
       const wk = when.k === 'weekend' ? z.wk : (when.k === 'weekdays' ? (1 - (z.wk - 1) * 0.4) : 1);
       const td = tod.i == null ? 1 : z.tod[tod.i];
-      return Math.round(z.pay * svc * wk * td * tr.mul / trDefault.mul / 10) * 10;
+      return Math.round(z.pay * svc * wk * td / 10) * 10;
     };
     const scored = RHS_ZONES.map((z) => ({ z, v: valueOf(z) })).filter((x) => x.v > 0);
     const byValue = scored.slice().sort((a, b) => b.v - a.v);
@@ -136,35 +149,37 @@ class Component extends DCLogic {
     const downX = byValue.filter((x) => x.z.trend <= -10).sort((a, b) => a.z.trend - b.z.trend)[0];
     const rows = list.map((x) => {
       const r = rowOf(x);
-      const far = x.z.km > tr.reach;
       const big = x === upX || x === downX;
       return Object.assign(r, {
-        meta: rhsKm(x.z.km) + (far ? ' · далеко' : ''),
-        routeHref: 'https://yandex.ru/maps/?mode=routes&rtt=' + (tr.k === 'car' ? 'auto' : (tr.k === 'foot' ? 'pd' : 'bc')) + '&rtext=~' + encodeURIComponent(city + ', район ' + x.z.name),
+        meta: rhsKm(x.z.km),
+        routeHref: 'https://yandex.ru/maps/?mode=routes&rtext=~' + encodeURIComponent(city + ', район ' + x.z.name),
         routeAria: 'Маршрут в район ' + x.z.name,
         action: 'route', divider: x !== list[list.length - 1],
         trend: big ? x.z.trend : 0,
-        trendTail: 'дохода в час за 4 недели' + (x.z.trend > 0 ? ', платят всё больше' : ', заказов стало меньше')
+        trendTail: '· по курьерам Разноса', trendUp: 'Доход в час вырос на {n}% за месяц', trendDown: 'Доход в час упал на {n}% за месяц'
       });
     });
 
+    // выбранный на карте район, по умолчанию самый выгодный
+    const pickX = byValue.find((x) => x.z.k === st.pick) || byValue[0];
+    const pickRow = pickX ? { k: pickX.z.k, row: Object.assign(rows.find((r) => r.name === pickX.z.name) || rowOf(pickX), { trend: pickX.z.trend, divider: false }) } : null;
     // карточка: топ-3 и район, который растёт быстрее всех вне топа
     const top = byValue.slice(0, 3);
     const risingX = byValue.slice(3).filter((x) => x.z.trend >= 10).sort((a, b) => b.z.trend - a.z.trend)[0];
-    const rising = risingX ? Object.assign(rowOf(risingX), { trend: risingX.z.trend, trendTail: 'дохода в час за 4 недели, платят всё больше' }) : null;
+    const rising = risingX ? Object.assign(rowOf(risingX), { trend: risingX.z.trend, trendTail: '· по курьерам Разноса', trendUp: 'Доход в час вырос на {n}% за месяц', trendDown: 'Доход в час упал на {n}% за месяц' }) : null;
 
     const optsOf = (l) => l.map((o) => ({ k: o.k, label: o.label, note: o.note }));
     const filters = [
       { key: 'when', title: 'Когда', value: when.k, def: 'week', options: optsOf(RHS_WHEN) },
       { key: 'tod', title: 'Время суток', value: tod.k, def: 'all', options: optsOf(RHS_TODS) },
-      { key: 'transport', title: 'Транспорт', value: tr.k, def: trDefault.k, options: optsOf(RHS_TRANSPORTS) },
       { key: 'metric', title: 'Показатель', value: metric.k, def: 'pay', options: optsOf(RHS_METRICS) },
       { key: 'cat', title: 'Сервис', value: cat.k, def: 'all', options: optsOf(RHS_CATS) }
     ];
     const open = typeof p.open === 'function' ? p.open : (() => {});
 
     return {
-      is_card: !full, is_full: full,
+      no_data: !hasData, no_data_title: 'Нет данных по городу ' + city,
+      is_card: !full && hasData, is_full: full && hasData,
       card_sub: city + ' · ₽ в час · вся неделя',
       // растущий район отделяем чертой от топа
       card_rows: top.map((x, i) => Object.assign(rowOf(x), { divider: !!rising && i === top.length - 1 })).concat(rising ? [rising] : []),
@@ -176,7 +191,16 @@ class Component extends DCLogic {
       sort_rank: () => set({ sort: 'rank' }), sort_near: () => set({ sort: 'near' }),
       filters, on_filter: (key, k) => set({ [key]: k }),
       rows, is_empty: rows.length === 0,
-      source_note: 'По заказам курьеров Разноса: ' + city + ', последние 4 недели. Расстояние считаем от вашего района'
+      // карта: те же районы и цифры, что в списке, цвет от худшего к лучшему
+      is_map: st.view === 'map', is_list: st.view !== 'map',
+      view_list_cls: 'raznos-segment' + (st.view !== 'map' ? ' raznos-is-active' : ''), view_map_cls: 'raznos-segment' + (st.view === 'map' ? ' raznos-is-active' : ''),
+      view_list: () => set({ view: 'list' }), view_map: () => set({ view: 'map' }),
+      map_zones: RHS_ZONES.map((z) => {
+        const x = scored.find((y) => y.z === z);
+        return { k: z.k, name: z.name, val: x ? shown(x.v) + (metric.k === 'pay' ? '/ч' : '') : 'нет заказов', t: x ? (max === min ? 1 : (x.v - min) / (max - min)) : null, up: !!x && z.trend >= 10, top: !!x && x.rank === 1, sel: pickRow && pickRow.k === z.k, tap: () => set({ pick: z.k }) };
+      }),
+      has_pick: !!pickRow, pick: pickRow ? pickRow.row : {},
+      source_note: 'По заказам курьеров Разноса: ' + city + ', 18 авг – 14 сент (4 недели), 184 курьера, 6 240 заказов. Расстояние считаем от вашего района'
     };
   }
 }

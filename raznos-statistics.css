@@ -3,6 +3,7 @@
 .raznos-stats-summary,
 .raznos-stats-section,
 .raznos-stats-money-card,
+.raznos-stats-work-card,
 .raznos-stats-time-card,
 .raznos-stats-services-card,
 .raznos-stats-trend-tiles,
@@ -33,7 +34,7 @@
  background: var(--stats-card);
 }
 
-.raznos-stats-periods .raznos-chip { min-width: 0; min-height: 40px; justify-content: center; padding: 0 4px; border-color: transparent; background: transparent; color: var(--stats-muted); font: 600 14px var(--raznos-font); text-align: center; }
+.raznos-stats-periods .raznos-chip { min-width: 0; min-height: 44px; justify-content: center; padding: 0 4px; border-color: transparent; background: transparent; color: var(--stats-muted); font: 600 14px var(--raznos-font); text-align: center; }
 .raznos-stats-periods .raznos-chip[aria-pressed="true"] { background: var(--raznos-dark); color: var(--raznos-on-dark); }
 
 .raznos-stats-range { margin: -4px 2px 0; color: var(--stats-muted); font: 500 13px/1.4 var(--raznos-font); }
@@ -53,6 +54,7 @@
 .raznos-stats-overview-card,
 .raznos-stats-section,
 .raznos-stats-money-card,
+.raznos-stats-work-card,
 .raznos-stats-time-card,
 .raznos-stats-services-card {
  display: flex;
@@ -68,6 +70,7 @@
 .raznos-stats-overview-card { gap: 20px; padding: 20px 20px 22px; border-radius: 20px; }
 .raznos-stats-summary-lead { display: flex; flex-direction: column; align-items: flex-start; gap: 6px; }
 .raznos-stats-recap-top { width: 100%; display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+.raznos-stats-headline { display: inline-flex; align-items: center; gap: 6px; margin: 0 0 8px; padding: 6px 11px 6px 8px; border-radius: 999px; background: color-mix(in oklab, var(--raznos-green) 14%, var(--stats-card)); font: 700 13px/1.25 var(--raznos-font); color: var(--raznos-green-deep); }
 .raznos-stats-summary-title { margin: 0; color: var(--stats-ink); font: 650 16px/1.25 var(--raznos-font); }
 .raznos-stats-recap-status { display: inline-flex; align-items: center; gap: 6px; padding: 5px 10px; border-radius: 999px; background: var(--stats-track); color: var(--stats-muted); font: 600 12px/1 var(--raznos-font); white-space: nowrap; }
 .raznos-stats-recap-status i { width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
@@ -87,6 +90,8 @@
 .raznos-stats-summary-note { color: var(--stats-muted); font: 500 12px/1.35 var(--raznos-font); }
 
 .raznos-stats-summary-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; padding-top: 18px; border-top: 1px solid var(--stats-track); }
+.raznos-stats-summary-grid.raznos-has-fines { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; }
+.raznos-stats-summary-grid.raznos-has-fines .raznos-stats-summary-number { font-size: 16px; }
 .raznos-stats-summary-grid > div { min-width: 0; display: flex; flex-direction: column; gap: 4px; }
 .raznos-stats-summary-grid .raznos-stats-summary-number { color: var(--stats-ink); font: 750 18px/1.15 var(--raznos-font); letter-spacing: -0.02em; font-variant-numeric: tabular-nums; overflow-wrap: anywhere; }
 .raznos-stats-summary-grid .raznos-stats-summary-number.raznos-is-unknown { color: var(--stats-muted); font-size: 15px; font-weight: 650; }
@@ -120,9 +125,11 @@
 .raznos-stats-bars.raznos-is-year { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 16px 4px; }
 .raznos-stats-bars.raznos-is-year .raznos-stats-day-ring { width: 34px; height: 34px; }
 .raznos-stats-bars.raznos-is-year .raznos-stats-day-ring i { inset: 6px; }
-.raznos-stats-bars.raznos-is-long { gap: 2px; }
-.raznos-stats-bars.raznos-is-long .raznos-stats-day-ring { width: 20px; height: 20px; }
-.raznos-stats-bars.raznos-is-long .raznos-stats-day-ring i { inset: 4px; }
+/* больше 7 кружков: два ряда; у своих дат подписи не влезают, лучший отрезок назван в заголовке */
+.raznos-stats-bars.raznos-is-rows { display: grid; grid-template-columns: repeat(var(--rss-cols, 7), minmax(0, 1fr)); gap: 12px 4px; justify-items: center; }
+.raznos-stats-bars.raznos-is-long .raznos-stats-day-ring { width: 32px; height: 32px; }
+.raznos-stats-bars.raznos-is-long .raznos-stats-day-ring i { inset: 6px; }
+.raznos-stats-bars.raznos-is-long .raznos-stats-bar-label { display: none; }
 .raznos-stats-bars.raznos-is-long .raznos-stats-bar-value { display: none; }
 .raznos-stats-bars.raznos-is-long .raznos-stats-bar-label { font-size: 9px; }
 
@@ -134,6 +141,7 @@
 .raznos-stats-section-action { min-height: 44px; min-width: 68px; flex: none; padding: 0 4px; border: 0; background: transparent; color: var(--raznos-green-deep); font: 650 12px var(--raznos-font); cursor: pointer; box-sizing: border-box; }
 .raznos-stats-section-action:hover { color: var(--stats-ink); }
 .raznos-stats-head-link { width: 100%; min-height: 44px; display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; padding: 0; border: 0; background: transparent; color: var(--stats-ink); text-align: left; font: inherit; cursor: pointer; }
+.raznos-stats-head-link.raznos-is-static { cursor: default; }
 .raznos-stats-head-copy { min-width: 0; display: flex; flex-direction: column; gap: 5px; }
 .raznos-stats-head-copy small { color: var(--stats-muted); font: 500 13px/1.35 var(--raznos-font); }
 .raznos-stats-head-chevron { flex: none; margin-top: 2px; color: var(--raznos-line-strong); transition: transform .15s ease, color .15s ease; }
@@ -166,6 +174,10 @@
 .raznos-stats-money-bar.raznos-is-unknown strong { color: var(--stats-muted); font-weight: 600; }
 .raznos-stats-inline-link { width: 100%; min-height: 48px; display: flex; align-items: center; justify-content: space-between; gap: 10px; margin: -4px 0 -8px; padding: 12px 0 0; border: 0; border-top: 1px solid var(--stats-track); background: transparent; color: var(--stats-ink); font: 600 14px var(--raznos-font); text-align: left; cursor: pointer; }
 .raznos-stats-inline-link .raznos-stats-head-chevron { margin: 0; }
+.raznos-stats-tax-link { align-items: flex-start; padding-top: 14px; }
+.raznos-stats-tax-link .raznos-stats-head-chevron { margin-top: 2px; }
+.raznos-stats-tax-link-copy { min-width: 0; display: flex; flex-direction: column; gap: 3px; text-align: left; }
+.raznos-stats-tax-link-copy small { color: var(--stats-muted); font: 500 12.5px/1.35 var(--raznos-font); }
 .raznos-stats-inline-link:hover .raznos-stats-head-chevron { color: var(--stats-ink); }
 
 .raznos-stats-time-track { height: 14px; display: flex; gap: 3px; overflow: hidden; border-radius: 999px; background: var(--stats-track); }
@@ -183,18 +195,20 @@
 
 .raznos-stats-service-bars,
 .raznos-stats-ranking { display: flex; flex-direction: column; gap: 0; }
-.raznos-stats-service-bar { width: 100%; display: flex; flex-direction: column; gap: 12px; padding: 14px 0; border: 0; background: transparent; color: var(--stats-ink); text-align: left; cursor: pointer; }
+.raznos-stats-service-bar { width: 100%; display: flex; flex-direction: column; gap: 10px; padding: 14px 0; border: 0; background: transparent; color: var(--stats-ink); text-align: left; cursor: pointer; }
 .raznos-stats-service-bar:first-child { padding-top: 0; }
 .raznos-stats-service-bar:last-child { padding-bottom: 0; }
 .raznos-stats-service-head { display: flex; justify-content: space-between; align-items: center; gap: 10px; }
 .raznos-stats-service-label { display: inline-flex; align-items: center; gap: 10px; min-width: 0; }
 .raznos-stats-service-label strong { font: 650 15px var(--raznos-font); }
-.raznos-stats-service-meta { display: inline-flex; align-items: baseline; gap: 8px; white-space: nowrap; }
-.raznos-stats-service-meta strong { font: 750 16px var(--raznos-font); letter-spacing: -0.01em; font-variant-numeric: tabular-nums; }
+.raznos-stats-service-name { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.raznos-stats-service-sum { flex: none; font: 750 16px var(--raznos-font); letter-spacing: -0.01em; font-variant-numeric: tabular-nums; white-space: nowrap; }
 .raznos-stats-service-track { width: 100%; height: 10px; display: block; overflow: hidden; border-radius: 999px; background: var(--stats-track); }
 .raznos-stats-service-track i { display: block; height: 100%; min-width: 8px; border-radius: inherit; background: var(--raznos-green); }
 .raznos-stats-service-bar.raznos-is-vkusvill .raznos-stats-service-track i { background: var(--raznos-svc-vkusvill); }
 .raznos-stats-service-bar.raznos-is-samokat .raznos-stats-service-track i { background: var(--raznos-svc-samokat); }
+/* удержания и корректировки всегда красные, это минус к доходу, цвет сервиса тут не нужен */
+.raznos-stats-fines-bars .raznos-stats-service-bar .raznos-stats-service-track i { background: var(--raznos-red); }
 .raznos-stats-service-orders,
 .raznos-stats-rank-orders { color: var(--stats-muted); font: 500 12.5px var(--raznos-font); }
 
@@ -324,15 +338,17 @@
 .raznos-stats-field :focus-visible { outline: 2px solid var(--raznos-green); outline-offset: 3px; }
 
 @media (prefers-reduced-motion: no-preference) {
+  /* смена периода: карточка сводки проявляется из лёгкого размытия, число при этом докручивается */
   .raznos-stats-overview-card { animation: raznos-stats-card-in .45s cubic-bezier(.16, 1, .3, 1) both; }
-  .raznos-stats-filter-sheet { animation: raznos-stats-filter-in .28s cubic-bezier(.16, 1, .3, 1) both; }
   @keyframes raznos-stats-card-in { from { opacity: .5; transform: translateY(8px); filter: blur(3px); } to { opacity: 1; transform: none; filter: none; } }
+  .raznos-stats-filter-sheet { animation: raznos-stats-filter-in .24s cubic-bezier(.16, 1, .3, 1) both; }
   @keyframes raznos-stats-filter-in { from { transform: translateY(18px); } to { transform: none; } }
 }
 
 @media (max-width: 370px) {
  .raznos-stats-overview-card,
  .raznos-stats-section,
+ .raznos-stats-work-card,
  .raznos-stats-money-card,
  .raznos-stats-time-card,
  .raznos-stats-services-card { padding: 16px 16px 18px; }
@@ -349,9 +365,9 @@
 .raznos-stats-range-bar { display: flex; flex-direction: column; gap: 10px; }
 
 .raznos-stats-top-card { --stats-card: var(--raznos-surface); --stats-ink: var(--raznos-ink); --stats-muted: var(--raznos-ink-3); width: 100%; min-height: 76px; display: flex; align-items: center; gap: 14px; padding: 14px 16px; border: 0; border-radius: 18px; background: var(--stats-card); color: var(--stats-ink); text-align: left; font: inherit; cursor: pointer; box-sizing: border-box; }
-.raznos-stats-top-medal { width: 44px; height: 44px; flex: none; display: inline-flex; align-items: center; justify-content: center; border-radius: 14px; background: color-mix(in oklab, var(--raznos-amber) 18%, var(--stats-card)); color: var(--raznos-amber); }
+.raznos-stats-top-medal { width: 44px; height: 48px; flex: none; display: inline-flex; align-items: center; justify-content: center; clip-path: var(--raznos-hex); background: color-mix(in oklab, var(--raznos-amber) 22%, var(--stats-card)); color: var(--raznos-amber); }
 .raznos-stats-top-copy { min-width: 0; flex: 1; display: flex; flex-direction: column; gap: 3px; }
-.raznos-stats-top-copy strong { font: 700 16px/1.2 var(--raznos-font); }
+.raznos-stats-top-copy strong { font: 700 16px/1.2 var(--raznos-font); white-space: nowrap; }
 .raznos-stats-top-copy small { color: var(--stats-muted); font: 500 12.5px/1.3 var(--raznos-font); }
 .raznos-stats-top-place { flex: none; padding: 6px 11px; border-radius: 999px; background: color-mix(in oklab, var(--raznos-green) 14%, var(--stats-card)); color: var(--raznos-green-deep); font: 750 14px/1 var(--raznos-font); font-variant-numeric: tabular-nums; white-space: nowrap; }
 .raznos-stats-top-card:hover .raznos-stats-head-chevron { color: var(--stats-ink); transform: translateX(2px); }
@@ -397,6 +413,7 @@
 
 /* Мои тренды: список показателей, как у Gridwise */
 .raznos-stats-trend-list { display: flex; flex-direction: column; gap: 10px; }
+.raznos-stats-trend-group { margin: 8px 2px 0; font: 700 15px var(--raznos-font); color: var(--raznos-ink-2); }
 .raznos-stats-trend-card { display: flex; flex-direction: column; gap: 14px; width: 100%; padding: 14px 16px; border: 0; border-radius: 16px; background: var(--raznos-surface); color: var(--raznos-ink); text-align: left; font: inherit; cursor: pointer; }
 .raznos-stats-trend-card:focus-visible { outline: 2px solid var(--raznos-green); outline-offset: 2px; }
 .raznos-stats-trend-card-head { display: flex; align-items: center; justify-content: space-between; gap: 10px; color: var(--raznos-ink-3); }
@@ -417,3 +434,64 @@
 .raznos-stats-compare-delta { display: block; margin-top: 2px; font: 700 13px var(--raznos-font); font-style: normal; color: var(--raznos-ink-3); font-variant-numeric: tabular-nums; }
 .raznos-stats-compare-delta.raznos-is-positive { color: var(--raznos-green-deep); }
 .raznos-stats-compare-delta.raznos-is-negative { color: var(--raznos-red); }
+
+/* как работали: заказы, маршруты и смены за период */
+.raznos-stats-work-tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(0, 1fr)); gap: 8px; }
+.raznos-stats-work-tile { display: flex; flex-direction: column; gap: 2px; padding: 12px; border-radius: 14px; background: var(--stats-track); }
+.raznos-stats-work-tile > b { color: var(--stats-ink); font: 800 26px/1 var(--raznos-font); letter-spacing: -0.03em; font-variant-numeric: tabular-nums; }
+.raznos-stats-work-tile > span { color: var(--stats-ink); font: 600 13px var(--raznos-font); }
+.raznos-stats-work-tile > small { color: var(--stats-muted); font: 500 12px/1.3 var(--raznos-font); }
+.raznos-stats-work-time { display: flex; flex-direction: column; gap: 8px; }
+.raznos-stats-work-time-head { width: 100%; min-height: 44px; display: flex; align-items: center; gap: 8px; margin: -8px 0 -4px; padding: 0; border: 0; background: transparent; color: var(--stats-muted); font: 500 13px var(--raznos-font); text-align: left; cursor: pointer; }
+.raznos-stats-work-time-head > b { margin-left: auto; }
+.raznos-stats-work-time-head .raznos-stats-head-chevron { margin: 0; }
+.raznos-stats-work-booked { margin: 0; color: var(--stats-muted); font: 500 12.5px/1.35 var(--raznos-font); }
+.raznos-stats-work-time-head > b { color: var(--stats-ink); font: 750 15px var(--raznos-font); font-variant-numeric: tabular-nums; }
+.raznos-stats-work-bar { display: flex; gap: 3px; height: 10px; }
+.raznos-stats-work-bar > i { display: block; border-radius: 999px; min-width: 6px; }
+.raznos-stats-work-legend { display: flex; flex-wrap: wrap; gap: 4px 14px; color: var(--stats-muted); font: 500 12.5px var(--raznos-font); }
+.raznos-stats-work-legend > span { display: inline-flex; align-items: center; gap: 6px; }
+.raznos-stats-work-legend b { color: var(--stats-ink); font-weight: 700; font-variant-numeric: tabular-nums; }
+.raznos-stats-work-legend i { width: 10px; height: 10px; border-radius: 3px; }
+.raznos-stats-work-bar > .raznos-is-with-order, .raznos-stats-work-legend > span > .raznos-is-with-order { background: var(--raznos-green); }
+.raznos-stats-work-bar > .raznos-is-waiting, .raznos-stats-work-legend > span > .raznos-is-waiting { background: var(--raznos-amber); }
+.raznos-is-booked { background: var(--raznos-green-deep); }
+.raznos-is-free { background: var(--raznos-green); opacity: 0.55; }
+.raznos-is-other { background: var(--stats-track); outline: 1px solid var(--raznos-line-strong); }
+.raznos-stats-work-chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.raznos-stats-work-chip { padding: 4px 10px; border-radius: 999px; background: color-mix(in oklab, var(--raznos-amber) 16%, transparent); color: var(--stats-ink); font: 600 12.5px var(--raznos-font); }
+
+/* сравнение: вывод к прошлому периоду и к медиане города, ниже тренды */
+.raznos-stats-compare-card { gap: 16px; }
+.raznos-stats-verdicts { display: flex; flex-direction: column; gap: 12px; }
+.raznos-stats-verdicts > .raznos-stats-summary-delta { margin-top: 0; }
+.raznos-stats-verdict-row { display: flex; align-items: flex-start; justify-content: space-between; gap: 8px; }
+.raznos-stats-verdict { margin-top: 0; align-items: flex-start; }
+.raznos-stats-verdict-copy { min-width: 0; display: flex; flex-direction: column; gap: 3px; }
+.raznos-stats-verdict-copy > b { font: 700 14px/1.3 var(--raznos-font); }
+.raznos-stats-verdict-copy > small { color: var(--stats-muted); font: 500 12.5px/1.35 var(--raznos-font); }
+.raznos-stats-verdict-settings { margin: -11px -6px -11px 0; }
+
+/* карточка Сравнение: три ставки в один ряд без дыры, под выводом мини-шкала медианы */
+.raznos-stats-compare-card .raznos-stats-trend-tiles { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
+.raznos-stats-compare-card .raznos-stats-trend-tile { flex-direction: column; align-items: flex-start; gap: 8px; }
+.raznos-stats-compare-card .raznos-stats-trend-badge { width: 32px; height: 32px; border-radius: 10px; }
+.raznos-stats-compare-card .raznos-stats-trend-tile-copy small { flex-direction: column; }
+.raznos-stats-verdict-gauge { margin: -2px 0 0 30px; }
+
+/* топ курьеров в профиле: место справа, сдвиг за сегодня под подписью, при открытии по поверхности один раз перекатывается золотой блик, не по рамке, чтобы не путать с идущим окном */
+.raznos-stats-top-card { position: relative; }
+.raznos-stats-top-delta { display: inline-flex; align-items: center; gap: 3px; font: 600 11.5px var(--raznos-font); white-space: nowrap; }
+.raznos-stats-top-delta.raznos-is-up { color: var(--raznos-green-deep); }
+.raznos-stats-top-delta.raznos-is-down { color: var(--stats-muted); }
+.raznos-stats-top-num { font-variant-numeric: tabular-nums; }
+@media (prefers-reduced-motion: no-preference) {
+  .raznos-stats-top-shine { overflow: hidden; }
+  .raznos-stats-top-shine::before { content: ""; position: absolute; inset: 0; z-index: 1; pointer-events: none; background: linear-gradient(105deg, transparent 32%, color-mix(in oklab, oklch(0.93 0.11 92) 60%, transparent) 50%, transparent 68%); transform: translateX(-100%); animation: rstl-sweep 2s cubic-bezier(.45, 0, .25, 1) .3s 1 both; }
+  .raznos-stats-top-shine .raznos-stats-top-delta { animation: rstl-delta-in .25s cubic-bezier(.16, 1, .3, 1) .6s both; }
+  @keyframes rstl-sweep { from { transform: translateX(-100%); } to { transform: translateX(100%); } }
+  @keyframes rstl-delta-in { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: none; } }
+}
+
+/* строка периода со стрелками липнет к верху, табы периода уезжают под неё */
+.raznos-stats-sticky { position: sticky; top: -54px; z-index: 6; margin: 0 calc(var(--raznos-screen-x, 16px) * -1); padding: 6px var(--raznos-screen-x, 16px) 8px; background: var(--raznos-bg); }
