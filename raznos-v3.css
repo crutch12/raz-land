@@ -108,6 +108,12 @@ a:hover { color: var(--raznos-ink); }
 .raznos-phone-status { display: flex; justify-content: space-between; padding: 10px 20px 2px; font: 600 13px var(--raznos-mono); color: var(--raznos-ink-2); }
 .raznos-demo-ribbon { position: sticky; top: 0; z-index: 5; display: flex; align-items: center; gap: 8px; padding: 6px 8px; background: var(--raznos-dark); color: var(--raznos-on-dark); font: 600 14px var(--raznos-font); letter-spacing: 0.02em; }
 .raznos-demo-ribbon-text { flex: 1; min-width: 0; }
+/* помощник раскрывается из кнопки: до начала раскрытия шторка не видна и не выезжает сама */
+/* слот шторки помощника не занимает места: заглушка на время загрузки компонента не сдвигает экран */
+.raznos-ai-slot { position: absolute; inset: 0; z-index: 60; pointer-events: none; }
+.raznos-ai-slot .raznos-dialog-layer { pointer-events: auto; }
+[data-rab-pour] .ras-sheet { visibility: hidden; animation: none !important; }
+[data-rab-pour] .raznos-dialog-layer { background: transparent !important; }
 .raznos-demo-ribbon-close { position: relative; flex: 0 0 auto; width: 20px; height: 20px; padding: 0; background: rgba(255, 255, 255, 0.18); border: 0; border-radius: 999px; color: var(--raznos-on-dark); font: 700 13px/20px var(--raznos-font); text-align: center; }
 .raznos-demo-ribbon-close::before { content: ""; position: absolute; inset: -12px; }
 .raznos-demo-ribbon-gear { display: inline-flex; align-items: center; justify-content: center; margin-right: 8px; }
@@ -119,15 +125,17 @@ a:hover { color: var(--raznos-ink); }
 .raznos-demo-toggle-go { flex: none; min-height: 44px; margin: -10px -4px -10px 0; padding: 0 4px 0 12px; background: none; border: 0; cursor: pointer; font: 600 14px var(--raznos-font); color: var(--raznos-green-deep); }
 .raznos-demo-ribbon-close:focus { outline: 2px solid var(--raznos-on-dark); outline-offset: 2px; }
 .raznos-phone-scroll { flex: 1; min-height: 0; overflow-y: auto; overflow-x: hidden; display: flex; flex-direction: column; overscroll-behavior-x: none; overscroll-behavior-y: contain; }
-/* потянуть, чтобы обновить: фирменная Р крутится вслед за пальцем, после порога зеленеет, при обновлении вращается, в конце галочка */
-.raznos-ptr { position: absolute; left: 50%; top: 0; z-index: 4; width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; background: var(--raznos-surface); color: var(--raznos-ink-3); box-shadow: 0 4px 14px rgba(20, 25, 40, .18); opacity: 0; pointer-events: none; transform: translate(-50%, -20px); }
-.raznos-ptr-mark { font: 800 17px var(--raznos-font); line-height: 1; }
-.raznos-ptr.raznos-ptr-ready, .raznos-ptr.raznos-ptr-spin { background: var(--raznos-brand, var(--raznos-green)); color: #fff; }
-.raznos-ptr.raznos-ptr-spin .raznos-ptr-mark { animation: raznos-ptr-spin .8s linear infinite; }
-.raznos-ptr.raznos-ptr-done { background: var(--raznos-green-deep); color: #fff; }
-.raznos-ptr.raznos-ptr-done .raznos-ptr-mark { font-size: 0; }
-.raznos-ptr.raznos-ptr-done .raznos-ptr-mark::after { content: "✓"; font-size: 17px; }
-@keyframes raznos-ptr-spin { to { transform: rotate(360deg); } }
+/* потянуть, чтобы обновить: кольцо дорисовывается вслед за пальцем, после порога пружинит, при обновлении крутится короткая дуга, в конце замыкается и гаснет */
+.raznos-ptr { --ptr-p: 0; position: absolute; left: 50%; top: 0; z-index: 4; width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; background: var(--raznos-surface); color: var(--raznos-green); box-shadow: 0 3px 12px rgba(20, 25, 40, .14); opacity: 0; pointer-events: none; transform: translate(-50%, -20px); }
+.raznos-ptr-ring { width: 24px; height: 24px; display: block; transform: rotate(-90deg); transition: scale .35s cubic-bezier(.34, 1.56, .64, 1); }
+.raznos-ptr-track { fill: none; stroke: var(--raznos-line); stroke-width: 2.5; }
+.raznos-ptr-arc { fill: none; stroke: currentColor; stroke-width: 2.5; stroke-linecap: round; stroke-dasharray: calc(var(--ptr-p) * 100) 100; opacity: calc(.35 + var(--ptr-p) * .65); }
+.raznos-ptr.raznos-ptr-ready .raznos-ptr-ring { scale: 1.12; }
+.raznos-ptr.raznos-ptr-spin .raznos-ptr-arc { stroke-dasharray: 30 100; opacity: 1; transition: stroke-dasharray .3s ease; }
+.raznos-ptr.raznos-ptr-spin .raznos-ptr-ring { animation: raznos-ptr-spin .9s linear infinite; }
+.raznos-ptr.raznos-ptr-done .raznos-ptr-arc { stroke-dasharray: 100 100; opacity: 1; transition: stroke-dasharray .32s cubic-bezier(.16, 1, .3, 1); }
+.raznos-ptr.raznos-ptr-done .raznos-ptr-ring { scale: .9; transition: scale .3s ease; }
+@keyframes raznos-ptr-spin { from { transform: rotate(-90deg); } to { transform: rotate(270deg); } }
 /* на один кадр снимаем анимации, чтобы после обновления они сыграли заново */
 .raznos-ptr-replay, .raznos-ptr-replay *, .raznos-ptr-replay *::before, .raznos-ptr-replay *::after { animation: none !important; }
 /* отступ от краёв экрана до блоков и между основными блоками, плотнее как у Gridwise */
@@ -157,6 +165,9 @@ button.raznos-list-row:focus-visible, button.raznos-consent-row:focus-visible, b
 .raznos-onboarding-top .raznos-btn-ghost { color: var(--raznos-ink-2); text-decoration: underline; text-underline-offset: 3px; }
 .raznos-btn-row { display: flex; gap: 10px; flex-wrap: wrap; }
 .raznos-sticky-actions { position: sticky; bottom: 0; display: flex; flex-direction: column; gap: 8px; padding: 12px 0 4px; background: linear-gradient(to top, var(--raznos-bg) 70%, transparent); margin-top: auto; }
+/* экран без нижнего меню доходит до края телефона: кнопкам и концу прокрутки нужна зона жеста домой */
+.raznos-phone-frame:not(:has(.raznos-bottom-nav)) .raznos-sticky-actions { padding-bottom: calc(4px + env(safe-area-inset-bottom, 0px)); }
+.raznos-phone-frame:not(:has(.raznos-bottom-nav)) .raznos-phone-body { padding-bottom: calc(20px + env(safe-area-inset-bottom, 0px)); }
 /* строка под основной кнопкой входа и онбординга одной высоты, чтобы кнопка не прыгала между шагами */
 .raznos-sticky-actions > .raznos-entry-foot { min-height: 72px; box-sizing: border-box; }
 /* онбординг на всю высоту экрана, как экраны входа */
@@ -189,12 +200,13 @@ button.raznos-list-row:focus-visible, button.raznos-consent-row:focus-visible, b
 
 .raznos-chip-row { display: flex; gap: 8px; flex-wrap: wrap; }
 .raznos-chip { min-height: 44px; padding: 8px 14px; border-radius: 999px; border: 1px solid var(--raznos-line-strong); font: 600 14px var(--raznos-font); color: var(--raznos-ink-2); background: var(--raznos-surface); }
-/* выбор чипа: тёмный круг растекается из точки нажатия, при снятии стягивается в неё; точку и радиус ставит RaznosTabMotion */
+/* выбор чипа: тёмный круг растекается из точки нажатия, при снятии стягивается в неё; точку и радиус ставит RaznosTabMotion
+   raznos-chip-ink даёт тот же эффект чипам компонентов со своей формой */
 @property --raznos-chip-r { syntax: '<length>'; inherits: false; initial-value: 0px; }
-.raznos-chip { background-image: radial-gradient(circle at var(--raznos-chip-x, 50%) var(--raznos-chip-y, 50%), var(--raznos-dark) calc(var(--raznos-chip-r) - .5px), transparent var(--raznos-chip-r)); }
-.raznos-chip.raznos-is-active { --raznos-chip-r: var(--raznos-chip-max, 120px); color: var(--raznos-on-dark); border-color: var(--raznos-dark); }
+.raznos-chip, .raznos-chip-ink { background-image: radial-gradient(circle at var(--raznos-chip-x, 50%) var(--raznos-chip-y, 50%), var(--raznos-dark) calc(var(--raznos-chip-r) - .5px), transparent var(--raznos-chip-r)); }
+.raznos-chip.raznos-is-active, .raznos-chip-ink.raznos-is-active { --raznos-chip-r: var(--raznos-chip-max, 120px); color: var(--raznos-on-dark); border-color: var(--raznos-dark); }
 @media (prefers-reduced-motion: no-preference) {
-  .raznos-chip { transition: --raznos-chip-r .42s cubic-bezier(.3, .6, .2, 1), color .2s ease .08s, border-color .2s ease; }
+  .raznos-chip, .raznos-chip-ink { transition: --raznos-chip-r .42s cubic-bezier(.3, .6, .2, 1), color .2s ease .08s, border-color .2s ease; }
 }
 
 /* Карточки и списки */
@@ -260,10 +272,17 @@ button.raznos-list-row:focus-visible, button.raznos-consent-row:focus-visible, b
 .raznos-hero-pre-line { font: 500 14px/1.35 var(--raznos-font); color: var(--raznos-ink-2); }
 .raznos-hero-pre-cta { margin-top: 6px; min-height: 44px; display: inline-flex; align-items: center; align-self: flex-start; padding: 0 16px; border-radius: 999px; background: var(--raznos-dark); color: var(--raznos-on-dark); font: 650 14px var(--raznos-font); }
 .raznos-hero-label { font: 500 14px var(--raznos-font); opacity: 0.72; }
+/* свежесть данных отдельно под полосой сервисов: тихая серая строка, точка зелёная, при сбое янтарная */
+/* подзаголовок Сегодня: транспорт, дата и свежесть данных одной тихой строкой, при сбое свежесть янтарная */
+.raznos-home-sub { display: flex; align-items: center; flex-wrap: wrap; column-gap: 8px; white-space: nowrap; font: 500 12.5px var(--raznos-font); color: var(--raznos-ink-3); }
+.raznos-home-fresh-wrap { display: inline-flex; align-items: center; }
+.raznos-hero-fresh { position: relative; display: inline-flex; align-items: center; gap: 3px; padding: 0; border: 0; background: none; color: inherit; font: inherit; cursor: pointer; }
+.raznos-hero-fresh::before { content: ''; position: absolute; inset: -14px -6px; }
+.raznos-hero-fresh.raznos-is-warn { color: var(--raznos-amber); font-weight: 600; }
+.raznos-hero-fresh:focus-visible { outline: 2px solid var(--raznos-green); outline-offset: 2px; border-radius: 4px; }
 .raznos-hero-value { font: 700 40px/1 var(--raznos-mono); letter-spacing: -0.01em; }
 .raznos-hero-unit { font: 600 16px var(--raznos-font); opacity: 0.8; }
 .raznos-hero-today { position: relative; }
-.raznos-hero-open { position: absolute; top: 8px; right: 8px; width: 44px; height: 44px; display: inline-flex; align-items: center; justify-content: center; padding: 0; border: 0; border-radius: 12px; background: none; color: color-mix(in oklab, var(--raznos-on-dark) 75%, transparent); cursor: pointer; }
 /* полоска долей сервисов под карточкой Заработано сегодня */
 .raznos-today-mix { width: 100%; display: flex; flex-direction: column; gap: 8px; margin-top: -4px; padding: 10px 4px 2px; border: 0; background: none; font: inherit; color: inherit; text-align: left; cursor: pointer; }
 .raznos-today-mix-bar { display: flex; gap: 3px; height: 8px; }
@@ -278,8 +297,10 @@ button.raznos-list-row:focus-visible, button.raznos-consent-row:focus-visible, b
 .raznos-conn-device-icons > * + * { margin-left: -8px; }
 .raznos-client-note { display: flex; flex-direction: column; gap: 2px; padding-bottom: 10px; margin-bottom: 4px; border-bottom: 1px solid var(--raznos-line); }
 /* шторка Сегодня: ответ сверху, карточки ниже, суммы одной гарнитурой */
-.raznos-dialog-bottom > .raznos-dialog.raznos-day-sheet { max-height: 86%; gap: 12px; padding: 8px 16px 0; background: var(--raznos-bg); }
-.raznos-day-handle { align-self: center; width: 40px; height: 4px; border-radius: 999px; background: var(--raznos-line-strong); }
+.raznos-dialog-bottom > .raznos-dialog.raznos-day-sheet { max-height: 86%; gap: 12px; padding: 8px 16px calc(16px + env(safe-area-inset-bottom, 0px)); background: var(--raznos-bg); }
+/* с липким подвалом отступ уходит в подвал, иначе он двоится */
+.raznos-dialog-bottom > .raznos-dialog.raznos-day-sheet:has(> .raznos-day-foot) { padding-bottom: 0; }
+.raznos-day-handle { flex: none; align-self: center; width: 40px; height: 4px; border-radius: 999px; background: var(--raznos-line-strong); }
 .raznos-day-head { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin: -2px -4px -6px 4px; }
 .raznos-day-close { font-size: 24px; line-height: 1; }
 .raznos-day-net { display: flex; flex-direction: column; gap: 2px; padding: 0 4px; }
@@ -293,6 +314,8 @@ button.raznos-list-row:focus-visible, button.raznos-consent-row:focus-visible, b
 .raznos-day-minus { color: var(--raznos-red) !important; }
 .raznos-day-svc, .raznos-day-exp-open { flex: 1; min-width: 0; display: flex; align-items: center; gap: 10px; padding: 8px 0; border: 0; background: none; font: inherit; color: inherit; text-align: left; cursor: pointer; }
 .raznos-day-svc { width: 100%; border-top: 1px solid var(--raznos-line); }
+/* разделитель только между сервисами, над первым линии нет */
+.raznos-day-svc:first-of-type { border-top: 0; }
 .raznos-day-svc-main { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 6px; }
 .raznos-day-svc-top { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
 .raznos-day-svc-name { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 1px; font: 600 14.5px var(--raznos-font); color: var(--raznos-ink); }
@@ -301,22 +324,25 @@ button.raznos-list-row:focus-visible, button.raznos-consent-row:focus-visible, b
 .raznos-day-bar > i { display: block; height: 100%; border-radius: inherit; background: var(--raznos-green); }
 .raznos-day-bar-goal { height: 8px; }
 .raznos-day-goal { gap: 8px; padding-bottom: 12px; }
+button.raznos-day-goal { width: 100%; border: 0; font: inherit; color: inherit; text-align: left; cursor: pointer; }
+button.raznos-day-goal:focus-visible { outline: 2px solid var(--raznos-green); outline-offset: 2px; }
 .raznos-day-goal .raznos-day-line { min-height: 36px; }
 .raznos-day-note { font: 500 12.5px/1.4 var(--raznos-font); color: var(--raznos-ink-3); }
 .raznos-day-fines, .raznos-day-exp { border-top: 1px solid var(--raznos-line); }
 .raznos-day-exp { display: flex; align-items: center; gap: 8px; }
 .raznos-day-exp-ico { width: 32px; height: 32px; flex: none; display: inline-flex; align-items: center; justify-content: center; border-radius: 10px; background: var(--raznos-red-tint); color: var(--raznos-red); }
+/* строка чаевых как расходы, значок зелёный: это плюс к деньгам */
+.raznos-day-tips-ico { background: var(--raznos-green-tint); color: var(--raznos-green-deep); font: 700 16px var(--raznos-font); }
 .raznos-day-exp-add { width: 40px; height: 40px; flex: none; display: inline-flex; align-items: center; justify-content: center; border: 1px solid var(--raznos-line-strong); border-radius: 12px; background: var(--raznos-surface); color: var(--raznos-ink); cursor: pointer; }
 .raznos-day-exp-add:focus-visible, .raznos-day-exp-open:focus-visible, .raznos-day-svc:focus-visible { outline: 2px solid var(--raznos-green); outline-offset: 2px; }
 .raznos-day-tip { display: flex; align-items: center; gap: 10px; padding: 8px 0; border-top: 1px solid var(--raznos-line); }
 .raznos-day-tip-cash { width: 32px; height: 32px; flex: none; display: inline-flex; align-items: center; justify-content: center; border-radius: 10px; background: color-mix(in oklab, var(--raznos-green) 16%, var(--raznos-surface)); color: var(--raznos-green-deep); font: 800 15px var(--raznos-font); }
 .raznos-day-tip-none { display: flex; align-items: center; gap: 10px; padding: 10px 0 8px; border-top: 1px solid var(--raznos-line); font: 500 12.5px var(--raznos-font); color: var(--raznos-ink-3); }
 .raznos-day-tip-none-icons { display: inline-flex; flex: none; gap: 4px; opacity: 0.7; }
-.raznos-day-foot { position: sticky; bottom: 0; margin: 0 -16px; padding: 10px 16px 16px; background: linear-gradient(to bottom, transparent, var(--raznos-bg) 30%); }
+.raznos-day-foot { position: sticky; bottom: 0; margin: 0 -16px; padding: 10px 16px calc(16px + env(safe-area-inset-bottom, 0px)); background: linear-gradient(to bottom, transparent, var(--raznos-bg) 30%); }
 .raznos-day-foot > .raznos-btn { width: 100%; }
 .raznos-hero-today { cursor: pointer; }
 .raznos-hero-today:focus-visible { outline: 2px solid var(--raznos-green); outline-offset: 3px; }
-.raznos-hero-open:focus-visible { outline: 2px solid var(--raznos-green); outline-offset: 2px; }
 .raznos-hero-chips { display: flex; flex-wrap: wrap; gap: 6px; }
 .raznos-hero-chip { display: inline-flex; align-items: baseline; gap: 6px; padding: 5px 10px; border-radius: 999px; background: color-mix(in oklab, var(--raznos-on-dark) 12%, transparent); font: 500 13px var(--raznos-font); color: color-mix(in oklab, var(--raznos-on-dark) 80%, transparent); }
 .raznos-hero-chip-add { position: relative; align-items: center; gap: 6px; min-height: 44px; padding-inline: 14px; border: 0; font-family: inherit; cursor: pointer; color: var(--raznos-on-dark); }
@@ -414,6 +440,18 @@ button.raznos-metric-card { appearance: none; -webkit-appearance: none; font: in
 .raznos-review-block { display: flex; flex-direction: column; gap: 6px; padding-top: 12px; }
 .raznos-review-block + .raznos-review-block { border-top: 1px solid var(--raznos-line); margin-top: 4px; }
 .raznos-review-label { font-weight: 600; }
+/* отзыв о заказе: части разделены линией, у каждой свой отступ сверху */
+.raznos-ord-review .rrb { border-top: 1px solid var(--raznos-line); margin-top: 4px; }
+/* наличные чаевые строкой в начислении: нажатие открывает правку на месте */
+.raznos-ord-cash { display: flex; align-items: center; justify-content: space-between; gap: 12px; width: 100%; min-height: 52px; margin-top: 2px; padding: 8px 0 0; border: 0; border-top: 1px solid var(--raznos-line); background: none; font: inherit; color: var(--raznos-ink); text-align: left; cursor: pointer; }
+.raznos-ord-cash-main { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.raznos-ord-cash-sub { font: 500 12px var(--raznos-font); color: var(--raznos-ink-3); }
+.raznos-ord-cash-add { font: 650 14px var(--raznos-font); color: var(--raznos-green-deep); }
+.raznos-ord-cash:focus-visible { outline: 2px solid var(--raznos-green); outline-offset: 2px; border-radius: 8px; }
+.raznos-ord-cash-edit { display: flex; flex-direction: column; gap: 10px; margin-top: 2px; padding-top: 10px; border-top: 1px solid var(--raznos-line); }
+.raznos-ord-cash-field { display: flex; align-items: center; justify-content: space-between; gap: 12px; font: 500 15px var(--raznos-font); color: var(--raznos-ink); }
+.raznos-ord-cash-input { width: 110px; text-align: right; font: 700 17px var(--raznos-mono); font-variant-numeric: tabular-nums; }
+.raznos-ord-cash-del { margin-left: auto; color: var(--raznos-red); }
 .raznos-focus-card { box-shadow: 0 0 0 2px var(--raznos-green-deep); }
 .raznos-order-card { border-left-width: 4px; border-left-style: solid; }
 
@@ -558,7 +596,7 @@ button.raznos-metric-card { appearance: none; -webkit-appearance: none; font: in
 .raznos-city-trigger-icon { flex: 0 0 auto; color: var(--raznos-ink-2); display: block; }
 .raznos-city-modal-layer { position: absolute; inset: 0; z-index: 70; display: flex; flex-direction: column; justify-content: flex-end; background: oklch(0.22 0.012 250 / 0.42); }
 .raznos-city-modal-backdrop { position: absolute; inset: 0; padding: 0; border: 0; background: transparent; cursor: pointer; }
-.raznos-city-modal { position: relative; z-index: 1; display: flex; flex-direction: column; gap: 12px; max-height: 76%; padding: 16px 16px 8px; border-radius: 20px 20px 0 0; background: var(--raznos-surface); border: 1px solid var(--raznos-line); box-shadow: 0 -12px 40px rgba(20, 25, 40, 0.22); }
+.raznos-city-modal { position: relative; z-index: 1; display: flex; flex-direction: column; gap: 12px; max-height: 76%; padding: 16px 16px calc(8px + env(safe-area-inset-bottom, 0px)); border-radius: 20px 20px 0 0; background: var(--raznos-surface); border: 1px solid var(--raznos-line); box-shadow: 0 -12px 40px rgba(20, 25, 40, 0.22); }
 .raznos-city-modal-head { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
 .raznos-city-search-box { min-height: 46px; border-radius: 12px; border: 1px solid var(--raznos-line-strong); background: var(--raznos-bg); display: flex; align-items: center; gap: 8px; padding: 0 12px; }
 .raznos-city-search-box:focus-within { border-color: var(--raznos-ink); border-width: 2px; padding: 0 11px; }
@@ -644,9 +682,17 @@ button.raznos-metric-card { appearance: none; -webkit-appearance: none; font: in
 .raznos-theme-dark ::selection { background: oklch(0.45 0.10 150); color: oklch(0.97 0.006 250); }
 .raznos-phone-frame.raznos-theme-dark .raznos-icon-bordered,
 .raznos-theme-dark .raznos-icon-bordered { background: oklch(0.95 0.004 250); }
-.raznos-phone-frame.raznos-theme-dark .raznos-demo-ribbon { background: oklch(0.34 0.016 250); color: var(--raznos-ink); }
+.raznos-phone-frame.raznos-theme-dark .raznos-demo-ribbon { background: oklch(0.29 0.016 250); color: var(--raznos-ink); border-bottom: 1px solid var(--raznos-line); }
+/* в тёмной теме кнопки на плашке демо светлые, иначе тёмный значок тонет в сером */
+.raznos-phone-frame.raznos-theme-dark .raznos-demo-ribbon-close { background: rgba(255, 255, 255, 0.12); color: var(--raznos-ink); }
+.raznos-phone-frame.raznos-theme-dark .raznos-demo-ribbon-close:focus { outline-color: var(--raznos-ink); }
 .raznos-dialog-layer.raznos-dialog-bottom { align-items: flex-end; padding: 0; }
-.raznos-dialog-bottom > .raznos-dialog { max-width: none; max-height: 92%; overflow-y: auto; padding: 18px 20px 20px; border: 0; border-radius: 22px 22px 0 0; box-shadow: 0 -18px 44px rgba(20, 25, 40, .18); }
+/* нижние шторки: под последней кнопкой обычный отступ плюс зона жеста домой на телефоне */
+.raznos-dialog-bottom > .raznos-dialog { max-width: none; max-height: 92%; overflow-y: auto; padding: 18px 20px calc(20px + env(safe-area-inset-bottom, 0px)); border: 0; border-radius: 22px 22px 0 0; box-shadow: 0 -18px 44px rgba(20, 25, 40, .18); }
+/* ручка сверху у каждой шторки снизу: говорит, что её можно смахнуть; у шторок со своей ручкой второй не рисуем */
+.raznos-dialog-bottom > .raznos-dialog:not(:has(> [class*="handle"]))::before, .raznos-city-modal::before { content: ''; flex: none; align-self: center; width: 38px; height: 4px; margin: -8px 0 2px; border-radius: 999px; background: var(--raznos-line-strong); }
+/* у шторок дня верхний отступ и так маленький, ручку не поднимаем */
+.raznos-dialog-bottom > .raznos-dialog.raznos-day-sheet::before { margin-top: 0; }
 @media (prefers-reduced-motion: no-preference) {
   .raznos-dialog-bottom > .raznos-dialog { animation: raznos-sheet-up .24s cubic-bezier(.16, 1, .3, 1) both; }
   @keyframes raznos-sheet-up { from { transform: translateY(100%); } to { transform: none; } }
@@ -686,6 +732,9 @@ button.raznos-metric-card { appearance: none; -webkit-appearance: none; font: in
 .raznos-trip-plate { display: flex; align-items: center; justify-content: space-between; gap: 8px; min-height: 44px; padding: 8px 14px; border: 1px solid var(--raznos-line); border-radius: 12px; background: var(--raznos-green-tint); color: var(--raznos-green-deep); font: 600 14px var(--raznos-font); text-align: left; cursor: pointer; width: 100%; box-sizing: border-box; }
 /* группы раздела Сегодня: сейчас, деньги, вокруг */
 .raznos-home-group { margin: 12px 2px -2px; font: 750 18px var(--raznos-font); letter-spacing: -0.01em; color: var(--raznos-ink); }
+/* строки одной карточкой с разделителем: деньги на Сегодня (Ждёт выплаты, Итог недели) */
+.raznos-row-group { display: flex; flex-direction: column; border-radius: 16px; background: var(--raznos-surface); overflow: hidden; }
+.raznos-row-group > * + * { border-top: 1px solid var(--raznos-line); }
 
 /* карта курьеров: карта на весь экран, чипы сервисов сверху, сводка и переключатель снизу */
 .raznos-cmap-screen { padding-bottom: 12px; }
@@ -694,11 +743,15 @@ button.raznos-metric-card { appearance: none; -webkit-appearance: none; font: in
 .raznos-cmap-filters { position: absolute; top: 10px; left: 10px; right: 10px; display: flex; align-items: center; gap: 8px; overflow-x: auto; scrollbar-width: none; padding: 2px; }
 .raznos-cmap-filters .rfc-chip, .raznos-cmap-filters > button { box-shadow: 0 2px 8px rgba(20, 25, 40, .16); }
 .raznos-cmap-filters::-webkit-scrollbar { display: none; }
+/* полоска и нижний блок только раскладывают кнопки: карту между ними можно тянуть и нажимать */
+.raznos-cmap-filters, .raznos-cmap-filters .rfc-row, .raznos-cmap-dock { pointer-events: none; }
+.raznos-cmap-filters .rfc-chip, .raznos-cmap-filters > button, .raznos-cmap-filters .raznos-dialog-layer, .raznos-cmap-dock > * { pointer-events: auto; }
 /* шторка выбора сервисов открывается на весь телефон, а не внутри полоски фильтров */
 .raznos-phone-frame { contain: layout; }
 .raznos-cmap-filters .raznos-dialog-layer { position: fixed; }
 .raznos-cmap-toggle { flex: none; display: inline-flex; align-items: center; gap: 6px; min-height: 44px; padding: 0 14px; border-radius: 999px; border: 1px solid var(--raznos-line-strong); background: var(--raznos-surface); font: 600 14px var(--raznos-font); color: var(--raznos-ink); white-space: nowrap; cursor: pointer; }
 .raznos-cmap-toggle.raznos-is-active { border-color: var(--raznos-dark); background: var(--raznos-dark); color: var(--raznos-on-dark); }
+/* сводка выше нижнего края, чтобы подпись источников карты не пряталась под ней */
 .raznos-cmap-dock { position: absolute; left: 10px; right: 10px; bottom: 10px; display: flex; flex-direction: column; align-items: flex-end; gap: 10px; }
 .raznos-cmap-locate { display: flex; align-items: center; justify-content: center; width: 48px; height: 48px; padding: 0; border: 0; border-radius: 50%; background: var(--raznos-surface); box-shadow: 0 4px 14px rgba(20, 25, 40, 0.18); color: var(--raznos-ink); cursor: pointer; }
 .raznos-cmap-locate.raznos-is-active { background: var(--raznos-dark); color: var(--raznos-on-dark); }
@@ -806,3 +859,27 @@ button.raznos-metric-card { appearance: none; -webkit-appearance: none; font: in
 
 /* цель дня достигнута: соты разлетаются от сотой на полосе, элементы ставит RaznosApp */
 .raznos-goal-spark { position: absolute; z-index: 2; width: 8px; height: 9px; margin: -4.5px 0 0 -4px; clip-path: var(--raznos-hex); background: var(--raznos-green); pointer-events: none; }
+
+/* карта района из шторок Плана и Слотов: слой поверх экрана под строкой статуса, Назад возвращает в шторку */
+/* карта района на весь экран: шапка сверху и карточка с маршрутом снизу лежат поверх карты */
+.raznos-dmap-layer { position: absolute; inset: 29px 0 0; z-index: 90; display: block; padding: 0; background: var(--raznos-bg); overflow: hidden; }
+.raznos-dmap-layer > .raznos-app-bar { position: absolute; z-index: 2; top: 0; left: 0; right: 0; margin: 0; padding: 4px 12px 22px; background: linear-gradient(var(--raznos-bg) 62%, color-mix(in oklab, var(--raznos-bg) 0%, transparent)); pointer-events: none; }
+.raznos-dmap-layer > .raznos-app-bar > * { pointer-events: auto; }
+.raznos-dmap-head { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.raznos-dmap-box { position: absolute; inset: 0; }
+.raznos-dmap-card { position: absolute; z-index: 2; left: 12px; right: 12px; bottom: calc(80px + env(safe-area-inset-bottom, 0px)); display: flex; flex-direction: row; align-items: center; gap: 12px; box-shadow: 0 6px 20px oklch(0 0 0 / 0.16); }
+.raznos-dmap-layer > a.raznos-btn { position: absolute; z-index: 2; left: 12px; right: 12px; bottom: calc(16px + env(safe-area-inset-bottom, 0px)); gap: 8px; text-decoration: none; background: var(--raznos-surface); box-shadow: 0 6px 20px oklch(0 0 0 / 0.16); }
+.raznos-dmap-card-text { display: flex; flex-direction: column; gap: 2px; min-width: 0; font: 500 13px/1.4 var(--raznos-font); color: var(--raznos-ink-3); }
+.raznos-dmap-card-text > b { font: 700 15px var(--raznos-font); color: var(--raznos-ink); }
+@media (prefers-reduced-motion: no-preference) {
+  .raznos-dmap-layer { animation: raznos-dmap-in .26s cubic-bezier(.16, 1, .3, 1) both; }
+  @keyframes raznos-dmap-in { from { transform: translateX(24px); opacity: 0; } to { transform: none; opacity: 1; } }
+}
+
+/* пустой старт: ответ на вопрос Уже работаете в сервисе доставки двумя карточками рядом */
+.raznos-ready-choice { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.raznos-ready-opt { display: flex; flex-direction: column; align-items: flex-start; gap: 4px; min-height: 92px; padding: 12px 12px 14px; border: 1px solid var(--raznos-line-strong); border-radius: 14px; background: var(--raznos-surface); color: var(--raznos-ink); text-align: left; cursor: pointer; font: inherit; }
+.raznos-ready-opt b { font: 700 16px var(--raznos-font); }
+.raznos-ready-opt span { font: 500 13px/1.35 var(--raznos-font); color: var(--raznos-ink-3); }
+.raznos-ready-opt:active { background: var(--raznos-surface-2); }
+.raznos-ready-opt:focus-visible { outline: 3px solid color-mix(in oklab, var(--raznos-green) 42%, transparent); outline-offset: 2px; }

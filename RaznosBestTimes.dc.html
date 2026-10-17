@@ -46,7 +46,7 @@
     .rbt-dp { flex: 1; min-height: 44px; padding: 7px 0; border-radius: 10px; border: 1px solid var(--raznos-line); background: var(--raznos-surface); font: 600 13px var(--raznos-font); color: var(--raznos-ink); cursor: pointer; }
     .rbt-dp-today { color: var(--raznos-green-deep); }
     .rbt-dp.raznos-is-active { background: var(--raznos-dark); border-color: var(--raznos-dark); color: var(--raznos-on-dark); }
-    .rbt-readout { display: flex; align-items: flex-end; justify-content: space-between; gap: 10px; }
+    .rbt-readout { display: flex; align-items: flex-start; justify-content: space-between; gap: 10px; }
     .rbt-ro-label { font: 600 13px var(--raznos-font); color: var(--raznos-ink-2); }
     .rbt-ro-val { font: 800 26px var(--raznos-font); letter-spacing: -0.02em; color: var(--raznos-ink); font-variant-numeric: tabular-nums; white-space: nowrap; }
     .rbt-ro-sub { font: 500 12px var(--raznos-font); color: var(--raznos-ink-3); }
@@ -79,7 +79,7 @@
       </div>
       <div class="rbt-axis"><sc-for list="{{ bars }}" as="b" hint-placeholder-count="7"><span class="{{ b.axCls }}">{{ b.ax }}</span></sc-for></div>
     </div></div>
-    <div class="rbt-foot"><span class="rbt-best">{{ best_prefix }} <b>{{ best_label }}</b> · ≈ {{ best_val }}</span><button type="button" class="rbt-more" onClick="{{ open_more }}">Подробнее<span class="raznos-row-chevron">›</span></button></div>
+    <div class="rbt-foot"><span class="rbt-best">{{ best_prefix }} <b>{{ best_label }}</b> · ≈ {{ best_val }} </span><button type="button" class="rbt-more" onClick="{{ open_more }}">Подробнее<span class="raznos-row-chevron">›</span></button></div>
     <span class="rbt-sub">{{ basis }}</span>
   </div>
 </sc-if>
@@ -94,7 +94,7 @@
 
     <div class="rbt">
       <div class="rbt-readout">
-        <span class="raznos-fx raznos-col raznos-gap4"><span class="rbt-ro-label">{{ ro_label }}</span><span class="rbt-ro-val">{{ ro_val }}</span></span>
+        <span class="raznos-fx raznos-col raznos-gap4"><span class="rbt-ro-label">{{ ro_label }}</span><span class="raznos-fx raznos-ac raznos-gap8"><span class="rbt-ro-val">{{ ro_val }}</span></span></span>
         <span class="{{ ro_pill_cls }}">{{ ro_pill }}</span>
       </div>
       <div class="{{ scroll_cls }}" data-rbt-scroll="{{ uid }}"><div style="{{ scroll_style }}">
@@ -110,13 +110,16 @@
     </div>
 
     <p class="raznos-text-tiny">{{ source_note }}</p>
+    <sc-if value="{{ has_detail }}" hint-placeholder-val="{{ false }}"><dc-import name="RaznosMarketDetailLink" title="{{ detail_title }}" hint="Где и в каком сервисе выгоднее в каждый час" onOpen="{{ open_detail }}"></dc-import></sc-if>
   </div>
 </sc-if>
-</x-dc><script type="text/x-dc" data-dc-script data-props='{"few":{"editor":"boolean","default":false},"mode":{"editor":"text","default":"card"},"initialView":{"editor":"text","default":"week"},"open":{"editor":null},"cityTitle":{"editor":"text","default":"Москва"},"cityKey":{"editor":"text","default":"moscow"},"hasData":{"editor":"boolean","default":true},"workStart":{"editor":"number","default":9},"workEnd":{"editor":"number","default":18},"$preview":{"width":390,"height":250}}'>
+</x-dc><script type="text/x-dc" data-dc-script data-props='{"few":{"editor":"boolean","default":false},"mode":{"editor":"text","default":"card"},"initialView":{"editor":"text","default":"week"},"open":{"editor":null},"onDetail":{"editor":null},"initialDay":{"editor":"number"},"initialHour":{"editor":"number"},"cityTitle":{"editor":"text","default":"Москва"},"cityKey":{"editor":"text","default":"moscow"},"hasData":{"editor":"boolean","default":true},"workStart":{"editor":"number","default":9},"workEnd":{"editor":"number","default":18},"$preview":{"width":390,"height":250}}'>
 // когда выгоднее по мотивам Gridwise When to Work, два представления: день по часам и неделя по дням
 // один компонент на карточку хаба Работа и экран, чтобы цифры совпадали
 const RBT_DAYS = ['Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб', 'Вс'];
 const RBT_DAYS_FULL = ['понедельник', 'вторник', 'среда', 'четверг', 'пятница', 'суббота', 'воскресенье'];
+const RBT_DAYS_ACC = ['понедельник', 'вторник', 'среду', 'четверг', 'пятницу', 'субботу', 'воскресенье'];
+const RBT_MONTHS_GEN = ['января', 'февраля', 'марта', 'апреля', 'мая', 'июня', 'июля', 'августа', 'сентября', 'октября', 'ноября', 'декабря'];
 const RBT_WEEK_FROM = 8; // неделю считаем по часам 8..23, как раньше
 // доход в час по часам суток (демо): ночью мало, обед, вечерний пик
 const RBT_BASE = [460, 380, 320, 280, 280, 340, 420, 480, 520, 560, 620, 700, 860, 980, 900, 760, 720, 820, 1040, 1220, 1300, 1180, 920, 700];
@@ -190,7 +193,8 @@ class Component extends DCLogic {
     let bestDay = 0;
     dayPay.forEach((v, d) => { if (v > dayPay[bestDay]) bestDay = d; });
     // карточка в режиме дня всегда про сегодня
-    const selDay = full ? (st.day != null ? st.day : (isDay ? RBT_TODAY : bestDay)) : (isDay ? RBT_TODAY : bestDay);
+    const iDay = p.initialDay != null && p.initialDay !== '' ? +p.initialDay : null;
+    const selDay = full ? (st.day != null ? st.day : (iDay != null ? iDay : (isDay ? RBT_TODAY : bestDay))) : (isDay ? RBT_TODAY : bestDay);
 
     // день: все 24 часа выбранного дня, лучшее окно из 3 часов
     const hp = RBT_BASE.map((_, i) => pay(selDay, i));
@@ -202,7 +206,8 @@ class Component extends DCLogic {
     }
     const inWin = (i) => i >= wStart && i < wStart + winLen;
     const peakInWin = allIdx.filter(inWin).reduce((a, i) => (hp[i] > hp[a] ? i : a), wStart);
-    const selHour = full && st.hour != null ? st.hour : peakInWin;
+    const iHour = st.day == null && p.initialHour != null && p.initialHour !== '' ? +p.initialHour : null;
+    const selHour = full && st.hour != null ? st.hour : (full && iHour != null ? iHour : peakInWin);
 
     const series = isDay ? hp.map(toVal) : dayPay.map(toVal);
     const n = series.length;
@@ -280,12 +285,18 @@ class Component extends DCLogic {
       scroll_cls: isDay ? 'rbt-scroll-on' : '',
       scroll_style: isDay ? 'width:' + (24 * colW) + 'px' : '',
       bars,
+      // мера числа по словарю: неделя по дням это обычно, день по часам это в этот час
       card_sub: isDay ? ('сегодня, ' + RBT_DAYS_FULL[RBT_TODAY] + ' · ₽ в час') : ((p.cityTitle || 'Москва') + ' · ₽ в час · по дням недели'),
       best_prefix: lowSample ? (isDay ? 'Предварительно: лучшее окно' : 'Предварительно: лучше всего') : (isDay ? 'Лучшее окно' : 'Лучше всего'),
       best_label: isDay ? winLabel : RBT_DAYS_FULL[bestDay],
       // лучший день рядом с неделей целиком, чтобы было понятно, почему он выше лучшего района
       best_val: isDay ? fmt(toVal(winAvg)) : fmt(toVal(dayPay[bestDay])) + ', вся неделя ≈ ' + fmtShort(toVal(Math.round(dayPay.reduce((a, v) => a + v, 0) / 7 / 10) * 10)),
       open_more: () => open(view),
+      // полная версия открывается на этом дне и выбранном или лучшем часе
+      has_detail: typeof p.onDetail === 'function',
+      // подпись про конкретную дату: По часам откроется на ближайшем таком дне, район и сервис переедут туда же
+      detail_title: (() => { const off = (selDay - RBT_TODAY + 7) % 7; const d = new Date(); d.setDate(d.getDate() + off); return off === 0 ? 'Сегодня, ' + d.getDate() + ' ' + RBT_MONTHS_GEN[d.getMonth()] + ', по часам' : 'Прогноз на ' + RBT_DAYS_ACC[selDay] + ' ' + d.getDate() + ' ' + RBT_MONTHS_GEN[d.getMonth()] + ' по часам'; })(),
+      open_detail: () => p.onDetail({ view, day: selDay, hour: selHour, district: dist.k, cat: cat.k }),
       daypick: RBT_DAYS.map((label, d) => ({ label, cls: 'rbt-dp' + (d === RBT_TODAY ? ' rbt-dp-today' : '') + (d === selDay ? ' raznos-is-active' : ''), tap: () => set({ day: d, hour: null }) })),
       ro_label: roLabel, ro_val: roVal, ro_pill: roPill, ro_pill_cls: 'rbt-pill' + (roMuted ? ' rbt-pill-mute' : ''), ro_note: roNote, trend,
       filters,

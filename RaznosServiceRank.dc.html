@@ -6,6 +6,7 @@
     .rsr-title { display: inline-flex; align-items: center; gap: 8px; font: 700 15px var(--raznos-font); color: var(--raznos-ink); }
     .rsr-sub { font: 500 12px var(--raznos-font); color: var(--raznos-ink-3); margin-top: 2px; }
     .rsr-list { display: flex; flex-direction: column; }
+    /* мера чисел списка одной меткой над столбцом значений */
     .rsr-foot { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
     .rsr-more-note { font: 500 13px var(--raznos-font); color: var(--raznos-ink-2); }
     .rsr-more { flex: none; display: inline-flex; align-items: center; gap: 2px; min-height: 44px; border: 0; background: none; padding: 0 0 0 8px; font: 600 13px var(--raznos-font); color: var(--raznos-green-deep); cursor: pointer; }
@@ -49,9 +50,10 @@
       <sc-if value="{{ is_empty }}" hint-placeholder-val="{{ false }}"><p class="rsr-empty">{{ empty_text }}</p></sc-if>
     </div>
     <p class="raznos-text-tiny">{{ source_note }}</p>
+    <sc-if value="{{ has_detail }}" hint-placeholder-val="{{ false }}"><dc-import name="RaznosMarketDetailLink" hint="Каждый час: где и в каком сервисе выгоднее" onOpen="{{ open_detail }}"></dc-import></sc-if>
   </div>
 </sc-if>
-</x-dc><script type="text/x-dc" data-dc-script data-props='{"few":{"editor":"boolean","default":false},"mode":{"editor":"text","default":"card"},"open":{"editor":null},"connected":{"editor":null},"onConnect":{"editor":null},"onOpenService":{"editor":null},"cityTitle":{"editor":"text","default":"Москва"},"cityKey":{"editor":"text","default":"moscow"},"hasData":{"editor":"boolean","default":true},"$preview":{"width":390,"height":340}}'>
+</x-dc><script type="text/x-dc" data-dc-script data-props='{"few":{"editor":"boolean","default":false},"mode":{"editor":"text","default":"card"},"open":{"editor":null},"onDetail":{"editor":null},"connected":{"editor":null},"onConnect":{"editor":null},"onOpenService":{"editor":null},"cityTitle":{"editor":"text","default":"Москва"},"cityKey":{"editor":"text","default":"moscow"},"hasData":{"editor":"boolean","default":true},"$preview":{"width":390,"height":340}}'>
 // сравнение сервисов по мотивам Gridwise Compare Companies и Solo Jobs: доход по сервисам города, тренд, горячие дни
 // hot: индексы дней Пн=0, tod: утро, день, вечер, ночь, демо
 const RSR_SERVICES = [
@@ -63,6 +65,7 @@ const RSR_SERVICES = [
   { k: 'x5', name: 'X5 Доставка', cat: 'grocery', pay: 610, per: 240, trend: -2, hot: [0, 1, 4], wk: 0.98, tod: [0.98, 1.02, 1.04, 0.8] },
   { k: 'yandex-lavka', name: 'Яндекс Лавка', cat: 'grocery', pay: 700, per: 250, trend: 4, hot: [4, 5, 6], wk: 1.05, tod: [0.92, 1.02, 1.08, 0.86] },
   { k: 'delivery', name: 'Деливери', cat: 'food', pay: 620, per: 280, trend: 2, hot: [4, 5, 6], wk: 1.1, tod: [0.72, 1.06, 1.12, 1.04] },
+  { k: 'yandex-delivery', name: 'Яндекс Доставка', cat: 'parcels', pay: 600, per: 320, trend: 5, hot: [0, 1, 4], wk: 0.94, tod: [1.02, 1.08, 1, 0.72] },
   { k: 'magnit', name: 'Магнит', cat: 'grocery', pay: 580, per: 220, trend: -14, hot: [4, 5, 6], wk: 1.02, tod: [0.94, 1, 1.06, 0.82] },
   { k: 'dodo', name: 'Додо', cat: 'food', pay: 570, per: 210, trend: 1, hot: [4, 5, 6], wk: 1.08, tod: [0.7, 1.04, 1.12, 0.9] },
   { k: 'ozon-fresh', name: 'Ozon fresh', cat: 'grocery', pay: 540, per: 250, trend: 11, hot: [1, 2, 3], wk: 0.96, tod: [1, 1.04, 1, 0.82] }
@@ -71,7 +74,8 @@ const RSR_DAYS = ['Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб', 'Вс'];
 const RSR_CATS = [
   { k: 'all', label: 'Все заказы' },
   { k: 'grocery', label: 'Продукты' },
-  { k: 'food', label: 'Еда из ресторанов' }
+  { k: 'food', label: 'Еда из ресторанов' },
+  { k: 'parcels', label: 'Посылки' }
 ];
 const RSR_METRICS = [{ k: 'pay', label: '₽ в час' }, { k: 'per', label: '₽ за заказ' }, { k: 'ord', label: 'Заказов в час' }];
 const RSR_WHEN = [{ k: 'week', label: 'Вся неделя' }, { k: 'weekdays', label: 'Будни', note: 'Пн–Пт' }, { k: 'weekend', label: 'Выходные', note: 'Сб–Вс' }];
@@ -185,10 +189,12 @@ class Component extends DCLogic {
       card_rows: cardRows,
       more_label: 'Ещё ' + rest + ' ' + rsrPlural(rest, 'сервис', 'сервиса', 'сервисов'),
       open_more: () => open(),
+      has_detail: typeof p.onDetail === 'function',
+      open_detail: () => p.onDetail({ show: onlyMine ? 'mine' : 'all' }),
       show_all: !onlyMine, show_mine: onlyMine,
       seg_all_cls: 'raznos-segment' + (!onlyMine ? ' raznos-is-active' : ''),
       seg_mine_cls: 'raznos-segment' + (onlyMine ? ' raznos-is-active' : ''),
-      mine_label: 'Мои' + (mineCount ? ' · ' + mineCount : ''),
+      mine_label: 'Мои сервисы' + (mineCount ? ' · ' + mineCount : ''),
       pick_all: () => set({ show: 'all' }), pick_mine: () => set({ show: 'mine' }),
       filters, on_filter: (key, k) => set({ [key]: k }),
       rows, is_empty: rows.length === 0,
