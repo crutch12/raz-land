@@ -41,7 +41,7 @@
       <dc-import name="RaznosIcon" svc="{{ row.svc }}" alt="{{ row.title }}" size="md"></dc-import>
       <span class="rnn-row-body"><span class="rnn-row-top"><span class="rnn-row-lab">{{ row.label }}</span><span class="rnn-row-hint">{{ row.hint }}</span></span><span class="rnn-row-name">{{ row.title }}</span><span class="rnn-row-sub">{{ row.subTime }}</span><sc-if value="{{ row.place }}" hint-placeholder-val="{{ true }}"><span class="rnn-row-place">{{ row.place }}</span></sc-if><sc-if value="{{ row.deadline }}" hint-placeholder-val="{{ false }}"><span class="rnn-row-place">{{ row.deadline }}</span></sc-if></span>
     </button>
-    <sc-if value="{{ row.has_rb }}" hint-placeholder-val="{{ false }}"><dc-import name="RaznosRebookLine" variant="chip" altSvc="{{ rb.altSvc }}" altTitle="{{ rb.altTitle }}" altTime="{{ rb.altTime }}" altSum="{{ rb.altSum }}" mineSvc="{{ rb.mineSvc }}" mineTitle="{{ rb.mineTitle }}" mineTime="{{ rb.mineTime }}" mineSum="{{ rb.mineSum }}" penalty="{{ rb.penalty }}" freeUntil="{{ rb.freeUntil }}" requested="{{ rb.requested }}" onOpen="{{ on_rebook }}"></dc-import></sc-if>
+    <sc-if value="{{ row.has_rb }}" hint-placeholder-val="{{ false }}"><dc-import name="RaznosRebookLine" variant="chip" altSvc="{{ rb.altSvc }}" altTitle="{{ rb.altTitle }}" altTime="{{ rb.altTime }}" altSum="{{ rb.altSum }}" mineSvc="{{ rb.mineSvc }}" mineTitle="{{ rb.mineTitle }}" mineTime="{{ rb.mineTime }}" mineSum="{{ rb.mineSum }}" penalty="{{ rb.penalty }}" bonus="{{ rb.bonus }}" freeUntil="{{ rb.freeUntil }}" requested="{{ rb.requested }}" onOpen="{{ on_rebook }}"></dc-import></sc-if>
   </sc-for>
   <sc-if value="{{ warning }}" hint-placeholder-val="{{ true }}"><button type="button" class="{{ warning_cls }}" onClick="{{ on_warning }}"><span>{{ warning }}</span><span class="rnn-warning-act">Что делать ›</span></button></sc-if>
   <button type="button" class="rnn-open" onClick="{{ open_plan }}">План дня<span class="raznos-row-chevron">›</span></button>
@@ -56,8 +56,8 @@ class Component extends DCLogic {
     const openPlan = typeof p.onOpenPlan === 'function' ? p.onOpenPlan : noop;
     const state = p.state || 'on';
     const rows = (p.rows || [
-      { svc: 'vkusvill', kind: 'now', source: 'booking', title: 'ВкусВилл', time: '14:00–17:00', place: 'Даркстор на Правды, 24', word: 'смена', hint: 'ещё 1 ч 20 мин' },
-      { svc: 'yandex-eda', kind: 'next', source: 'booking', title: 'Яндекс Еда', time: '17:00–20:00', place: 'Локация Беговая', word: 'бронь', hint: 'через 1 ч 20 мин' }
+      { svc: 'vkusvill', kind: 'now', source: 'booking', title: 'ВкусВилл', time: '14:00–17:00', place: 'Даркстор · ул. Правды, д. 24 стр. 3 · 2,9 км', word: 'смена', hint: 'ещё 1 ч 20 мин' },
+      { svc: 'yandex-eda', kind: 'next', source: 'booking', title: 'Яндекс Еда', time: '17:00–20:00', place: 'Локация · Беговой', word: 'бронь', hint: 'через 1 ч 20 мин' }
     ]).map((row) => {
       const now = row.kind === 'now';
       // слово статуса по профилю сервиса: бронь, заявка, подтверждена

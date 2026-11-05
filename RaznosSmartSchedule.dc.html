@@ -212,10 +212,10 @@
   </sc-if>
 
   <sc-if value="{{ show_gap_sheet }}" hint-placeholder-val="{{ false }}">
-    <dc-import name="RaznosGapSheet" from="{{ gs_from }}" to="{{ gs_to }}" current="{{ gs_current }}" options="{{ gs_options }}" extra="{{ gs_extra }}" rely="{{ gs_rely }}" doneNote="{{ gs_done_note }}" closeLabel="{{ gs_close_label }}" onRemove="{{ gs_remove }}" place="{{ gs_place }}" svc="{{ gs_svc }}" onArea="{{ area_map }}" onClose="{{ gs_close }}"></dc-import>
+    <dc-import name="RaznosGapSheet" from="{{ gs_from }}" to="{{ gs_to }}" current="{{ gs_current }}" options="{{ gs_options }}" extra="{{ gs_extra }}" rely="{{ gs_rely }}" doneNote="{{ gs_done_note }}" closeLabel="{{ gs_close_label }}" onRemove="{{ gs_remove }}" place="{{ gs_place }}" pid="{{ gs_pid }}" svc="{{ gs_svc }}" onArea="{{ area_map }}" onClose="{{ gs_close }}"></dc-import>
   </sc-if>
   <sc-if value="{{ show_book_sheet }}" hint-placeholder-val="{{ false }}">
-    <dc-import name="RaznosShiftSheet" offer="{{ bs.offer }}" onOffer="{{ bs.onOffer }}" svc="{{ bs.svc }}" title="{{ bs.title }}" place="{{ bs.place }}" time="{{ bs.time }}" status="{{ bs.status }}" tone="{{ bs.tone }}" whenNote="{{ bs.whenNote }}" svcLine="{{ bs.svcLine }}" fallback="{{ bs.fallback }}" money="{{ bs.money }}" moneyNote="{{ bs.moneyNote }}" conflict="{{ bs.conflict }}" rebook="{{ bs.rebook }}" rule="{{ bs.rule }}" ruleTone="{{ bs.ruleTone }}" ruleSrc="{{ bs.ruleSrc }}" action="{{ bs.action }}" actionNote="{{ bs.actionNote }}" onAction="{{ bs.act }}" onArea="{{ area_map }}" onClose="{{ bs_close }}"></dc-import>
+    <dc-import name="RaznosShiftSheet" offer="{{ bs.offer }}" onOffer="{{ bs.onOffer }}" svc="{{ bs.svc }}" title="{{ bs.title }}" place="{{ bs.place }}" pid="{{ bs.pid }}" time="{{ bs.time }}" status="{{ bs.status }}" tone="{{ bs.tone }}" whenNote="{{ bs.whenNote }}" svcLine="{{ bs.svcLine }}" fallback="{{ bs.fallback }}" money="{{ bs.money }}" moneyNote="{{ bs.moneyNote }}" conflict="{{ bs.conflict }}" rebook="{{ bs.rebook }}" rule="{{ bs.rule }}" ruleTone="{{ bs.ruleTone }}" ruleSrc="{{ bs.ruleSrc }}" action="{{ bs.action }}" actionNote="{{ bs.actionNote }}" onAction="{{ bs.act }}" onArea="{{ area_map }}" onClose="{{ bs_close }}"></dc-import>
   </sc-if>
   <sc-if value="{{ show_offer }}" hint-placeholder-val="{{ false }}">
     <dc-import name="RaznosDayOffer" variant="sheet" conflict="{{ ofs.conflict }}" swap="{{ ofs.swap }}" transport="{{ fx_transport }}" onSwap="{{ ofs.onSwap }}" onLeave="{{ ofs.onLeave }}" onLate="{{ ofs.onLate }}" onKeep="{{ ofs.onKeep }}" onClose="{{ ofs_close }}"></dc-import>
@@ -264,12 +264,13 @@
 
   <sc-if value="{{ toast }}" hint-placeholder-val="{{ false }}"><span class="rss-toast" data-toast role="status"><button type="button" class="raznos-toast-x" data-toast-close onClick="{{ toast_close }}" aria-label="Закрыть"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button><span>{{ toast }}</span><sc-if value="{{ toast_has_act }}" hint-placeholder-val="{{ false }}"><button type="button" class="rss-toast-act" onClick="{{ toast_show }}">Показать</button></sc-if><sc-if value="{{ toast_has_undo }}" hint-placeholder-val="{{ false }}"><button type="button" class="rss-toast-act" onClick="{{ toast_undo }}">Вернуть</button></sc-if></span></sc-if>
 </div>
-</x-dc><script type="text/x-dc" data-dc-script data-props='{"caps":{"editor":null},"onAreaMap":{"editor":null},"onBack":{"editor":null},"onDay":{"editor":null},"planState":{"editor":null},"onPlanState":{"editor":null},"weekGoal":{"editor":null},"weekEarned":{"editor":null},"booked":{"editor":null},"slots":{"editor":null},"workStart":{"editor":null},"workWeek":{"editor":null},"openKey":{"editor":null},"todayEarned":{"editor":null},"prefs":{"editor":null},"build":{"editor":null},"onSettings":{"editor":null},"stay":{"editor":null},"onStay":{"editor":null},"fact":{"editor":null},"embedded":{"editor":null},"onGoalChange":{"editor":null},"onAssistant":{"editor":null},"assistantAttention":{"editor":null},"onboarded":{"editor":null},"onOnboard":{"editor":null},"workEnd":{"editor":null},"onFindSlot":{"editor":null},"onTakeSlot":{"editor":null},"onOpenShifts":{"editor":null},"onOpenResult":{"editor":null},"onOpenWeekResult":{"editor":null},"onEditGraph":{"editor":null},"addWindow":{"editor":null},"focusAdded":{"editor":null},"focusIso":{"editor":null},"focusKey":{"editor":null},"changeNote":{"editor":"text","default":""},"changeIso":{"editor":"text","default":""},"changeKey":{"editor":"text","default":""},"onChangeHide":{"editor":null},"rules":{"editor":null},"onOpenService":{"editor":null},"dayFacts":{"editor":null},"reopenSettings":{"editor":null},"onReopened":{"editor":null},"quests":{"editor":null},"weather":{"editor":null},"alertFind":{"editor":null},"onAlert":{"editor":null},"$preview":{"width":390,"height":1100}}'>
+</x-dc><script type="text/x-dc" data-dc-script data-props='{"caps":{"editor":null},"onAreaMap":{"editor":null},"onBack":{"editor":null},"onDay":{"editor":null},"planState":{"editor":null},"onPlanState":{"editor":null},"weekGoal":{"editor":null},"weekEarned":{"editor":null},"booked":{"editor":null},"slots":{"editor":null},"workStart":{"editor":null},"workWeek":{"editor":null},"openKey":{"editor":null},"todayEarned":{"editor":null},"prefs":{"editor":null},"build":{"editor":null},"onSettings":{"editor":null},"stay":{"editor":null},"onStay":{"editor":null},"fact":{"editor":null},"embedded":{"editor":null},"onGoalChange":{"editor":null},"onAssistant":{"editor":null},"assistantAttention":{"editor":null},"onboarded":{"editor":null},"onOnboard":{"editor":null},"workEnd":{"editor":null},"onFindSlot":{"editor":null},"onTakeSlot":{"editor":null},"onOpenShifts":{"editor":null},"onOpenResult":{"editor":null},"onOpenWeekResult":{"editor":null},"onEditGraph":{"editor":null},"addWindow":{"editor":null},"focusAdded":{"editor":null},"focusIso":{"editor":null},"focusKey":{"editor":null},"changeNote":{"editor":"text","default":""},"changeIso":{"editor":"text","default":""},"changeKey":{"editor":"text","default":""},"onChangeHide":{"editor":null},"rules":{"editor":null},"onOpenService":{"editor":null},"onCancelDue":{"editor":null},"dayFacts":{"editor":null},"reopenSettings":{"editor":null},"onReopened":{"editor":null},"quests":{"editor":null},"weather":{"editor":null},"alertFind":{"editor":null},"onAlert":{"editor":null},"$preview":{"width":390,"height":1100}}'>
 // демо-сегодня как в приложении: реальная дата устройства, время дня держим 15:40
 const RSS_TODAY = (() => { const d = new Date(); return new Date(d.getFullYear(), d.getMonth(), d.getDate()); })();
 const RSS_NOW = 15 * 60 + 40;
 const RSS_WD = ['Вс', 'Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб'];
 const RSS_WD_FULL = ['Воскресенье', 'Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота'];
+const RSS_WD_ACC = ['воскресенье', 'понедельник', 'вторник', 'среду', 'четверг', 'пятницу', 'субботу'];
 const RSS_MONTHS = ['января', 'февраля', 'марта', 'апреля', 'мая', 'июня', 'июля', 'августа', 'сентября', 'октября', 'ноября', 'декабря'];
 const RSS_MONTHS_SHORT = ['янв', 'февр', 'марта', 'апр', 'мая', 'июня', 'июля', 'авг', 'сент', 'окт', 'нояб', 'дек'];
 const rssIso = (d) => d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
@@ -290,9 +291,11 @@ const RSS_SVC_FALLBACK = {
   x5: { title: 'X5 Доставка', in: 'X5 Доставке', free: false },
   dodo: { title: 'Додо', in: 'Додо', free: false }
 };
+const RSS_GEN = { 'yandex-eda': 'Яндекс Еды', 'yandex-lavka': 'Яндекс Лавки', samokat: 'Самоката', vkusvill: 'ВкусВилла', x5: 'X5 Доставки', dodo: 'Додо', kuper: 'Купера', magnit: 'Магнита', 'ozon-fresh': 'Ozon Fresh', 'ozon-courier': 'Ozon' };
 const RSS_NO_WATCH_NOTE = 'Слота нет в списке сервиса, слежение для него недоступно';
 const RSS_VV_NOTE = 'Часы обычно согласует куратор';
-const RSS_ZONES = [{ name: 'Центр', f: 1 }, { name: 'Север', f: 0.95 }, { name: 'Юг', f: 0.92 }, { name: 'Запад', f: 0.9 }];
+// районы те же, что на карте района и в Где выгоднее
+const RSS_ZONES = [{ name: 'Тверской', f: 1 }, { name: 'Пресненский', f: 0.97 }, { name: 'Хамовники', f: 0.95 }, { name: 'Беговой', f: 0.92 }];
 const rssZoneF = (name) => (RSS_ZONES.find((z) => z.name === name) || RSS_ZONES[0]).f;
 // спрос по часам и поправки сервисов по времени суток, демо на основе заказов курьеров Разноса
 // демо: курьер сам поставил Яндекс Еду через 3 дня, а слот X5 в эти часы платит больше, пересборка это покажет
@@ -316,42 +319,50 @@ const rssLeft = (m) => ((m >= 60 ? Math.floor(m / 60) + ' ч ' : '') + (m % 60 ?
 const rssHours = (m) => { const h = Math.round(m / 6) / 10; return String(h).replace('.', ',') + ' ч'; };
 const rssVsMine = (rate) => { const d = Math.round((rate - RSS_MY_RATE) * 100 / RSS_MY_RATE); return d >= 6 ? '+' + d + '% к вашему среднему' : (d <= -6 ? '−' + Math.abs(d) + '% к вашему среднему' : 'как ваш средний'); };
 const RSS_BOOK_STATUS = { requested: ['заявка', 'pending'], tentative: ['предварительная', 'pending'], confirmed: ['бронь', 'booked'], active: ['бронь', 'booked'], completed: ['бронь', 'booked'] };
+// места демо из справочника RaznosApp, строка как в Слотах, подписи заданы текстом: без приложения справочника нет
+const RSS_P = {
+  sam: { pid: 'sam-ae20d027', place: 'Даркстор · Хорошёвское шоссе, 52 к1 · 0,8 км' },
+  vv: { pid: 'vv-5773739', place: 'Даркстор · ул. Правды, д. 24 стр. 3 · 2,9 км' },
+  eda: { pid: 'yeda-loc-begovoy', place: 'Локация · Беговой' },
+  x5s: { pid: 'osm:node/5256784721', place: 'Магазин · Хорошёвское шоссе, 48 · 0,7 км' },
+  x5p: { pid: 'x5-poly-khoroshevsky', place: 'Полигон · Хорошёвский · 19 магазинов · 0,5 км' }
+};
 // демо на случай, когда экран открыт отдельно от приложения
 const RSS_DEMO_BOOKED = [
-  { id: 's3', iso: rssAt(0), svc: 'samokat', title: 'Самокат', place: 'Даркстор Беговая, 7', from: 540, to: 720, status: 'completed' },
-  { id: 's4', iso: rssAt(0), svc: 'vkusvill', title: 'ВкусВилл', place: 'Даркстор на Правды, 24', from: 840, to: 1020, status: 'active' },
-  { id: 's5', iso: rssAt(0), svc: 'yandex-eda', title: 'Яндекс Еда', place: 'Локация Беговая', from: 1020, to: 1260, status: 'confirmed' },
-  { id: 's6', iso: rssAt(1), svc: 'samokat', title: 'Самокат', place: 'Даркстор Беговая, 7', from: 630, to: 810, status: 'confirmed' },
-  { id: 's7', iso: rssAt(1), svc: 'vkusvill', title: 'ВкусВилл', place: 'Даркстор на Правды, 24', from: 840, to: 1080, status: 'requested' },
-  { id: 's8', iso: rssAt(2), svc: 'x5', title: 'X5 Доставка', place: 'Пятёрочка, Ленинградский пр-т, 15', from: 660, to: 1020, status: 'confirmed' },
-  { id: 's9', iso: rssAt(3), svc: 'samokat', title: 'Самокат', place: 'Даркстор Беговая, 7', from: 1080, to: 1320, status: 'confirmed' },
-  { id: 's10', iso: rssAt(4), svc: 'yandex-eda', title: 'Яндекс Еда', place: 'Локация Беговая', from: 720, to: 960, status: 'confirmed' }
+  { id: 's3', iso: rssAt(0), svc: 'samokat', title: 'Самокат', ...RSS_P.sam, from: 540, to: 720, status: 'completed' },
+  { id: 's4', iso: rssAt(0), svc: 'vkusvill', title: 'ВкусВилл', ...RSS_P.vv, from: 840, to: 1020, status: 'active' },
+  { id: 's5', iso: rssAt(0), svc: 'yandex-eda', title: 'Яндекс Еда', ...RSS_P.eda, from: 1020, to: 1260, status: 'confirmed' },
+  { id: 's6', iso: rssAt(1), svc: 'samokat', title: 'Самокат', ...RSS_P.sam, from: 630, to: 810, status: 'confirmed' },
+  { id: 's7', iso: rssAt(1), svc: 'vkusvill', title: 'ВкусВилл', ...RSS_P.vv, from: 840, to: 1080, status: 'requested' },
+  { id: 's8', iso: rssAt(2), svc: 'x5', title: 'X5 Доставка', ...RSS_P.x5s, from: 660, to: 1020, status: 'confirmed' },
+  { id: 's9', iso: rssAt(3), svc: 'samokat', title: 'Самокат', ...RSS_P.sam, from: 1080, to: 1320, status: 'confirmed' },
+  { id: 's10', iso: rssAt(4), svc: 'yandex-eda', title: 'Яндекс Еда', ...RSS_P.eda, from: 720, to: 960, status: 'confirmed' }
 ];
 const RSS_DEMO_SLOTS = [
-  { id: 'f1', iso: rssAt(0), svc: 'samokat', place: 'Даркстор Беговая, 7', from: 1080, to: 1320, apply: true },
-  { id: 'f3', iso: rssAt(1), svc: 'samokat', place: 'Даркстор Беговая, 7', from: 1080, to: 1320, apply: true },
-  { id: 'f5', iso: rssAt(1), svc: 'x5', place: 'Пятёрочка, Ленинградский пр-т, 15', from: 540, to: 900 },
-  { id: 'f6', iso: rssAt(1), svc: 'vkusvill', place: 'Даркстор на Правды, 24', from: 1140, to: 1320, apply: true },
-  { id: 'f9', iso: rssAt(3), svc: 'x5', place: 'Пятёрочка, Ленинградский пр-т, 15', from: 720, to: 1080 },
-  { id: 'f12', iso: rssAt(5), svc: 'samokat', place: 'Даркстор Беговая, 7', from: 720, to: 960, apply: true },
+  { id: 'f1', iso: rssAt(0), svc: 'samokat', ...RSS_P.sam, from: 1080, to: 1320, apply: true },
+  { id: 'f3', iso: rssAt(1), svc: 'samokat', ...RSS_P.sam, from: 1080, to: 1320, apply: true },
+  { id: 'f5', iso: rssAt(1), svc: 'x5', ...RSS_P.x5p, from: 540, to: 900 },
+  { id: 'f6', iso: rssAt(1), svc: 'vkusvill', ...RSS_P.vv, from: 1140, to: 1320, apply: true },
+  { id: 'f9', iso: rssAt(3), svc: 'x5', ...RSS_P.x5p, from: 720, to: 1080 },
+  { id: 'f12', iso: rssAt(5), svc: 'samokat', ...RSS_P.sam, from: 720, to: 960, apply: true },
   { id: 'f13', iso: rssAt(5), svc: 'yandex-eda', from: 840, to: 1080, gone: true }
 ];
 // слоты, которые план сам ставит в свободные часы, остальное закрывает свободный выход
 // соседние недели для демо: прошлая выполнена, на следующей часть записи уже открылась
 const RSS_EXTRA_BOOKED = [
-  { id: 'p1', iso: rssAt(-8), svc: 'samokat', title: 'Самокат', place: 'Даркстор Беговая, 7', from: 540, to: 780, status: 'completed' },
-  { id: 'p2', iso: rssAt(-8), svc: 'vkusvill', title: 'ВкусВилл', place: 'Даркстор на Правды, 24', from: 840, to: 1080, status: 'completed' },
-  { id: 'p3', iso: rssAt(-7), svc: 'yandex-eda', title: 'Яндекс Еда', place: 'Локация Беговая', from: 720, to: 1080, status: 'completed' },
-  { id: 'p4', iso: rssAt(-6), svc: 'x5', title: 'X5 Доставка', place: 'Пятёрочка, Ленинградский пр-т, 15', from: 660, to: 1020, status: 'completed' },
-  { id: 'p5', iso: rssAt(-5), svc: 'samokat', title: 'Самокат', place: 'Даркстор Беговая, 7', from: 1080, to: 1320, status: 'completed' },
-  { id: 'p6', iso: rssAt(-4), svc: 'vkusvill', title: 'ВкусВилл', place: 'Даркстор на Правды, 24', from: 600, to: 840, status: 'completed' },
-  { id: 'p7', iso: rssAt(-3), svc: 'yandex-eda', title: 'Яндекс Еда', place: 'Локация Беговая', from: 720, to: 1200, status: 'completed' },
-  { id: 'n1', iso: rssAt(7), svc: 'yandex-eda', title: 'Яндекс Еда', place: 'Локация Беговая', from: 720, to: 960, status: 'confirmed' },
-  { id: 'n2', iso: rssAt(9), svc: 'x5', title: 'X5 Доставка', place: 'Пятёрочка, Ленинградский пр-т, 15', from: 660, to: 1020, status: 'confirmed' }
+  { id: 'p1', iso: rssAt(-8), svc: 'samokat', title: 'Самокат', ...RSS_P.sam, from: 540, to: 780, status: 'completed' },
+  { id: 'p2', iso: rssAt(-8), svc: 'vkusvill', title: 'ВкусВилл', ...RSS_P.vv, from: 840, to: 1080, status: 'completed' },
+  { id: 'p3', iso: rssAt(-7), svc: 'yandex-eda', title: 'Яндекс Еда', ...RSS_P.eda, from: 720, to: 1080, status: 'completed' },
+  { id: 'p4', iso: rssAt(-6), svc: 'x5', title: 'X5 Доставка', ...RSS_P.x5s, from: 660, to: 1020, status: 'completed' },
+  { id: 'p5', iso: rssAt(-5), svc: 'samokat', title: 'Самокат', ...RSS_P.sam, from: 1080, to: 1320, status: 'completed' },
+  { id: 'p6', iso: rssAt(-4), svc: 'vkusvill', title: 'ВкусВилл', ...RSS_P.vv, from: 600, to: 840, status: 'completed' },
+  { id: 'p7', iso: rssAt(-3), svc: 'yandex-eda', title: 'Яндекс Еда', ...RSS_P.eda, from: 720, to: 1200, status: 'completed' },
+  { id: 'n1', iso: rssAt(7), svc: 'yandex-eda', title: 'Яндекс Еда', ...RSS_P.eda, from: 720, to: 960, status: 'confirmed' },
+  { id: 'n2', iso: rssAt(9), svc: 'x5', title: 'X5 Доставка', ...RSS_P.x5s, from: 660, to: 1020, status: 'confirmed' }
 ];
 const RSS_EXTRA_SLOTS = [
   { id: 'n3', iso: rssAt(6), svc: 'yandex-eda', from: 1020, to: 1260 },
-  { id: 'n4', iso: rssAt(10), svc: 'x5', place: 'Пятёрочка, Ленинградский пр-т, 15', from: 720, to: 1080 }
+  { id: 'n4', iso: rssAt(10), svc: 'x5', ...RSS_P.x5p, from: 720, to: 1080 }
 ];
 // сколько начислено на прошлой неделе и какая была цель, демо-цифры
 const RSS_PREV_WEEK = { earned: 27240, goal: 30000 };
@@ -488,7 +499,10 @@ class Component extends DCLogic {
     // часы, поставленные на конкретный день, важнее графика, выходной так становится рабочим днём
     const hoursOf = (d) => { const o = (st.dayHours || {})[rssIso(d)]; return o ? { on: true, from: o.from, to: o.to } : graphHoursOf(d); };
     const isWorkDay = (d) => hoursOf(d).on;
-    const booked = (p.booked || RSS_DEMO_BOOKED.concat(RSS_EXTRA_BOOKED)).filter((b) => b.status !== 'cancelled' && b.status !== 'missed');
+    const bookedAll = (p.booked || RSS_DEMO_BOOKED.concat(RSS_EXTRA_BOOKED)).filter((b) => b.status !== 'cancelled' && b.status !== 'missed');
+    // бронь, вместо которой курьер взял другую смену: пока не отменил в приложении сервиса, в расчётах её нет
+    const dueBooked = bookedAll.filter((b) => b.cancelDue);
+    const booked = bookedAll.filter((b) => !b.cancelDue);
     const slots = (p.slots || RSS_DEMO_SLOTS.concat(RSS_EXTRA_SLOTS)).filter((sl) => !sl.taken);
     const rules = p.rules || {};
     // итог прошедших дней как в Результатах: день делим между выполненными сменами, сервисы со своими суммами берут свои
@@ -509,7 +523,10 @@ class Component extends DCLogic {
         });
       };
       const vv = ws.filter((b) => b.svc === 'vkusvill'), sk = ws.filter((b) => b.svc === 'samokat');
-      if (vv.length && sk.length && vv.length + sk.length === ws.length) { split(vv, df.vvEarn, df.vvOrders); split(sk, df.samokatEarn, df.samokatOrders); }
+      const keys = ws.map((b) => b.svc).filter((k, i, arr) => arr.indexOf(k) === i);
+      // у сервиса своя сумма и число заказов дня: смены делят только их
+      if (df.svc && keys.every((k) => df.svc[k])) keys.forEach((k) => split(ws.filter((b) => b.svc === k), df.svc[k].earn, df.svc[k].orders));
+      else if (vv.length && sk.length && vv.length + sk.length === ws.length) { split(vv, df.vvEarn, df.vvOrders); split(sk, df.samokatEarn, df.samokatOrders); }
       else split(ws, df.earn, df.orders);
       return (dayFactCache[iso] = out);
     };
@@ -573,7 +590,7 @@ class Component extends DCLogic {
     // все окна дня: брони из Смен, план в свободные часы графика, добавленное курьером
     const windowsOf = (iso, withRemoved) => {
       const d = new Date(iso + 'T00:00:00');
-      const own = booked.filter((b) => b.iso === iso).map((b) => ({ key: 'b:' + b.id, iso, svc: b.svc, from: b.from, to: b.to, zone: '', place: b.place, source: 'booking', status: b.status }));
+      const own = booked.filter((b) => b.iso === iso).map((b) => ({ key: 'b:' + b.id, iso, svc: b.svc, from: b.from, to: b.to, zone: '', place: b.place, pid: b.pid, source: 'booking', status: b.status }));
       const list = own.slice();
       // прошедший день это только факт броней, план и свободные часы не показываем
       if (iso < RSS_TODAY_ISO) return list.sort((a, b) => a.from - b.from);
@@ -590,8 +607,8 @@ class Component extends DCLogic {
             .find((sl) => sl && sl.from >= f && sl.to <= t && slotState(sl) !== 'full' && rssRate(sl.svc, sl.from, sl.to) - rssRate('yandex-eda', sl.from, sl.to) >= 40);
           const parts = pick ? [[f, pick.from, null], [pick.from, pick.to, pick], [pick.to, t, null]] : [[f, t, null]];
           parts.filter(([a, b]) => b - a >= 60).forEach(([a, b, sl]) => {
-            if (sl) list.push({ key: 'p:' + iso + ':' + a, iso, svc: sl.svc, from: a, to: b, zone: 'Центр', source: 'plan', slot: sl });
-            else list.push({ key: 'p:' + iso + ':' + a, iso, svc: 'yandex-eda', from: a, to: b, zone: 'Центр', source: 'plan' });
+            if (sl) list.push({ key: 'p:' + iso + ':' + a, iso, svc: sl.svc, from: a, to: b, zone: 'Тверской', place: sl.place, pid: sl.pid, source: 'plan', slot: sl });
+            else list.push({ key: 'p:' + iso + ':' + a, iso, svc: 'yandex-eda', from: a, to: b, zone: 'Тверской', source: 'plan' });
           });
         });
       } else if (!auto && isWorkDay(d)) {
@@ -600,14 +617,18 @@ class Component extends DCLogic {
         busy.forEach(([f, t]) => { if (f - cur >= 60 && f <= dh.to) list.push({ key: 'g:' + iso + ':' + cur, iso, from: cur, to: f, source: 'gap' }); cur = Math.max(cur, t); });
         if (dh.to - cur >= 60) list.push({ key: 'g:' + iso + ':' + cur, iso, from: cur, to: dh.to, source: 'gap' });
       }
-      if (bt && iso === btIso) list.push({ key: 'bt:' + iso, iso, svc: 'yandex-eda', from: bt.from * 60, to: bt.to * 60, zone: 'Центр', source: 'bt' });
-      if (iso === RSS_TODAY_ISO && stay === 'added' && stayBase) list.push({ key: 'a:stay', iso, svc: stayBase.svc, from: stayBase.to, to: stayBase.to + 60, zone: 'Центр', source: 'added' });
+      if (bt && iso === btIso) list.push({ key: 'bt:' + iso, iso, svc: 'yandex-eda', from: bt.from * 60, to: bt.to * 60, zone: 'Тверской', source: 'bt' });
+      if (iso === RSS_TODAY_ISO && stay === 'added' && stayBase) list.push({ key: 'a:stay', iso, svc: stayBase.svc, from: stayBase.to, to: stayBase.to + 60, zone: 'Тверской', source: 'added' });
       // ваше окно, которое уже взято бронью в том же сервисе, не дублируем
-      (added[iso] || []).filter((a) => !own.some((b) => b.svc === a.svc && b.from < a.to && b.to > a.from)).forEach((a) => list.push(Object.assign({ iso, zone: 'Центр' }, a)));
+      (added[iso] || []).filter((a) => !own.some((b) => b.svc === a.svc && b.from < a.to && b.to > a.from)).forEach((a) => list.push(Object.assign({ iso, zone: 'Тверской' }, a)));
       return list.filter((w) => withRemoved || !removed[w.key])
         .map((w) => (w.source === 'booking' || w.source === 'gap' ? w : Object.assign({}, w, { svc: swaps[w.key] || w.svc, zone: zonesOf[w.key] || w.zone })))
         .sort((a, b) => a.from - b.from);
     };
+    const RP = typeof window !== 'undefined' ? window.RAZNOS_PLACES : null;
+    const pidOk = (w) => !!(RP && w.pid && RP.get(w.pid) && RP.get(w.pid).svc === w.svc);
+    const prevAtOf = (ws, w) => { const x = ws.filter((y) => y.key !== w.key && y.from < w.from && pidOk(y) && RP.at(y.pid)).sort((a, b) => b.from - a.from)[0]; return x ? RP.at(x.pid) : null; };
+    const whereOf = (w, ws, past) => (pidOk(w) ? RP.line(w.pid, { from: prevAtOf(ws, w), km: !past }) : (w.place || w.zone));
     const rateOf = (w) => rssRate(w.svc, w.from, w.to, rssZoneF(w.zone));
     const kindOf = (w) => {
       if (w.source === 'booking') return bookStat(w.status, w.svc)[1];
@@ -744,12 +765,13 @@ class Component extends DCLogic {
       // прошедшая бронь сегодня показывает факт из интеграции, а не прогноз
       const f = factOf(w, past);
       const noFact = selIso < RSS_TODAY_ISO && w.source === 'booking' && !f;
+      const where = whereOf(w, dayWins, past);
       // идущая смена показывает, сколько в ней уже начислено, чтобы сумма дня складывалась из видимых смен
       const nf = now && w.source === 'booking' ? (fact[w.svc] || null) : null;
       rows.push({
         _past: past, _earn: f ? f.earn : 0, _prevB: !past && prevB ? prevB : null,
-        is_window: true, _t: w.from, key: w.key, src: w.source, mine: w.source === 'added' || w.source === 'bt', from: rssTime(w.from), to: rssTime(w.to), svc: w.svc, title: RSS_SVC[w.svc].title,
-        sub: f ? (w.place || w.zone) + ' · ' + f.orders + ' заказов, ' + rssFmt(Math.round(f.earn * 60 / (w.to - w.from) / 10) * 10) + ' ₽/ч' : nf ? (w.place || w.zone) + ' · ' + nf.orders + ' заказов' : (noFact ? (w.place || w.zone) + ' · данные ещё не пришли' : (w.source === 'booking' && w.status === 'requested' ? (w.place || w.zone) + ' · ждёт подтверждения' : (w.place || w.zone))),
+        is_window: true, _t: w.from, key: w.key, pid: w.pid || '', src: w.source, mine: w.source === 'added' || w.source === 'bt', from: rssTime(w.from), to: rssTime(w.to), svc: w.svc, title: RSS_SVC[w.svc].title,
+        sub: f ? where + ' · ' + f.orders + ' заказов, ' + rssFmt(Math.round(f.earn * 60 / (w.to - w.from) / 10) * 10) + ' ₽/ч' : nf ? where + ' · ' + nf.orders + ' заказов' : (noFact ? where + ' · данные ещё не пришли' : (w.source === 'booking' && w.status === 'requested' ? where + ' · ждёт подтверждения' : where)),
         pay: f ? rssFmt(f.earn) + ' ₽' : (selIso < RSS_TODAY_ISO ? '—' : '≈ ' + rssFmt(rate) + ' ₽/ч'), kind,
         badge: f ? 'отработано' : (selIso < RSS_TODAY_ISO ? 'отработано' : w.source === 'booking' ? bookStat(w.status, w.svc)[0] : ({ free: 'свободный выход', need: 'нужен слот', full: 'нет в списке' })[kind]),
         state: past ? 'past' : (now ? 'now' : ''),
@@ -815,12 +837,12 @@ class Component extends DCLogic {
     if (selIso >= RSS_TODAY_ISO) {
       RSS_FREE_BANDS.forEach(([f, t]) => {
         const from = isToday ? Math.max(f, Math.ceil(RSS_NOW / 60) * 60) : f;
-        if (t - from >= 60) optList.push({ key: 'o:free:' + selIso + ':' + f, iso: selIso, svc: 'yandex-eda', from, to: t, zone: 'Центр', source: 'option', avail: 'free' });
+        if (t - from >= 60) optList.push({ key: 'o:free:' + selIso + ':' + f, iso: selIso, svc: 'yandex-eda', from, to: t, zone: 'Тверской', source: 'option', avail: 'free' });
       });
     }
     if (selIso >= RSS_TODAY_ISO) {
       slots.filter((sl) => sl.iso === selIso && !RSS_SVC[sl.svc].free && (!isToday || sl.to > RSS_NOW) && !booked.some((b) => b.iso === selIso && b.svc === sl.svc && b.from === sl.from))
-        .forEach((sl) => optList.push({ key: 'o:slot:' + sl.id, iso: selIso, svc: sl.svc, from: sl.from, to: sl.to, zone: 'Центр', place: sl.place || RSS_SVC[sl.svc].title, source: 'option', avail: slotState(sl), slot: sl }));
+        .forEach((sl) => optList.push({ key: 'o:slot:' + sl.id, iso: selIso, svc: sl.svc, from: sl.from, to: sl.to, zone: 'Тверской', place: sl.place || RSS_SVC[sl.svc].title, pid: sl.pid, source: 'option', avail: slotState(sl), slot: sl }));
     }
     // Варианты строятся от дня курьера: свободное время, окна плана, которые выгоднее заменить, и остальное
     // часы дня можно ставить любые в пределах суток, сегодня только не раньше ближайшего часа
@@ -875,14 +897,14 @@ class Component extends DCLogic {
     const addWin = (o, sheet, snap) => {
       const dropKey = sheet && sheet.addedKey ? sheet.addedKey : '';
       const nx = Object.assign({}, added);
-      nx[selIso] = (nx[selIso] || []).filter((a) => a.key !== dropKey).concat([{ key: 'a:' + o.key, svc: o.svc, from: o.from, to: o.to, zone: o.zone, place: o.place, source: 'added', slot: o.slot }]);
+      nx[selIso] = (nx[selIso] || []).filter((a) => a.key !== dropKey).concat([{ key: 'a:' + o.key, svc: o.svc, from: o.from, to: o.to, zone: o.zone, place: o.place, pid: o.pid, source: 'added', slot: o.slot }]);
       const patch = { added: nx };
       if (sheet) patch.gapSheet = Object.assign({}, sheet, { addedKey: 'a:' + o.key, snap: sheet.snap || snap.inside, snapExt: sheet.snapExt || snap.ext });
       set(patch);
       flash('Добавили в план, ' + rssShortDay(selDate) + ', ' + rssTime(o.from) + '–' + rssTime(o.to), { iso: selIso, key: 'a:' + o.key }, prevPlan());
     };
     // цена перебронирования одной строкой, как в Слотах: выгода слота против вашей брони, штраф из правил сервиса (rules.penalty)
-    const rebookOf = (o, w) => {
+    const cancelCostOf = (w) => {
       const r = rules[w.svc] || {}, pen = r.penalty || null;
       const requested = w.status === 'requested';
       const dl = r.freeCancel === 'noonBefore' ? (() => { const x = new Date(selIso + 'T00:00:00'); x.setDate(x.getDate() - 1); x.setHours(12); return x; })()
@@ -894,12 +916,31 @@ class Component extends DCLogic {
       else if (open) { penalty = 0; freeUntil = RSS_WD[dl.getDay()].toLowerCase() + ' ' + rssTime(dl.getHours() * 60 + dl.getMinutes()); penText = 'без штрафа до ' + freeUntil; }
       else if (pen && !pen.unknown) { penalty = pen.perHour ? Math.round(pen.perHour * (w.to - w.from) / 600) * 10 : (pen.sum || 0); penText = penalty ? 'штраф ≈ ' + rssFmt(penalty) + ' ₽' : 'без денежного штрафа'; other = pen.other || ''; }
       else { penText = 'штраф неизвестен'; other = (pen && pen.other) || ''; }
-      const altSum = Math.round(earnOf(o) / 10) * 10, mineSum = Math.round(earnOf(w) / 10) * 10;
+      return { requested, penalty, penText, freeUntil, other };
+    };
+    // следующий шаг после замены: свою бронь можно отменить только в приложении сервиса, цену отмены считаем как в чеке замены
+    const dueNudges = dueBooked.filter((b) => b.iso === selIso).map((b) => {
+      const c = cancelCostOf(b), svcTitle = RSS_SVC[b.svc].title;
+      const cost = c.requested ? 'Заявку отзовёте без штрафа' : (c.penalty === null ? 'Штраф уточните в приложении сервиса' : (c.penalty ? 'Штраф за отмену ≈ ' + rssFmt(c.penalty) + ' ₽' : 'Без штрафа' + (c.freeUntil ? ' до ' + c.freeUntil : '')));
+      return {
+        is_nudge: true, icon: 'swap', title: 'Отмените ' + (c.requested ? 'заявку' : 'бронь') + ' ' + (RSS_GEN[b.svc] || svcTitle) + ' в приложении сервиса',
+        text: rssTime(b.from) + '–' + rssTime(b.to) + '. ' + cost + '. Пока не отменили, в прогноз дня и цели не входит', meta: '',
+        action: 'Открыть ' + svcTitle.replace(/а$/, 'у'), dismiss: 'Отменил',
+        onAction: () => openService(b.svc, whenOf(b), b.iso),
+        onDismiss: () => { if (typeof p.onCancelDue === 'function') p.onCancelDue(b.id, true); flashUndo('Отметили, что бронь отменена', { _do: () => { if (typeof p.onCancelDue === 'function') p.onCancelDue(b.id, false); } }); }
+      };
+    });
+    const rebookOf = (o, w) => {
+      const { requested, penalty, penText, freeUntil, other } = cancelCostOf(w);
+      const altSum =Math.round(earnOf(o) / 10) * 10, mineSum = Math.round(earnOf(w) / 10) * 10;
       const gain = altSum - mineSum;
       const signed = (n) => (n > 0 ? '+' : (n < 0 ? '−' : '')) + rssFmt(Math.abs(n)) + ' ₽';
-      const net = penalty == null ? null : gain - penalty;
+      // бонус сервиса на этой брони (ещё N заказов до срока) пропадёт вместе с ней
+      const bq = (p.quests || []).find((q) => q.svc === w.svc && q.iso === selIso && w.from < q.until);
+      const bonus = !requested && bq && bq.reward ? bq.reward : 0;
+      const net = penalty == null ? null : gain - penalty - bonus;
       // поля для чека RaznosRebookLine, pair это бронь и слот, по нему курьер скрывает предложение
-      return { gain, penalty, freeUntil, other, requested, net, o, w, pair: w.key.replace(/^b:/, '') + '>' + (o.slot ? o.slot.id : o.key),
+      return { gain, penalty, bonus, freeUntil, other, requested, net, o, w, pair: w.key.replace(/^b:/, '') + '>' + (o.slot ? o.slot.id : o.key),
         altSvc: o.svc, altTitle: RSS_SVC[o.svc].title, altTime: rssTime(o.from) + '–' + rssTime(o.to), altSum,
         mineSvc: w.svc, mineTitle: RSS_SVC[w.svc].title, mineTime: rssTime(w.from) + '–' + rssTime(w.to), mineSum,
         line: 'Вместо брони в ' + RSS_SVC[w.svc].in + ' ' + rssTime(w.from) + '–' + rssTime(w.to) + ': ' + (net == null ? penText : 'итог ' + signed(net)) };
@@ -910,15 +951,15 @@ class Component extends DCLogic {
     const keepRebook = (rb) => { setRebookOff(rb.pair, true); flashUndo('Оставили свою смену, ' + rb.altTitle + ' больше не предлагаем', { offerSheet: st.offerSheet || null, bookSheet: st.bookSheet || null, _do: () => setRebookOff(rb.pair, false) }); set({ offerSheet: null, bookSheet: null }); };
     const takeRebook = (rb) => { set({ offerSheet: null, bookSheet: null }); takeSlot(rb.o.slot, rb.o.iso || selIso, rb.o.svc); };
     // лучший слот вместо брони: только если с учётом штрафа выходит от 100 ₽, неизвестный штраф не предлагаем
-    const rebookBest = (w, ok) => cands.filter((o) => o.fit === 'clash' && o.hard && o.hard.key === w.key && o.avail !== 'full' && (!ok || ok(o))).map((o) => rebookOf(o, w)).filter((x) => x.net != null && x.net >= 100 && !rebookOff[x.pair]).sort((a, b) => b.net - a.net)[0] || null;
-    const placeOf = (o) => (o.avail === 'free' || RSS_SVC[o.svc].free ? o.zone : (o.place || RSS_SVC[o.svc].title));
+    const rebookBest = (w, ok) => cands.filter((o) => o.fit === 'clash' && o.hard && o.hard.key === w.key && o.avail !== 'full' && inDayHours(o) && (!ok || ok(o))).map((o) => rebookOf(o, w)).filter((x) => x.net != null && (x.net >= 100 || (ok && x.bonus && x.net + x.bonus >= 100)) && !rebookOff[x.pair]).sort((a, b) => b.net - a.net)[0] || null;
+    const placeOf = (o) => (o.avail === 'free' || RSS_SVC[o.svc].free ? o.zone : (pidOk(o) ? RP.line(o.pid, { from: prevAtOf(planWins, o) }) : (o.place || RSS_SVC[o.svc].title)));
     const rowOf = (o) => {
       const sl = o.slot;
       const on = !!watches[o.key];
       const badge = o.avail === 'free' ? 'свободный выход' : (o.avail === 'full' ? 'нет в списке' : (o.avail === 'apply' ? 'по заявке' : 'слот'));
       const row = {
         from: rssTime(o.from), to: rssTime(o.to), svc: o.svc, title: RSS_SVC[o.svc].title,
-        sub: placeOf(o), pay: '≈ ' + rssFmt(o.rate) + ' ₽/ч', kind: o.avail === 'free' ? 'free' : (o.avail === 'full' ? 'full' : 'need'), badge,
+        sub: placeOf(o), pid: o.avail === 'free' ? '' : (o.pid || ''), pay: '≈ ' + rssFmt(o.rate) + ' ₽/ч', kind: o.avail === 'free' ? 'free' : (o.avail === 'full' ? 'full' : 'need'), badge,
         tap: () => {}, onBadge: () => set({ term: RSS_TERMS[badge] ? badge : (o.avail === 'free' ? 'свободный выход' : 'нужен слот') })
       };
       const slotTail = o.avail === 'free' ? '' : (o.svc === 'vkusvill' ? ', часы обычно согласуют с куратором' : (o.avail === 'apply' ? ', нужна заявка' : ', слот нужно взять'));
@@ -962,7 +1003,7 @@ class Component extends DCLogic {
     }
     // лучшая сборка дня: закреплённое стоит, слоты целиком, щели добивает свободный выход по часу
     const liveFrom = (w) => Math.max(w.from, isToday ? RSS_NOW : 0);
-    const winsSum = (ws) => ws.reduce((sum, w) => sum + rssRate(w.svc, liveFrom(w), w.to, rssZoneF(w.zone || 'Центр')) * Math.max(0, w.to - liveFrom(w)) / 60, 0);
+    const winsSum = (ws) => ws.reduce((sum, w) => sum + rssRate(w.svc, liveFrom(w), w.to, rssZoneF(w.zone || 'Тверской')) * Math.max(0, w.to - liveFrom(w)) / 60, 0);
     // режим rate оставляет только часы дороже вашего среднего, так меньше работы за те же деньги в час
     const bestFill = (fixed, from, to, mode, allow) => {
       const step = 30, n = Math.max(0, Math.floor((to - from) / step));
@@ -980,7 +1021,7 @@ class Component extends DCLogic {
           const j = i + len / step;
           if (j > n || busy(t, t + len)) return;
           const v = valueOf(rssRate('yandex-eda', t, t + len) * len / 60, len) + best[j];
-          if (v > best[i]) { best[i] = v; pick[i] = { svc: 'yandex-eda', from: t, to: t + len, zone: 'Центр', avail: 'free' }; }
+          if (v > best[i]) { best[i] = v; pick[i] = { svc: 'yandex-eda', from: t, to: t + len, zone: 'Тверской', avail: 'free' }; }
         });
         slotOpts.filter((o) => o.from === t).forEach((o) => { const v = valueOf(earnOf(o), o.to - o.from) + best[Math.round((o.to - from) / step)]; if (v > best[i]) { best[i] = v; pick[i] = o; } });
       }
@@ -1033,8 +1074,8 @@ class Component extends DCLogic {
           if (!was.length) tag = 'было свободно';
           else {
             const mins = was.reduce((m, x) => m + clip(x, w.from, w.to), 0);
-            const r0 = mins ? was.reduce((sum, x) => sum + rssRate(x.svc, Math.max(x.from, w.from), Math.min(x.to, w.to), rssZoneF(x.zone || 'Центр')) * clip(x, w.from, w.to), 0) / mins : 0;
-            const dr = Math.round((rssRate(w.svc, w.from, w.to, rssZoneF(w.zone || 'Центр')) - r0) / 10) * 10;
+            const r0 = mins ? was.reduce((sum, x) => sum + rssRate(x.svc, Math.max(x.from, w.from), Math.min(x.to, w.to), rssZoneF(x.zone || 'Тверской')) * clip(x, w.from, w.to), 0) / mins : 0;
+            const dr = Math.round((rssRate(w.svc, w.from, w.to, rssZoneF(w.zone || 'Тверской')) - r0) / 10) * 10;
             tag = dr === 0 ? 'та же ставка' : (dr > 0 ? '+' : '−') + rssFmt(Math.abs(dr)) + ' ₽/ч';
           }
         }
@@ -1058,7 +1099,7 @@ class Component extends DCLogic {
     })() : null;
     const applyRebuild = () => {
       const nx = Object.assign({}, added);
-      nx[selIso] = (keepMine ? (added[selIso] || []) : []).concat(rb.fill.map((w) => ({ key: 'a:r:' + selIso + ':' + w.from, svc: w.svc, from: w.from, to: w.to, zone: 'Центр', source: 'added', slot: w.slot })));
+      nx[selIso] = (keepMine ? (added[selIso] || []).filter((a) => a.source !== 'plan') : []).concat(rb.fill.map((w) => ({ key: 'a:r:' + selIso + ':' + w.from, svc: w.svc, from: w.from, to: w.to, zone: 'Тверской', source: 'added', slot: w.slot })));
       const strip = (obj) => { const o = {}; Object.keys(obj).forEach((k) => { if (k.indexOf(selIso) === -1) o[k] = obj[k]; }); return o; };
       const delta = Math.round((winsSum(rb.after) - winsSum(liveWins)) / 10) * 10;
       set({ added: nx, removed: strip(removed), swaps: strip(swaps), zones: strip(zonesOf), freed: strip(freed), rebuild: false });
@@ -1068,7 +1109,7 @@ class Component extends DCLogic {
     const replacePlan = (o) => {
       const out = liveWins.filter((x) => (x.source === 'plan' || x.source === 'added') && x.from < o.to && x.to > o.from);
       const pieces = [];
-      out.forEach((x) => [[Math.max(x.from, dayFrom), o.from], [o.to, x.to]].forEach(([a, b]) => { if (b - a >= 60) pieces.push({ svc: 'yandex-eda', from: a, to: b, zone: 'Центр', source: 'new', fromKey: x.key }); }));
+      out.forEach((x) => [[Math.max(x.from, dayFrom), o.from], [o.to, x.to]].forEach(([a, b]) => { if (b - a >= 60) pieces.push({ svc: 'yandex-eda', from: a, to: b, zone: 'Тверской', source: 'new', fromKey: x.key }); }));
       const after = liveWins.filter((x) => out.indexOf(x) === -1).concat([Object.assign({}, o, { source: 'new' })], pieces);
       return { out, pieces, delta: Math.round((winsSum(after) - winsSum(liveWins)) / 10) * 10 };
     };
@@ -1076,7 +1117,7 @@ class Component extends DCLogic {
     const replaceWith = (o) => {
       const rp = replacePlan(o), d = rp.delta;
       const nx = Object.assign({}, added);
-      nx[selIso] = (added[selIso] || []).filter((a) => !rp.out.some((x) => x.key === a.key)).concat([o].concat(rp.pieces).map((x) => ({ key: 'a:r:' + selIso + ':' + x.from + ':' + x.svc, svc: x.svc, from: x.from, to: x.to, zone: 'Центр', place: x.place, source: 'added', slot: x.slot })));
+      nx[selIso] = (added[selIso] || []).filter((a) => !rp.out.some((x) => x.key === a.key)).concat([o].concat(rp.pieces).map((x) => ({ key: 'a:r:' + selIso + ':' + x.from + ':' + x.svc, svc: x.svc, from: x.from, to: x.to, zone: 'Тверской', place: x.place, pid: x.pid, source: 'added', slot: x.slot })));
       const rm = Object.assign({}, removed);
       rp.out.filter((x) => x.source === 'plan').forEach((x) => { rm[x.key] = true; });
       set({ added: nx, removed: rm, gapSheet: null });
@@ -1103,7 +1144,7 @@ class Component extends DCLogic {
         const a = r._prevB;
         // в замене должно хватать времени на дорогу после первой смены
         const rb = prefs.swap && w.from > nowCut ? rebookBest(w, (o) => o.svc === a.svc || o.from >= a.to + RSS_TRAVEL) : null;
-        return { kind: 'conflict', p: 0, gain: rb ? rb.net : 0, w, a, rb };
+        return { kind: 'conflict', p: 0, gain: rb ? Math.max(0, rb.net) : 0, w, a, rb };
       }
       if (!prefs.swap) return null;
       if (r.src === 'booking') { const rb = w.from > nowCut ? rebookBest(w) : null; return rb ? { kind: 'rebook', p: 1, gain: rb.net, w, rb } : null; }
@@ -1123,7 +1164,7 @@ class Component extends DCLogic {
       const go = (x) => () => { set({ offerSheet: null }); openService(x.svc, whenOf(x), x.iso || selIso); };
       const conflict = a ? { aSvc: a.svc, aTitle: RSS_SVC[a.svc].title, aTo: a.to, bSvc: w.svc, bTitle: RSS_SVC[w.svc].title, bFrom: w.from, travel: RSS_TRAVEL, rateA: rateOf(a), rateB: rateOf(w) } : null;
       const mine = { mineSvc: w.svc, mineTitle: RSS_SVC[w.svc].title, mineTime: rssTime(w.from) + '–' + rssTime(w.to), mineMin: w.to - w.from, mineRate: rateOf(w) };
-      const swap = rb ? Object.assign({ altSvc: rb.altSvc, altTitle: rb.altTitle, altTime: rb.altTime, altFrom: rssTime(rb.o.from), altMin: rb.o.to - rb.o.from, altSum: rb.altSum, altRate: rateOf(rb.o), mineSum: rb.mineSum, penalty: rb.penalty, freeUntil: rb.freeUntil, requested: rb.requested, other: rb.other }, mine)
+      const swap = rb ? Object.assign({ altSvc: rb.altSvc, altTitle: rb.altTitle, altTime: rb.altTime, altFrom: rssTime(rb.o.from), altMin: rb.o.to - rb.o.from, altSum: rb.altSum, altRate: rateOf(rb.o), mineSum: rb.mineSum, penalty: rb.penalty, bonus: rb.bonus, freeUntil: rb.freeUntil, requested: rb.requested, other: rb.other }, mine)
         : (sw ? Object.assign({ altSvc: sw.o.svc, altTitle: RSS_SVC[sw.o.svc].title, altTime: rssTime(sw.o.from) + '–' + rssTime(sw.o.to), altFrom: rssTime(sw.o.from), altMin: sw.o.to - sw.o.from, altSum: r10o(earnOf(sw.o)), altRate: rateOf(sw.o), mineSum: r10o(earnOf(w)), penalty: 0, net: sw.d, plan: true }, mine) : null);
       const keepPlan = () => { setRebookOff(sw.pair, true); flashUndo('Оставили окно, ' + RSS_SVC[sw.o.svc].title + ' больше не предлагаем', { offerSheet: st.offerSheet || null, _do: () => setRebookOff(sw.pair, false) }); set({ offerSheet: null }); };
       return {
@@ -1180,7 +1221,7 @@ class Component extends DCLogic {
     })() : null;
     const removeWin = () => {
       const w = sheetWin;
-      if (w.source === 'added') { const nx = Object.assign({}, added); nx[selIso] = (added[selIso] || []).filter((a) => a.key !== w.key); set({ added: nx, freed: Object.assign({}, freed, { [selIso]: (freed[selIso] || []).concat([[w.from, w.to]]) }), gapSheet: null }); }
+      if (w.source === 'added' || (added[selIso] || []).some((a) => a.key === w.key)) { const nx = Object.assign({}, added); nx[selIso] = (added[selIso] || []).filter((a) => a.key !== w.key); set({ added: nx, freed: Object.assign({}, freed, { [selIso]: (freed[selIso] || []).concat([[w.from, w.to]]) }), gapSheet: null }); }
       else set({ removed: Object.assign({}, removed, { [w.key]: true }), gapSheet: null });
       flashUndo('Убрали ' + rssTime(w.from) + '–' + rssTime(w.to), prevPlan());
     };
@@ -1207,7 +1248,7 @@ class Component extends DCLogic {
         return { text: (open ? 'Отменить без последствий до ' + lbl : 'Отмена без последствий закончилась ' + lbl) + '. ' + r.late, tone: open ? '' : 'warn', src: r.src || '' };
       })();
       return {
-        svc: w.svc, title: RSS_SVC[w.svc].title, place: w.place || w.zone || '', time: rssTime(w.from) + '–' + rssTime(w.to),
+        svc: w.svc, title: RSS_SVC[w.svc].title, place: whereOf(w, planWins, past) || '', pid: w.pid || '', time: rssTime(w.from) + '–' + rssTime(w.to),
         status: f ? 'отработано' : (live ? 'идёт' : (past ? 'отработано' : stt[0])), svcLine: svcLineOf(w.svc, w.status),
         fallback: !past && w.status === 'requested' && !RSS_SVC[w.svc].free ? 'Если ' + RSS_SVC[w.svc].title + (capOf(w.svc).status === 'wish' ? ' не одобрит пожелание' : ' откажет в заявке') + ', подставим Яндекс Еду на ' + rssTime(w.from) + '–' + rssTime(w.to) + ', ≈ ' + rssFmt(rssRate('yandex-eda', w.from, w.to)) + ' ₽/ч, и пришлём пуш' : '', tone: live ? 'live' : (stt[1] === 'pending' ? 'warn' : 'ok'),
         whenNote: RSS_WD_FULL[d.getDay()] + ', ' + d.getDate() + ' ' + RSS_MONTHS[d.getMonth()] + (live ? ', осталось ' + rssLeft(w.to - RSS_NOW) : (w.iso === RSS_TODAY_ISO && !past ? ', через ' + rssLeft(w.from - RSS_NOW) : '')),
@@ -1271,9 +1312,9 @@ class Component extends DCLogic {
       pool.forEach((o) => { if (picked.length < 2 && !picked.some((x) => x.from < o.to && x.to > o.from)) picked.push(o); });
       if (!picked.length) { flash('На этот день нечего предложить'); return; }
       const nx = Object.assign({}, added);
-      nx[selIso] = (nx[selIso] || []).concat(picked.map((o) => ({ key: 'a:' + o.key, svc: o.svc, from: o.from, to: o.to, place: o.place, source: 'added', slot: o.slot })));
+      nx[selIso] = (nx[selIso] || []).concat(picked.map((o) => ({ key: 'a:' + o.key, svc: o.svc, from: o.from, to: o.to, place: o.place, pid: o.pid, source: 'plan', slot: o.slot })));
       set({ added: nx });
-      flashUndo('Собрали план на ' + RSS_WD_FULL[selDate.getDay()].toLowerCase(), prevPlan());
+      flashUndo('Собрали план на ' + RSS_WD_ACC[selDate.getDay()], prevPlan());
     };
     const dayChanged = !!(added[selIso] && added[selIso].length) || Object.keys(removed).some((k) => k.indexOf(selIso) !== -1) || Object.keys(swaps).some((k) => k.indexOf(selIso) !== -1);
 
@@ -1367,8 +1408,8 @@ class Component extends DCLogic {
       total_delta_show: false, total_delta: dayAnim ? (dayAnim.delta > 0 ? '+' : '−') + rssFmt(Math.abs(dayAnim.delta)) + ' ₽' : '',
       total_delta_cls: 'rss-total-delta' + (dayAnim ? ' rss-is-' + dayAnim.dir : ''), total_cap: isToday ? 'К концу дня' : 'За день', total_aria: (isToday ? 'К концу дня' : 'За день') + ' ≈ ' + rssFmt(r10(dayEarn)) + ' рублей, как считаем',
       open_forecast: () => set({ term: 'оценка дня' }),
-      rows: topNudge ? [topNudge].concat(rowsShown) : rowsShown, has_rows: rowsShown.length > 0 || !!topNudge,
-      show_empty: !realWins.length,
+      rows: (topNudge ? [topNudge] : []).concat(dueNudges, rowsShown), has_rows: rowsShown.length > 0 || !!topNudge || dueNudges.length > 0,
+      show_empty: !realWins.length && selIso >= RSS_TODAY_ISO,
       // в день с погодой, которая поднимает спрос: вход Сообщать о спросе из-за погоды под окнами
       ...(() => {
         const wx = typeof p.onAlert === 'function' && selIso >= RSS_TODAY_ISO ? (p.weather || []).find((x) => x.iso === selIso) : null;
@@ -1380,13 +1421,13 @@ class Component extends DCLogic {
       })(),
       empty_title: isWorkDay(selDate) ? 'Пока пусто' : 'Выходной по графику',
       empty_text: isWorkDay(selDate) ? 'Соберём день из лучших вариантов, лишнее потом уберёте' : 'Если захотите поработать, соберём план из лучших вариантов этого дня',
-      can_assemble: selIso >= RSS_TODAY_ISO, assemble_label: 'Собрать план на ' + ['воскресенье', 'понедельник', 'вторник', 'среду', 'четверг', 'пятницу', 'субботу'][selDate.getDay()], assemble: assembleDay,
+      can_assemble: selIso >= RSS_TODAY_ISO, assemble_label: 'Собрать план на ' + RSS_WD_ACC[selDate.getDay()], assemble: assembleDay,
       // итог прошедшего дня открывается в Результатах на этом же дне
       has_result_link: selIso < RSS_TODAY_ISO && realWins.length > 0, open_result: () => { if (typeof p.onOpenResult === 'function') p.onOpenResult(selIso); },
       can_rebuild: selIso >= RSS_TODAY_ISO && realWins.length > 0,
       // при предложении замены сумму рядом не пишем: это отдельное действие дня, а не вторая выгода
       rb_has_gain: rbPreview.gain > 0 && !offerSwap, rb_gain: '+' + rssFmt(rbPreview.gain) + ' ₽',
-      rb_label: rbPreview.gain > 0 || offerSwap ? 'Собрать день заново' : 'День уже собран', rb_cls: 'rss-rebuild' + (rbPreview.gain > 0 && !offerSwap ? '' : ' rss-rebuild-quiet'),
+      rb_label: rbPreview.gain > 0 || offerSwap || dueNudges.length ? 'Собрать день заново' : 'День уже собран', rb_cls: 'rss-rebuild' + (rbPreview.gain > 0 && !offerSwap ? '' : ' rss-rebuild-quiet'),
       rb_aria: 'Собрать день заново' + (rbPreview.gain > 0 && !offerSwap ? ', до +' + rssFmt(rbPreview.gain) + ' ₽' : '') + ', сначала покажем, что поменяется',
       show_gap_sheet: !!gapSheet, gs_from: gapSheet ? rssTime(gapSheet.from) : '', gs_to: gapSheet ? rssTime(gapSheet.to) : '', gs_options: gapOptions, gs_extra: gapExtra, gs_close: () => set({ gapSheet: null, extConfirm: null }),
       gs_rely: gapSheet ? 'Оценка ₽/ч ' + rssConfText(relyFrom, relyTo) : (sheetWin ? 'Оценка ₽/ч ' + rssConfText(sheetWin.from, sheetWin.to) : ''),
@@ -1394,7 +1435,7 @@ class Component extends DCLogic {
       show_ext: !!extO, ext_text: extView, ext_cancel: () => set({ extConfirm: null }), ext_ok: () => { if (extO) { addWin(extO, gapSheet, { inside: gsInside, ext: gsExt }); set({ extConfirm: null }); } },
       // район окна плана и брони: строка ведёт на карту района
       area_map: typeof p.onAreaMap === 'function' ? p.onAreaMap : null,
-      gs_place: (sheetCurrent || gapOptions[0] || {}).sub || '', gs_svc: (sheetCurrent || gapOptions[0] || {}).svc || '',
+      gs_place: (sheetCurrent || gapOptions[0] || {}).sub || '', gs_pid: (sheetCurrent || gapOptions[0] || {}).pid || '', gs_svc: (sheetCurrent || gapOptions[0] || {}).svc || '',
       gs_current: sheetCurrent, gs_remove: sheetWin ? removeWin : null,
       show_book_sheet: !!bookWin, bs: bookView, bs_close: () => set({ bookSheet: null }),
       // одна шторка предложения: конфликт и замена вместе, у каждого варианта цена

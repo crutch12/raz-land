@@ -3,6 +3,17 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>Разнос: весь заработок курьера в одном приложении</title>
+    <meta name="description" content="Доход из Самоката, ВкусВилла, Яндекс Про и других сервисов на одном экране. Сколько остаётся после расходов и где сейчас платят больше" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Разнос" />
+    <meta property="og:title" content="Разнос: весь заработок курьера в одном приложении" />
+    <meta property="og:description" content="Доход из Самоката, ВкусВилла, Яндекс Про и других сервисов на одном экране. Сколько остаётся после расходов и где сейчас платят больше" />
+    <meta property="og:image" content="./og/og-ru.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:locale" content="ru_RU" />
+    <meta name="twitter:card" content="summary_large_image" />
     <script src="./support.js"></script>
   </head>
   <body>
@@ -1200,7 +1211,7 @@
               var supported = ['ru', 'uz', 'tg', 'ky', 'hy', 'en'];
               var near = { kk: 'ky', az: 'uz', tr: 'uz', fa: 'tg', prs: 'tg', uk: 'ru', be: 'ru' };
               var pick = '';
-              var ql = String(qp.get('lang') || '').toLowerCase().split('-')[0];
+              var ql = String(qp.get('lang') || document.documentElement.getAttribute('data-lang') || '').toLowerCase().split('-')[0];
               var saved = ''; try { saved = localStorage.getItem('raz_lang') || ''; } catch (e) {}
               if (ql && supported.indexOf(ql) !== -1) {
                 pick = ql;
